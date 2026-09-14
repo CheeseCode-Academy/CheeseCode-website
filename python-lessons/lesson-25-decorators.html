@@ -1,0 +1,243 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🎨 درس ۲۵: دکوریتورها (Decorators)</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>دکوریتورها</strong> آشنا میشی. دکوریتورها روشی قدرتمند برای <strong>تغییر رفتار</strong> توابع بدون تغییر کد خودشون هستن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 دکوریتور چیست؟</h2>
+        <p>دکوریتور (Decorator) یه تابع هست که <strong>تابع دیگه‌ای</strong> رو می‌گیره و <strong>تابع جدیدی</strong> برمی‌گردونه که رفتار تابع اصلی رو تغییر میده.</p>
+        <p>فرض کن دکوریتور مثل یه <strong>لفاف</strong> هست که دور یه تابع پیچیده میشه و بهش قابلیت‌های جدید اضافه می‌کنه.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> دکوریتورها با <code>@</code> قبل از اسم تابع استفاده میشن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور ساده</h2>
+        
+        <pre class="code-block">def زمان_سنج(func):
+    import time
+    def wrapper(*args, **kwargs):
+        شروع = time.time()
+        نتیجه = func(*args, **kwargs)
+        پایان = time.time()
+        print(f"زمان اجرا: {پایان - شروع:.4f} ثانیه")
+        return نتیجه
+    return wrapper
+
+@زمان_سنج
+def تابع_طولانی():
+    sum([i ** 2 for i in range(1000000)])
+
+تابع_طولانی()</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">زمان اجرا: 0.0523 ثانیه</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور با پارامتر</h2>
+        
+        <pre class="code-block">def تکرار(تعداد):
+    def دکوراتور(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(تعداد):
+                func(*args, **kwargs)
+        return wrapper
+    return دکوراتور
+
+@تکرار(3)
+def سلام():
+    print("سلام!")
+
+سلام()</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام!
+سلام!
+سلام!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور لاگینگ</h2>
+        
+        <pre class="code-block">def لاگ(func):
+    def wrapper(*args, **kwargs):
+        print(f"تابع {func.__name__} فراخوانی شد")
+        print(f"آرگومان‌ها: {args}, {kwargs}")
+        نتیجه = func(*args, **kwargs)
+        print(f"نتیجه: {نتیجه}")
+        return نتیجه
+    return wrapper
+
+@لاگ
+def جمع(a, b):
+    return a + b
+
+جمع(5, 3)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">تابع جمع فراخوانی شد
+آرگومان‌ها: (5, 3), {}
+نتیجه: 8</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور اعتبارسنجی</h2>
+        
+        <pre class="code-block">def اعتبارسنجی_سن(func):
+    def wrapper(سن):
+        if سن < 0:
+            raise ValueError("سن نمی‌تواند منفی باشد!")
+        if سن > 120:
+            raise ValueError("سن نمی‌تواند بیشتر از ۱۲۰ باشد!")
+        return func(سن)
+    return wrapper
+
+@اعتبارسنجی_سن
+def وضعیت_سن(سن):
+    if سن < 18:
+        return "کودک/نوجوان"
+    elif سن < 60:
+        return "بزرگسال"
+    else:
+        return "سالمند"
+
+print(وضعیت_سن(25))
+print(وضعیت_سن(-5))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">بزرگسال
+Traceback (most recent call last):
+  ...
+ValueError: سن نمی‌تواند منفی باشد!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چند دکوریتور همزمان</h2>
+        
+        <pre class="code-block">@زمان_سنج
+@لاگ
+def تابع_مثال(x):
+    return x ** 2
+
+# ترتیب اجرا: از پایین به بالا
+تابع_مثال(5)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور با functools.wraps</h2>
+        <p>برای حفظ اطلاعات تابع اصلی:</p>
+        
+        <pre class="code-block">import functools
+
+def لاگ(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"اجرای {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@لاگ
+def مثال():
+    """این یک تابع نمونه است"""
+    pass
+
+print(مثال.__name__)  # مثال
+print(مثال.__doc__)   # این یک تابع نمونه است</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 دکوریتور کلاس</h2>
+        
+        <pre class="code-block">def اضافه_کننده(کلاس):
+    class کلاس_جدید(کلاس):
+        def سلام(self):
+            return "سلام از دکوریتور!"
+    return کلاس_جدید
+
+@اضافه_کننده
+class شخص:
+    def __init__(self, نام):
+        self.نام = نام
+
+علی = شخص("علی")
+print(علی.سلام())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام از دکوریتور!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>return wrapper</code> در دکوریتور</p>
+            <p><strong>✅ راه‌حل:</strong> دکوریتور حتماً باید تابع wrapper رو برگردونه.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>*args, **kwargs</code> در wrapper</p>
+            <p><strong>✅ راه‌حل:</strong> برای اینکه دکوریتور روی هر تابعی کار کنه، از <code>*args, **kwargs</code> استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>functools.wraps</code></p>
+            <p><strong>✅ راه‌حل:</strong> از <code>@functools.wraps(func)</code> برای حفظ اطلاعات تابع اصلی استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از دکوریتور برای <strong>ذخیره‌سازی در cache</strong> استفاده کن:</p>
+            <pre class="code-block">def cache(func):
+    ذخیره = {}
+    def wrapper(*args):
+        if args in ذخیره:
+            print("از کش استفاده شد!")
+            return ذخیره[args]
+        نتیجه = func(*args)
+        ذخیره[args] = نتیجه
+        return نتیجه
+    return wrapper
+
+@cache
+def فیبوناچی(n):
+    if n < 2:
+        return n
+    return فیبوناچی(n-1) + فیبوناچی(n-2)
+
+print(فیبوناچی(35))</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> دکوریتوری بساز که قبل از هر تابع "شروع..." و بعدش "پایان..." چاپ کنه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> دکوریتوری بساز که خطاهای تابع رو بگیره و چاپ کنه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> دکوریتوری بساز که زمان اجرای تابع رو اندازه بگیره و گزارش بده.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>کلاس و شی</strong> آشنا میشی و وارد دنیای برنامه‌نویسی شی‌گرا میشی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

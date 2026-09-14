@@ -1,0 +1,531 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۴۰: پروژه‌ی نهایی</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: پیشرفته</div>
+
+    <section class="section">
+        <h2>📝 تمرین ۱</h2>
+        <p><strong>سوال:</strong> به کلاس <code>Task</code> یک ویژگی <code>priority</code> (اولویت) اضافه کن که مقادیر <code>"low"</code>، <code>"medium"</code> یا <code>"high"</code> رو بپذیره.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <p>فایل <code>todo/models.py</code> رو به این صورت تغییر بده:</p>
+        
+        <pre class="code-block">from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Optional
+
+@dataclass
+class Task:
+    id: Optional[int] = None
+    title: str = ""
+    description: str = ""
+    done: bool = False
+    priority: str = "medium"  # low, medium, high
+    created_at: Optional[datetime] = None
+    
+    def __post_init__(self):
+        # اعتبارسنجی اولویت
+        if self.priority not in ["low", "medium", "high"]:
+            raise ValueError("اولویت باید low، medium یا high باشد!")
+    
+    def __str__(self) -> str:
+        status = "✅" if self.done else "❌"
+        priority_icon = {
+            "low": "🟢",
+            "medium": "🟡",
+            "high": "🔴"
+        }.get(self.priority, "⚪")
+        return f"{status} {priority_icon} {self.id}. {self.title}"
+    
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "done": self.done,
+            "priority": self.priority,
+            "created_at": self.created_at.isoformat() if self.created_at else None
+        }
+    
+    @classmethod
+    def from_dict(cls, data: dict) -> "Task":
+        return cls(
+            id=data.get("id"),
+            title=data.get("title", ""),
+            description=data.get("description", ""),
+            done=data.get("done", False),
+            priority=data.get("priority", "medium"),
+            created_at=datetime.fromisoformat(data["created_at"]) if data.get("created_at") else None
+        )</pre>
+        
+        <p>و فایل <code>todo/database.py</code> رو به‌روزرسانی کن:</p>
+        
+        <pre class="code-block">import sqlite3
+from typing import List, Optional
+from datetime import datetime
+from .models import Task
+
+class Database:
+    def __init__(self, db_name: str = "todo.db"):
+        self.db_name = db_name
+        self._init_db()
+    
+    def _init_db(self) -> None:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title TEXT NOT NULL,
+                    description TEXT,
+                    done INTEGER DEFAULT 0,
+                    priority TEXT DEFAULT 'medium',
+                    created_at TEXT
+                )
+            """)
+            # اگر جدول قدیمی بدون priority بود، اضافه‌اش کن
+            try:
+                cursor.execute("ALTER TABLE tasks ADD COLUMN priority TEXT DEFAULT 'medium'")
+            except sqlite3.OperationalError:
+                pass  # ستون قبلاً وجود داره
+            conn.commit()
+    
+    def add_task(self, task: Task) -> int:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO tasks (title, description, done, priority, created_at)
+                VALUES (?, ?, ?, ?, ?)
+            """, (
+                task.title,
+                task.description,
+                1 if task.done else 0,
+                task.priority,
+                datetime.now().isoformat()
+            ))
+            conn.commit()
+            return cursor.lastrowid
+    
+    def get_all_tasks(self) -> List[Task]:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM tasks ORDER BY created_at DESC")
+            rows = cursor.fetchall()
+            return [
+                Task(
+                    id=row[0],
+                    title=row[1],
+                    description=row[2] or "",
+                    done=bool(row[3]),
+                    priority=row[4] or "medium",
+                    created_at=datetime.fromisoformat(row[5]) if row[5] else None
+                )
+                for row in rows
+            ]
+    
+    def get_task(self, task_id: int) -> Optional[Task]:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM tasks WHERE id = ?", (task_id,))
+            row = cursor.fetchone()
+            if row:
+                return Task(
+                    id=row[0],
+                    title=row[1],
+                    description=row[2] or "",
+                    done=bool(row[3]),
+                    priority=row[4] or "medium",
+                    created_at=datetime.fromisoformat(row[5]) if row[5] else None
+                )
+            return None
+    
+    def update_task(self, task: Task) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE tasks
+                SET title = ?, description = ?, done = ?, priority = ?
+                WHERE id = ?
+            """, (
+                task.title,
+                task.description,
+                1 if task.done else 0,
+                task.priority,
+                task.id
+            ))
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def delete_task(self, task_id: int) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def toggle_task(self, task_id: int) -> Optional[Task]:
+        task = self.get_task(task_id)
+        if not task:
+            return None
+        task.done = not task.done
+        if self.update_task(task):
+            return task
+        return None</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 تمرین ۲</h2>
+        <p><strong>سوال:</strong> به کلاس <code>TodoManager</code> متدی برای <strong>فیلتر کردن</strong> وظایف بر اساس اولویت اضافه کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <p>فایل <code>todo/todo_manager.py</code> رو به این صورت تغییر بده:</p>
+        
+        <pre class="code-block">from typing import List, Optional
+from .models import Task
+from .database import Database
+
+class TodoManager:
+    def __init__(self, db: Optional[Database] = None):
+        self.db = db or Database()
+    
+    def add_task(self, title: str, description: str = "", priority: str = "medium") -> Task:
+        task = Task(title=title, description=description, priority=priority)
+        task_id = self.db.add_task(task)
+        task.id = task_id
+        return task
+    
+    def get_all_tasks(self) -> List[Task]:
+        return self.db.get_all_tasks()
+    
+    def get_task(self, task_id: int) -> Optional[Task]:
+        return self.db.get_task(task_id)
+    
+    def update_task(self, task_id: int, title: str, description: str, priority: str = "medium") -> Optional[Task]:
+        task = self.db.get_task(task_id)
+        if not task:
+            return None
+        task.title = title
+        task.description = description
+        task.priority = priority
+        if self.db.update_task(task):
+            return task
+        return None
+    
+    def delete_task(self, task_id: int) -> bool:
+        return self.db.delete_task(task_id)
+    
+    def toggle_task(self, task_id: int) -> Optional[Task]:
+        return self.db.toggle_task(task_id)
+    
+    def get_pending_tasks(self) -> List[Task]:
+        return [t for t in self.get_all_tasks() if not t.done]
+    
+    def get_done_tasks(self) -> List[Task]:
+        return [t for t in self.get_all_tasks() if t.done]
+    
+    # ===== متد جدید =====
+    def filter_by_priority(self, priority: str) -> List[Task]:
+        """فیلتر کردن وظایف بر اساس اولویت"""
+        return [t for t in self.get_all_tasks() if t.priority == priority]
+    
+    def get_high_priority_pending(self) -> List[Task]:
+        """وظایف با اولویت بالا که انجام نشده‌اند"""
+        return [t for t in self.get_all_tasks() if t.priority == "high" and not t.done]
+    
+    def get_stats_by_priority(self) -> dict:
+        """آمار وظایف به تفکیک اولویت"""
+        stats = {"low": 0, "medium": 0, "high": 0}
+        for task in self.get_all_tasks():
+            if task.priority in stats:
+                stats[task.priority] += 1
+        return stats</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 تمرین ۳</h2>
+        <p><strong>سوال:</strong> یک رابط کاربری خط فرمان (CLI) کامل با منوی رنگی بساز.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <p>فایل <code>todo/cli.py</code> رو به این صورت بازنویسی کن:</p>
+        
+        <pre class="code-block">import sys
+from .todo_manager import TodoManager
+
+class Colors:
+    """کلاس برای رنگ‌های ANSI"""
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    CYAN = '\033[96m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+class CLI:
+    def __init__(self):
+        self.manager = TodoManager()
+        self.colors = Colors()
+    
+    def _print_header(self, text: str) -> None:
+        print(f"\n{self.colors.CYAN}{'='*60}{self.colors.RESET}")
+        print(f"{self.colors.BOLD}{self.colors.YELLOW}  {text}{self.colors.RESET}")
+        print(f"{self.colors.CYAN}{'='*60}{self.colors.RESET}")
+    
+    def _print_success(self, text: str) -> None:
+        print(f"{self.colors.GREEN}✅ {text}{self.colors.RESET}")
+    
+    def _print_error(self, text: str) -> None:
+        print(f"{self.colors.RED}❌ {text}{self.colors.RESET}")
+    
+    def _print_info(self, text: str) -> None:
+        print(f"{self.colors.BLUE}ℹ️  {text}{self.colors.RESET}")
+    
+    def _priority_icon(self, priority: str) -> str:
+        return {
+            "low": "🟢",
+            "medium": "🟡",
+            "high": "🔴"
+        }.get(priority, "⚪")
+    
+    def run(self) -> None:
+        while True:
+            self._show_menu()
+            choice = input(f"\n{self.colors.BOLD}انتخاب خود را وارد کنید: {self.colors.RESET}").strip()
+            
+            if choice == "1":
+                self._add_task()
+            elif choice == "2":
+                self._list_tasks()
+            elif choice == "3":
+                self._toggle_task()
+            elif choice == "4":
+                self._delete_task()
+            elif choice == "5":
+                self._update_task()
+            elif choice == "6":
+                self._show_stats()
+            elif choice == "7":
+                self._filter_by_priority()
+            elif choice == "8":
+                self._search_tasks()
+            elif choice == "9":
+                print(f"{self.colors.YELLOW}خروج از برنامه...{self.colors.RESET}")
+                break
+            else:
+                self._print_error("انتخاب نامعتبر!")
+    
+    def _show_menu(self) -> None:
+        self._print_header("📋 مدیریت وظایف (To-Do List)")
+        print(f"  {self.colors.GREEN}1.{self.colors.RESET} ➕ اضافه کردن وظیفه جدید")
+        print(f"  {self.colors.BLUE}2.{self.colors.RESET} 📋 نمایش همه وظایف")
+        print(f"  {self.colors.YELLOW}3.{self.colors.RESET} 🔄 تغییر وضعیت (انجام/انجام نشده)")
+        print(f"  {self.colors.RED}4.{self.colors.RESET} 🗑️ حذف وظیفه")
+        print(f"  {self.colors.CYAN}5.{self.colors.RESET} ✏️ ویرایش وظیفه")
+        print(f"  {self.colors.HEADER}6.{self.colors.RESET} 📊 آمار وظایف")
+        print(f"  {self.colors.HEADER}7.{self.colors.RESET} 🎯 فیلتر بر اساس اولویت")
+        print(f"  {self.colors.HEADER}8.{self.colors.RESET} 🔍 جستجو")
+        print(f"  {self.colors.RED}9.{self.colors.RESET} 🚪 خروج")
+    
+    def _add_task(self) -> None:
+        self._print_header("➕ اضافه کردن وظیفه جدید")
+        title = input("عنوان وظیفه: ").strip()
+        if not title:
+            self._print_error("عنوان نمی‌تواند خالی باشد!")
+            return
+        
+        description = input("توضیحات (اختیاری): ").strip()
+        
+        print("\nاولویت را انتخاب کنید:")
+        print("  1. 🟢 کم (low)")
+        print("  2. 🟡 متوسط (medium)")
+        print("  3. 🔴 زیاد (high)")
+        p = input("انتخاب (پیش‌فرض ۲): ").strip()
+        priority = {"1": "low", "2": "medium", "3": "high"}.get(p, "medium")
+        
+        task = self.manager.add_task(title, description, priority)
+        self._print_success(f"وظیفه '{task.title}' با ID {task.id} اضافه شد!")
+    
+    def _list_tasks(self) -> None:
+        tasks = self.manager.get_all_tasks()
+        if not tasks:
+            self._print_info("هیچ وظیفه‌ای وجود ندارد!")
+            return
+        
+        self._print_header("📋 لیست وظایف")
+        for task in tasks:
+            status = "✅" if task.done else "❌"
+            icon = self._priority_icon(task.priority)
+            
+            # رنگ بر اساس وضعیت
+            color = self.colors.GREEN if task.done else self.colors.RESET
+            print(f"  {color}{status} [{task.id}] {icon} {task.title}{self.colors.RESET}")
+            if task.description:
+                print(f"     📝 {self.colors.CYAN}{task.description}{self.colors.RESET}")
+    
+    def _toggle_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            task = self.manager.toggle_task(task_id)
+            if task:
+                status = "انجام شده" if task.done else "انجام نشده"
+                self._print_success(f"وضعیت '{task.title}' به '{status}' تغییر کرد!")
+            else:
+                self._print_error("وظیفه‌ای با این ID پیدا نشد!")
+        except ValueError:
+            self._print_error("ID باید عدد باشد!")
+    
+    def _delete_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            if self.manager.delete_task(task_id):
+                self._print_success(f"وظیفه با ID {task_id} حذف شد!")
+            else:
+                self._print_error("وظیفه‌ای با این ID پیدا نشد!")
+        except ValueError:
+            self._print_error("ID باید عدد باشد!")
+    
+    def _update_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            task = self.manager.get_task(task_id)
+            if not task:
+                self._print_error("وظیفه‌ای با این ID پیدا نشد!")
+                return
+            
+            print(f"وظیفه فعلی: {task}")
+            title = input(f"عنوان جدید ({task.title}): ").strip() or task.title
+            description = input(f"توضیحات جدید ({task.description or 'خالی'}): ").strip() or task.description
+            
+            print(f"\nاولویت فعلی: {self._priority_icon(task.priority)} {task.priority}")
+            p = input("اولویت جدید (1=low, 2=medium, 3=high) [Enter=بدون تغییر]: ").strip()
+            priority = {"1": "low", "2": "medium", "3": "high"}.get(p, task.priority)
+            
+            updated = self.manager.update_task(task_id, title, description, priority)
+            if updated:
+                self._print_success("وظیفه به‌روزرسانی شد!")
+            else:
+                self._print_error("خطا در به‌روزرسانی!")
+        except ValueError:
+            self._print_error("ID باید عدد باشد!")
+    
+    def _show_stats(self) -> None:
+        all_tasks = self.manager.get_all_tasks()
+        total = len(all_tasks)
+        done = len(self.manager.get_done_tasks())
+        pending = len(self.manager.get_pending_tasks())
+        
+        self._print_header("📊 آمار وظایف")
+        print(f"  📌 مجموع: {self.colors.BOLD}{total}{self.colors.RESET}")
+        print(f"  ✅ انجام شده: {self.colors.GREEN}{done}{self.colors.RESET}")
+        print(f"  ❌ انجام نشده: {self.colors.RED}{pending}{self.colors.RESET}")
+        
+        if total > 0:
+            percent = done / total * 100
+            bar_length = 30
+            filled = int(bar_length * done / total)
+            bar = "█" * filled + "░" * (bar_length - filled)
+            print(f"\n  پیشرفت: [{self.colors.GREEN}{bar}{self.colors.RESET}] {percent:.1f}%")
+        
+        # آمار به تفکیک اولویت
+        stats = self.manager.get_stats_by_priority()
+        print(f"\n  {self.colors.BOLD}به تفکیک اولویت:{self.colors.RESET}")
+        print(f"    🔴 زیاد: {stats['high']}")
+        print(f"    🟡 متوسط: {stats['medium']}")
+        print(f"    🟢 کم: {stats['low']}")
+    
+    def _filter_by_priority(self) -> None:
+        print("\nفیلتر بر اساس اولویت:")
+        print("  1. 🔴 زیاد")
+        print("  2. 🟡 متوسط")
+        print("  3. 🟢 کم")
+        p = input("انتخاب: ").strip()
+        priority = {"1": "high", "2": "medium", "3": "low"}.get(p)
+        
+        if not priority:
+            self._print_error("انتخاب نامعتبر!")
+            return
+        
+        tasks = self.manager.filter_by_priority(priority)
+        if not tasks:
+            self._print_info(f"هیچ وظیفه‌ای با اولویت '{priority}' وجود ندارد!")
+            return
+        
+        self._print_header(f"🎯 وظایف با اولویت {priority}")
+        for task in tasks:
+            status = "✅" if task.done else "❌"
+            print(f"  {status} [{task.id}] {task.title}")
+    
+    def _search_tasks(self) -> None:
+        query = input("عبارت جستجو: ").strip().lower()
+        if not query:
+            self._print_error("عبارت جستجو نمی‌تواند خالی باشد!")
+            return
+        
+        all_tasks = self.manager.get_all_tasks()
+        results = [
+            t for t in all_tasks
+            if query in t.title.lower() or query in t.description.lower()
+        ]
+        
+        if not results:
+            self._print_info("نتیجه‌ای یافت نشد!")
+            return
+        
+        self._print_header(f"🔍 نتایج جستجو برای '{query}'")
+        for task in results:
+            status = "✅" if task.done else "❌"
+            icon = self._priority_icon(task.priority)
+            print(f"  {status} [{task.id}] {icon} {task.title}")
+
+def main() -> None:
+    try:
+        cli = CLI()
+        cli.run()
+    except KeyboardInterrupt:
+        print(f"\n{Colors.YELLOW}برنامه متوقف شد.{Colors.RESET}")
+    except Exception as e:
+        print(f"{Colors.RED}خطا: {e}{Colors.RESET}")
+
+if __name__ == "__main__":
+    main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧀 جمع‌بندی نهایی</h2>
+        <div class="highlight-box">
+            <p>🎉 <strong>تبریک! پروژه‌ی نهایی شما کامل شد!</strong></p>
+            <p>در این پروژه از این مفاهیم استفاده کردید:</p>
+            <ul>
+                <li>✅ کلاس‌ها و اشیاء (OOP)</li>
+                <li>✅ دیتاکلاس‌ها (dataclass)</li>
+                <li>✅ تایپ‌هینت‌ها</li>
+                <li>✅ مدیریت خطا</li>
+                <li>✅ کار با SQLite</li>
+                <li>✅ کار با فایل</li>
+                <li>✅ ماژول‌ها و پکیج‌ها</li>
+                <li>✅ لیست‌های فشرده</li>
+                <li>✅ توابع و متدها</li>
+                <li>✅ حلقه‌ها و شرط‌ها</li>
+            </ul>
+            <p>🍀 <strong>موفق باشید! حالا یک برنامه‌نویس حرفه‌ای پایتون هستید!</strong> 🚀</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🎯 ایده‌های گسترش پروژه</h2>
+        <div class="exercise-box">
+            <p>می‌تونید پروژه رو با این ایده‌ها گسترش بدید:</p>
+            <ul>
+                <li>📅 <strong>تاریخ سررسید</strong> (due date) برای وظایف</li>
+                <li>🏷️ <strong>دسته‌بندی</strong> (category) برای وظایف</li>
+                <li>👥 <strong>چند کاربره</strong> با سیستم لاگین</li>
+                <li>🔔 <strong>یادآور</strong> (reminder) با زمان</li>
+                <li>📊 <strong>نمودار</strong> با matplotlib</li>
+                <li>🌐 <strong>وب‌سایت</strong> با Flask</li>
+                <li>📱 <strong>اپلیکیشن دسکتاپ</strong> با Tkinter</li>
+                <li>☁️ <strong>ذخیره‌سازی ابری</strong> (مثلاً GitHub)</li>
+            </ul>
+        </div>
+    </section>
+</div>

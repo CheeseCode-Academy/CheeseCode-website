@@ -1,0 +1,325 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🔧 درس ۳۳: ماژول‌های استاندارد مهم</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۲۲ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>ماژول‌های استاندارد</strong> مهم پایتون آشنا میشی که کارهای روزمره رو خیلی راحت‌تر می‌کنن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 ماژول os</h2>
+        <p>کار با سیستم‌عامل:</p>
+        
+        <pre class="code-block">import os
+
+# اطلاعات سیستم
+print(f"سیستم‌عامل: {os.name}")
+print(f"پوشه فعلی: {os.getcwd()}")
+
+# کار با فایل و پوشه
+os.mkdir("پوشه_جدید")  # ایجاد پوشه
+os.chdir("پوشه_جدید")  # تغییر پوشه
+print(f"پوشه جدید: {os.getcwd()}")
+
+# لیست فایل‌ها
+print("فایل‌ها:", os.listdir("."))
+
+# حذف پوشه
+os.chdir("..")
+os.rmdir("پوشه_جدید")
+
+# مسیرها
+مسیر = os.path.join("پوشه", "فایل.txt")
+print(f"مسیر: {مسیر}")
+print(f"وجود دارد: {os.path.exists(مسیر)}")
+print(f"فایل است: {os.path.isfile(مسیر)}")
+print(f"پوشه است: {os.path.isdir(مسیر)}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول sys</h2>
+        <p>اطلاعات سیستم و خط فرمان:</p>
+        
+        <pre class="code-block">import sys
+
+# نسخه پایتون
+print(f"نسخه پایتون: {sys.version}")
+print(f"نسخه: {sys.version_info}")
+
+# آرگومان‌های خط فرمان
+print(f"آرگومان‌ها: {sys.argv}")
+
+# مسیرهای جستجوی ماژول
+print(f"مسیرها: {sys.path[:3]}...")
+
+# خروج از برنامه
+# sys.exit(0)  # خروج با کد ۰
+
+# ورودی/خروجی استاندارد
+sys.stdout.write("این یک خروجی است\n")
+sys.stderr.write("این یک خطا است\n")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول datetime</h2>
+        <p>کار با تاریخ و زمان:</p>
+        
+        <pre class="code-block">import datetime
+
+# زمان حال
+اکنون = datetime.datetime.now()
+print(f"اکنون: {اکنون}")
+print(f"تاریخ: {اکنون.date()}")
+print(f"زمان: {اکنون.time()}")
+
+# اجزای زمان
+print(f"سال: {اکنون.year}")
+print(f"ماه: {اکنون.month}")
+print(f"روز: {اکنون.day}")
+print(f"ساعت: {اکنون.hour}")
+print(f"دقیقه: {اکنون.minute}")
+
+# ساخت تاریخ
+تاریخ1 = datetime.datetime(2026, 7, 21)
+print(f"تاریخ: {تاریخ1}")
+
+# تفاوت زمانی
+تفاوت = اکنون - تاریخ1
+print(f"تفاوت: {تفاوت}")
+print(f"روزها: {تفاوت.days}")
+print(f"ثانیه‌ها: {تفاوت.seconds}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">اکنون: 2026-07-21 14:30:25.123456
+تاریخ: 2026-07-21
+زمان: 14:30:25.123456
+سال: 2026
+ماه: 7
+روز: 21
+ساعت: 14
+دقیقه: 30
+تاریخ: 2026-07-21 00:00:00
+تفاوت: 14:30:25.123456
+روزها: 0
+ثانیه‌ها: 52225</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول random</h2>
+        <p>تولید اعداد تصادفی:</p>
+        
+        <pre class="code-block">import random
+
+# عدد تصادفی
+print(f"تصادفی: {random.random()}")
+print(f"بین ۱ تا ۱۰: {random.randint(1, 10)}")
+print(f"بین ۰ تا ۱: {random.uniform(0, 1)}")
+
+# انتخاب تصادفی
+لیست = ["سیب", "موز", "پرتقال", "انگور"]
+print(f"انتخاب: {random.choice(لیست)}")
+print(f"چند انتخاب: {random.choices(لیست, k=2)}")
+
+# مرتب‌سازی تصادفی
+random.shuffle(لیست)
+print(f"مرتب‌سازی: {لیست}")
+
+# نمونه‌گیری
+print(f"نمونه: {random.sample(لیست, 2)}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">تصادفی: 0.723456789
+بین ۱ تا ۱۰: 7
+بین ۰ تا ۱: 0.456789
+انتخاب: موز
+چند انتخاب: ['پرتقال', 'انگور']
+مرتب‌سازی: ['انگور', 'سیب', 'پرتقال', 'موز']
+نمونه: ['پرتقال', 'سیب']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول re (عبارت‌های منظم)</h2>
+        <p>پیدا کردن الگوها در متن:</p>
+        
+        <pre class="code-block">import re
+
+# جستجوی الگو
+متن = "سلام! شماره تلفن من 0912-345-6789 است."
+الگو = r"\d{4}-\d{3}-\d{4}"
+
+پیدا = re.search(الگو, متن)
+if پیدا:
+    print(f"پیدا شد: {پیدا.group()}")
+
+# پیدا کردن همه
+شماره‌ها = re.findall(r"\d+", متن)
+print(f"همه اعداد: {شماره‌ها}")
+
+# جایگزینی
+متن_جدید = re.sub(الگو, "***-***-****", متن)
+print(f"متن جدید: {متن_جدید}")
+
+# بررسی تطابق
+if re.match(r"^سلام", متن):
+    print("متن با سلام شروع می‌شود")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول collections</h2>
+        <p>ساختارهای داده پیشرفته:</p>
+        
+        <pre class="code-block">from collections import Counter, defaultdict, OrderedDict
+
+# Counter - شمارش
+تکرار = Counter("سلام سلام علی")
+print(f"تکرار: {تکرار}")
+print(f"بیشترین: {تکرار.most_common(2)}")
+
+# defaultdict - دیکشنری با مقدار پیش‌فرض
+dd = defaultdict(int)
+dd["x"] += 1
+dd["y"] += 2
+dd["x"] += 3
+print(f"defaultdict: {dict(dd)}")
+
+# OrderedDict - دیکشنری مرتب
+od = OrderedDict()
+od["a"] = 1
+od["b"] = 2
+od["c"] = 3
+print(f"ordered: {od}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">تکرار: Counter({' ': 3, 'س': 2, 'ل': 2, 'ا': 2, 'م': 1, 'ع': 1, 'ی': 1})
+بیشترین: [(' ', 3), ('س', 2)]
+defaultdict: {'x': 4, 'y': 2}
+ordered: OrderedDict([('a', 1), ('b', 2), ('c', 3)])</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول json</h2>
+        <p>کار با داده‌های JSON:</p>
+        
+        <pre class="code-block">import json
+
+# تبدیل دیکشنری به JSON
+data = {
+    "نام": "علی",
+    "سن": 25,
+    "شهر": "تهران",
+    "علاقه‌ها": ["برنامه‌نویسی", "ورزش"]
+}
+
+json_string = json.dumps(data, ensure_ascii=False, indent=2)
+print(f"JSON:\n{json_string}")
+
+# تبدیل JSON به دیکشنری
+parsed = json.loads(json_string)
+print(f"پارسی: {parsed}")
+
+# ذخیره در فایل
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+# خواندن از فایل
+with open("data.json", "r", encoding="utf-8") as f:
+    loaded = json.load(f)
+print(f"بارگیری: {loaded}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول time</h2>
+        <p>کار با زمان:</p>
+        
+        <pre class="code-block">import time
+
+# زمان فعلی به ثانیه
+print(f"زمان: {time.time()}")
+
+# مکث
+print("صبر کنید...")
+time.sleep(2)
+print("ادامه!")
+
+# زمان با فرمت
+print(f"زمان محلی: {time.localtime()}")
+print(f"زمان خوانا: {time.ctime()}")
+
+# اندازه‌گیری زمان
+شروع = time.time()
+# کار سنگین
+time.sleep(0.5)
+پایان = time.time()
+print(f"زمان اجرا: {پایان - شروع:.3f} ثانیه")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول math</h2>
+        <p>توابع ریاضی:</p>
+        
+        <pre class="code-block">import math
+
+# اعداد
+print(f"π: {math.pi}")
+print(f"e: {math.e}")
+print(f"جذر ۱۶: {math.sqrt(16)}")
+print(f"توان ۲ به ۳: {math.pow(2, 3)}")
+
+# مثلثات
+print(f"سینوس ۳۰: {math.sin(math.radians(30))}")
+print(f"کسینوس ۶۰: {math.cos(math.radians(60))}")
+
+# گرد کردن
+print(f"بالا گرد: {math.ceil(3.14)}")
+print(f"پایین گرد: {math.floor(3.14)}")
+print(f"فاکتوریل ۵: {math.factorial(5)}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">π: 3.141592653589793
+e: 2.718281828459045
+جذر ۱۶: 4.0
+توان ۲ به ۳: 8.0
+سینوس ۳۰: 0.5
+کسینوس ۶۰: 0.5
+بالا گرد: 4
+پایین گرد: 3
+فاکتوریل ۵: 120</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>dir()</code> برای دیدن همه‌ی امکانات یک ماژول استفاده کن:</p>
+            <pre class="code-block">import os
+print(dir(os))  # همه چیزهای موجود در os</pre>
+            <p>از <code>help()</code> برای دیدن مستندات:</p>
+            <pre class="code-block">help(os.path.join)  # مستندات تابع join</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> با <code>datetime</code> تاریخ تولد خودت رو وارد کن و سنت رو حساب کن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> با <code>random</code> یک عدد تصادفی ۶ رقمی به عنوان کد تایید تولید کن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با <code>os</code> یک اسکریپت بنویس که همه‌ی فایل‌های <code>.txt</code> توی یک پوشه رو پیدا کنه و اندازه‌شون رو چاپ کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>کار با JSON و CSV</strong> آشنا میشی که برای تبادل داده خیلی کاربردی هستن.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

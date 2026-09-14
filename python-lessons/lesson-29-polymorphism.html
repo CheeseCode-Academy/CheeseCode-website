@@ -1,0 +1,252 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🎭 درس ۲۹: چندریختی (Polymorphism)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>چندریختی</strong> (Polymorphism) آشنا میشی که یکی از مهم‌ترین مفاهیم برنامه‌نویسی شی‌گراست.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 چندریختی چیست؟</h2>
+        <p>چندریختی (Polymorphism) یعنی <strong>یک رابط، چند رفتار</strong>. یعنی کلاس‌های مختلف می‌تونن متدهای هم‌نام داشته باشن ولی رفتارهای متفاوتی داشته باشن.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> چندریختی به کدت <strong>انعطاف‌پذیری</strong> میده و از تکرار کد جلوگیری می‌کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چندریختی با متدهای هم‌نام</h2>
+        
+        <pre class="code-block">class سگ:
+    def صدا_بده(self):
+        return "هاپ هاپ!"
+    
+    def حرکت_کن(self):
+        return "چهار دست و پا می‌رود"
+
+class گربه:
+    def صدا_بده(self):
+        return "میو میو!"
+    
+    def حرکت_کن(self):
+        return "چهار دست و پا می‌رود"
+
+class پرنده:
+    def صدا_بده(self):
+        return "جیک جیک!"
+    
+    def حرکت_کن(self):
+        return "پرواز می‌کند"
+
+# تابع چندریختی
+def رفتار_حیوان(حیوان):
+    print(حیوان.صدا_بده())
+    print(حیوان.حرکت_کن())
+
+رفتار_حیوان(سگ())
+رفتار_حیوان(گربه())
+رفتار_حیوان(پرنده())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">هاپ هاپ!
+چهار دست و پا می‌رود
+میو میو!
+چهار دست و پا می‌رود
+جیک جیک!
+پرواز می‌کند</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چندریختی با وراثت</h2>
+        
+        <pre class="code-block">class شکل:
+    def مساحت(self):
+        pass
+
+class مستطیل(شکل):
+    def __init__(self, طول, عرض):
+        self.طول = طول
+        self.عرض = عرض
+    
+    def مساحت(self):
+        return self.طول * self.عرض
+
+class دایره(شکل):
+    def __init__(self, شعاع):
+        self.شعاع = شعاع
+    
+    def مساحت(self):
+        return 3.14 * self.شعاع ** 2
+
+class مثلث(شکل):
+    def __init__(self, قاعده, ارتفاع):
+        self.قاعده = قاعده
+        self.ارتفاع = ارتفاع
+    
+    def مساحت(self):
+        return 0.5 * self.قاعده * self.ارتفاع
+
+اشکال = [مستطیل(5, 3), دایره(4), مثلث(6, 4)]
+for شکل in اشکال:
+    print(f"مساحت: {شکل.مساحت():.2f}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">مساحت: 15.00
+مساحت: 50.24
+مساحت: 12.00</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 Duck Typing</h2>
+        <p>در پایتون، "اگر مثل اردک راه بره و مثل اردک صدا بده، پس اردک است":</p>
+        
+        <pre class="code-block">class اردک:
+    def صدا_بده(self):
+        return "کواک کواک"
+    
+    def راه_برو(self):
+        return "تاب می‌خورد"
+
+class مرغ:
+    def صدا_بده(self):
+        return "قُد قُد"
+    
+    def راه_برو(self):
+        return "می‌دود"
+
+class انسان:
+    def صدا_بده(self):
+        return "سلام!"
+    
+    def راه_برو(self):
+        return "راه می‌رود"
+
+def تست_اردک(چیز):
+    print(چیز.صدا_بده())
+    print(چیز.راه_برو())
+
+تست_اردک(اردک())
+تست_اردک(مرغ())
+تست_اردک(انسان())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">کواک کواک
+تاب می‌خورد
+قُد قُد
+می‌دود
+سلام!
+راه می‌رود</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> Duck Typing یعنی به جای اینکه چک کنی یه شیء از چه کلاسی هست، چک می‌کنی که چه متدهایی داره.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 Operator Overloading</h2>
+        <p>چندریختی با عملگرها:</p>
+        
+        <pre class="code-block">class عدد_با_واحد:
+    def __init__(self, مقدار, واحد):
+        self.مقدار = مقدار
+        self.واحد = واحد
+    
+    def __add__(self, دیگر):
+        if self.واحد != دیگر.واحد:
+            raise ValueError("واحدها متفاوت هستند!")
+        return عدد_با_واحد(self.مقدار + دیگر.مقدار, self.واحد)
+    
+    def __str__(self):
+        return f"{self.مقدار} {self.واحد}"
+
+وزن۱ = عدد_با_واحد(5, "kg")
+وزن۲ = عدد_با_واحد(3, "kg")
+وزن۳ = وزن۱ + وزن۲
+print(وزن۳)  # 8 kg</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ABC (Abstract Base Classes)</h2>
+        <p>برای强制执行 چندریختی:</p>
+        
+        <pre class="code-block">from abc import ABC, abstractmethod
+
+class شکل(ABC):
+    @abstractmethod
+    def مساحت(self):
+        pass
+
+class مستطیل(شکل):
+    def __init__(self, طول, عرض):
+        self.طول = طول
+        self.عرض = عرض
+    
+    def مساحت(self):
+        return self.طول * self.عرض
+
+# class دایره(شکل):  # ارور! باید مساحت رو پیاده‌سازی کنه
+#     pass</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>isinstance()</code> به جای Duck Typing</p>
+            <p><strong>✅ راه‌حل:</strong> به جای چک کردن نوع، چک کن که متد وجود داره یا نه:</p>
+            <pre class="code-block">if hasattr(شیء, "متد"):</pre>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>@abstractmethod</code> در کلاس‌های انتزاعی</p>
+            <p><strong>✅ راه‌حل:</strong> از <code>@abstractmethod</code> برای مشخص کردن متدهای اجباری استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>functools.singledispatch</code> برای چندریختی با توابع استفاده کن:</p>
+            <pre class="code-block">from functools import singledispatch
+
+@singledispatch
+def پردازش(obj):
+    return f"نوع نامشخص: {obj}"
+
+@پردازش.register(int)
+def _(obj):
+    return f"عدد: {obj}"
+
+@پردازش.register(str)
+def _(obj):
+    return f"متن: {obj}"
+
+print(پردازش(10))   # عدد: 10
+print(پردازش("سلام")) # متن: سلام
+print(پردازش(3.14)) # نوع نامشخص: 3.14</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> سه کلاس با متد <code>صدا_بده</code> بساز و با یک حلقه همه رو صدا بزن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>وسیله_نقلیه</code> بساز و کلاس‌های <code>ماشین</code> و <code>دوچرخه</code> ازش ارث ببرن و متد <code>حرکت_کن</code> رو بازنویسی کنن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس انتزاعی <code>محاسبه_گر</code> بساز با متد <code>محاسبه</code> و دو کلاس <code>جمع_کننده</code> و <code>ضرب_کننده</code> که اون رو پیاده‌سازی کنن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>متدهای کلاس و استاتیک</strong> بیشتر آشنا میشی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

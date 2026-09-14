@@ -1,0 +1,76 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۲۱: کار با فایل‌ها</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: متوسط</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> یه فایل به اسم <code>name.txt</code> بساز و اسم خودت رو توش بنویس.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">with open("name.txt", "w") as فایل:
+    فایل.write("علی رضایی")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> فایل <code>name.txt</code> رو بخون و محتواش رو چاپ کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">with open("name.txt", "r") as فایل:
+    محتوا = فایل.read()
+    print("محتوای فایل:", محتوا)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">محتوای فایل: علی رضایی</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> برنامه‌ای بنویس که از کاربر ۵ اسم بگیره، توی فایل <code>names.txt</code> ذخیره کنه و بعد دوباره بخونه و چاپ کنه.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block"># گرفتن اسامی
+اسامی = []
+for i in range(5):
+    نام = input(f"اسم {i+1} را وارد کنید: ")
+    اسامی.append(نام)
+
+# ذخیره در فایل
+with open("names.txt", "w") as فایل:
+    for نام in اسامی:
+        فایل.write(نام + "\n")
+
+print("اسامی ذخیره شدند!")
+
+# خواندن از فایل
+print("\nاسامی ذخیره شده:")
+with open("names.txt", "r") as فایل:
+    for خط in فایل:
+        print("-", خط.strip())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">اسم 1 را وارد کنید: علی
+اسم 2 را وارد کنید: زهرا
+اسم 3 را وارد کنید: رضا
+اسم 4 را وارد کنید: سارا
+اسم 5 را وارد کنید: محمد
+اسامی ذخیره شدند!
+
+اسامی ذخیره شده:
+- علی
+- زهرا
+- رضا
+- سارا
+- محمد</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧀 جمع‌بندی</h2>
+        <p>تبریک! 🎉 تو درس بیست و یکم رو با موفقیت کامل کردی. حالا می‌دونی چطور با فایل‌ها کار کنی. توی درس بعدی قراره با <strong>مدیریت خطا</strong> آشنا بشی.</p>
+        <p>🍀 <strong>موفق باشی!</strong></p>
+    </section>
+</div>

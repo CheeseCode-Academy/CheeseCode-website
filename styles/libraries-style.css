@@ -1,0 +1,501 @@
+/* ============================================
+   ⚡💻 استایل مرکز دانلود | CodaX Academy
+   ============================================ */
+
+.libraries-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   وضعیت کش
+   ============================================ */
+
+.cache-status-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(15, 22, 38, 0.85);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;
+}
+
+.cache-status-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.cache-status-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.cache-status-info h3 {
+    color: #00d4ff;
+    font-size: 1rem;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.cache-status-info p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    margin: 0 0 0.6rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.cache-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cache-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #00ffcc);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+}
+
+/* ============================================
+   دکمه بررسی آپدیت
+   ============================================ */
+
+.btn-check-update {
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    color: #00d4ff;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-check-update:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 255, 204, 0.4);
+    transform: scale(1.02);
+}
+
+/* ============================================
+   دکمه حذف کامل کش
+   ============================================ */
+
+.btn-clear-all {
+    background: rgba(255, 68, 68, 0.08);
+    border: 1px solid rgba(255, 68, 68, 0.2);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    color: #ff6b6b;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-clear-all:hover {
+    background: rgba(255, 68, 68, 0.15);
+    border-color: rgba(255, 68, 68, 0.4);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.15);
+}
+
+/* ============================================
+   بخش‌ها
+   ============================================ */
+
+.libraries-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    color: #00d4ff;
+    font-size: 1.3rem;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.section-title::before {
+    content: '> ';
+    color: #00ffcc;
+}
+
+.section-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0 0 1rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   کارت‌های دانلود
+   ============================================ */
+
+.download-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.download-card {
+    background: rgba(15, 22, 38, 0.85);
+    border: 1px solid rgba(0, 212, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.2rem;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.download-card:hover {
+    border-color: rgba(0, 255, 204, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.card-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-info h3 {
+    color: #00d4ff;
+    font-size: 1rem;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.card-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    margin: 0 0 0.3rem 0;
+    line-height: 1.5;
+}
+
+.card-stats {
+    color: rgba(0, 212, 255, 0.5);
+    font-size: 0.7rem;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   نوار پیشرفت کارت
+   ============================================ */
+
+.card-progress {
+    margin-top: 0.3rem;
+}
+
+.progress-bar-track-small {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.progress-bar-fill-small {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #00ffcc);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.progress-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   دکمه‌های کارت
+   ============================================ */
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.btn-cache,
+.btn-clear,
+.btn-download {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid;
+}
+
+.btn-cache {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+}
+
+.btn-cache:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 255, 204, 0.4);
+}
+
+.btn-clear {
+    background: rgba(255, 68, 68, 0.05);
+    border-color: rgba(255, 68, 68, 0.15);
+    color: #ff6b6b;
+    flex: 0 0 auto;
+}
+
+.btn-clear:hover {
+    background: rgba(255, 68, 68, 0.1);
+    border-color: rgba(255, 68, 68, 0.3);
+}
+
+.btn-download {
+    background: rgba(0, 255, 204, 0.08);
+    border-color: rgba(0, 255, 204, 0.2);
+    color: #00ffcc;
+}
+
+.btn-download:hover {
+    background: rgba(0, 255, 204, 0.15);
+    border-color: rgba(0, 255, 204, 0.4);
+}
+
+/* ============================================
+   کارت منابع خارجی
+   ============================================ */
+
+.resource-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(15, 22, 38, 0.85);
+    border: 1px solid rgba(0, 212, 255, 0.08);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.resource-card:hover {
+    border-color: rgba(0, 255, 204, 0.25);
+    background: rgba(0, 212, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.resource-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.resource-info {
+    flex: 1;
+}
+
+.resource-info h4 {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    margin: 0 0 0.2rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.resource-info p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    direction: ltr;
+    text-align: left;
+}
+
+.resource-arrow {
+    color: rgba(0, 212, 255, 0.5);
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.resource-card:hover .resource-arrow {
+    color: #00ffcc;
+    transform: translateX(-3px);
+}
+
+/* ============================================
+   پیشرفت کلی
+   ============================================ */
+
+.global-progress {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 22, 38, 0.98);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    color: #00d4ff;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    z-index: 10000;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: none;
+    max-width: 90%;
+    text-align: center;
+    animation: slideUp 0.3s ease;
+}
+
+.global-progress.success {
+    border-color: rgba(0, 255, 204, 0.4);
+    color: #00ffcc;
+}
+
+.global-progress.error {
+    border-color: rgba(255, 68, 68, 0.4);
+    color: #ff6b6b;
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 30px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* ============================================
+   ☀️ حالت روشن
+   ============================================ */
+
+body[data-theme^="light"] .cache-status-box,
+body[data-theme^="light"] .download-card,
+body[data-theme^="light"] .resource-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body[data-theme^="light"] .cache-status-info h3,
+body[data-theme^="light"] .section-title,
+body[data-theme^="light"] .card-info h3,
+body[data-theme^="light"] .resource-info h4 {
+    color: #0369a1;
+}
+
+body[data-theme^="light"] .section-desc,
+body[data-theme^="light"] .cache-status-info p,
+body[data-theme^="light"] .card-desc,
+body[data-theme^="light"] .progress-label {
+    color: #475569;
+}
+
+body[data-theme^="light"] .card-stats,
+body[data-theme^="light"] .resource-info p {
+    color: rgba(3, 105, 161, 0.6);
+}
+
+body[data-theme^="light"] .btn-check-update,
+body[data-theme^="light"] .btn-cache {
+    background: rgba(2, 132, 199, 0.08);
+    border-color: rgba(2, 132, 199, 0.2);
+    color: #0284c7;
+}
+
+body[data-theme^="light"] .btn-clear-all {
+    background: rgba(220, 38, 38, 0.06);
+    border-color: rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+}
+
+body[data-theme^="light"] .btn-clear-all:hover {
+    background: rgba(220, 38, 38, 0.12);
+    border-color: rgba(220, 38, 38, 0.35);
+}
+
+body[data-theme^="light"] .btn-download {
+    background: rgba(5, 150, 105, 0.08);
+    border-color: rgba(5, 150, 105, 0.2);
+    color: #059669;
+}
+
+body[data-theme^="light"] .global-progress {
+    background: rgba(255, 255, 255, 0.98);
+    color: #0369a1;
+}
+
+body[data-theme^="light"] .cache-progress-bar,
+body[data-theme^="light"] .progress-bar-track-small {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .libraries-wrapper {
+        padding: 1rem 0.8rem;
+    }
+    
+    .cache-status-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .cache-status-box > div:last-child {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-check-update,
+    .btn-clear-all {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .download-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+}

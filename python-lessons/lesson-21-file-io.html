@@ -1,0 +1,219 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">💾 درس ۲۱: کار با فایل‌ها (File I/O)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۲۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری چطور اطلاعات رو توی فایل‌ها <strong>ذخیره</strong> کنی و ازشون <strong>بخونی</strong>. این یکی از مهم‌ترین مباحث برنامه‌نویسیه!</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 کار با فایل در پایتون</h2>
+        <p>پایتون بهت اجازه میده با فایل‌های مختلف کار کنی: متن، CSV، JSON، تصویر و ...</p>
+        <p>کار با فایل معمولاً ۳ مرحله داره:</p>
+        <ol>
+            <li><strong>باز کردن</strong> فایل با <code>open()</code></li>
+            <li><strong>خواندن یا نوشتن</strong> با متدهای مختلف</li>
+            <li><strong>بستن</strong> فایل با <code>close()</code></li>
+        </ol>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> همیشه بعد از کار با فایل، اون رو <strong>ببند</strong> تا اطلاعات ذخیره بشن و حافظه آزاد بشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 حالت‌های باز کردن فایل</h2>
+        <ul>
+            <li><code>'r'</code> - خواندن (پیش‌فرض)</li>
+            <li><code>'w'</code> - نوشتن (محتوای قبلی پاک میشه)</li>
+            <li><code>'a'</code> - افزودن به انتهای فایل</li>
+            <li><code>'x'</code> - ایجاد فایل جدید (اگر وجود داشته باشه ارور میده)</li>
+            <li><code>'r+'</code> - خواندن و نوشتن</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 نوشتن در فایل</h2>
+        
+        <pre class="code-block"># نوشتن در فایل (محتوای قبلی پاک میشه)
+فایل = open("test.txt", "w")
+فایل.write("سلام دنیا!\n")
+فایل.write("این خط دوم هست.\n")
+فایل.close()
+
+# افزودن به انتهای فایل
+فایل = open("test.txt", "a")
+فایل.write("این خط به انتها اضافه شد.\n")
+فایل.close()</pre>
+        
+        <p>محتوای فایل <code>test.txt</code>:</p>
+        <div class="output-box">
+            <span class="output-label">خروجی (محتوای فایل):</span>
+            <pre class="code-block-output">سلام دنیا!
+این خط دوم هست.
+این خط به انتها اضافه شد.</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 خواندن از فایل</h2>
+        
+        <pre class="code-block"># روش‌های مختلف خواندن
+فایل = open("test.txt", "r")
+
+# خواندن کل فایل
+کل_محتوا = فایل.read()
+print("کل محتوا:\n", کل_محتوا)
+
+# برگرد به ابتدای فایل
+فایل.seek(0)
+
+# خواندن خط به خط
+خطوط = فایل.readlines()
+print("خطوط:", خطوط)
+
+# برگرد به ابتدای فایل
+فایل.seek(0)
+
+# خواندن با حلقه
+for خط in فایل:
+    print("خط:", خط.strip())
+
+فایل.close()</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">کل محتوا:
+ سلام دنیا!
+این خط دوم هست.
+این خط به انتها اضافه شد.
+
+خطوط: ['سلام دنیا!\n', 'این خط دوم هست.\n', 'این خط به انتها اضافه شد.\n']
+خط: سلام دنیا!
+خط: این خط دوم هست.
+خط: این خط به انتها اضافه شد.</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده از with (روش پیشنهادی)</h2>
+        <p><code>with</code> به‌طور خودکار فایل رو می‌بنده:</p>
+        
+        <pre class="code-block"># نوشتن با with
+with open("data.txt", "w") as فایل:
+    فایل.write("این یک خط است.\n")
+    فایل.write("این خط دوم است.\n")
+# فایل به‌طور خودکار بسته میشه
+
+# خواندن با with
+with open("data.txt", "r") as فایل:
+    محتوا = فایل.read()
+    print(محتوا)
+# فایل به‌طور خودکار بسته میشه</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">این یک خط است.
+این خط دوم است.</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> استفاده از <code>with</code> <strong>امن‌تر</strong> و <strong>خواناتر</strong> هست و نیازی به <code>close()</code> نداره.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 خواندن فایل‌های CSV</h2>
+        
+        <pre class="code-block">import csv
+
+# نوشتن CSV
+with open("افراد.csv", "w", newline="") as فایل:
+    نویسنده = csv.writer(فایل)
+    نویسنده.writerow(["نام", "سن", "شهر"])
+    نویسنده.writerow(["علی", "25", "تهران"])
+    نویسنده.writerow(["زهرا", "30", "اصفهان"])
+
+# خواندن CSV
+with open("افراد.csv", "r") as فایل:
+    خواننده = csv.reader(فایل)
+    for ردیف in خواننده:
+        print(ردیف)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">['نام', 'سن', 'شهر']
+['علی', '25', 'تهران']
+['زهرا', '30', 'اصفهان']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 بررسی وجود فایل</h2>
+        
+        <pre class="code-block">import os
+
+if os.path.exists("test.txt"):
+    print("فایل وجود داره")
+    with open("test.txt", "r") as فایل:
+        print(فایل.read())
+else:
+    print("فایل وجود نداره")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 حذف فایل</h2>
+        
+        <pre class="code-block">import os
+
+if os.path.exists("test.txt"):
+    os.remove("test.txt")
+    print("فایل حذف شد")
+else:
+    print("فایل وجود نداره")</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>close()</code> فایل</p>
+            <p><strong>✅ راه‌حل:</strong> از <code>with</code> استفاده کن که خودکار می‌بنده.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> باز کردن فایل در حالت <code>'w'</code> و از دست دادن اطلاعات قبلی</p>
+            <p><strong>✅ راه‌حل:</strong> برای اضافه کردن از <code>'a'</code> استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> خواندن فایلی که وجود نداره</p>
+            <p><strong>✅ راه‌حل:</strong> اول با <code>os.path.exists()</code> چک کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>with</code> برای کار با چند فایل همزمان استفاده کن:</p>
+            <pre class="code-block">with open("ورودی.txt", "r") as ورودی, open("خروجی.txt", "w") as خروجی:
+    for خط in ورودی:
+        خروجی.write(خط.upper())  # تبدیل به حروف بزرگ</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> یه فایل به اسم <code>name.txt</code> بساز و اسم خودت رو توش بنویس.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> فایل <code>name.txt</code> رو بخون و محتواش رو چاپ کن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر ۵ اسم بگیره، توی فایل <code>names.txt</code> ذخیره کنه و بعد دوباره بخونه و چاپ کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>مدیریت خطا</strong> آشنا میشی و یاد می‌گیری چطور از ارورهای برنامه جلوگیری کنی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

@@ -1,0 +1,155 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🖨️ درس ۲: چاپ کردن با print</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۲ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری چطور با دستور <code>print()</code> هر چیزی رو که می‌خوای توی صفحه نمایش ببینی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 دستور print چیست؟</h2>
+        <p><code>print()</code> یه دستور تو پایتونه که به کامپیوتر می‌گه "این چیز رو به من نشون بده".</p>
+        <p>فرض کن <code>print()</code> مثل یه <strong>بلندگو</strong>ست. هر چیزی که بهش بدی، اون رو برای تو می‌خونه و نشون میده.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> <code>print()</code> همیشه چیزی که می‌خوای چاپ کنی رو داخل <code>( )</code> می‌نویسی. به این می‌گن <strong>پارامتر</strong>.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ متن</h2>
+        <p>برای چاپ متن، باید متن رو داخل <strong>کوتیشن</strong> ("" یا '') قرار بدی:</p>
+        
+        <pre class="code-block">print("سلام به همه!")
+print('چطور هستید؟')</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام به همه!
+چطور هستید؟</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> فرقی نمی‌کنه از کوتیشن دوتا (" ") استفاده کنی یا یکتا (' ')؛ هر دو درستن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ اعداد</h2>
+        <p>برای چاپ اعداد، نیازی به کوتیشن نیست:</p>
+        
+        <pre class="code-block">print(5)
+print(100)
+print(3.14)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">5
+100
+3.14</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ چند چیز با هم</h2>
+        <p>می‌تونی چند چیز رو با <code>print()</code> و با استفاده از <strong>کاما</strong> (,) جدا کنی:</p>
+        
+        <pre class="code-block">print("سلام", "علی", "چطوری؟")
+print("سن من", 25, "سال است")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام علی چطوری؟
+سن من 25 سال است</pre>
+        </div>
+        
+        <p>توی خروجی، بین هر چیزی که با کاما جدا کردی، یه <strong>فاصله</strong> میفته.</p>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ در یک خط با sep</h2>
+        <p>می‌تونی با <code>sep</code> مشخص کنی که بین چیزهایی که چاپ میکنی چه چیزی قرار بگیره:</p>
+        
+        <pre class="code-block">print("سلام", "علی", "چطوری؟", sep="-")
+print(1, 2, 3, 4, 5, sep=" * ")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام-علی-چطوری؟
+1 * 2 * 3 * 4 * 5</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ در چند خط با \n</h2>
+        <p>با استفاده از <code>\n</code> می‌تونی متن رو به چند خط تقسیم کنی:</p>
+        
+        <pre class="code-block">print("خط اول\nخط دوم\nخط سوم")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">خط اول
+خط دوم
+خط سوم</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> به <code>\n</code> می‌گن <strong>"اسکیپ کاراکتر"</strong> و به پایتون می‌گه که برو خط بعدی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چاپ با end</h2>
+        <p>به‌طور پیش‌فرض، <code>print()</code> بعد از هر چاپ، یه خط جدید می‌ره. با <code>end</code> می‌تونی این رو تغییر بدی:</p>
+        
+        <pre class="code-block">print("سلام", end=" ")
+print("دنیا!")
+print("اولین", end="---")
+print("دومین")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام دنیا!
+اولین---دومین</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن پرانتز: <code>print "سلام"</code></p>
+            <p><strong>✅ راه‌حل:</strong> همیشه پرانتز رو بذار: <code>print("سلام")</code></p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن کوتیشن برای متن: <code>print(سلام)</code></p>
+            <p><strong>✅ راه‌حل:</strong> برای متن حتماً از کوتیشن استفاده کن: <code>print("سلام")</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>می‌تونی با <code>print() * 3</code> یه چیز رو چند بار چاپ کنی؟ نه! ولی با حلقه‌هایی که بعداً یاد می‌گیری، این کار شدنیه. فعلاً فقط بدون که <code>print("سلام")</code> رو سه بار بنویسی تا سه بار چاپ بشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> یه برنامه بنویس که اسم و فامیلت رو توی دو خط جداگانه چاپ کنه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> با استفاده از <code>sep</code>، سه کلمه‌ی "پایتون"، "برنامه‌نویسی"، "عالی" رو با خط تیره (-) از هم جدا کن.</p>
+            
+            <p><strong>تمرین ۳ (متوسط):</strong> یک جمله رو با <code>\n</code> به سه خط تقسیم کن.</p>
+            
+            <p><strong>تمرین ۴ (چالش‌برانگیز):</strong> با استفاده از <code>end</code>، یه جمله رو بدون رفتن به خط بعدی چاپ کن، و بعدش یه جمله‌ی دیگه رو توی همون خط چاپ کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>متغیرها</strong> آشنا میشی. متغیرها مثل جعبه‌هایی هستن که می‌تونی اطلاعات رو توش ذخیره کنی و بعداً ازش استفاده کنی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

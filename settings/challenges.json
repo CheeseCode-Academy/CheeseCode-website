@@ -1,0 +1,13 @@
+[
+    {
+      "id": "py_004",
+      "title": "با پایتون و حلقه ها اعداد 1 تا 100 رو باهم جمع کن",
+      "description": "با حلقه for و یا while میتونی انجام بدی",
+      "type": "python",
+      "badgeName": "نشان جمع حلقه ای",
+      "badgeImage": "badges/python-badge-03.png",
+      "creationDate": "2026-08-02",
+      "expirationDate": "2026-08-19",
+      "expectedOutput": "5050"
+    }
+  ]

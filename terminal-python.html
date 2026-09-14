@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ترمینال پایتون | CodaX</title>
+    <link rel="stylesheet" href="./styles/terminal-python.css">
+    <link rel="stylesheet" href="./styles/python-linux-style.css">
+    <link rel="stylesheet" href="./styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CodaX">
+    
+    <script src="./pyodide/pyodide.js"></script>
+    <script src="./js/python-engine.js"></script>
+    <script src="./js/codax-utils.js"></script>
+</head>
+<body data-theme="dark">
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text"><h1>CodaX</h1><p>CodaX | ترمینال پایتون</p></div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button id="themeToggle" title="Select Theme" class="action-btn" style="background:transparent; border:1px solid rgba(0,212,255,0.1);">🌙</button>
+        </div>
+    </header>
+    
+    <div class="terminal-wrapper" dir="ltr">
+        <div class="terminal-topbar">
+            <div class="window-dots">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <span class="terminal-label" dir="ltr">CodaX@terminal:~</span>
+            <span id="pyodideStatus" style="margin-right: auto; margin-left: 1rem; font-size: 0.7rem; color: rgba(0, 212, 255, 0.5);">⏳ در حال آماده‌سازی...</span>
+        </div>
+
+        <div class="terminal-body">
+            <label for="code-input" class="editor-label">محیط اجرای آزاد پایتون (Python 3.11)</label>
+            
+            <textarea id="code-input" class="code-textarea" placeholder="# کد پایتون خود را اینجا بنویسید...
+"></textarea>
+            
+            <div class="action-bar">
+                <button class="btn-terminal" id="runBtn" onclick="executeTerminal()" disabled>⏳ در حال آماده‌سازی...</button>
+                <button class="btn-terminal btn-secondary" onclick="downloadPythonFile()">💾 دانلود فایل .py</button>
+                <span style="font-size: 11px; color: #8899aa; margin-right: auto;">میانبر: Ctrl + Enter برای اجرا</span>
+            </div>
+
+            <div class="output-container">
+                <div class="output-title">خروجی ترمینال (STDOUT):</div>
+                <pre id="output-box" class="terminal-output">⏳ در حال آماده‌سازی مفسر پایتون... لطفاً چند لحظه صبر کنید.</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isPyodideReady = false;
+
+        async function preparePython() {
+            let statusEl = document.getElementById('pyodideStatus');
+            let runBtn = document.getElementById('runBtn');
+            let outputBox = document.getElementById('output-box');
+
+            try {
+                if (typeof initPythonEngine !== 'function') {
+                    throw new Error('python-engine.js لود نشده');
+                }
+
+                statusEl.textContent = '⏳ در حال بارگذاری...';
+                outputBox.innerText = '⏳ در حال بارگذاری مفسر پایتون...\n\nاین فقط بار اول طول می‌کشه.\nبارهای بعدی از کش مرورگر لود میشه.';
+
+                await initPythonEngine();
+                isPyodideReady = true;
+                
+                statusEl.textContent = '✅ آماده';
+                statusEl.style.color = '#00ffcc';
+                
+                runBtn.disabled = false;
+                runBtn.textContent = '▶ اجرای کد';
+                
+                outputBox.innerText = '✅ مفسر پایتون آماده است!\n\nکد پایتون خود را بنویسید و دکمه‌ی اجرا را بزنید.\n\nمیانبر: Ctrl + Enter';
+                
+                console.log('⚡ Pyodide آماده شد');
+            } catch (err) {
+                console.error('❌ خطا:', err);
+                statusEl.textContent = '❌ خطا';
+                statusEl.style.color = '#ff6b6b';
+                outputBox.innerText = '❌ خطا در بارگذاری مفسر پایتون\n\nلطفاً صفحه را رفرش کنید.';
+            }
+        }
+
+        async function executeTerminal() {
+            let codeInput = document.getElementById('code-input');
+            let outputBox = document.getElementById('output-box');
+
+            if (!isPyodideReady) {
+                outputBox.innerText = '⏳ لطفاً صبر کنید، مفسر پایتون هنوز آماده نیست...';
+                return;
+            }
+
+            if (!codeInput.value.trim()) {
+                outputBox.innerText = '❌ لطفاً کدی بنویسید!';
+                return;
+            }
+            
+            outputBox.innerText = "⏳ در حال اجرا...";
+            
+            try {
+                let result = await runPythonCode(codeInput.value);
+                outputBox.innerText = result || '(هیچ خروجی‌ای تولید نشد)';
+            } catch (err) {
+                outputBox.innerText = '❌ خطا در اجرا:\n' + err.message;
+            }
+        }
+
+        function downloadPythonFile() {
+            let code = document.getElementById('code-input').value;
+            let blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'script.py';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        document.getElementById('code-input').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                executeTerminal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(preparePython, 500);
+        });
+
+        // ثبت Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker ثبت شد:', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.warn('⚠️ Service Worker ثبت نشد:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

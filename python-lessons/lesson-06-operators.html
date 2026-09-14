@@ -1,0 +1,201 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">➕ درس ۶: عملگرها</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>عملگرها</strong> آشنا میشی. عملگرها ابزارهایی هستن که با اون‌ها می‌تونی محاسبات ریاضی، مقایسه‌ها و کارهای منطقی انجام بدی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 عملگرهای ریاضی</h2>
+        <p>این عملگرها برای انجام محاسبات عددی استفاده میشن:</p>
+        <ul>
+            <li><code>+</code> (جمع)</li>
+            <li><code>-</code> (تفریق)</li>
+            <li><code>*</code> (ضرب)</li>
+            <li><code>/</code> (تقسیم - نتیجه اعشاری)</li>
+            <li><code>//</code> (تقسیم صحیح - فقط جزء صحیح)</li>
+            <li><code>%</code> (باقیمانده تقسیم)</li>
+            <li><code>**</code> (توان)</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 مثال‌های عملگرهای ریاضی</h2>
+        
+        <pre class="code-block">a = 10
+b = 3
+
+print("جمع:", a + b)
+print("تفریق:", a - b)
+print("ضرب:", a * b)
+print("تقسیم:", a / b)
+print("تقسیم صحیح:", a // b)
+print("باقیمانده:", a % b)
+print("توان:", a ** b)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">جمع: 13
+تفریق: 7
+ضرب: 30
+تقسیم: 3.3333333333333335
+تقسیم صحیح: 3
+باقیمانده: 1
+توان: 1000</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای مقایسه‌ای</h2>
+        <p>این عملگرها برای مقایسه دو مقدار استفاده میشن و نتیجه‌شون <code>True</code> یا <code>False</code> هست:</p>
+        <ul>
+            <li><code>==</code> (برابر)</li>
+            <li><code>!=</code> (نامساوی)</li>
+            <li><code>></code> (بزرگتر)</li>
+            <li><code><</code> (کوچکتر)</li>
+            <li><code>>=</code> (بزرگتر یا مساوی)</li>
+            <li><code><=</code> (کوچکتر یا مساوی)</li>
+        </ul>
+        
+        <pre class="code-block">x = 10
+y = 20
+
+print(x == y)   # False
+print(x != y)   # True
+print(x > y)    # False
+print(x < y)    # True
+print(x >= 10)  # True
+print(y <= 15)  # False</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">False
+True
+False
+True
+True
+False</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای منطقی</h2>
+        <p>این عملگرها برای ترکیب شرط‌ها استفاده میشن:</p>
+        <ul>
+            <li><code>and</code> (و) - هر دو شرط درست باشن</li>
+            <li><code>or</code> (یا) - حداقل یکی از شرط‌ها درست باشه</li>
+            <li><code>not</code> (نقیض) - برعکس کردن شرط</li>
+        </ul>
+        
+        <pre class="code-block">سن = 25
+گواهینامه = True
+
+print(سن >= 18 and گواهینامه == True)  # True
+print(سن >= 18 or گواهینامه == False)  # True
+print(not (سن < 18))                   # True</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">True
+True
+True</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای انتساب</h2>
+        <p>این عملگرها برای <strong>مقداردهی</strong> و <strong>تغییر مقدار</strong> متغیرها استفاده میشن:</p>
+        
+        <pre class="code-block">x = 10        # انتساب ساده
+x += 5        # یعنی x = x + 5
+print(x)      # 15
+
+x -= 3        # یعنی x = x - 3
+print(x)      # 12
+
+x *= 2        # یعنی x = x * 2
+print(x)      # 24
+
+x /= 4        # یعنی x = x / 4
+print(x)      # 6.0
+
+x //= 2       # یعنی x = x // 2
+print(x)      # 3.0
+
+x %= 3        # یعنی x = x % 3
+print(x)      # 0.0</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">15
+12
+24
+6.0
+3.0
+0.0</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای هویتی</h2>
+        <p><code>is</code> و <code>is not</code> برای مقایسه اینکه آیا دو متغیر به <strong>یک شیء</strong> اشاره می‌کنن:</p>
+        
+        <pre class="code-block">a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(a == b)    # True (مقدارشون برابر)
+print(a is b)    # False (شیء متفاوت)
+print(a is c)    # True (همون شیء)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">True
+False
+True</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>=</code> به جای <code>==</code> برای مقایسه: <code>if x = 5:</code></p>
+            <p><strong>✅ راه‌حل:</strong> برای مقایسه از <code>==</code> استفاده کن: <code>if x == 5:</code></p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> تقسیم دو عدد صحیح با <code>/</code> که نتیجه اعشاری میده ولی انتظار عدد صحیح داریم.</p>
+            <p><strong>✅ راه‌حل:</strong> از <code>//</code> برای تقسیم صحیح استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از عملگر <code>%</code> (باقیمانده) برای تشخیص <strong>زوج یا فرد</strong> بودن استفاده کن:</p>
+            <pre class="code-block">عدد = 7
+if عدد % 2 == 0:
+    print("زوج")
+else:
+    print("فرد")</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که دو عدد از کاربر بگیره و مجموع، تفریق، ضرب و تقسیمشون رو چاپ کنه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه زوجه یا فرد؟</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که سه عدد از کاربر بگیره و بزرگترینشون رو پیدا کنه و چاپ کنه. (بدون استفاده از تابع max)</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>شرط if</strong> آشنا میشی. با if می‌تونی به برنامه بگی که <strong>تصمیم</strong> بگیره و کارهای مختلفی انجام بده.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

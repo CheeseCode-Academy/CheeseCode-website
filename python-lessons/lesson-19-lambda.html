@@ -1,0 +1,277 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">⚡ درس ۱۹: توابع لامبدا (Lambda Functions)</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۴ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>توابع لامبدا</strong> آشنا میشی. توابع لامبدا توابع <strong>کوچک</strong> و <strong>یک‌خطی</strong> هستن که برای کارهای ساده استفاده میشن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 تابع لامبدا چیست؟</h2>
+        <p>تابع لامبدا (Lambda Function) یه تابع <strong>بی‌نام</strong> (anonymous) هست که فقط یه <strong>عبارت</strong> رو برمی‌گردونه. این توابع برای کارهای ساده‌ای که فقط یه خط هستن، عالی‌ان.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> توابع لامبدا با کلمه‌ی کلیدی <code>lambda</code> تعریف میشن و نیازی به <code>return</code> ندارن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساختار تابع لامبدا</h2>
+        
+        <pre class="code-block"># تابع معمولی
+def جمع(a, b):
+    return a + b
+
+# تابع لامبدا (همان کار)
+جمع_لامبدا = lambda a, b: a + b
+
+print(جمع(5, 3))
+print(جمع_لامبدا(5, 3))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">8
+8</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> <code>lambda a, b: a + b</code> یعنی "تابعی که a و b رو می‌گیره و a+b رو برمی‌گردونه".</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 مثال‌های ساده</h2>
+        
+        <pre class="code-block"># ضرب دو عدد
+ضرب = lambda x, y: x * y
+print(ضرب(4, 5))  # 20
+
+# توان دو
+توان_دو = lambda x: x ** 2
+print(توان_دو(5))  # 25
+
+# بزرگتر
+بزرگتر = lambda a, b: a if a > b else b
+print(بزرگتر(10, 20))  # 20</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">20
+25
+20</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده با map()</h2>
+        <p><code>map()</code> یه تابع رو روی همه‌ی اعضای لیست اعمال می‌کنه:</p>
+        
+        <pre class="code-block">اعداد = [1, 2, 3, 4, 5]
+
+# استفاده از لامبدا برای توان دو
+توان_دو = list(map(lambda x: x ** 2, اعداد))
+print(توان_دو)
+
+# استفاده از لامبدا برای ضرب در ۲
+ضرب_دو = list(map(lambda x: x * 2, اعداد))
+print(ضرب_دو)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">[1, 4, 9, 16, 25]
+[2, 4, 6, 8, 10]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده با filter()</h2>
+        <p><code>filter()</code> اعضایی که شرط رو برآورده می‌کنن رو انتخاب می‌کنه:</p>
+        
+        <pre class="code-block">اعداد = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# انتخاب اعداد زوج
+زوج‌ها = list(filter(lambda x: x % 2 == 0, اعداد))
+print("اعداد زوج:", زوج‌ها)
+
+# انتخاب اعداد بزرگتر از ۵
+بزرگتر_از_۵ = list(filter(lambda x: x > 5, اعداد))
+print("بزرگتر از ۵:", بزرگتر_از_۵)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">اعداد زوج: [2, 4, 6, 8, 10]
+بزرگتر از ۵: [6, 7, 8, 9, 10]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده با sorted()</h2>
+        <p>مرتب‌سازی با کلید سفارشی:</p>
+        
+        <pre class="code-block"># مرتب‌سازی بر اساس طول کلمه
+کلمات = ["سیب", "موز", "پرتقال", "انگور", "هلو"]
+مرتب = sorted(کلمات, key=lambda x: len(x))
+print("بر اساس طول:", مرتب)
+
+# مرتب‌سازی بر اساس حرف آخر
+مرتب = sorted(کلمات, key=lambda x: x[-1])
+print("بر اساس حرف آخر:", مرتب)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">بر اساس طول: ['سیب', 'موز', 'هلو', 'انگور', 'پرتقال']
+بر اساس حرف آخر: ['انگور', 'سیب', 'هلو', 'موز', 'پرتقال']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 مرتب‌سازی لیست دیکشنری‌ها</h2>
+        
+        <pre class="code-block">افراد = [
+    {"نام": "علی", "سن": 25},
+    {"نام": "زهرا", "سن": 30},
+    {"نام": "رضا", "سن": 22},
+    {"نام": "سارا", "سن": 28}
+]
+
+# مرتب‌سازی بر اساس سن
+مرتب_با_سن = sorted(افراد, key=lambda x: x["سن"])
+for فرد in مرتب_با_سن:
+    print(f"{فرد['نام']}: {فرد['سن']} سال")
+
+print("---")
+
+# مرتب‌سازی بر اساس نام
+مرتب_با_نام = sorted(افراد, key=lambda x: x["نام"])
+for فرد in مرتب_با_نام:
+    print(f"{فرد['نام']}: {فرد['سن']} سال")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">رضا: 22 سال
+علی: 25 سال
+سارا: 28 سال
+زهرا: 30 سال
+---
+رضا: 22 سال
+سارا: 28 سال
+علی: 25 سال
+زهرا: 30 سال</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 لامبدا با چندین شرط</h2>
+        
+        <pre class="code-block"># تشخیص زوج یا فرد
+زوج_یا_فرد = lambda x: "زوج" if x % 2 == 0 else "فرد"
+print(زوج_یا_فرد(7))
+print(زوج_یا_فرد(8))
+
+# تشخیص مثبت، منفی، صفر
+وضعیت = lambda x: "مثبت" if x > 0 else ("منفی" if x < 0 else "صفر")
+print(وضعیت(5))
+print(وضعیت(-3))
+print(وضعیت(0))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">فرد
+زوج
+مثبت
+منفی
+صفر</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 لامبدا با reduce()</h2>
+        <p><code>reduce()</code> برای اعمال تابع به صورت تجمعی استفاده میشه:</p>
+        
+        <pre class="code-block">from functools import reduce
+
+اعداد = [1, 2, 3, 4, 5]
+
+# ضرب همه اعداد
+ضرب_همه = reduce(lambda a, b: a * b, اعداد)
+print("ضرب همه:", ضرب_همه)
+
+# جمع همه اعداد
+جمع_همه = reduce(lambda a, b: a + b, اعداد)
+print("جمع همه:", جمع_همه)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">ضرب همه: 120
+جمع همه: 15</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 لامبدا در توابع</h2>
+        
+        <pre class="code-block">def عملیات(انتخاب):
+    if انتخاب == "جمع":
+        return lambda a, b: a + b
+    elif انتخاب == "ضرب":
+        return lambda a, b: a * b
+    else:
+        return lambda a, b: a - b
+
+جمع = عملیات("جمع")
+ضرب = عملیات("ضرب")
+
+print(جمع(10, 5))   # 15
+print(ضرب(10, 5))   # 50</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">15
+50</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از لامبدا برای کدهای طولانی:</p>
+            <pre class="code-block"># این کار رو نکن! خیلی پیچیده میشه
+مشخص = lambda x: True if x > 0 and x % 2 == 0 else False</pre>
+            <p><strong>✅ راه‌حل:</strong> برای کدهای طولانی از تابع معمولی استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>return</code> در لامبدا (نیازی نیست!):</p>
+            <pre class="code-block">lambda x: return x * 2  # غلط!</pre>
+            <p><strong>✅ راه‌حل:</strong> فقط عبارت رو بنویس: <code>lambda x: x * 2</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از لامبدا برای <strong>مرتب‌سازی پیشرفته</strong> استفاده کن:</p>
+            <pre class="code-block"># مرتب‌سازی بر اساس حروف الفبا برعکس
+کلمات = ["سیب", "موز", "پرتقال", "انگور"]
+مرتب = sorted(کلمات, key=lambda x: x[::-1])
+print(مرتب)  # مرتب‌سازی بر اساس کلمه‌ی برعکس</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> با لامبدا تابعی بساز که عدد رو به توان ۳ برسونه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> با <code>map()</code> و لامبدا، لیستی از اعداد رو به لیستی از مجذورات تبدیل کن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با <code>filter()</code> و لامبدا، اعداد اول رو از لیستی از اعداد انتخاب کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>ماژول‌ها و import</strong> آشنا میشی. ماژول‌ها بهت کمک می‌کنن کدها رو به چند فایل تقسیم کنی و از کدهای آماده استفاده کنی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

@@ -1,0 +1,263 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🔧 درس ۳۰: متدهای کلاس و استاتیک</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>متدهای کلاس</strong> و <strong>متدهای استاتیک</strong> آشنا میشی و تفاوت‌شون رو با متدهای معمولی یاد می‌گیری.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 انواع متدها در کلاس</h2>
+        <ul>
+            <li><strong>متد معمولی</strong> - با <code>self</code> کار می‌کنه (روی شیء)</li>
+            <li><strong>متد کلاس</strong> - با <code>cls</code> کار می‌کنه (روی کلاس) - <code>@classmethod</code></li>
+            <li><strong>متد استاتیک</strong> - به کلاس یا شیء وابسته نیست - <code>@staticmethod</code></li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> متدهای کلاس و استاتیک رو می‌تونی بدون ساختن شیء هم صدا بزنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 متد معمولی</h2>
+        
+        <pre class="code-block">class شخص:
+    def __init__(self, نام):
+        self.نام = نام
+    
+    def معرفی(self):  # متد معمولی
+        return f"سلام! من {self.نام} هستم"
+
+علی = شخص("علی")
+print(علی.معرفی())  # فقط با شیء قابل صدا زدنه</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 متد کلاس (@classmethod)</h2>
+        
+        <pre class="code-block">class دانشجو:
+    دانشگاه = "دانشگاه تهران"
+    
+    def __init__(self, نام):
+        self.نام = نام
+    
+    @classmethod
+    def تغییر_دانشگاه(cls, دانشگاه_جدید):
+        cls.دانشگاه = دانشگاه_جدید
+    
+    @classmethod
+    def از_رشته(cls, نام, رشته):
+        # سازنده جایگزین
+        دانشجو = cls(نام)
+        دانشجو.رشته = رشته
+        return دانشجو
+
+# استفاده بدون شیء
+print(دانشجو.دانشگاه)  # دانشگاه تهران
+دانشجو.تغییر_دانشگاه("دانشگاه صنعتی")
+print(دانشجو.دانشگاه)  # دانشگاه صنعتی
+
+# سازنده جایگزین
+علی = دانشجو.از_رشته("علی", "مهندسی")
+print(علی.نام)  # علی
+print(علی.رشته)  # مهندسی</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 متد استاتیک (@staticmethod)</h2>
+        
+        <pre class="code-block">class ریاضی:
+    @staticmethod
+    def جمع(a, b):
+        return a + b
+    
+    @staticmethod
+    def ضرب(a, b):
+        return a * b
+    
+    @staticmethod
+    def اول_است(n):
+        if n <= 1:
+            return False
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+# استفاده بدون شیء
+print(ریاضی.جمع(5, 3))  # 8
+print(ریاضی.ضرب(4, 2))  # 8
+print(ریاضی.اول_است(7))  # True
+print(ریاضی.اول_است(10))  # False</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تفاوت‌های کلیدی</h2>
+        
+        <pre class="code-block">class مثال:
+    متغیر_کلاس = "مقدار کلاس"
+    
+    def __init__(self, نام):
+        self.نام = نام
+    
+    def متد_معمولی(self):
+        return f"self: {self.نام}"
+    
+    @classmethod
+    def متد_کلاس(cls):
+        return f"cls: {cls.متغیر_کلاس}"
+    
+    @staticmethod
+    def متد_استاتیک():
+        return "متد استاتیک"
+
+# متد معمولی - به شیء نیاز داره
+م = مثال("علی")
+print(م.متد_معمولی())  # self: علی
+
+# متد کلاس - به کلاس یا شیء وصل میشه
+print(مثال.متد_کلاس())  # cls: مقدار کلاس
+print(م.متد_کلاس())     # cls: مقدار کلاس
+
+# متد استاتیک - مستقل
+print(مثال.متد_استاتیک())  # متد استاتیک
+print(م.متد_استاتیک())     # متد استاتیک</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کاربردهای عملی</h2>
+        
+        <pre class="code-block">class تاریخ:
+    def __init__(self, روز, ماه, سال):
+        self.روز = روز
+        self.ماه = ماه
+        self.سال = سال
+    
+    @classmethod
+    def از_رشته(cls, تاریخ_رشته):
+        # "2026-07-21" -> تاریخ(2026, 7, 21)
+        سال, ماه, روز = map(int, تاریخ_رشته.split("-"))
+        return cls(روز, ماه, سال)
+    
+    @staticmethod
+    def معتبر_است(روز, ماه, سال):
+        # بررسی ساده
+        if ماه < 1 or ماه > 12:
+            return False
+        if روز < 1 or روز > 31:
+            return False
+        return True
+    
+    def __str__(self):
+        return f"{self.سال}/{self.ماه}/{self.روز}"
+
+# استفاده از سازنده جایگزین
+تاریخ1 = تاریخ.از_رشته("2026-07-21")
+print(تاریخ1)  # 2026/7/21
+
+# استفاده از متد استاتیک
+print(تاریخ.معتبر_است(31, 12, 2026))  # True
+print(تاریخ.معتبر_است(32, 12, 2026))  # False</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 متد کلاس برای inheritance</h2>
+        
+        <pre class="code-block">class حیوان:
+    نوع = "حیوان"
+    
+    @classmethod
+    def اطلاعات(cls):
+        return f"من یک {cls.نوع} هستم"
+
+class سگ(حیوان):
+    نوع = "سگ"
+
+class گربه(حیوان):
+    نوع = "گربه"
+
+print(حیوان.اطلاعات())  # من یک حیوان هستم
+print(سگ.اطلاعات())     # من یک سگ هستم
+print(گربه.اطلاعات())   # من یک گربه هستم</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده عملی از @staticmethod</h2>
+        
+        <pre class="code-block">class ابزار:
+    @staticmethod
+    def پاک_کن_فاصله(متن):
+        return " ".join(متن.split())
+    
+    @staticmethod
+    def معکوس_کن(متن):
+        return متن[::-1]
+    
+    @staticmethod
+    def بزرگ_کن(متن):
+        return متن.upper()
+
+print(ابزار.پاک_کن_فاصله("  سلام   علی  "))  # سلام علی
+print(ابزار.معکوس_کن("سلام"))  # ملس
+print(ابزار.بزرگ_کن("hello"))  # HELLO</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>self</code> در متد کلاس</p>
+            <p><strong>✅ راه‌حل:</strong> در متد کلاس از <code>cls</code> استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>cls</code> در متد استاتیک</p>
+            <p><strong>✅ راه‌حل:</strong> متد استاتیک به کلاس وابسته نیست، از هیچی استفاده نکن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن دکوریتورها: <code>@classmethod</code> یا <code>@staticmethod</code></p>
+            <p><strong>✅ راه‌حل:</strong> حتماً دکوریتور رو قبل از متد بذار.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>@classmethod</code> برای <strong>سازنده‌های جایگزین</strong> استفاده کن که ورودی‌های مختلفی رو قبول کنن:</p>
+            <pre class="code-block">class نقطه:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    @classmethod
+    def از_قطبی(cls, فاصله, زاویه):
+        import math
+        return cls(فاصله * math.cos(زاویه), فاصله * math.sin(زاویه))
+    
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+نقطه1 = نقطه(3, 4)
+نقطه2 = نقطه.از_قطبی(5, 0.927)
+print(نقطه1)  # (3, 4)
+print(نقطه2)  # (~3, ~4)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> کلاسی با یه متد کلاس بساز که یه پیام چاپ کنه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>تبدیل</code> بساز با متدهای استاتیک برای تبدیل دما (سلسیوس به فارنهایت و بالعکس).</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس <code>کارخانه</code> بساز که با متد کلاس، اشیاء مختلف تولید کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>پروپرتی‌ها</strong> آشنا میشی که کنترل بیشتری روی ویژگی‌های کلاس بهت می‌دن.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

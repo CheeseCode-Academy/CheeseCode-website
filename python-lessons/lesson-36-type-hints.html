@@ -1,0 +1,219 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📝 درس ۳۶: تایپ‌هینت‌ها (Type Hints)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>تایپ‌هینت‌ها</strong> آشنا میشی که کدت رو <strong>خوانا‌تر</strong> و <strong>قابل فهم‌تر</strong> می‌کنن و به IDEها کمک می‌کنن خطاها رو زودتر پیدا کنن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 تایپ‌هینت چیست؟</h2>
+        <p>تایپ‌هینت (Type Hint) مشخص می‌کنه که یه متغیر یا تابع <strong>چه نوعی</strong> از داده رو دریافت می‌کنه یا برمی‌گردونه.</p>
+        <p>تایپ‌هینت‌ها <strong>اجباری</strong> نیستن و فقط برای <strong>مستندسازی</strong> و کمک به IDE هستن.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> تایپ‌هینت‌ها در پایتون ۳.۵+ اضافه شدن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 تایپ‌هینت ساده</h2>
+        
+        <pre class="code-block">def جمع(a: int, b: int) -> int:
+    return a + b
+
+def سلام(نام: str) -> str:
+    return f"سلام {نام}!"
+
+# استفاده
+نتیجه: int = جمع(5, 3)
+پیام: str = سلام("علی")
+
+print(نتیجه)  # 8
+print(پیام)   # سلام علی!</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تایپ‌های مختلف</h2>
+        
+        <pre class="code-block">from typing import List, Dict, Tuple, Optional, Union
+
+# لیست
+def پردازش_اعداد(اعداد: List[int]) -> List[int]:
+    return [x * 2 for x in اعداد]
+
+# دیکشنری
+def اطلاعات_فرد(فرد: Dict[str, Union[str, int]]) -> str:
+    return f"{فرد['نام']} - {فرد['سن']} سال"
+
+# تاپل
+def مختصات() -> Tuple[int, int]:
+    return (10, 20)
+
+# Optional (می‌تونه None باشه)
+def نام(شخص: Optional[str] = None) -> str:
+    if شخص:
+        return f"سلام {شخص}!"
+    return "سلام مهمان!"
+
+# Union (چند نوع)
+def تبدیل(مقدار: Union[int, float, str]) -> str:
+    return str(مقدار)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تایپ‌های پیشرفته</h2>
+        
+        <pre class="code-block">from typing import Callable, Any, TypeVar, Generic
+
+# Callable (تابع)
+def اجرا_کننده(تابع: Callable[[int, int], int], a: int, b: int) -> int:
+    return تابع(a, b)
+
+# Any (هر نوعی)
+def پردازش_هر(داده: Any) -> None:
+    print(داده)
+
+# TypeVar (نوع متغیر)
+T = TypeVar('T')
+
+def اولین(لیست: List[T]) -> T:
+    return لیست[0]
+
+# Generic
+from typing import Generic
+
+class Stack(Generic[T]):
+    def __init__(self) -> None:
+        self._items: List[T] = []
+    
+    def push(self, item: T) -> None:
+        self._items.append(item)
+    
+    def pop(self) -> T:
+        return self._items.pop()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تایپ‌هینت برای متغیرها</h2>
+        
+        <pre class="code-block">name: str = "علی"
+age: int = 25
+scores: List[int] = [18, 19, 17]
+user: Dict[str, Union[str, int]] = {"نام": "علی", "سن": 25}
+is_active: bool = True
+coordinates: Tuple[int, int] = (10, 20)
+
+# Optional
+maybe_number: Optional[int] = None
+maybe_number = 5</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تایپ‌هینت برای کلاس‌ها</h2>
+        
+        <pre class="code-block">class شخص:
+    def __init__(self, نام: str, سن: int) -> None:
+        self.نام = نام
+        self.سن = سن
+    
+    def معرفی(self) -> str:
+        return f"من {self.نام} هستم"
+
+class دانشجو(شخص):
+    def __init__(self, نام: str, سن: int, رشته: str) -> None:
+        super().__init__(نام, سن)
+        self.رشته = رشته
+    
+    def معرفی(self) -> str:
+        return f"{super().معرفی()} و رشته‌ام {self.رشته} است"</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نوع‌های سفارشی</h2>
+        
+        <pre class="code-block">from typing import NewType
+
+# ایجاد نوع سفارشی
+UserId = NewType('UserId', int)
+ProductId = NewType('ProductId', str)
+
+def get_user(user_id: UserId) -> str:
+    return f"کاربر {user_id}"
+
+def get_product(product_id: ProductId) -> str:
+    return f"محصول {product_id}"
+
+# استفاده
+user_id = UserId(123)
+product_id = ProductId("P-456")
+
+print(get_user(user_id))
+print(get_product(product_id))</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 Literal و Final</h2>
+        
+        <pre class="code-block">from typing import Literal, Final
+
+# Literal - مقادیر مشخص
+def وضعیت(وضع: Literal["فعال", "غیرفعال"]) -> str:
+    return f"وضعیت: {وضع}"
+
+# Final - ثابت
+MAX_SIZE: Final = 100
+PI: Final[float] = 3.14159
+
+print(وضعیت("فعال"))    # وضعیت: فعال
+# print(وضعیت("معلق"))  # خطا!
+
+# MAX_SIZE = 200  # خطا! نمی‌شه تغییر داد</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 بررسی تایپ‌ها با mypy</h2>
+        <p>برای بررسی تایپ‌هینت‌ها می‌تونی از <code>mypy</code> استفاده کنی:</p>
+        
+        <pre class="code-block"># در خط فرمان:
+# pip install mypy
+# mypy filename.py</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>TypeAlias</code> برای <strong>ساده‌سازی</strong> تایپ‌های پیچیده استفاده کن:</p>
+            <pre class="code-block">from typing import TypeAlias, Dict, List, Union
+
+PersonDict: TypeAlias = Dict[str, Union[str, int]]
+PeopleList: TypeAlias = List[PersonDict]
+
+def پردازش_افراد(افراد: PeopleList) -> None:
+    for شخص in افراد:
+        print(شخص)
+
+# استفاده
+افراد = [{"نام": "علی", "سن": 25}, {"نام": "زهرا", "سن": 30}]
+پردازش_افراد(افراد)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> تابعی با تایپ‌هینت بنویس که دو عدد رو جمع کنه و نتیجه رو برگردونه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> تابعی با تایپ‌هینت بنویس که لیستی از اعداد بگیره و مجموعشون رو برگردونه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس با تایپ‌هینت کامل بنویس که اطلاعات یک کتاب رو مدیریت کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>کار با SQLite</strong> آشنا میشی و یاد می‌گیری چطور با دیتابیس کار کنی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

@@ -1,0 +1,84 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۴۳: Matplotlib</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: پیشرفته</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> نمودار خطی از تابع f(x) = x² در بازه [-۱۰, ۱۰] رسم کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-10, 10, 100)
+y = x ** 2
+
+plt.plot(x, y, color="blue", linewidth=2)
+plt.title("تابع f(x) = x²")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.grid(True, alpha=0.3)
+plt.axhline(y=0, color="black", linewidth=0.5)
+plt.axvline(x=0, color="black", linewidth=0.5)
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> نمودار میله‌ای از فروش ۴ محصول مختلف رسم کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import matplotlib.pyplot as plt
+
+محصولات = ["لپ‌تاپ", "موبایل", "تبلت", "هدفون"]
+فروش = [150, 200, 100, 250]
+
+plt.bar(محصولات, فروش, color=["#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A"])
+plt.title("فروش محصولات در سال ۱۴۰۳")
+plt.xlabel("محصول")
+plt.ylabel("فروش (میلیون تومان)")
+plt.ylim(0, 300)
+plt.grid(True, alpha=0.3, axis="y")
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> یک نمودار ترکیبی (خطی + میله‌ای) با دو محور y رسم کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(5)
+سال‌ها = ["۱۴۰۰", "۱۴۰۱", "۱۴۰۲", "۱۴۰۳", "۱۴۰۴"]
+فروش = [100, 120, 90, 150, 180]
+سود = [20, 25, 18, 30, 35]
+
+fig, ax1 = plt.subplots()
+
+# محور اول (فروش - میله‌ای)
+ax1.bar(x, فروش, color="blue", alpha=0.7, label="فروش")
+ax1.set_xlabel("سال")
+ax1.set_ylabel("فروش (میلیون)", color="blue")
+ax1.tick_params(axis="y", labelcolor="blue")
+
+# محور دوم (سود - خطی)
+ax2 = ax1.twinx()
+ax2.plot(x, سود, color="red", marker="o", linewidth=2, label="سود")
+ax2.set_ylabel("سود (میلیون)", color="red")
+ax2.tick_params(axis="y", labelcolor="red")
+
+plt.title("فروش و سود سالانه")
+ax1.set_xticks(x)
+ax1.set_xticklabels(سال‌ها)
+
+# افسانه
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines1 + lines2, labels1 + labels2, loc="upper left")
+
+plt.tight_layout()
+plt.show()</pre>
+    </section>
+</div>

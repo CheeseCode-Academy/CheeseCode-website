@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodaX | پاسخ تمرین‌های لینوکس</title>
+    <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CodaX">
+    
+    <script src="js/codax-utils.js"></script>
+    <script src="configs/answers-linux-config.js"></script>
+</head>
+<body data-theme="dark">
+
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text"><h1>CodaX</h1><p>پاسخ لینوکس | CodaX</p></div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button id="themeToggle" title="Select Theme" class="action-btn" style="background:transparent; border:1px solid rgba(0,212,255,0.1);">🌙</button>
+            <button class="action-btn" id="infoButton">📢 اطلاعات</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>📊 پیشرفت پاسخ‌ها</span>
+                    <span id="progressText">۰ / ۰ جواب</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progressBar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 جستجوی جواب...">
+            </div>
+
+            <button id="resumeBtn" class="resume-btn" style="display:none;">
+                ▶️ ادامه از آخرین جواب
+            </button>
+
+            <h2 class="sidebar-header">📚 جواب تمارین لینوکس</h2>
+            <nav class="lessons-list" id="answers-menu"></nav>
+        </aside>
+    </div>
+
+    <div id="lessonModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLesson">&times;</span>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <div id="channelModal" class="modal">
+        <div class="modal-content" style="max-width: 450px; text-align: center; border-top-color: #00d4ff;">
+            <span class="close-modal" id="closeChannel">&times;</span>
+            <div><img src="images/logo.jpeg" style="width: 300px; height: auto; border-radius: 20px;"></div>
+            <h3 style="color: #00d4ff; font-weight: 700; font-size: 1.4rem;" dir="rtl">CodaX Academy | آکادمی CodaX</h3>
+            <p style="margin: 1rem 0; color: rgba(255,255,255,0.5);">هستۀ کد به دست تو | CodaX</p>
+            <p style="color: rgba(255,255,255,0.7);">
+                ارتباط با ادمین: 
+                <span>
+                    <a href="https://ble.ir/CodaX_Admin" target="_blank" class="channel-link" style="color: #00d4ff; text-decoration: none; font-size: 0.95rem; font-weight: 600; display: inline-block; background: rgba(0,212,255,0.08); padding: 0.5rem 1.8rem; border-radius: 60px; border: 1px solid rgba(0,212,255,0.15); transition: all 0.3s ease; backdrop-filter: blur(8px);">
+                        CodaX_Admin@
+                    </a>
+                </span>
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <a href="https://ble.ir/CodaX" target="_blank" class="channel-link" style="color: #00d4ff; text-decoration: none; font-size: 0.95rem; font-weight: 600; display: inline-block; background: rgba(0,212,255,0.08); padding: 0.5rem 1.8rem; border-radius: 60px; border: 1px solid rgba(0,212,255,0.15); transition: all 0.3s ease; backdrop-filter: blur(8px);">
+                    👈 ورود به کانال بله 👉
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var menuContainer = document.getElementById('answers-menu');
+        var lessonModal = document.getElementById('lessonModal');
+        var modalBody = document.getElementById('modal-body-content');
+        var closeLesson = document.getElementById('closeLesson');
+        var channelModal = document.getElementById('channelModal');
+        var logoBtn = document.getElementById('logoBtn');
+        var infoButton = document.getElementById('infoButton');
+        var closeChannel = document.getElementById('closeChannel');
+
+        if (typeof answersConfig === 'undefined') {
+            menuContainer.innerHTML = '<p style="color: #ff6b6b; padding: 1rem;">❌ خطا: فایل answers-linux-config.js یافت نشد!</p>';
+            console.error('answersConfig is undefined!');
+            return;
+        }
+
+        console.log('⚡ تعداد جواب‌ها:', answersConfig.length);
+
+        function closeModal() {
+            lessonModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (window.CodaXUtils) {
+                setTimeout(function() {
+                    window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
+                }, 100);
+            }
+        }
+
+        function loadAnswer(answer) {
+            modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">⏳ در حال بارگذاری...</div>';
+            lessonModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            var cachedContent = null;
+            if (window.CodaXUtils) {
+                cachedContent = window.CodaXUtils.getFromCache(answer.file, 'answers-linux');
+            }
+            
+            if (cachedContent) {
+                console.log('📦 از cache لود شد:', answer.file);
+                showAnswerContent(cachedContent, answer);
+                return;
+            }
+            
+            console.log('🌐 از شبکه لود میشه:', answer.file);
+            fetch('answers/linux/' + answer.file + '?v=' + Date.now())
+                .then(function(res) {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.text();
+                })
+                .then(function(html) {
+                    if (window.CodaXUtils) {
+                        window.CodaXUtils.saveToCache(answer.file, html, 'answers-linux');
+                    }
+                    showAnswerContent(html, answer);
+                })
+                .catch(function(err) {
+                    console.error('❌ خطا:', err);
+                    modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">❌ خطا در بارگذاری<br><span style="font-size:0.8rem;color:rgba(255,255,255,0.3);">' + err.message + '</span></div>';
+                });
+        }
+
+        function showAnswerContent(html, answer) {
+            modalBody.innerHTML = html;
+            
+            if (window.CodaXUtils) {
+                window.CodaXUtils.saveLastLesson(answer.file, answer.title);
+                window.CodaXUtils.markAsSeen(answer.file, 'answers-linux');
+                window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
+            }
+            
+            addShareButton(answer, 'answers-linux');
+        }
+
+        function addShareButton(answer, courseType) {
+            setTimeout(function() {
+                var modalContent = document.querySelector('#lessonModal .modal-content');
+                if (!modalContent) return;
+                
+                var oldBtn = modalContent.querySelector('.share-btn');
+                if (oldBtn) oldBtn.remove();
+                
+                var shareBtn = document.createElement('button');
+                shareBtn.className = 'share-btn';
+                shareBtn.innerHTML = '🔗';
+                shareBtn.title = 'اشتراک‌گذاری';
+                shareBtn.style.cssText = `
+                    position: absolute;
+                    top: 0.2rem;
+                    left: 4rem;
+                    background: rgba(0, 212, 255, 0.1);
+                    border: 1px solid rgba(0, 212, 255, 0.3);
+                    border-radius: 8px;
+                    padding: 0.4rem 0.7rem;
+                    color: #00d4ff;
+                    cursor: pointer;
+                    font-family: 'Courier New', monospace;
+                    font-size: 0.9rem;
+                    z-index: 11;
+                    transition: all 0.2s ease;
+                `;
+                shareBtn.onclick = function() {
+                    window.CodaXUtils.shareLesson(answer.file, answer.title, courseType);
+                };
+                shareBtn.onmouseover = function() {
+                    this.style.background = 'rgba(0, 212, 255, 0.2)';
+                    this.style.transform = 'scale(1.05)';
+                };
+                shareBtn.onmouseout = function() {
+                    this.style.background = 'rgba(0, 212, 255, 0.1)';
+                    this.style.transform = 'scale(1)';
+                };
+                
+                modalContent.appendChild(shareBtn);
+            }, 100);
+        }
+
+        menuContainer.innerHTML = '';
+
+        for (var i = 0; i < answersConfig.length; i++) {
+            (function(index) {
+                var answer = answersConfig[index];
+                var button = document.createElement('button');
+                button.className = 'menu-item';
+                button.setAttribute('data-index', index + 1);
+                button.innerHTML = '<span>💻</span> ' + (index + 1) + '. ' + answer.title;
+                
+                button.addEventListener('click', function() {
+                    loadAnswer(answer);
+                });
+                
+                menuContainer.appendChild(button);
+            })(i);
+        }
+
+        console.log('⚡ منو ساخته شد با', answersConfig.length, 'دکمه');
+
+        closeLesson.addEventListener('click', closeModal);
+        infoButton.addEventListener('click', function() { channelModal.style.display = 'block'; });
+        logoBtn.addEventListener('click', function() { channelModal.style.display = 'block'; });
+        closeChannel.addEventListener('click', function() { channelModal.style.display = 'none'; });
+        window.addEventListener('click', function(e) {
+            if (e.target === lessonModal) closeModal();
+            if (e.target === channelModal) channelModal.style.display = 'none';
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (lessonModal.style.display === 'block') closeModal();
+                if (channelModal.style.display === 'block') channelModal.style.display = 'none';
+            }
+        });
+
+        if (window.CodaXUtils) {
+            window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
+            window.CodaXUtils.setupResume();
+            setTimeout(function() {
+                window.CodaXUtils.setupSearch();
+            }, 100);
+        } else {
+            console.warn('⚠️ CodaXUtils پیدا نشد!');
+        }
+
+        console.log('⚡ Answers Linux page ready!');
+    })();
+    </script>
+</body>
+</html>

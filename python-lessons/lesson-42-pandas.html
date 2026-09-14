@@ -1,0 +1,428 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🐼 درس ۴۲: Pandas - تحلیل داده</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۳۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>با <strong>Pandas</strong> آشنا بشی، کتابخانه‌ای قدرتمند برای <strong>تحلیل</strong> و <strong>دستکاری</strong> داده‌ها.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 Pandas چیست؟</h2>
+        <p>Pandas کتابخانه‌ای برای <strong>تحلیل داده</strong> هست که:</p>
+        <ul>
+            <li>ساختارهای داده‌ی <strong>Series</strong> و <strong>DataFrame</strong></li>
+            <li>خواندن/نوشتن فرمت‌های مختلف (CSV, Excel, JSON, SQL)</li>
+            <li>پاکسازی و آماده‌سازی داده</li>
+            <li>گروه‌بندی و تجمیع</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نصب:</strong> <code>pip install pandas</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 Series و DataFrame</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+# Series - ستون یک‌بعدی
+s = pd.Series([10, 20, 30, 40], index=["a", "b", "c", "d"])
+print("Series:\n", s)
+
+# DataFrame - جدول دو‌بعدی
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا"],
+    "سن": [25, 30, 22, 28],
+    "شهر": ["تهران", "اصفهان", "شیراز", "مشهد"]
+}
+df = pd.DataFrame(data)
+print("\nDataFrame:\n", df)
+
+# دسترسی به ستون
+print("\nستون سن:\n", df["سن"])
+print("\nستون نام:\n", df.نام)
+
+# دسترسی به سطر
+print("\nسطر اول:\n", df.iloc[0])
+print("\nسطر با ایندکس:\n", df.loc[2])</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">Series:
+ a    10
+ b    20
+ c    30
+ d    40
+ dtype: int64
+
+DataFrame:
+     نام   سن    شهر
+0   علی  25  تهران
+1  زهرا  30  اصفهان
+2   رضا  22  شیراز
+3  سارا  28  مشهد
+
+ستون سن:
+ 0    25
+1    30
+2    22
+3    28
+Name: سن, dtype: int64
+
+ستون نام:
+ 0    علی
+1    زهرا
+2    رضا
+3    سارا
+Name: نام, dtype: object
+
+سطر اول:
+ نام       علی
+سن        25
+شهر     تهران
+Name: 0, dtype: object
+
+سطر با ایندکس:
+ نام     رضا
+سن      22
+شهر   شیراز
+Name: 2, dtype: object</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 خواندن داده</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+# خواندن CSV
+df = pd.read_csv("data.csv")
+
+# خواندن Excel
+df = pd.read_excel("data.xlsx")
+
+# خواندن JSON
+df = pd.read_json("data.json")
+
+# خواندن از Clipboard
+df = pd.read_clipboard()
+
+# خواندن از دیکشنری
+data = {
+    "Product": ["A", "B", "C", "D"],
+    "Price": [100, 200, 150, 300],
+    "Quantity": [10, 5, 8, 3]
+}
+df = pd.DataFrame(data)
+print(df)
+
+# سربرگ
+print("\nاولین ۲ سطر:\n", df.head(2))
+print("\nآخرین ۲ سطر:\n", df.tail(2))
+
+# اطلاعات
+print("\nاطلاعات:\n", df.info())
+print("\nآمار:\n", df.describe())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">  Product  Price  Quantity
+0       A    100        10
+1       B    200         5
+2       C    150         8
+3       D    300         3
+
+اولین ۲ سطر:
+   Product  Price  Quantity
+0       A    100        10
+1       B    200         5
+
+آخرین ۲ سطر:
+   Product  Price  Quantity
+2       C    150         8
+3       D    300         3
+
+اطلاعات:
+ &lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 4 entries, 0 to 3
+Data columns (total 3 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   Product   4 non-null      object
+ 1   Price     4 non-null      int64
+ 2   Quantity  4 non-null      int64
+dtypes: int64(2), object(1)
+memory usage: 224.0+ bytes
+None
+
+آمار:
+           Price  Quantity
+count    4.00000   4.00000
+mean   187.50000   6.50000
+std     83.79565   3.10913
+min    100.00000   3.00000
+25%    137.50000   4.50000
+50%    175.00000   6.50000
+75%    225.00000   8.50000
+max    300.00000  10.00000</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 فیلتر کردن داده</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا", "مهدی"],
+    "سن": [25, 30, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", "تهران", "مشهد", "شیراز"],
+    "حقوق": [5000, 6000, 4500, 7000, 8000]
+}
+df = pd.DataFrame(data)
+
+# شرط ساده
+print("سن > 25:\n", df[df["سن"] > 25])
+
+# شرط چندگانه
+print("\nسن > 25 و حقوق > 6000:\n", df[(df["سن"] > 25) & (df["حقوق"] > 6000)])
+
+# عضو بودن در لیست
+print("\nشهرهای تهران یا شیراز:\n", df[df["شهر"].isin(["تهران", "شیراز"])])
+
+# جستجو در متن
+print("\nنام‌های با 'ر':\n", df[df["نام"].str.contains("ر")])
+
+# انتخاب ستون‌ها
+print("\nفقط نام و حقوق:\n", df[["نام", "حقوق"]])</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سن > 25:
+     نام  سن    شهر  حقوق
+1  زهرا  30  اصفهان  6000
+3  سارا  28   مشهد  7000
+4  مهدی  35  شیراز  8000
+
+سن > 25 و حقوق > 6000:
+     نام  سن  شهر  حقوق
+3  سارا  28  مشهد  7000
+4  مهدی  35  شیراز  8000
+
+شهرهای تهران یا شیراز:
+    نام  سن   شهر  حقوق
+0  علی  25  تهران  5000
+2  رضا  22  تهران  4500
+4  مهدی  35  شیراز  8000
+
+نام‌های با 'ر':
+    نام  سن   شهر  حقوق
+1  زهرا  30  اصفهان  6000
+3  سارا  28   مشهد  7000
+
+فقط نام و حقوق:
+     نام  حقوق
+0   علی  5000
+1  زهرا  6000
+2   رضا  4500
+3  سارا  7000
+4  مهدی  8000</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 گروه‌بندی و تجمیع</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "محصول": ["لپ‌تاپ", "موبایل", "لپ‌تاپ", "تبلت", "موبایل", "لپ‌تاپ"],
+    "فروش": [1000, 500, 1200, 300, 600, 900],
+    "تعداد": [5, 10, 4, 8, 12, 6]
+}
+df = pd.DataFrame(data)
+
+# گروه‌بندی
+grouped = df.groupby("محصول")
+print("گروه‌بندی:\n", grouped)
+
+# مجموع
+print("\nمجموع فروش:\n", grouped["فروش"].sum())
+
+# میانگین
+print("\nمیانگین فروش:\n", grouped["فروش"].mean())
+
+# آمار کامل
+print("\nآمار فروش:\n", grouped["فروش"].agg(["sum", "mean", "max", "min", "count"]))
+
+# چندین ستون
+print("\nچندین ستون:\n", grouped.agg({"فروش": "sum", "تعداد": "mean"}))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">گروه‌بندی:
+ &lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x...&gt;
+
+مجموع فروش:
+ محصول
+تبلت      300
+لپ‌تاپ   3100
+موبایل   1100
+Name: فروش, dtype: int64
+
+میانگین فروش:
+ محصول
+تبلت      300.000000
+لپ‌تاپ   1033.333333
+موبایل    550.000000
+Name: فروش, dtype: float64
+
+آمار فروش:
+          sum   mean  max  min  count
+محصول                              
+تبلت     300  300.0  300  300      1
+لپ‌تاپ  3100 1033.333333 1200  900      3
+موبایل  1100  550.0  600  500      2
+
+چندین ستون:
+          فروش  تعداد
+محصول              
+تبلت      300    8.0
+لپ‌تاپ   3100    5.0
+موبایل   1100   11.0</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 مرتب‌سازی و تغییر</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا", "مهدی"],
+    "سن": [25, 30, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", "تهران", "مشهد", "شیراز"]
+}
+df = pd.DataFrame(data)
+
+# مرتب‌سازی بر اساس سن
+print("مرتب‌سازی بر اساس سن:\n", df.sort_values("سن"))
+
+# مرتب‌سازی نزولی
+print("\nمرتب‌سازی نزولی:\n", df.sort_values("سن", ascending=False))
+
+# اضافه کردن ستون جدید
+df["سن_افزایش"] = df["سن"] + 5
+print("\nستون جدید:\n", df)
+
+# تغییر نام ستون
+df = df.rename(columns={"شهر": "استان"})
+print("\nتغییر نام:\n", df)
+
+# حذف ستون
+df = df.drop("سن_افزایش", axis=1)
+print("\nحذف ستون:\n", df)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 مقادیر گمشده</h2>
+        
+        <pre class="code-block">import pandas as pd
+import numpy as np
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", None, "مهدی"],
+    "سن": [25, np.nan, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", None, "مشهد", "شیراز"]
+}
+df = pd.DataFrame(data)
+
+print("داده:\n", df)
+
+# بررسی مقادیر گمشده
+print("\nمقادیر گمشده:\n", df.isnull())
+
+# تعداد گمشده‌ها
+print("\nتعداد گمشده‌ها:\n", df.isnull().sum())
+
+# حذف سطرهای گمشده
+print("\nحذف گمشده:\n", df.dropna())
+
+# پر کردن گمشده‌ها
+print("\nپر کردن با ۰:\n", df.fillna(0))
+
+# پر کردن با مقدار خاص
+df["سن"] = df["سن"].fillna(df["سن"].mean())
+df["شهر"] = df["شهر"].fillna("نامشخص")
+print("\nپر کردن با میانگین:\n", df)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ذخیره داده</h2>
+        
+        <pre class="code-block">import pandas as pd
+
+df = pd.DataFrame({
+    "نام": ["علی", "زهرا", "رضا"],
+    "سن": [25, 30, 22],
+    "شهر": ["تهران", "اصفهان", "شیراز"]
+})
+
+# ذخیره به CSV
+df.to_csv("output.csv", index=False, encoding="utf-8")
+
+# ذخیره به Excel
+df.to_excel("output.xlsx", index=False)
+
+# ذخیره به JSON
+df.to_json("output.json", orient="records", force_ascii=False)
+
+# ذخیره به Clipboard
+df.to_clipboard()
+
+print("فایل‌ها ذخیره شدند!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>pandas</strong> با <strong>matplotlib</strong> برای <strong>نمودار</strong> استفاده کن:</p>
+            <pre class="code-block">import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    "محصول": ["A", "B", "C", "D"],
+    "فروش": [100, 200, 150, 300]
+})
+
+# نمودار ساده
+df.plot(x="محصول", y="فروش", kind="bar")
+plt.title("فروش محصولات")
+plt.show()
+
+# نمودار خطی
+df.plot(x="محصول", y="فروش", kind="line")
+plt.title("روند فروش")
+plt.show()</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱:</strong> یک DataFrame با اطلاعات ۵ نفر بساز (نام، سن، شهر، حقوق) و آمار پایه رو نمایش بده.</p>
+            
+            <p><strong>تمرین ۲:</strong> DataFrame رو بر اساس سن مرتب کن و فقط افرادی که حقوق > ۵۰۰۰ هستن رو نمایش بده.</p>
+            
+            <p><strong>تمرین ۳:</strong> DataFrame رو بر اساس شهر گروه‌بندی کن و میانگین حقوق هر شهر رو حساب کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>Matplotlib</strong> آشنا میشی که برای رسم نمودار خیلی عالیه!</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

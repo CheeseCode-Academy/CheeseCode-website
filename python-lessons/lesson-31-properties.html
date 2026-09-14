@@ -1,0 +1,298 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🔒 درس ۳۱: پروپرتی‌ها (Properties)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>پروپرتی‌ها</strong> (Properties) آشنا میشی که بهت اجازه می‌دن به ویژگی‌های کلاس <strong>کنترل</strong> داشته باشی و کدت رو <strong>تمیزتر</strong> کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 پروپرتی چیست؟</h2>
+        <p>پروپرتی (Property) روشیه که بهت اجازه میده متدها رو مثل <strong>ویژگی</strong> (attribute) صدا بزنی. با پروپرتی می‌تونی:</p>
+        <ul>
+            <li>دسترسی به ویژگی‌ها رو <strong>کنترل</strong> کنی</li>
+            <li>اعتبارسنجی انجام بدی</li>
+            <li>ویژگی‌های <strong>محاسباتی</strong> بسازی</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> پروپرتی‌ها با دکوریتور <code>@property</code> ساخته میشن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی ساده</h2>
+        
+        <pre class="code-block">class مستطیل:
+    def __init__(self, طول, عرض):
+        self.طول = طول
+        self.عرض = عرض
+    
+    @property
+    def مساحت(self):
+        return self.طول * self.عرض
+    
+    @property
+    def محیط(self):
+        return 2 * (self.طول + self.عرض)
+
+م = مستطیل(5, 3)
+print(f"مساحت: {م.مساحت}")  # بدون پرانتز!
+print(f"محیط: {م.محیط}")    # بدون پرانتز!</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">مساحت: 15
+محیط: 16</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> پروپرتی‌ها مثل ویژگی‌های معمولی استفاده میشن، نه مثل متد! پس <strong>بدون پرانتز</strong> صدا زده میشن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی با setter</h2>
+        
+        <pre class="code-block">class شخص:
+    def __init__(self, نام, سن):
+        self._نام = نام
+        self._سن = سن
+    
+    @property
+    def سن(self):
+        return self._سن
+    
+    @سن.setter
+    def سن(self, مقدار):
+        if مقدار < 0:
+            raise ValueError("سن نمی‌تواند منفی باشد!")
+        if مقدار > 120:
+            raise ValueError("سن نمی‌تواند بیشتر از ۱۲۰ باشد!")
+        self._سن = مقدار
+    
+    @property
+    def نام(self):
+        return self._نام
+    
+    @نام.setter
+    def نام(self, مقدار):
+        if not مقدار:
+            raise ValueError("نام نمی‌تواند خالی باشد!")
+        self._نام = مقدار
+
+علی = شخص("علی", 25)
+print(علی.سن)  # 25
+
+علی.سن = 30
+print(علی.سن)  # 30
+
+# علی.سن = -5  # ValueError!</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی با deleter</h2>
+        
+        <pre class="code-block">class حساب:
+    def __init__(self):
+        self._موجودی = 0
+    
+    @property
+    def موجودی(self):
+        return self._موجودی
+    
+    @موجودی.setter
+    def موجودی(self, مقدار):
+        if مقدار < 0:
+            raise ValueError("موجودی نمی‌تواند منفی باشد!")
+        self._موجودی = مقدار
+    
+    @موجودی.deleter
+    def موجودی(self):
+        print("حساب بسته شد!")
+        del self._موجودی
+
+حساب_من = حساب()
+حساب_من.موجودی = 1000
+print(حساب_من.موجودی)  # 1000
+
+del حساب_من.موجودی  # حساب بسته شد!</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی محاسباتی</h2>
+        
+        <pre class="code-block">class دایره:
+    def __init__(self, شعاع):
+        self.شعاع = شعاع
+    
+    @property
+    def مساحت(self):
+        return 3.14 * self.شعاع ** 2
+    
+    @property
+    def محیط(self):
+        return 2 * 3.14 * self.شعاع
+    
+    @property
+    def قطر(self):
+        return 2 * self.شعاع
+
+د = دایره(5)
+print(f"شعاع: {د.شعاع}")
+print(f"قطر: {د.قطر}")
+print(f"مساحت: {د.مساحت:.2f}")
+print(f"محیط: {د.محیط:.2f}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">شعاع: 5
+قطر: 10
+مساحت: 78.50
+محیط: 31.40</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی با محاسبه بر اساس ویژگی‌های دیگر</h2>
+        
+        <pre class="code-block">class مستطیل:
+    def __init__(self, طول, عرض):
+        self.طول = طول
+        self.عرض = عرض
+    
+    @property
+    def مساحت(self):
+        return self.طول * self.عرض
+    
+    @property
+    def نسبت_طول_به_عرض(self):
+        return self.طول / self.عرض if self.عرض != 0 else 0
+    
+    @property
+    def مربع_است(self):
+        return self.طول == self.عرض
+
+م = مستطیل(5, 5)
+print(f"مساحت: {م.مساحت}")
+print(f"نسبت: {م.نسبت_طول_به_عرض:.2f}")
+print(f"مربع است: {م.مربع_است}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">مساحت: 25
+نسبت: 1.00
+مربع است: True</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی فقط خواندنی</h2>
+        
+        <pre class="code-block">class کتاب:
+    def __init__(self, عنوان, نویسنده, سال):
+        self.عنوان = عنوان
+        self.نویسنده = نویسنده
+        self.سال = سال
+    
+    @property
+    def سن(self):
+        from datetime import datetime
+        return datetime.now().year - self.سال
+    
+    @property
+    def اطلاعات(self):
+        return f"📚 {self.عنوان} - {self.نویسنده} ({self.سال})"
+
+ک = کتاب("صد سال تنهایی", "گابریل گارسیا مارکز", 1967)
+print(ک.اطلاعات)
+print(f"سن کتاب: {ک.سن} سال")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">📚 صد سال تنهایی - گابریل گارسیا مارکز (1967)
+سن کتاب: 59 سال</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پروپرتی با cache</h2>
+        
+        <pre class="code-block">class پردازش:
+    def __init__(self, داده):
+        self.داده = داده
+        self._نتیجه_کش = None
+    
+    @property
+    def نتیجه(self):
+        if self._نتیجه_کش is None:
+            print("محاسبه نتیجه...")
+            self._نتیجه_کش = sum(self.داده) / len(self.داده)
+        return self._نتیجه_کش
+
+p = پردازش([10, 20, 30, 40, 50])
+print(p.نتیجه)  # محاسبه نتیجه... 30.0
+print(p.نتیجه)  # 30.0 (از کش استفاده شد)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">محاسبه نتیجه...
+30.0
+30.0</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> نام‌گذاری پروپرتی با متغیر داخلی یکسان: <code>@property def نام(self): return self.نام</code></p>
+            <p><strong>✅ راه‌حل:</strong> از <code>_نام</code> برای متغیر داخلی استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>@property</code> برای getter</p>
+            <p><strong>✅ راه‌حل:</strong> حتماً قبل از getter از <code>@property</code> استفاده کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>@property</code> برای متدهایی که پارامتر دارن</p>
+            <p><strong>✅ راه‌حل:</strong> پروپرتی‌ها فقط برای متدهای بدون پارامتر (به جز <code>self</code>) هستن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>@property</code> برای <strong>سازگاری با نسخه‌های قبلی</strong> استفاده کن. می‌تونی ویژگی رو به پروپرتی تبدیل کنی بدون اینکه کدهای دیگه رو تغییر بدی:</p>
+            <pre class="code-block">class شخص:
+    def __init__(self, نام):
+        self._نام = نام
+    
+    @property
+    def نام(self):
+        return self._نام
+    
+    @نام.setter
+    def نام(self, مقدار):
+        self._نام = مقدار
+
+# کد قدیمی که مستقیم به نام دسترسی داشت، همچنان کار می‌کنه!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> کلاسی با پروپرتی <code>مربع</code> بساز که مقدار رو به توان ۲ برسونه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>دانشجو</code> با پروپرتی <code>معدل</code> بساز که از لیست نمرات محاسبه بشه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس <code>حساب_بانکی</code> با پروپرتی <code>موجودی</code> بساز که برداشت و واریز رو کنترل کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، یک <strong>پروژه‌ی عملی</strong> برای مدیریت کتابخانه می‌سازیم که همه‌چیزهایی که یاد گرفتی رو به کار بگیری.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

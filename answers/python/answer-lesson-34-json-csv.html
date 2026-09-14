@@ -1,0 +1,101 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۳۴: کار با JSON و CSV</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: متوسط</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> یک لیست از دیکشنری‌ها رو به JSON تبدیل کن و توی فایل ذخیره کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import json
+
+لیست_افراد = [
+    {"نام": "علی", "سن": 25, "شهر": "تهران"},
+    {"نام": "زهرا", "سن": 30, "شهر": "اصفهان"},
+    {"نام": "رضا", "سن": 22, "شهر": "شیراز"}
+]
+
+with open("people.json", "w", encoding="utf-8") as f:
+    json.dump(لیست_افراد, f, ensure_ascii=False, indent=2)
+
+print("JSON ذخیره شد!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> یک فایل CSV با اطلاعات افراد بساز و با <code>DictReader</code> بخون.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import csv
+
+# نوشتن فایل
+data = [
+    {"نام": "علی", "سن": 25, "شهر": "تهران"},
+    {"نام": "زهرا", "سن": 30, "شهر": "اصفهان"},
+    {"نام": "رضا", "سن": 22, "شهر": "شیراز"}
+]
+
+with open("people.csv", "w", newline="", encoding="utf-8") as f:
+    fieldnames = ["نام", "سن", "شهر"]
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(data)
+
+# خواندن فایل
+with open("people.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(f"{row['نام']} - {row['سن']} سال - {row['شهر']}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">علی - 25 سال - تهران
+زهرا - 30 سال - اصفهان
+رضا - 22 سال - شیراز</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> یک فایل CSV رو بخون و به JSON تبدیل کن، سپس دوباره JSON رو به CSV برگردون.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import csv
+import json
+
+def csv_to_json(نام_فایل_csv, نام_فایل_json):
+    data = []
+    with open(نام_فایل_csv, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            data.append(row)
+    
+    with open(نام_فایل_json, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def json_to_csv(نام_فایل_json, نام_فایل_csv):
+    with open(نام_فایل_json, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    if not data:
+        print("داده‌ای وجود ندارد!")
+        return
+    
+    with open(نام_فایل_csv, "w", newline="", encoding="utf-8") as f:
+        fieldnames = data[0].keys()
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+
+# تست
+csv_to_json("people.csv", "people.json")
+json_to_csv("people.json", "people_convert.csv")
+print("تبدیل انجام شد!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧀 جمع‌بندی</h2>
+        <p>تبریک! 🎉 تو درس سی و چهارم رو با موفقیت کامل کردی. حالا با JSON و CSV و کاربردهایشون آشنا شدی. توی درس بعدی قراره با <strong>عبارت‌های منظم</strong> آشنا بشی.</p>
+        <p>🍀 <strong>موفق باشی!</strong></p>
+    </section>
+</div>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چالش‌های پایتون | CodaX Academy</title>
+    
+    <link rel="stylesheet" href="styles/index-style.css">
+    <link rel="stylesheet" href="styles/challenges-style.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CodaX">
+    
+    <script src="./pyodide/pyodide.js"></script>
+    <script src="./js/python-engine.js"></script>
+    <script src="./js/codax-utils.js"></script>
+</head>
+<body>
+
+    <div class="challenges-wrapper">
+
+        <div class="page-header">
+            <h2>چالش‌های پایتون</h2>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" title="Select Theme">🌙</button>
+                <a href="index.html" class="back-link">↩ بازگشت</a>
+            </div>
+        </div>
+
+        <div class="challenge-card">
+            <h3 id="challenge-title">در حال بارگذاری چالش...</h3>
+            <div id="challenge-description" class="challenge-desc"></div>
+            
+            <textarea id="challenge-code" dir="ltr" rows="6" placeholder="# کد پایتون خود را اینجا بنویسید..."></textarea>
+            
+            <button onclick="submitChallenge()" id="submitBtn" disabled>⏳ در حال آماده‌سازی...</button>
+            
+            <p id="challenge-result"></p>
+        </div>
+
+        <hr style="border-color: rgba(0, 212, 255, 0.08); margin: 30px 0;">
+
+        <div class="badges-section">
+            <h2>نشان‌های من</h2>
+            <div id="badges-container"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentChallenge = null;
+        let isPyodideReady = false;
+
+        async function loadDailyChallenge() {
+            try {
+                let response = await fetch('./settings/challenges.json?v=' + Date.now());
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                
+                let challenges = await response.json();
+                if (!challenges || challenges.length === 0) {
+                    throw new Error('هیچ چالشی یافت نشد');
+                }
+                
+                currentChallenge = challenges[0];
+                document.getElementById('challenge-title').innerText = currentChallenge.title || 'چالش';
+                document.getElementById('challenge-description').innerHTML = currentChallenge.description || '';
+                
+                renderBadges();
+            } catch (err) {
+                console.error('❌ خطا:', err);
+                document.getElementById('challenge-title').innerText = 'خطا در بارگذاری چالش';
+                document.getElementById('challenge-description').innerHTML = 
+                    '<span style="color: #ff6b6b;">متأسفانه چالش بارگذاری نشد.</span>';
+            }
+        }
+
+        async function preparePython() {
+            let submitBtn = document.getElementById('submitBtn');
+            
+            try {
+                if (typeof initPythonEngine !== 'function') {
+                    throw new Error('python-engine.js لود نشده');
+                }
+
+                await initPythonEngine();
+                isPyodideReady = true;
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = '▶ ارسال و بررسی';
+                
+                console.log('⚡ Pyodide آماده شد');
+            } catch (err) {
+                console.error('❌ خطا:', err);
+                submitBtn.textContent = '❌ خطا در آماده‌سازی';
+            }
+        }
+
+        async function submitChallenge() {
+            let resultBox = document.getElementById('challenge-result');
+            
+            if (!currentChallenge) {
+                resultBox.className = 'error';
+                resultBox.innerText = '❌ چالش بارگذاری نشده است!';
+                return;
+            }
+
+            if (!isPyodideReady) {
+                resultBox.className = 'loading';
+                resultBox.innerText = '⏳ در حال آماده‌سازی مفسر پایتون...';
+                return;
+            }
+
+            let userCode = document.getElementById('challenge-code').value;
+            
+            if (!userCode.trim()) {
+                resultBox.className = 'error';
+                resultBox.innerText = '❌ لطفاً کدی بنویسید!';
+                return;
+            }
+
+            resultBox.className = 'loading';
+            resultBox.innerText = '⏳ در حال بررسی خروجی...';
+
+            try {
+                let userOutput = await runPythonCode(userCode);
+
+                if (userOutput.trim() === currentChallenge.expectedOutput.trim()) {
+                    resultBox.className = 'success';
+                    resultBox.innerText = '🎉 تبریک! چالش با موفقیت حل شد و نشان آزاد شد.';
+                    saveBadge(currentChallenge.id, currentChallenge.badgeName, currentChallenge.badgeImage);
+                } else {
+                    resultBox.className = 'error';
+                    resultBox.innerText = '❌ خروجی اشتباه است.\n\nخروجی شما:\n' + userOutput + '\n\nخروجی مورد انتظار:\n' + currentChallenge.expectedOutput;
+                }
+            } catch (err) {
+                resultBox.className = 'error';
+                resultBox.innerText = '❌ خطا در اجرای کد: ' + err.message;
+            }
+        }
+
+        function saveBadge(id, name, imagePath) {
+            let earnedBadges = JSON.parse(localStorage.getItem('codax_earned_badges') || "{}");
+            if (!earnedBadges[id]) {
+                earnedBadges[id] = { name: name, image: imagePath, date: new Date().toISOString() };
+                localStorage.setItem('codax_earned_badges', JSON.stringify(earnedBadges));
+                renderBadges();
+            }
+        }
+
+        function renderBadges() {
+            let container = document.getElementById('badges-container');
+            let earnedBadges = JSON.parse(localStorage.getItem('codax_earned_badges') || "{}");
+            
+            container.innerHTML = "";
+            
+            let keys = Object.keys(earnedBadges);
+            if (keys.length === 0) {
+                container.innerHTML = '<div class="badge-empty">هنوز نشانی کسب نکرده‌اید 🏆</div>';
+                return;
+            }
+            
+            for (let id in earnedBadges) {
+                let badge = earnedBadges[id];
+                container.innerHTML += `
+                    <div>
+                        <img src="${badge.image}" alt="${badge.name}">
+                        <p>${badge.name}</p>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDailyChallenge();
+            setTimeout(preparePython, 500);
+        });
+
+        // ثبت Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker ثبت شد:', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.warn('⚠️ Service Worker ثبت نشد:', err);
+                    });
+            });
+        }
+    </script>
+
+</body>
+</html>

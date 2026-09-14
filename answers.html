@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <link rel="stylesheet" href="./styles/themes.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodaX | پاسخ‌ها</title>
+    <link rel="stylesheet" href="styles/index-style.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <script src="configs/answers.js"></script>
+</head>
+<body>
+
+    <!-- ===== هدر با دکمه‌ی تم ===== -->
+    <header style="width:100%; max-width:500px; display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; padding:0.5rem 1rem; background:rgba(10,14,26,0.5); border-radius:16px; border:1px solid rgba(0,212,255,0.06);">
+        <div style="display:flex; align-items:center; gap:0.8rem;">
+            <img src="images/logo.jpeg" alt="Logo" style="width:40px; height:40px; border-radius:12px; object-fit:cover; border:1px solid rgba(0,212,255,0.15);">
+            <div>
+                <h1 style="font-size:1.1rem; color:#00d4ff; margin:0; font-family:'Courier New',monospace;">CodaX پاسخ‌ها</h1>
+                <p style="font-size:0.6rem; color:rgba(0,212,255,0.5); margin:0; letter-spacing:2px; font-family:'Courier New',monospace;">CodaX Answers</p>
+            </div>
+        </div>
+        <button id="themeToggle" title="انتخاب تم" style="background:transparent; border:1px solid rgba(0,212,255,0.1); padding:0.4rem 0.8rem; border-radius:8px; color:#00d4ff; cursor:pointer; font-family:'Courier New',monospace; font-size:0.9rem; transition:all 0.3s ease;">☀️</button>
+    </header>
+
+    <div class="glass-card">
+        <h1>پاسخ‌های CodaX</h1>
+        <p>پاسخ کدوم دوره رو می‌خوای ببینی؟</p>
+        <div id="course-list"></div>
+    </div>
+
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h2>🎓 خوش آمدید</h2>
+            <p style="margin:1rem 0;">هستۀ کد به دست تو | CodaX</p>
+            <a href="https://ble.ir/CodaX" class="btn-link">ورود به کانال بله 👉</a>
+            <a href="https://ble.ir/CodaX_Admin" class="btn-link" style="background:transparent; color:#00d4ff; border:1px solid #00d4ff;">ارتباط با ادمین</a>
+            <button onclick="document.getElementById('welcomeModal').style.display='none'" style="margin-top:10px; background:none; border:none; color:#8899aa; cursor:pointer;">بستن</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // ============================================
+        // ۱. نمایش دوره‌ها
+        // ============================================
+        var container = document.getElementById('course-list');
+        if (typeof coursesConfig !== 'undefined' && coursesConfig.length > 0) {
+            container.innerHTML = '';
+            for (var i = 0; i < coursesConfig.length; i++) {
+                var course = coursesConfig[i];
+                var link = document.createElement('a');
+                link.className = 'course-card';
+                link.href = course.url;
+                link.innerHTML = '🚀 ' + course.title;
+                container.appendChild(link);
+            }
+        }
+
+        // ============================================
+        // ۲. مودال خوش‌آمدگویی
+        // ============================================
+        if (localStorage.getItem('codax_welcome_shown')) {
+            document.getElementById('welcomeModal').style.display = 'none';
+        } else {
+            document.getElementById('welcomeModal').style.display = 'flex';
+            localStorage.setItem('codax_welcome_shown', 'true');
+        }
+
+        // ============================================
+        // ۳. دکمه‌ی تم
+        // ============================================
+        var themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) {
+            var saved = localStorage.getItem('codax_theme') || 'dark';
+            document.body.setAttribute('data-theme', saved);
+            themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+            
+            themeBtn.addEventListener('click', function() {
+                var current = document.body.getAttribute('data-theme') || 'dark';
+                var next = current === 'dark' ? 'light' : 'dark';
+                document.body.setAttribute('data-theme', next);
+                localStorage.setItem('codax_theme', next);
+                this.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        }
+
+        console.log('⚡ Answers index page ready!');
+    })();
+    </script>
+</body>
+</html>

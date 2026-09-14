@@ -1,0 +1,106 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۴۲: Pandas</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: پیشرفته</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> یک DataFrame با اطلاعات ۵ نفر بساز (نام، سن، شهر، حقوق) و آمار پایه رو نمایش بده.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا", "مهدی"],
+    "سن": [25, 30, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", "تهران", "مشهد", "شیراز"],
+    "حقوق": [5000, 6000, 4500, 7000, 8000]
+}
+df = pd.DataFrame(data)
+
+print("DataFrame:\n", df)
+print("\nآمار:\n", df.describe())
+print("\nاطلاعات:\n", df.info())</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> DataFrame رو بر اساس سن مرتب کن و فقط افرادی که حقوق > ۵۰۰۰ هستن رو نمایش بده.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا", "مهدی"],
+    "سن": [25, 30, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", "تهران", "مشهد", "شیراز"],
+    "حقوق": [5000, 6000, 4500, 7000, 8000]
+}
+df = pd.DataFrame(data)
+
+# مرتب‌سازی
+sorted_df = df.sort_values("سن")
+print("مرتب‌سازی بر اساس سن:\n", sorted_df)
+
+# فیلتر
+high_salary = df[df["حقوق"] > 5000]
+print("\nافراد با حقوق > ۵۰۰۰:\n", high_salary)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">مرتب‌سازی بر اساس سن:
+     نام  سن   شهر  حقوق
+2  رضا  22  تهران  4500
+0  علی  25  تهران  5000
+3  سارا  28  مشهد  7000
+1  زهرا  30  اصفهان  6000
+4  مهدی  35  شیراز  8000
+
+افراد با حقوق > ۵۰۰۰:
+     نام  سن   شهر  حقوق
+1  زهرا  30  اصفهان  6000
+3  سارا  28  مشهد  7000
+4  مهدی  35  شیراز  8000</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> DataFrame رو بر اساس شهر گروه‌بندی کن و میانگین حقوق هر شهر رو حساب کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import pandas as pd
+
+data = {
+    "نام": ["علی", "زهرا", "رضا", "سارا", "مهدی"],
+    "سن": [25, 30, 22, 28, 35],
+    "شهر": ["تهران", "اصفهان", "تهران", "مشهد", "شیراز"],
+    "حقوق": [5000, 6000, 4500, 7000, 8000]
+}
+df = pd.DataFrame(data)
+
+# گروه‌بندی
+grouped = df.groupby("شهر")
+print("میانگین حقوق هر شهر:\n", grouped["حقوق"].mean())
+
+print("\nآمار کامل:\n", grouped["حقوق"].agg(["mean", "min", "max", "count"]))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">میانگین حقوق هر شهر:
+ شهر
+اصفهان    6000.0
+تهران     4750.0
+شیراز     8000.0
+مشهد      7000.0
+Name: حقوق, dtype: float64
+
+آمار کامل:
+        mean   min   max  count
+شهر                          
+اصفهان  6000.0  6000  6000      1
+تهران   4750.0  4500  5000      2
+شیراز   8000.0  8000  8000      1
+مشهد    7000.0  7000  7000      1</pre>
+        </div>
+    </section>
+</div>

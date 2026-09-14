@@ -1,0 +1,142 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۴۵: BeautifulSoup</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: پیشرفته</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> با BeautifulSoup تمام لینک‌های یک صفحه رو استخراج کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.python.org"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+links = soup.find_all("a")
+print(f"تعداد کل لینک‌ها: {len(links)}")
+
+print("\n۱۰ لینک اول:")
+for i, link in enumerate(links[:10]):
+    href = link.get("href", "بدون لینک")
+    text = link.text.strip() or "بدون متن"
+    print(f"{i+1}. {text[:30]} -> {href[:50]}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> از یک صفحه وب، تیترهای اخبار رو استخراج کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.python.org"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+# استخراج از بخش اخبار
+news_items = soup.select(".event-widget li")
+print("📰 آخرین اخبار پایتون:")
+for item in news_items[:10]:
+    text = item.text.strip()
+    if text:
+        print(f"  • {text}")
+
+# روش با find_all
+news = soup.find_all("a", class_="event-link")
+print("\n📰 روش دوم:")
+for item in news[:5]:
+    print(f"  • {item.text.strip()}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> یک جدول HTML رو استخراج کن و به DataFrame تبدیل کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# مثال با جدول
+html = """
+<table>
+    <tr>
+        <th>نام</th>
+        <th>سن</th>
+        <th>شهر</th>
+        <th>شغل</th>
+    </tr>
+    <tr>
+        <td>علی</td>
+        <td>۲۵</td>
+        <td>تهران</td>
+        <td>برنامه‌نویس</td>
+    </tr>
+    <tr>
+        <td>زهرا</td>
+        <td>۳۰</td>
+        <td>اصفهان</td>
+        <td>مهندس</td>
+    </tr>
+    <tr>
+        <td>رضا</td>
+        <td>۲۲</td>
+        <td>شیراز</td>
+        <td>دانشجو</td>
+    </tr>
+</table>
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+table = soup.find("table")
+
+# استخراج داده‌ها
+data = []
+headers = []
+
+# استخراج هدرها
+header_row = table.find("tr")
+headers = [th.text.strip() for th in header_row.find_all("th")]
+
+# استخراج سطرها
+for row in table.find_all("tr")[1:]:
+    cols = row.find_all("td")
+    data.append([col.text.strip() for col in cols])
+
+# تبدیل به DataFrame
+df = pd.DataFrame(data, columns=headers)
+print("DataFrame:\n", df)
+
+# استخراج مستقیم از وب
+def scrape_table_from_url(url, table_class=None):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    if table_class:
+        table = soup.find("table", class_=table_class)
+    else:
+        table = soup.find("table")
+    
+    if not table:
+        return None
+    
+    # استخراج داده...
+    return pd.read_html(str(table))[0]  # روش سریع
+
+# استفاده
+# df = scrape_table_from_url("https://example.com", "table-class")
+# print(df)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">DataFrame:
+     نام  سن    شهر         شغل
+0   علی  25  تهران  برنامه‌نویس
+1  زهرا  30  اصفهان      مهندس
+2   رضا  22  شیراز     دانشجو</pre>
+        </div>
+    </section>
+</div>

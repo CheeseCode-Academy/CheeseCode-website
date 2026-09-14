@@ -1,0 +1,281 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🧪 درس ۳۸: تست‌نویسی (Unittest)</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>تست‌نویسی</strong> آشنا میشی که بهت کمک می‌کنه کدهای <strong>با کیفیت‌تر</strong> و <strong>بدون اشکال</strong> بنویسی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 تست‌نویسی چیست؟</h2>
+        <p>تست‌نویسی یعنی نوشتن کدهایی که <strong>کد اصلی</strong> رو تست می‌کنن و مطمئن میشن درست کار می‌کنه.</p>
+        <ul>
+            <li>پیدا کردن باگ‌ها زودتر</li>
+            <li>اطمینان از کارکرد صحیح</li>
+            <li>تغییر کد با خیال راحت</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> تست‌نویسی یکی از نشانه‌های <strong>برنامه‌نویس حرفه‌ای</strong> هست.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول unittest</h2>
+        
+        <pre class="code-block">import unittest
+
+# کد اصلی
+def جمع(a, b):
+    return a + b
+
+def تفریق(a, b):
+    return a - b
+
+# کلاس تست
+class Testحساب(unittest.TestCase):
+    def test_جمع(self):
+        self.assertEqual(جمع(5, 3), 8)
+        self.assertEqual(جمع(-1, 1), 0)
+        self.assertEqual(جمع(0, 0), 0)
+    
+    def test_تفریق(self):
+        self.assertEqual(تفریق(10, 5), 5)
+        self.assertEqual(تفریق(0, 5), -5)
+        self.assertEqual(تفریق(-5, -5), 0)
+
+# اجرا
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تست با setUp</h2>
+        
+        <pre class="code-block">import unittest
+
+class TestList(unittest.TestCase):
+    def setUp(self):
+        # قبل از هر تست اجرا میشه
+        self.data = [1, 2, 3, 4, 5]
+        print("setUp اجرا شد")
+    
+    def tearDown(self):
+        # بعد از هر تست اجرا میشه
+        print("tearDown اجرا شد")
+    
+    def test_len(self):
+        self.assertEqual(len(self.data), 5)
+    
+    def test_sum(self):
+        self.assertEqual(sum(self.data), 15)
+    
+    def test_max(self):
+        self.assertEqual(max(self.data), 5)
+
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 انواع Assertions</h2>
+        
+        <pre class="code-block">import unittest
+
+class TestAssertions(unittest.TestCase):
+    def test_assertions(self):
+        # برابری
+        self.assertEqual(5 + 3, 8)
+        
+        # نابرابری
+        self.assertNotEqual(5 + 3, 9)
+        
+        # درستی
+        self.assertTrue(5 > 3)
+        self.assertTrue("hello".isalpha())
+        
+        # نادرستی
+        self.assertFalse(5 < 3)
+        self.assertFalse("123".isalpha())
+        
+        # None
+        self.assertIsNone(None)
+        self.assertIsNotNone("hello")
+        
+        # عضویت
+        self.assertIn(3, [1, 2, 3, 4])
+        self.assertNotIn(5, [1, 2, 3, 4])
+        
+        # استثناها
+        with self.assertRaises(ZeroDivisionError):
+            result = 10 / 0</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تست تابع با خطا</h2>
+        
+        <pre class="code-block">import unittest
+
+def تقسیم(a, b):
+    if b == 0:
+        raise ValueError("تقسیم بر صفر!")
+    return a / b
+
+class Testتقسیم(unittest.TestCase):
+    def test_تقسیم_معمولی(self):
+        self.assertEqual(تقسیم(10, 2), 5)
+        self.assertEqual(تقسیم(7, 2), 3.5)
+    
+    def test_تقسیم_بر_صفر(self):
+        with self.assertRaises(ValueError):
+            تقسیم(10, 0)
+    
+    def test_تقسیم_با_عدد_منفی(self):
+        self.assertEqual(تقسیم(-10, 2), -5)
+        self.assertEqual(تقسیم(10, -2), -5)
+
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تست کلاس</h2>
+        
+        <pre class="code-block">import unittest
+
+class حساب:
+    def __init__(self, موجودی=0):
+        self.موجودی = موجودی
+    
+    def واریز(self, مبلغ):
+        if مبلغ <= 0:
+            raise ValueError("مبلغ باید مثبت باشد!")
+        self.موجودی += مبلغ
+        return self.موجودی
+    
+    def برداشت(self, مبلغ):
+        if مبلغ <= 0:
+            raise ValueError("مبلغ باید مثبت باشد!")
+        if مبلغ > self.موجودی:
+            raise ValueError("موجودی کافی نیست!")
+        self.موجودی -= مبلغ
+        return self.موجودی
+
+class Testحساب(unittest.TestCase):
+    def setUp(self):
+        self.حساب = حساب(1000)
+    
+    def test_واریز(self):
+        self.assertEqual(self.حساب.واریز(500), 1500)
+        self.assertEqual(self.حساب.واریز(200), 1700)
+    
+    def test_برداشت(self):
+        self.assertEqual(self.حساب.برداشت(300), 700)
+        self.assertEqual(self.حساب.برداشت(100), 600)
+    
+    def test_واریز_با_مبلغ_منفی(self):
+        with self.assertRaises(ValueError):
+            self.حساب.واریز(-100)
+    
+    def test_برداشت_بیشتر_از_موجودی(self):
+        with self.assertRaises(ValueError):
+            self.حساب.برداشت(2000)
+
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تست با mock</h2>
+        
+        <pre class="code-block">import unittest
+from unittest.mock import Mock, patch
+
+class کاربر:
+    def __init__(self, نام):
+        self.نام = نام
+    
+    def سلام_بگو(self):
+        return f"سلام {self.نام}!"
+
+class Testکاربر(unittest.TestCase):
+    def test_سلام_بگو(self):
+        # ساخت mock
+        mock_user = Mock()
+        mock_user.نام = "علی"
+        mock_user.سلام_بگو.return_value = "سلام علی!"
+        
+        self.assertEqual(mock_user.سلام_بگو(), "سلام علی!")
+        mock_user.سلام_بگو.assert_called_once()
+    
+    @patch('builtins.print')
+    def test_چاپ_با_patch(self, mock_print):
+        def چاپ_کن(پیام):
+            print(پیام)
+        
+        چاپ_کن("سلام")
+        mock_print.assert_called_with("سلام")
+
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساختار پروژه برای تست</h2>
+        <p>ساختار پیشنهادی:</p>
+        <pre class="code-block">project/
+├── src/
+│   ├── __init__.py
+│   ├── calculator.py
+│   └── user.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_calculator.py
+│   └── test_user.py
+└── run_tests.py</pre>
+        
+        <p><code>run_tests.py</code>:</p>
+        <pre class="code-block">import unittest
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>Test-Driven Development</strong> (TDD) استفاده کن:</p>
+            <ol>
+                <li>اول <strong>تست</strong> رو بنویس</li>
+                <li>تست <strong>شکست می‌خوره</strong> (کد هنوز نوشته نشده)</li>
+                <li><strong>کد</strong> رو بنویس تا تست پاس بشه</li>
+                <li><strong>رفکتور</strong> کن و دوباره تست کن</li>
+            </ol>
+            <pre class="code-block"># مرحله ۱: تست بنویس
+def test_جمع():
+    assert جمع(2, 3) == 5  # این خطا میده
+
+# مرحله ۳: کد بنویس
+def جمع(a, b):
+    return a + b</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> برای تابع <code>ضرب</code> یک تست بنویس.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> برای کلاس <code>مستطیل</code> (مساحت و محیط) تست بنویس.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برای کلاس <code>کتابخانه</code> (که در درس ۳۲ ساختیم) تست بنویس.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>محیط مجازی و pip</strong> آشنا میشی که برای مدیریت پکیج‌ها خیلی مهمه.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

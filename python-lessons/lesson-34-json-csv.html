@@ -1,0 +1,254 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📊 درس ۳۴: کار با JSON و CSV</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۲۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>JSON</strong> و <strong>CSV</strong> آشنا میشی که دو فرمت مهم برای <strong>تبادل داده</strong> هستن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 JSON چیست؟</h2>
+        <p>JSON (JavaScript Object Notation) یه فرمت سبک برای تبادل داده هست که <strong>قابل خواندن</strong> توسط انسان و <strong>قابل پردازش</strong> توسط کامپیوتره.</p>
+        <p>JSON توی وب‌سایت‌ها، APIها و پایگاه‌های داده خیلی استفاده میشه.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> JSON در پایتون به دیکشنری شباهت داره.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 JSON در پایتون</h2>
+        
+        <pre class="code-block">import json
+
+# داده‌های پایتون -> JSON
+داده = {
+    "نام": "علی",
+    "سن": 25,
+    "شهر": "تهران",
+    "علاقه‌ها": ["برنامه‌نویسی", "ورزش", "موسیقی"],
+    "مجرد": True
+}
+
+# تبدیل به JSON
+json_string = json.dumps(داده, ensure_ascii=False, indent=2)
+print("JSON:")
+print(json_string)
+
+# تبدیل JSON به دیکشنری
+json_string = '{"نام": "علی", "سن": 25}'
+parsed = json.loads(json_string)
+print(f"پارسی: {parsed}")
+print(f"نام: {parsed['نام']}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">JSON:
+{
+  "نام": "علی",
+  "سن": 25,
+  "شهر": "تهران",
+  "علاقه‌ها": [
+    "برنامه‌نویسی",
+    "ورزش",
+    "موسیقی"
+  ],
+  "مجرد": true
+}
+پارسی: {'نام': 'علی', 'سن': 25}
+نام: علی</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ذخیره و خواندن JSON</h2>
+        
+        <pre class="code-block">import json
+
+داده = [
+    {"نام": "علی", "سن": 25, "شهر": "تهران"},
+    {"نام": "زهرا", "سن": 30, "شهر": "اصفهان"},
+    {"نام": "رضا", "سن": 22, "شهر": "شیراز"}
+]
+
+# ذخیره در فایل
+with open("people.json", "w", encoding="utf-8") as f:
+    json.dump(داده, f, ensure_ascii=False, indent=2)
+
+print("داده ذخیره شد!")
+
+# خواندن از فایل
+with open("people.json", "r", encoding="utf-8") as f:
+    loaded = json.load(f)
+
+print("داده بارگیری شد:")
+for person in loaded:
+    print(f"  {person}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 CSV چیست؟</h2>
+        <p>CSV (Comma-Separated Values) یه فرمت ساده برای ذخیره داده‌های جدولی هست که با <strong>کاما</strong> جدا میشن.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> CSV برای کار با اکسل و دیتابیس‌ها خیلی کاربردی‌ه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با CSV</h2>
+        
+        <pre class="code-block">import csv
+
+# نوشتن CSV
+data = [
+    ["نام", "سن", "شهر"],
+    ["علی", "25", "تهران"],
+    ["زهرا", "30", "اصفهان"],
+    ["رضا", "22", "شیراز"]
+]
+
+with open("people.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+print("CSV ذخیره شد!")
+
+# خواندن CSV
+with open("people.csv", "r", encoding="utf-8") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">CSV ذخیره شد!
+['نام', 'سن', 'شهر']
+['علی', '25', 'تهران']
+['زهرا', '30', 'اصفهان']
+['رضا', '22', 'شیراز']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 CSV با DictWriter</h2>
+        <p>نوشتن با دیکشنری:</p>
+        
+        <pre class="code-block">import csv
+
+data = [
+    {"نام": "علی", "سن": 25, "شهر": "تهران"},
+    {"نام": "زهرا", "سن": 30, "شهر": "اصفهان"},
+    {"نام": "رضا", "سن": 22, "شهر": "شیراز"}
+]
+
+with open("people_dict.csv", "w", newline="", encoding="utf-8") as f:
+    fieldnames = ["نام", "سن", "شهر"]
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    
+    writer.writeheader()
+    for row in data:
+        writer.writerow(row)
+
+# خواندن با DictReader
+with open("people_dict.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(f"{row['نام']} - {row['سن']} سال - {row['شهر']}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تبدیل CSV به JSON</h2>
+        
+        <pre class="code-block">import csv
+import json
+
+def csv_to_json(csv_file, json_file):
+    data = []
+    with open(csv_file, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            data.append(row)
+    
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+csv_to_json("people_dict.csv", "output.json")
+print("تبدیل انجام شد!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با API و JSON</h2>
+        
+        <pre class="code-block">import requests
+import json
+
+# دریافت داده از API
+response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+data = response.json()
+
+print(f"عنوان: {data['title']}")
+print(f"متن: {data['body']}")
+
+# ذخیره در فایل
+with open("post.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با داده‌های حجیم CSV</h2>
+        
+        <pre class="code-block">import csv
+
+def پردازش_csv_بزرگ(نام_فایل):
+    with open(نام_فایل, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        
+        # پردازش خط به خط
+        for i, row in enumerate(reader):
+            # فقط ۱۰ خط اول رو نشون بده
+            if i < 10:
+                print(row)
+            elif i == 10:
+                print("...")
+                break
+
+# پردازش_CSV_بزرگ("big_file.csv")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>برای داده‌های حجیم، از <strong>پردازش خط به خط</strong> استفاده کن تا حافظه کمتری مصرف بشه:</p>
+            <pre class="code-block">import csv
+
+# جایگزین json.load() برای فایل‌های بزرگ
+def خط_به_خط_json(نام_فایل):
+    with open(نام_فایل, "r", encoding="utf-8") as f:
+        for line in f:
+            yield json.loads(line)
+
+# استفاده
+for data in خط_به_خط_json("big.json"):
+    print(data)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> یک لیست از دیکشنری‌ها رو به JSON تبدیل کن و توی فایل ذخیره کن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> یک فایل CSV با اطلاعات افراد بساز و با <code>DictReader</code> بخون.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک فایل CSV رو بخون و به JSON تبدیل کن، سپس دوباره JSON رو به CSV برگردون.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>عبارت‌های منظم</strong> (Regex) آشنا میشی که برای جستجوی الگوها در متن خیلی قدرتمنده.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

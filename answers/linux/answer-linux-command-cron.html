@@ -1,0 +1,18 @@
+<div class="lesson-content" dir="auto">
+    <h1 class="lesson-title">🧀 جواب درس: دستور cron و crontab</h1>
+    <div class="lesson-meta">سطح: پیشرفته | جواب تمرین</div>
+
+    <section class="section">
+        <h2>📝 تمرین</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین:</strong> یه کرون‌جاب بساز که هر ۵ دقیقه اجرا بشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✅ جواب</h2>
+        <pre class="code-block">crontab -e</pre>
+        <p>و اضافه کن:</p>
+        <pre class="code-block">*/5 * * * * /usr/bin/date &gt;&gt; /tmp/date.log</pre>
+    </section>
+</div>

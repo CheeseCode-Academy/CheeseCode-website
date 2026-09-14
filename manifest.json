@@ -1,0 +1,60 @@
+{
+    "name": "CodaX Academy",
+    "short_name": "CodaX",
+    "description": "هستۀ کد به دست تو | CodaX",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a0e1a",
+    "theme_color": "#00d4ff",
+    "lang": "fa",
+    "dir": "rtl",
+    "categories": ["education", "programming"],
+    "icons": [
+        {
+            "src": "images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "دوره پایتون",
+            "short_name": "پایتون",
+            "url": "./python.html",
+            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "دوره لینوکس",
+            "short_name": "لینوکس",
+            "url": "./linux.html",
+            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "ترمینال پایتون",
+            "short_name": "ترمینال",
+            "url": "./terminal-python.html",
+            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+        }
+    ]
+}

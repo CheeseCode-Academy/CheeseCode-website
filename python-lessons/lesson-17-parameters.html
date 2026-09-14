@@ -1,0 +1,240 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📥 درس ۱۷: پارامترها و مقدار برگشتی</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>پارامترها</strong> و <strong>مقدار برگشتی</strong> بیشتر آشنا میشی و یاد می‌گیری چطور توابع قدرتمندتری بنویسی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 انواع پارامترها</h2>
+        <ul>
+            <li><strong>پارامترهای اجباری</strong> - حتماً باید مقدار بدی</li>
+            <li><strong>پارامترهای اختیاری</strong> - می‌تونی مقدار پیش‌فرض بدی</li>
+            <li><strong>پارامترهای کلیدواژه‌ای</strong> - با اسم پارامتر مقدار می‌دی</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 پارامترهای اجباری</h2>
+        
+        <pre class="code-block">def جمع(a, b):  # a و b اجباری هستن
+    return a + b
+
+print(جمع(5, 3))   # درسته
+# print(جمع(5))    # ارور! یک پارامتر کمه</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">8</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پارامترهای اختیاری (پیش‌فرض)</h2>
+        
+        <pre class="code-block">def سلام(نام, رسمی=False):
+    if رسمی:
+        print(f"جناب {نام}، خوش آمدید!")
+    else:
+        print(f"سلام {نام}!")
+
+سلام("علی")           # رسمی=False (پیش‌فرض)
+سلام("زهرا", True)   # رسمی=True</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام علی!
+جناب زهرا، خوش آمدید!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 پارامترهای کلیدواژه‌ای</h2>
+        <p>با اسم پارامتر مقدار می‌دی، ترتیب مهم نیست:</p>
+        
+        <pre class="code-block">def معرفی(نام, سن, شهر):
+    print(f"{نام}، {سن} ساله، اهل {شهر}")
+
+# روش عادی (با ترتیب)
+معرفی("علی", 25, "تهران")
+
+# روش کلیدواژه‌ای (ترتیب مهم نیست)
+معرفی(شهر="اصفهان", نام="زهرا", سن=30)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">علی، 25 ساله، اهل تهران
+زهرا، 30 ساله، اهل اصفهان</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 *args (پارامترهای متغیر)</h2>
+        <p><code>*args</code> به تابع اجازه میده هر تعداد پارامتر دریافت کنه:</p>
+        
+        <pre class="code-block">def جمع_همه(*اعداد):
+    مجموع = 0
+    for عدد in اعداد:
+        مجموع += عدد
+    return مجموع
+
+print(جمع_همه(1, 2, 3))
+print(جمع_همه(10, 20, 30, 40, 50))
+print(جمع_همه(5, 5, 5, 5))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">6
+150
+20</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> <code>*args</code> یه تاپل از پارامترها رو می‌گیره.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 **kwargs (پارامترهای کلیدواژه‌ای متغیر)</h2>
+        <p><code>**kwargs</code> به تابع اجازه میده هر تعداد پارامتر کلیدواژه‌ای دریافت کنه:</p>
+        
+        <pre class="code-block">def نمایش_اطلاعات(**اطلاعات):
+    for کلید, مقدار in اطلاعات.items():
+        print(f"{کلید}: {مقدار}")
+    print("---")
+
+نمایش_اطلاعات(نام="علی", سن=25, شهر="تهران")
+نمایش_اطلاعات(نام="زهرا", سن=30, شهر="اصفهان", رشته="مهندسی")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">نام: علی
+سن: 25
+شهر: تهران
+---
+نام: زهرا
+سن: 30
+شهر: اصفهان
+رشته: مهندسی
+---</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ترکیب *args و **kwargs</h2>
+        
+        <pre class="code-block">def تابع_کامل(نام, *علاقه‌مندی‌ها, **اطلاعات):
+    print(f"نام: {نام}")
+    print("علاقه‌مندی‌ها:", علاقه‌مندی‌ها)
+    print("اطلاعات دیگر:", اطلاعات)
+
+تابع_کامل("علی", "برنامه‌نویسی", "ورزش", "موسیقی", سن=25, شهر="تهران")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">نام: علی
+علاقه‌مندی‌ها: ('برنامه‌نویسی', 'ورزش', 'موسیقی')
+اطلاعات دیگر: {'سن': 25, 'شهر': 'تهران'}</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 مقدار برگشتی پیشرفته</h2>
+        <p>می‌تونی هر چیزی رو برگردونی: عدد، متن، لیست، دیکشنری، حتی تابع!</p>
+        
+        <pre class="code-block">def تجزیه_و_تحلیل(لیست):
+    return {
+        "تعداد": len(لیست),
+        "مجموع": sum(لیست),
+        "بزرگترین": max(لیست),
+        "کوچکترین": min(لیست),
+        "میانگین": sum(لیست) / len(لیست)
+    }
+
+اعداد = [10, 20, 30, 40, 50]
+نتیجه = تجزیه_و_تحلیل(اعداد)
+
+for کلید, مقدار in نتیجه.items():
+    print(f"{کلید}: {مقدار}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">تعداد: 5
+مجموع: 150
+بزرگترین: 50
+کوچکترین: 10
+میانگین: 30.0</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 تابع بدون return</h2>
+        <p>اگر <code>return</code> نباشه، تابع <code>None</code> برمی‌گردونه:</p>
+        
+        <pre class="code-block">def بدون_بازگشت():
+    print("این تابع چیزی برنمی‌گردونه")
+
+نتیجه = بدون_بازگشت()
+print("مقدار برگشتی:", نتیجه)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">این تابع چیزی برنمی‌گردونه
+مقدار برگشتی: None</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از متغیر تغییرپذیر به عنوان مقدار پیش‌فرض:</p>
+            <pre class="code-block">def تابع(لیست=[]):  # خطرناک!
+    لیست.append(1)
+    return لیست</pre>
+            <p><strong>✅ راه‌حل:</strong> از <code>None</code> به عنوان پیش‌فرض استفاده کن:</p>
+            <pre class="code-block">def تابع(لیست=None):
+    if لیست is None:
+        لیست = []
+    لیست.append(1)
+    return لیست</pre>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>return</code> وقتی که باید مقداری برگردونه:</p>
+            <pre class="code-block">def جمع(a, b):
+    a + b  # return رو فراموش کردی!</pre>
+            <p><strong>✅ راه‌حل:</strong> حتماً از <code>return</code> استفاده کن: <code>return a + b</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>می‌تونی از <code>*</code> برای <strong>باز کردن</strong> لیست یا تاپل موقع صدا زدن تابع استفاده کنی:</p>
+            <pre class="code-block">def جمع_سه(a, b, c):
+    return a + b + c
+
+اعداد = [10, 20, 30]
+print(جمع_سه(*اعداد))  # 60</pre>
+            <p>به این می‌گن <strong>Unpacking</strong>.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> تابعی بنویس که دو عدد بگیره و حاصل ضربشون رو برگردونه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> تابعی بنویس که یک لیست از اعداد بگیره و مجموع و میانگین رو به صورت دیکشنری برگردونه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که با <code>*args</code> هر تعداد عدد بگیره و بزرگترینشون رو پیدا کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>آرگومان‌های پیش‌فرض</strong> بیشتر آشنا میشی و یاد می‌گیری چطور توابع انعطاف‌پذیرتری بنویسی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

@@ -1,0 +1,308 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🗄️ درس ۳۷: کار با SQLite</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>SQLite</strong> آشنا میشی که یک دیتابیس سبک و بدون نیاز به سرور هست. یاد می‌گیری چطور داده‌ها رو توی دیتابیس ذخیره و مدیریت کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 SQLite چیست؟</h2>
+        <p>SQLite یک <strong>دیتابیس</strong> ساده و سبک هست که به‌صورت <strong>فایل</strong> ذخیره میشه و نیازی به نصب سرور نداره.</p>
+        <ul>
+            <li>بدون سرور</li>
+            <li>فایل واحد</li>
+            <li>سبک و سریع</li>
+            <li>در پایتون داخلی‌ست</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> SQLite با ماژول <code>sqlite3</code> در پایتون کار می‌کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 اتصال به دیتابیس</h2>
+        
+        <pre class="code-block">import sqlite3
+
+# اتصال به دیتابیس (ایجاد میشه اگر نباشه)
+conn = sqlite3.connect("mydb.db")
+
+# ایجاد یک cursor برای اجرای دستورات
+cursor = conn.cursor()
+
+# بستن اتصال
+conn.close()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ایجاد جدول</h2>
+        
+        <pre class="code-block">import sqlite3
+
+conn = sqlite3.connect("mydb.db")
+cursor = conn.cursor()
+
+# ایجاد جدول کاربران
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        age INTEGER,
+        city TEXT
+    )
+""")
+
+conn.commit()
+conn.close()
+print("جدول ساخته شد!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 درج داده</h2>
+        
+        <pre class="code-block">import sqlite3
+
+conn = sqlite3.connect("mydb.db")
+cursor = conn.cursor()
+
+# درج یک رکورد
+cursor.execute("""
+    INSERT INTO users (name, age, city)
+    VALUES (?, ?, ?)
+""", ("علی", 25, "تهران"))
+
+# درج چند رکورد
+users = [
+    ("زهرا", 30, "اصفهان"),
+    ("رضا", 22, "شیراز"),
+    ("سارا", 28, "مشهد")
+]
+
+cursor.executemany("""
+    INSERT INTO users (name, age, city)
+    VALUES (?, ?, ?)
+""", users)
+
+conn.commit()
+conn.close()
+print("داده‌ها ذخیره شدند!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 خواندن داده</h2>
+        
+        <pre class="code-block">import sqlite3
+
+conn = sqlite3.connect("mydb.db")
+cursor = conn.cursor()
+
+# خواندن همه
+cursor.execute("SELECT * FROM users")
+همه = cursor.fetchall()
+print("همه کاربران:")
+for user in همه:
+    print(f"  ID: {user[0]}, نام: {user[1]}, سن: {user[2]}, شهر: {user[3]}")
+
+# خواندن با شرط
+cursor.execute("SELECT * FROM users WHERE age > ?", (25,))
+بزرگتر = cursor.fetchall()
+print(f"\nکاربران بالای ۲۵ سال: {len(بزرگتر)} نفر")
+
+# خواندن یک رکورد
+cursor.execute("SELECT * FROM users WHERE name = ?", ("علی",))
+علی = cursor.fetchone()
+if علی:
+    print(f"\nعلی: {علی}")
+
+conn.close()</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">همه کاربران:
+  ID: 1, نام: علی, سن: 25, شهر: تهران
+  ID: 2, نام: زهرا, سن: 30, شهر: اصفهان
+  ID: 3, نام: رضا, سن: 22, شهر: شیراز
+  ID: 4, نام: سارا, سن: 28, شهر: مشهد
+
+کاربران بالای ۲۵ سال: 2 نفر
+
+علی: (1, 'علی', 25, 'تهران')</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 به‌روزرسانی داده</h2>
+        
+        <pre class="code-block">import sqlite3
+
+conn = sqlite3.connect("mydb.db")
+cursor = conn.cursor()
+
+# به‌روزرسانی
+cursor.execute("""
+    UPDATE users
+    SET city = ?
+    WHERE name = ?
+""", ("قم", "علی"))
+
+conn.commit()
+print("به‌روزرسانی انجام شد!")
+
+# بررسی
+cursor.execute("SELECT * FROM users WHERE name = 'علی'")
+print(cursor.fetchone())
+
+conn.close()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 حذف داده</h2>
+        
+        <pre class="code-block">import sqlite3
+
+conn = sqlite3.connect("mydb.db")
+cursor = conn.cursor()
+
+# حذف با شرط
+cursor.execute("DELETE FROM users WHERE name = ?", ("رضا",))
+
+conn.commit()
+print("حذف انجام شد!")
+
+# بررسی
+cursor.execute("SELECT * FROM users")
+for user in cursor.fetchall():
+    print(user)
+
+conn.close()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با کلاس</h2>
+        
+        <pre class="code-block">import sqlite3
+from typing import List, Optional, Dict
+
+class Database:
+    def __init__(self, db_name: str = "mydb.db"):
+        self.db_name = db_name
+        self._init_table()
+    
+    def _init_table(self):
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    age INTEGER,
+                    city TEXT
+                )
+            """)
+            conn.commit()
+    
+    def add_user(self, name: str, age: int, city: str) -> int:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO users (name, age, city)
+                VALUES (?, ?, ?)
+            """, (name, age, city))
+            conn.commit()
+            return cursor.lastrowid
+    
+    def get_all_users(self) -> List[Dict]:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users")
+            rows = cursor.fetchall()
+            return [{"id": r[0], "name": r[1], "age": r[2], "city": r[3]} for r in rows]
+    
+    def update_user(self, user_id: int, **kwargs) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            for key, value in kwargs.items():
+                cursor.execute(f"UPDATE users SET {key} = ? WHERE id = ?", (value, user_id))
+            conn.commit()
+            return True
+    
+    def delete_user(self, user_id: int) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+            conn.commit()
+            return True
+
+# استفاده
+db = Database()
+db.add_user("علی", 25, "تهران")
+db.add_user("زهرا", 30, "اصفهان")
+
+users = db.get_all_users()
+for user in users:
+    print(user)
+
+db.update_user(1, city="قم")
+db.delete_user(2)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با SQLite و pandas</h2>
+        
+        <pre class="code-block">import sqlite3
+import pandas as pd
+
+# خواندن دیتابیس به pandas
+conn = sqlite3.connect("mydb.db")
+df = pd.read_sql_query("SELECT * FROM users", conn)
+print(df)
+
+# ذخیره pandas به دیتابیس
+new_data = pd.DataFrame([
+    {"name": "رضا", "age": 22, "city": "شیراز"},
+    {"name": "سارا", "age": 28, "city": "مشهد"}
+])
+new_data.to_sql("users", conn, if_exists="append", index=False)
+conn.close()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>with</code> برای <strong>مدیریت خودکار</strong> اتصال استفاده کن:</p>
+            <pre class="code-block">import sqlite3
+
+with sqlite3.connect("mydb.db") as conn:
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    # اتصال به‌طور خودکار بسته میشه</pre>
+            <p>برای <strong>خطاگیری</strong> از <code>try/except</code> استفاده کن:</p>
+            <pre class="code-block">try:
+    with sqlite3.connect("mydb.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users")
+except sqlite3.Error as e:
+    print(f"خطای دیتابیس: {e}")</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> یک دیتابیس با جدول <code>products</code> (نام، قیمت، تعداد) بساز.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> به جدول <code>products</code> چند محصول اضافه کن و همه رو بخون.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس کامل برای مدیریت محصولات بساز (اضافه، حذف، به‌روزرسانی، جستجو).</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>تست‌نویسی</strong> آشنا میشی که بهت کمک می‌کنه کدهای باکیفیت‌تر بنویسی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

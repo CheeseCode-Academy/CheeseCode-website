@@ -1,0 +1,117 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🐍 درس ۱: پایتون چیه؟ نصب و راه‌اندازی</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری که پایتون چیه، چرا باید یادش بگیری، و چطور توی کامپیوتر خودت نصبش کنی تا بتونی کد بزنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 پایتون چیست؟</h2>
+        <p>پایتون یه <strong>زبان برنامه‌نویسی</strong> هست. یعنی زبانی که به کمک اون می‌تونی به کامپیوتر بگی چیکار کنه.</p>
+        <p>فرض کن پایتون مثل یه <strong>زبان واسطه</strong> بین تو و کامپیوتره. تو به زبان خودت (پایتون) به کامپیوتر می‌گی "این کار رو برام انجام بده" و کامپیوتر اون رو انجام میده.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> کامپیوترها فقط زبان ۰ و ۱ (باینری) رو می‌فهمن. پایتون این کدها رو برای کامپیوتر ترجمه می‌کنه!</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🤔 چرا پایتون؟</h2>
+        <ul>
+            <li><strong>ساده و خواناست:</strong> کدهای پایتون مثل انگلیسی ساده‌ست.</li>
+            <li><strong>قدرتمنده:</strong> از هوش مصنوعی تا ساخت وب‌سایت، همه‌جا کاربرد داره.</li>
+            <li><strong>محبوبیت بالا:</strong> یکی از پرکاربردترین زبان‌های دنیاست.</li>
+            <li><strong>رایگانه:</strong> هیچ هزینه‌ای نداره.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 نصب پایتون روی ویندوز</h2>
+        <p>نصب پایتون خیلی سادست. قدم‌های زیر رو دقیق انجام بده:</p>
+        
+        <h3>قدم ۱: دانلود پایتون</h3>
+        <p>به سایت رسمی پایتون برو: <a href="https://python.org" target="_blank">python.org</a> یا اگه بخوای از سایت دانلود کنی برو <a href="../libraries.html" target="_blank">صفحه‌ی دانلود ها</a></p>
+        <p>روی دکمه‌ی زرد رنگ <strong>Download Python</strong> کلیک کن. (خودش آخرین نسخه رو بهت پیشنهاد میده)</p>
+        
+        <h3>قدم ۲: اجرای فایل نصب</h3>
+        <p>فایل دانلود شده رو اجرا کن. (اسمش چیزی مثل <code>python-3.14.0.exe</code> هست)</p>
+        <div class="highlight-box">
+            <p>⚠️ <strong>خیلی مهم:</strong> توی صفحه‌ی اول نصب، حتماً تیک گزینه‌ی <strong>"Add Python to PATH"</strong> رو بزن! این کار باعث میشه بتونی از هر جایی پایتون رو اجرا کنی.</p>
+        </div>
+        
+        <h3>قدم ۳: نصب</h3>
+        <p>روی <strong>Install Now</strong> کلیک کن و صبر کن تا نصب تموم بشه.</p>
+        <p>وقتی پیام <strong>"Setup was successful"</strong> رو دیدی، یعنی نصب کامل شده!</p>
+        
+        <h3>قدم ۴: تست نصب</h3>
+        <p>برای اینکه مطمئن بشی پایتون درست نصب شده:</p>
+        <ul>
+            <li>کلیدهای <code>Win + R</code> رو بزن.</li>
+            <li>توی پنجره‌ی باز شده <code>cmd</code> رو بنویس و Enter بزن تا خط فرمان (Command Prompt) باز بشه.</li>
+            <li>توی خط فرمان <code>python --version</code> رو تایپ کن و Enter بزن.</li>
+        </ul>
+        <p>اگر نوشته <code>Python 3.14.0</code> یا چیزی شبیه این رو دیدی، یعنی نصب موفقیت‌آمیز بوده! 🎉</p>
+    </section>
+
+    <section class="section">
+        <h2>📝 اولین کد پایتون</h2>
+        <p>حالا که پایتون رو نصب کردی، بیا اولین کد رو بنویسیم.</p>
+        <p>توی خط فرمان (همون CMD که باز کردی)، این رو تایپ کن:</p>
+        
+        <pre class="code-block">python</pre>
+        
+        <p>با این کار وارد <strong>محیط تعاملی پایتون</strong> میشی. یعنی می‌تونی دستورات پایتون رو مستقیم تایپ کنی و نتیجه رو ببینی.</p>
+        
+        <p>حالا این کد رو تایپ کن:</p>
+        <pre class="code-block">print("سلام دنیا!")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام دنیا!</pre>
+        </div>
+        
+        <p>تبریک! 🎉 تو اولین کد پایتون رو نوشتی! <code>print</code> یعنی "چاپ کن" و به پایتون می‌گه که متن داخل پرانتز رو نمایش بده.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> برای خروج از محیط تعاملی پایتون، دستور <code>exit()</code> رو تایپ کن و Enter بزن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن تیک <strong>"Add Python to PATH"</strong> موقع نصب.</p>
+            <p><strong>✅ راه‌حل:</strong> اگر این کار رو نکردی، پایتون رو دوباره نصب کن و این بار تیکش رو بزن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> تایپ کردن <code>print(سلام دنیا)</code> بدون کوتیشن (" ").</p>
+            <p><strong>✅ راه‌حل:</strong> همیشه متن رو داخل <code>" "</code> یا <code>' '</code> قرار بده.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>به‌جای خط فرمان (CMD)، می‌تونی از <strong>IDLE</strong> استفاده کنی که با پایتون نصب میشه. IDLE یه محیط ساده‌تر و کاربردی‌تر برای نوشتن کد پایتونه. توی منوی استارت، <code>IDLE</code> رو جستجو کن و بازش کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> پایتون رو روی کامپیوترت نصب کن و با دستور <code>python --version</code> نسخه‌اش رو چک کن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> توی محیط تعاملی پایتون، سه چیز مختلف رو با <code>print</code> چاپ کن. مثلاً اسم خودت، اسم شهرت و غذای مورد علاقت.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> توی خط فرمان (CMD)، بدون اینکه وارد محیط پایتون بشی، می‌تونی با دستور <code>python -c "print('سلام')"</code> مستقیم کد رو اجرا کنی. امتحان کن!</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با دستور <code>print()</code> بیشتر آشنا میشی و یاد می‌گیری چطور متن‌های مختلف، اعداد و حتی چند چیز رو با هم چاپ کنی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

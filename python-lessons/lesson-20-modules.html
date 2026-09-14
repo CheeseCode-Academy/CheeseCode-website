@@ -1,0 +1,248 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📦 درس ۲۰: ماژول‌ها و import</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>ماژول‌ها</strong> و <strong>import</strong> آشنا میشی. ماژول‌ها بهت کمک می‌کنن کدها رو سازماندهی کنی و از کدهای آماده استفاده کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 ماژول چیست؟</h2>
+        <p>ماژول (Module) یه <strong>فایل پایتون</strong> هست که شامل توابع، کلاس‌ها و متغیرهای مختلفه. با <code>import</code> می‌تونی از ماژول‌ها استفاده کنی.</p>
+        <p>فرض کن ماژول مثل یه <strong>کتابخانه</strong> هست که پر از ابزارهای آماده‌ست.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> هر فایل <code>.py</code> یه ماژول هست و می‌تونی ازش <code>import</code> کنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 import ماژول‌های استاندارد</h2>
+        
+        <pre class="code-block">import math
+import random
+import datetime
+
+# استفاده از math
+print("عدد پی:", math.pi)
+print("جذر ۱۶:", math.sqrt(16))
+
+# استفاده از random
+print("عدد تصادفی:", random.randint(1, 10))
+print("انتخاب تصادفی:", random.choice(["سیب", "موز", "پرتقال"]))
+
+# استفاده از datetime
+اکنون = datetime.datetime.now()
+print("تاریخ و زمان:", اکنون)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">عدد پی: 3.141592653589793
+جذر ۱۶: 4.0
+عدد تصادفی: 7
+انتخاب تصادفی: موز
+تاریخ و زمان: 2026-07-21 14:30:25.123456</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 import با اسم مستعار (alias)</h2>
+        
+        <pre class="code-block">import math as m
+import datetime as dt
+
+print(m.pi)
+print(dt.datetime.now())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">3.141592653589793
+2026-07-21 14:30:25.123456</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 import فقط بخشی از ماژول</h2>
+        
+        <pre class="code-block">from math import pi, sqrt
+from random import randint, choice
+
+print("pi:", pi)
+print("جذر ۲۵:", sqrt(25))
+print("عدد تصادفی:", randint(1, 100))
+print("انتخاب:", choice(["الف", "ب", "ج"]))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">pi: 3.141592653589793
+جذر ۲۵: 5.0
+عدد تصادفی: 42
+انتخاب: ب</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> این روش باعث میشه کد <strong>کوتاه‌تر</strong> بشه، ولی ممکنه نام‌ها با هم تداخل پیدا کنن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 import همه چیز (توصیه نمی‌شه)</h2>
+        
+        <pre class="code-block">from math import *
+
+print(pi)
+print(sqrt(16))
+print(cos(0))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">3.141592653589793
+4.0
+1.0</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>⚠️ <strong>هشدار:</strong> این روش رو <strong>استفاده نکن</strong> چون ممکنه نام‌ها با هم تداخل پیدا کنن و کد گیج‌کننده بشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساخت ماژول خودمان</h2>
+        <p>فرض کن فایل <code>ابزار.py</code> رو می‌سازیم:</p>
+        
+        <pre class="code-block"># فایل: ابزار.py
+def سلام(نام):
+    return f"سلام {نام}!"
+
+def جمع(a, b):
+    return a + b
+
+پیش‌فرض = "سلام"</pre>
+        
+        <p>حالا می‌تونیم ازش استفاده کنیم:</p>
+        
+        <pre class="code-block">import ابزار
+
+print(ابزار.سلام("علی"))
+print(ابزار.جمع(5, 3))
+print(ابزار.پیش‌فرض)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام علی!
+8
+سلام</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ماژول‌های مفید استاندارد</h2>
+        
+        <pre class="code-block">import os
+import sys
+import json
+import time
+
+# os - کار با سیستم عامل
+print("پوشه فعلی:", os.getcwd())
+
+# sys - اطلاعات سیستم
+print("نسخه پایتون:", sys.version)
+
+# json - کار با JSON
+data = {"نام": "علی", "سن": 25}
+json_string = json.dumps(data)
+print("JSON:", json_string)
+
+# time - زمان
+time.sleep(1)  # ۱ ثانیه توقف
+print("بعد از ۱ ثانیه")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">پوشه فعلی: /home/user
+نسخه پایتون: 3.14.0
+JSON: {"نام": "علی", "سن": 25}
+بعد از ۱ ثانیه</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 نصب پکیج‌های خارجی</h2>
+        <p>با <code>pip</code> می‌تونی پکیج‌های خارجی نصب کنی:</p>
+        
+        <pre class="code-block"># در خط فرمان:
+pip install requests
+pip install numpy
+pip install pandas</pre>
+        
+        <p>حالا می‌تونی ازشون استفاده کنی:</p>
+        
+        <pre class="code-block">import requests
+
+response = requests.get("https://api.github.com")
+print(response.status_code)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __name__ و __main__</h2>
+        <p>برای تشخیص اینکه فایل به عنوان ماژول import شده یا مستقیم اجرا شده:</p>
+        
+        <pre class="code-block"># فایل: مثال.py
+def تابع():
+    print("این یک تابع است")
+
+if __name__ == "__main__":
+    print("این فایل مستقیم اجرا شده")
+    تابع()
+else:
+    print("این فایل به عنوان ماژول import شده")</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> نامگذاری فایل با اسم ماژول استاندارد: <code>math.py</code></p>
+            <p><strong>✅ راه‌حل:</strong> از اسم‌های منحصربه‌فرد استفاده کن: <code>ریاضی_من.py</code></p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>import</code> ماژول:</p>
+            <pre class="code-block">print(math.pi)  # ارور! math import نشده</pre>
+            <p><strong>✅ راه‌حل:</strong> اول <code>import math</code> کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>from module import *</code>:</p>
+            <p><strong>✅ راه‌حل:</strong> از این کار خودداری کن. به‌جاش دقیقاً مشخص کن چی می‌خوای:</p>
+            <pre class="code-block">from math import pi, sqrt</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>dir()</code> برای دیدن همه‌ی توابع و متغیرهای یه ماژول استفاده کن:</p>
+            <pre class="code-block">import math
+print(dir(math))  # همه چیزهای موجود در math رو نشون میده</pre>
+            <p>از <code>help()</code> برای دیدن مستندات:</p>
+            <pre class="code-block">help(math.sqrt)  # مستندات تابع sqrt</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> با <code>import math</code> سینوس ۳۰ درجه رو حساب کن. (راهنمایی: <code>math.radians()</code> و <code>math.sin()</code>)</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> با <code>random</code> یه عدد تصادفی بین ۱ تا ۱۰۰ تولید کن و به کاربر بگو حدس بزنه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک ماژول به اسم <code>عملیات</code> بساز که شامل توابع جمع، تفریق، ضرب و تقسیم باشه. سپس ازش در برنامه اصلی استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>کار با فایل‌ها</strong> آشنا میشی. یاد می‌گیری چطور اطلاعات رو توی فایل ذخیره کنی و ازش بخونی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

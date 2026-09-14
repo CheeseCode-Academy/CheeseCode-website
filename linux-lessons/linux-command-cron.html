@@ -1,0 +1,146 @@
+<div class="lesson-content" dir="auto">
+    <h1 class="lesson-title">⏰ دستور cron – زمان‌بندی خودکار کارها</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۲ دقیقه</div>
+
+    <section class="section">
+        <h2>📖 نام (NAME)</h2>
+        <p><code>cron</code> – سرویس زمان‌بندی خودکار دستورات در لینوکس</p>
+    </section>
+
+    <section class="section">
+        <h2>💻 خلاصه (SYNOPSIS)</h2>
+        <pre class="code-block">crontab [-u کاربر] [گزینه]</pre>
+        <p><strong>توضیح:</strong> <code>cron</code> یک سرویس پس‌زمینه است که دستورات را در زمان‌های مشخص به‌صورت خودکار اجرا می‌کند. فایل تنظیمات آن <code>crontab</code> نام دارد.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 توضیح کامل (DESCRIPTION)</h2>
+        <p>سرویس <code>cron</code> یکی از ابزارهای قدرتمند لینوکس برای اجرای خودکار کارهای تکراری است. این سرویس در پس‌زمینه اجرا می‌شود و بر اساس زمان‌بندی‌های تعریف‌شده در فایل <code>crontab</code>، دستورات را اجرا می‌کند.</p>
+        <p>ساختار هر خط در <code>crontab</code> به این صورت است:</p>
+        <pre class="code-block">* * * * * دستور
+│ │ │ │ │
+│ │ │ │ └─── روز هفته (0-7) (0 و 7 = یکشنبه)
+│ │ │ └───── ماه (1-12)
+│ │ └─────── روز ماه (1-31)
+│ └───────── ساعت (0-23)
+└─────────── دقیقه (0-59)</pre>
+    </section>
+
+    <section class="section">
+        <h2>⚙️ لیست کامل گزینه‌ها (OPTIONS)</h2>
+        <h3>دستورات crontab:</h3>
+        <ul>
+            <li><code>crontab -e</code> – ویرایش فایل crontab.</li>
+            <li><code>crontab -l</code> – نمایش محتوای crontab.</li>
+            <li><code>crontab -r</code> – حذف فایل crontab.</li>
+            <li><code>crontab -u کاربر</code> – کار با crontab کاربر دیگر (نیاز به root).</li>
+        </ul>
+        <h3>کاراکترهای ویژه:</h3>
+        <ul>
+            <li><code>*</code> – هر مقدار (هر دقیقه، هر ساعت و ...).</li>
+            <li><code>,</code> – جدا کردن مقادیر (مثلاً <code>1,5,10</code>).</li>
+            <li><code>-</code> – بازه (مثلاً <code>1-5</code> یعنی ۱ تا ۵).</li>
+            <li><code>/</code> – گام (مثلاً <code>*/5</code> یعنی هر ۵ واحد).</li>
+            <li><code>@daily</code> – هر روز نیمه‌شب.</li>
+            <li><code>@weekly</code> – هر هفته.</li>
+            <li><code>@monthly</code> – هر ماه.</li>
+            <li><code>@reboot</code> – هر بار ری‌استارت سیستم.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>🧪 مثال‌ها (EXAMPLES)</h2>
+
+        <div class="example">
+            <h3>مثال ۱: اجرای یک دستور هر دقیقه</h3>
+            <pre class="code-block">* * * * * echo "Hello" >> /tmp/log.txt</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(هر دقیقه "Hello" به فایل log.txt اضافه می‌شود)</pre>
+            </div>
+            <p>هر دقیقه یک بار دستور اجرا می‌شود.</p>
+        </div>
+
+        <div class="example">
+            <h3>مثال ۲: اجرای پشتیبان‌گیری هر روز ساعت ۳ صبح</h3>
+            <pre class="code-block">0 3 * * * /home/user/backup.sh</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(هر روز ساعت ۳ صبح اسکریپت پشتیبان‌گیری اجرا می‌شود)</pre>
+            </div>
+            <p>در ساعت ۳:۰۰ صبح هر روز، اسکریپت backup.sh اجرا می‌شود.</p>
+        </div>
+
+        <div class="example">
+            <h3>مثال ۳: اجرا هر ۵ دقیقه</h3>
+            <pre class="code-block">*/5 * * * * /home/user/check.sh</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(هر ۵ دقیقه اسکریپت اجرا می‌شود)</pre>
+            </div>
+            <p>در دقایق ۰، ۵، ۱۰، ۱۵ و ... اجرا می‌شود.</p>
+        </div>
+
+        <div class="example">
+            <h3>مثال ۴: اجرا هر دوشنبه ساعت ۹ صبح</h3>
+            <pre class="code-block">0 9 * * 1 /home/user/report.sh</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(هر دوشنبه ساعت ۹ صبح اسکریپت اجرا می‌شود)</pre>
+            </div>
+            <p>روز هفته: ۰ و ۷ = یکشنبه، ۱ = دوشنبه، ۲ = سه‌شنبه و ...</p>
+        </div>
+
+        <div class="example">
+            <h3>مثال ۵: اجرا در هر ری‌استارت</h3>
+            <pre class="code-block">@reboot /home/user/start.sh</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(هر بار روشن شدن سیستم، اسکریپت اجرا می‌شود)</pre>
+            </div>
+            <p>این دستور در هر بار ری‌استارت سیستم اجرا می‌شود.</p>
+        </div>
+
+        <div class="example">
+            <h3>مثال ۶: اجرا در روزهای مشخصی از هفته</h3>
+            <pre class="code-block">0 12 * * 1,3,5 /home/user/task.sh</pre>
+            <div class="output-box">
+                <span class="output-label">خروجی:</span>
+                <pre class="code-block-output">(دوشنبه، چهارشنبه و جمعه ساعت ۱۲ ظهر)</pre>
+            </div>
+            <p>در روزهای دوشنبه (۱)، چهارشنبه (۳) و جمعه (۵) در ساعت ۱۲ ظهر اجرا می‌شود.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 نکته (BUGS & NOTES)</h2>
+        <div class="highlight-box">
+            <p><strong>نکته:</strong> خروجی cron به‌صورت پیش‌فرض به ایمیل کاربر ارسال می‌شود.</p>
+            <p><strong>نکته:</strong> برای ذخیره‌ی خروجی در فایل، از <code>>></code> استفاده کنید.</p>
+            <p><strong>نکته:</strong> برای دیدن وضعیت سرویس cron از <code>systemctl status cron</code> استفاده کنید.</p>
+            <p><strong>نکته:</strong> مسیرها در crontab باید مطلق باشند (نه نسبی).</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱:</strong> یک زمان‌بندی بسازید که هر دقیقه یک پیام در فایل log ذخیره کند.</p>
+            <p><strong>تمرین ۲:</strong> زمان‌بندی برای اجرای یک اسکریپت هر روز ساعت ۱۲ ظهر بنویسید.</p>
+            <p><strong>تمرین ۳:</strong> با <code>crontab -l</code> زمان‌بندی‌های فعلی خود را ببینید.</p>
+            <p><strong>تمرین ۴:</strong> یک زمان‌بندی با <code>@reboot</code> بسازید.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="highlight-box" style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
+            <p style="font-size: 1.1rem;">
+                🧀 برای دیدن <strong>جواب تمرین</strong> این درس، 
+                <a href="../answers.html?id=32" style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+                    اینجا کلیک کن
+                </a>
+            </p>
+        </div>
+    </section>
+
+</div>

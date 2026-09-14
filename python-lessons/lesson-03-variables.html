@@ -1,0 +1,160 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📦 درس ۳: متغیرها</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری که چطور اطلاعات رو توی <strong>جعبه‌هایی</strong> به اسم <strong>متغیر</strong> ذخیره کنی و بعداً ازشون استفاده کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 متغیر چیست؟</h2>
+        <p>متغیر مثل یه <strong>جعبه</strong> یا <strong>ظرف</strong> هست که می‌تونی هر چیزی رو توش بذاری و بعداً دوباره ازش بیرون بیاری.</p>
+        <p>فرض کن می‌خوای سن خودت رو توی برنامه ذخیره کنی. به‌جای اینکه هر بار عدد رو بنویسی، می‌تونی توی یه متغیر بذاری و هرجا نیاز شد ازش استفاده کنی.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> متغیرها مثل برچسب‌هایی روی جعبه‌ها هستن. هر جعبه یه اسم داره که باهاش می‌تونی بهش دسترسی پیدا کنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 تعریف متغیر</h2>
+        <p>برای تعریف یه متغیر، فقط کافیه یه اسم انتخاب کنی و با علامت <strong>=</strong> یه مقدار بهش بدی:</p>
+        
+        <pre class="code-block">سن = 25
+نام = "علی"
+قد = 175.5</pre>
+        
+        <p>حالا می‌تونی این متغیرها رو توی <code>print()</code> استفاده کنی:</p>
+        
+        <pre class="code-block">print(سن)
+print(نام)
+print(قد)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">25
+علی
+175.5</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 قوانین نام‌گذاری متغیرها</h2>
+        <ul>
+            <li>اسم متغیر می‌تونه از حروف انگلیسی، اعداد و <code>_</code> (زیرخط) تشکیل بشه.</li>
+            <li>اسم متغیر <strong>نمی‌تونه</strong> با عدد شروع بشه.</li>
+            <li>اسم متغیر به <strong>حروف بزرگ و کوچک</strong> حساسه (سن با SEN فرق داره).</li>
+            <li>از کلمات کلیدی پایتون مثل <code>if</code>، <code>for</code>، <code>while</code> و ... نمی‌تونی استفاده کنی.</li>
+        </ul>
+        
+        <p><strong>اسم‌های درست:</strong></p>
+        <pre class="code-block">سن = 30
+نام_کاربر = "علی"
+علی_رضایی = 20
+num1 = 10</pre>
+        
+        <p><strong>اسم‌های غلط:</strong></p>
+        <pre class="code-block">1num = 10  # اشتباه! با عدد شروع شده
+نام-کاربر = "علی"  # اشتباه! خط فاصله مجاز نیست
+if = 5  # اشتباه! کلمه کلیدی</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تغییر مقدار متغیر</h2>
+        <p>می‌تونی هر زمان که خواستی مقدار یه متغیر رو عوض کنی:</p>
+        
+        <pre class="code-block">سن = 25
+print(سن)
+
+سن = 30  # تغییر مقدار
+print(سن)
+
+سن = سن + 5  # مقدار قبلی رو +۵ می‌کنه
+print(سن)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">25
+30
+35</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 متغیرهای چندگانه در یک خط</h2>
+        <p>می‌تونی چند متغیر رو توی یه خط تعریف کنی:</p>
+        
+        <pre class="code-block">x, y, z = 10, 20, 30
+print(x, y, z)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">10 20 30</pre>
+        </div>
+        
+        <p>یا حتی به همه‌شون یه مقدار یکسان بدی:</p>
+        
+        <pre class="code-block">a = b = c = 100
+print(a, b, c)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">100 100 100</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده از متغیرها در کنار هم</h2>
+        <p>می‌تونی متغیرها رو با هم ترکیب کنی و توی <code>print()</code> چاپ کنی:</p>
+        
+        <pre class="code-block">نام = "علی"
+سن = 25
+print("نام من", نام, "و سن من", سن, "سال است")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">نام من علی و سن من 25 سال است</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از متغیر بدون تعریف کردنش: <code>print(سن)</code> وقتی سن تعریف نشده.</p>
+            <p><strong>✅ راه‌حل:</strong> قبل از استفاده، متغیر رو تعریف کن: <code>سن = 25</code></p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> نوشتن اسم متغیر با فاصله: <code>نام کاربر = "علی"</code></p>
+            <p><strong>✅ راه‌حل:</strong> از زیرخط استفاده کن: <code>نام_کاربر = "علی"</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>توی پایتون، برای جابجا کردن دو متغیر، نیازی به متغیر کمکی نیست:</p>
+            <pre class="code-block">a = 10
+b = 20
+a, b = b, a  # جابجایی
+print(a, b)  # خروجی: 20 10</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> سه متغیر به اسم‌های <code>اسم</code>، <code>سن</code> و <code>شهر</code> تعریف کن و مقادیر دلخواه بهشون بده. بعد همه رو با <code>print()</code> چاپ کن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> دو متغیر <code>عدد۱</code> و <code>عدد۲</code> تعریف کن و به‌ترتیب ۱۰ و ۲۰ رو بهشون بده. مجموعشون رو توی یه متغیر جدید به اسم <code>جمع</code> بریز و چاپ کن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> متغیر <code>سن</code> رو تعریف کن و مقدار ۳۰ بهش بده. بعد توی یه خط جدید، سن رو +۵ کن و دوباره چاپ کن. (راهنمایی: <code>سن = سن + 5</code>)</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>انواع داده</strong> آشنا میشی. می‌بینی که هر متغیر می‌تونه نوع خاصی داشته باشه مثل عدد، متن، درست/نادرست و ...</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

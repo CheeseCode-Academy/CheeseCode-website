@@ -1,0 +1,196 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">⚠️ درس ۲۲: مدیریت خطا (Exceptions)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری چطور خطاهای برنامه رو <strong>مدیریت</strong> کنی و از کرش کردن برنامه جلوگیری کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 خطاها در پایتون</h2>
+        <p>خطاها (Exceptions) وقتی رخ می‌دن که یه اتفاق غیرمنتظره توی برنامه بیفته. مثلاً تقسیم بر صفر یا باز کردن فایلی که وجود نداره.</p>
+        <p>با <code>try</code> و <code>except</code> می‌تونی خطاها رو <strong>گرفته</strong> و <strong>مدیریت</strong> کنی.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> مدیریت خطا به برنامه‌ات <strong>قابلیت اطمینان</strong> میده و از کرش کردن جلوگیری می‌کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساختار try/except</h2>
+        
+        <pre class="code-block">try:
+    عدد = int(input("یک عدد وارد کنید: "))
+    نتیجه = 10 / عدد
+    print("نتیجه:", نتیجه)
+except:
+    print("خطایی رخ داد!")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه ۱):</span>
+            <pre class="code-block-output">یک عدد وارد کنید: 5
+نتیجه: 2.0</pre>
+        </div>
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه ۲):</span>
+            <pre class="code-block-output">یک عدد وارد کنید: 0
+خطایی رخ داد!</pre>
+        </div>
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه ۳):</span>
+            <pre class="code-block-output">یک عدد وارد کنید: سلام
+خطایی رخ داد!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 گرفتن خطاهای خاص</h2>
+        
+        <pre class="code-block">try:
+    عدد = int(input("یک عدد وارد کنید: "))
+    نتیجه = 10 / عدد
+    print("نتیجه:", نتیجه)
+except ValueError:
+    print("خطا: لطفاً یک عدد وارد کنید!")
+except ZeroDivisionError:
+    print("خطا: تقسیم بر صفر ممکن نیست!")
+except Exception as e:
+    print(f"خطای ناشناخته: {e}")</pre>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> همیشه خطاهای <strong>خاص</strong> رو قبل از خطای <strong>کلی</strong> (<code>Exception</code>) بنویس.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 try/except/else/finally</h2>
+        
+        <pre class="code-block">try:
+    عدد = int(input("یک عدد وارد کنید: "))
+    نتیجه = 10 / عدد
+except ZeroDivisionError:
+    print("تقسیم بر صفر!")
+except ValueError:
+    print("عدد معتبر وارد کنید!")
+else:
+    print(f"نتیجه: {نتیجه}")  # اگر خطایی نبود
+finally:
+    print("این پیام همیشه اجرا میشه")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">یک عدد وارد کنید: 5
+نتیجه: 2.0
+این پیام همیشه اجرا میشه</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 raise (پرتاب خطا)</h2>
+        <p>می‌تونی خودت خطا ایجاد کنی:</p>
+        
+        <pre class="code-block">def سن_را_بررسی_کن(سن):
+    if سن < 0:
+        raise ValueError("سن نمی‌تواند منفی باشد!")
+    elif سن > 120:
+        raise ValueError("سن نمی‌تواند بیشتر از ۱۲۰ باشد!")
+    return "سن معتبر است"
+
+try:
+    print(سن_را_بررسی_کن(25))
+    print(سن_را_بررسی_کن(-5))
+except ValueError as e:
+    print(f"خطا: {e}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سن معتبر است
+خطا: سن نمی‌تواند منفی باشد!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 خطاهای رایج در پایتون</h2>
+        <ul>
+            <li><code>ValueError</code> - مقدار نامعتبر</li>
+            <li><code>TypeError</code> - نوع داده نامعتبر</li>
+            <li><code>ZeroDivisionError</code> - تقسیم بر صفر</li>
+            <li><code>FileNotFoundError</code> - فایل پیدا نشد</li>
+            <li><code>IndexError</code> - ایندکس خارج از محدوده</li>
+            <li><code>KeyError</code> - کلید در دیکشنری وجود نداره</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 مثال کامل</h2>
+        
+        <pre class="code-block">def خواندن_فایل(نام_فایل):
+    try:
+        with open(نام_فایل, "r") as فایل:
+            return فایل.read()
+    except FileNotFoundError:
+        print(f"فایل {نام_فایل} پیدا نشد!")
+        return None
+    except PermissionError:
+        print(f"دسترسی به فایل {نام_فایل} وجود ندارد!")
+        return None
+    except Exception as e:
+        print(f"خطای ناشناخته: {e}")
+        return None
+
+محتوا = خواندن_فایل("test.txt")
+if محتوا:
+    print(محتوا)</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> گرفتن همه خطاها با <code>except:</code> بدون مشخص کردن نوع خطا</p>
+            <p><strong>✅ راه‌حل:</strong> حداقل از <code>except Exception as e:</code> استفاده کن تا نوع خطا رو بدونی.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> خالی گذاشتن <code>except</code> (بدون هیچ کدی)</p>
+            <p><strong>✅ راه‌حل:</strong> حداقل یه پیام به کاربر نشون بده یا خطا رو لاگ کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> گرفتن خطا در کل برنامه و نادیده گرفتنش</p>
+            <p><strong>✅ راه‌حل:</strong> فقط خطاهایی رو بگیر که می‌دونی چطور مدیریتشون کنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>else</code> برای کدهایی که فقط وقتی خطایی نیست اجرا میشن استفاده کن:</p>
+            <pre class="code-block">try:
+    فایل = open("data.txt", "r")
+except FileNotFoundError:
+    print("فایل پیدا نشد، فایل جدید می‌سازیم")
+    فایل = open("data.txt", "w")
+else:
+    print("فایل با موفقیت باز شد")
+    محتوا = فایل.read()
+finally:
+    فایل.close()</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و تقسیم ۱۰۰ بر اون رو انجام بده. خطای تقسیم بر صفر رو مدیریت کن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر یه فایل بخونه و محتواش رو چاپ کنه. خطای <code>FileNotFoundError</code> رو مدیریت کن.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که سن رو بگیره و اگر منفی یا بزرگتر از ۱۲۰ بود، خطا پرتاب کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>لیست‌های فشرده</strong> آشنا میشی که روشی سریع و خوانا برای ساخت لیست‌هاست.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

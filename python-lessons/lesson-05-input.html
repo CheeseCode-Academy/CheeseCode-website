@@ -1,0 +1,132 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">⌨️ درس ۵: ورودی گرفتن از کاربر با input</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۲ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس یاد می‌گیری که چطور از کاربر <strong>سوال بپرسی</strong> و جوابش رو توی برنامه‌ات استفاده کنی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 دستور input چیست؟</h2>
+        <p><code>input()</code> یه دستور تو پایتونه که برنامه رو <strong>متوقف</strong> می‌کنه و از کاربر می‌پرسه که چیزی بنویسه. وقتی کاربر چیزی نوشت و Enter زد، برنامه ادامه پیدا می‌کنه.</p>
+        <p>فرض کن <code>input()</code> مثل یه <strong>صندوق پرسش</strong> هست که ازت سوال می‌پرسه و منتظر جوابت می‌مونه.</p>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده ساده از input</h2>
+        
+        <pre class="code-block">نام = input("اسم شما چیست؟ ")
+print("سلام", نام)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">اسم شما چیست؟ علی
+سلام علی</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نکته:</strong> هر چیزی که کاربر تایپ کنه، توی متغیر <code>نام</code> ذخیره میشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ورودی عددی</h2>
+        <p><code>input()</code> همیشه خروجی <strong>متن (str)</strong> میده. برای اینکه عدد بشه، باید با <code>int()</code> یا <code>float()</code> تبدیلش کنی:</p>
+        
+        <pre class="code-block">سن = input("سن خود را وارد کنید: ")
+سن = int(سن)  # تبدیل به عدد
+print("شما", سن, "ساله هستید")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">سن خود را وارد کنید: 25
+شما 25 ساله هستید</pre>
+        </div>
+        
+        <p>یا می‌تونی توی یه خط انجامش بدی:</p>
+        <pre class="code-block">سن = int(input("سن خود را وارد کنید: "))</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 محاسبه با ورودی کاربر</h2>
+        
+        <pre class="code-block">عدد۱ = int(input("عدد اول را وارد کنید: "))
+عدد۲ = int(input("عدد دوم را وارد کنید: "))
+جمع = عدد۱ + عدد۲
+print("مجموع:", جمع)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">عدد اول را وارد کنید: 10
+عدد دوم را وارد کنید: 20
+مجموع: 30</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ورودی اعشاری</h2>
+        
+        <pre class="code-block">قد = float(input("قد خود را به متر وارد کنید: "))
+print("قد شما", قد, "متر است")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">قد خود را به متر وارد کنید: 1.75
+قد شما 1.75 متر است</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ورودی چندگانه در یک خط</h2>
+        <p>با <code>split()</code> می‌تونی چند ورودی رو توی یه خط بگیری:</p>
+        
+        <pre class="code-block">نام, سن = input("نام و سن خود را با فاصله وارد کنید: ").split()
+سن = int(سن)
+print("نام:", نام, "سن:", سن)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">نام و سن خود را با فاصله وارد کنید: علی 25
+نام: علی سن: 25</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن تبدیل نوع: <code>سن = input("سن: ") + 5</code></p>
+            <p><strong>✅ راه‌حل:</strong> اول تبدیل کن: <code>سن = int(input("سن: ")) + 5</code></p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> ورود حروف به جای عدد موقع استفاده از <code>int()</code></p>
+            <p><strong>✅ راه‌حل:</strong> این باعث ارور میشه. توی درس مدیریت خطا یاد می‌گیری چطور ازش جلوگیری کنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>برای پاک کردن فضای اضافه‌ی اول و آخر ورودی کاربر، از <code>strip()</code> استفاده کن:</p>
+            <pre class="code-block">نام = input("نام: ").strip()</pre>
+            <p>اگه کاربر "  علی  " بنویسه، تبدیل میشه به "علی".</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر اسمش رو بپرسه و بعد بهش سلام کنه.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که دو عدد از کاربر بگیره و حاصل‌ضربشون رو چاپ کنه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر نام و سن و شهرش رو بپرسه و یه جمله‌ی کامل چاپ کنه. مثل: "سلام علی، تو ۲۵ سالته و اهل تهران هستی."</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>عملگرها</strong> آشنا میشی. عملگرها بهت کمک می‌کنن که محاسبات ریاضی و مقایسه‌ای انجام بدی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

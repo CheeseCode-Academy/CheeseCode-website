@@ -1,0 +1,117 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۳۱: پروپرتی‌ها</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: متوسط</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> کلاسی با پروپرتی <code>مربع</code> بساز که مقدار رو به توان ۲ برسونه.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">class عدد:
+    def __init__(self, مقدار):
+        self.مقدار = مقدار
+    
+    @property
+    def مربع(self):
+        return self.مقدار ** 2
+
+n = عدد(5)
+print(f"مربع ۵: {n.مربع}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">مربع ۵: 25</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> کلاس <code>دانشجو</code> با پروپرتی <code>معدل</code> بساز که از لیست نمرات محاسبه بشه.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">class دانشجو:
+    def __init__(self, نام, نمرات=None):
+        self.نام = نام
+        self._نمرات = نمرات or []
+    
+    def اضافه_نمره(self, نمره):
+        self._نمرات.append(نمره)
+    
+    @property
+    def معدل(self):
+        if not self._نمرات:
+            return 0
+        return sum(self._نمرات) / len(self._نمرات)
+    
+    @property
+    def تعداد_درس(self):
+        return len(self._نمرات)
+
+علی = دانشجو("علی")
+علی.اضافه_نمره(18)
+علی.اضافه_نمره(16)
+علی.اضافه_نمره(19)
+
+print(f"معدل علی: {علی.معدل:.2f}")
+print(f"تعداد درس: {علی.تعداد_درس}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">معدل علی: 17.67
+تعداد درس: 3</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> کلاس <code>حساب_بانکی</code> با پروپرتی <code>موجودی</code> بساز که برداشت و واریز رو کنترل کنه.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">class حساب_بانکی:
+    def __init__(self, نام, موجودی_اولیه=0):
+        self.نام = نام
+        self._موجودی = موجودی_اولیه
+    
+    @property
+    def موجودی(self):
+        return self._موجودی
+    
+    @موجودی.setter
+    def موجودی(self, مقدار):
+        if مقدار < 0:
+            raise ValueError("موجودی نمی‌تواند منفی باشد!")
+        self._موجودی = مقدار
+    
+    def واریز(self, مبلغ):
+        if مبلغ <= 0:
+            raise ValueError("مبلغ واریز باید مثبت باشد!")
+        self._موجودی += مبلغ
+        return f"{مبلغ} تومان واریز شد. موجودی: {self._موجودی}"
+    
+    def برداشت(self, مبلغ):
+        if مبلغ <= 0:
+            raise ValueError("مبلغ برداشت باید مثبت باشد!")
+        if مبلغ > self._موجودی:
+            raise ValueError("موجودی کافی نیست!")
+        self._موجودی -= مبلغ
+        return f"{مبلغ} تومان برداشت شد. موجودی: {self._موجودی}"
+
+حساب = حساب_بانکی("علی", 1000)
+print(حساب.واریز(500))
+print(حساب.برداشت(200))
+print(f"موجودی نهایی: {حساب.موجودی}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">500 تومان واریز شد. موجودی: 1500
+200 تومان برداشت شد. موجودی: 1300
+موجودی نهایی: 1300</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧀 جمع‌بندی</h2>
+        <p>تبریک! 🎉 تو درس سی و یکم رو با موفقیت کامل کردی. حالا با پروپرتی‌ها و کاربردهایشون آشنا شدی. توی درس بعدی قراره یک <strong>پروژه‌ی عملی</strong> برای مدیریت کتابخانه بسازیم.</p>
+        <p>🍀 <strong>موفق باشی!</strong></p>
+    </section>
+</div>

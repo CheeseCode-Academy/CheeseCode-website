@@ -1,0 +1,225 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">👨‍👩‍👦 درس ۲۸: وراثت (Inheritance)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۲۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>وراثت</strong> آشنا میشی که به کلاس‌ها اجازه میده ویژگی‌ها و متدهای کلاس دیگه‌ای رو <strong>به ارث</strong> ببرن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 وراثت چیست؟</h2>
+        <p>وراثت (Inheritance) به کلاس‌ها اجازه میده که از کلاس دیگه‌ای <strong>ارث‌بری</strong> کنن. کلاسی که ارث می‌بره، <strong>کلاس فرزند</strong> (Child) و کلاسی که ازش ارث برده میشه، <strong>کلاس والد</strong> (Parent) نامیده میشه.</p>
+        <p>فرض کن کلاس <code>ماشین</code> (والد) و کلاس <code>پژو</code> (فرزند) داریم. پژو همه‌ی ویژگی‌های ماشین رو داره + ویژگی‌های خودش.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> وراثت باعث <strong>کاهش کد تکراری</strong> و <strong>افزایش قابلیت استفاده</strong> میشه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 وراثت ساده</h2>
+        
+        <pre class="code-block">class حیوان:
+    def __init__(self, نام):
+        self.نام = نام
+    
+    def صدا_بده(self):
+        return "حیوان صدا می‌دهد"
+
+class سگ(حیوان):
+    def صدا_بده(self):
+        return "هاپ هاپ!"
+
+class گربه(حیوان):
+    def صدا_بده(self):
+        return "میو میو!"
+
+سگ_من = سگ("رکس")
+گربه_من = گربه("پیشی")
+
+print(سگ_من.نام)  # رکس
+print(سگ_من.صدا_بده())  # هاپ هاپ!
+print(گربه_من.صدا_بده())  # میو میو!</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده از super()</h2>
+        <p><code>super()</code> به متدهای کلاس والد دسترسی میده:</p>
+        
+        <pre class="code-block">class شخص:
+    def __init__(self, نام, سن):
+        self.نام = نام
+        self.سن = سن
+    
+    def معرفی(self):
+        return f"من {self.نام} هستم"
+
+class دانشجو(شخص):
+    def __init__(self, نام, سن, رشته):
+        super().__init__(نام, سن)  # فراخوانی سازنده والد
+        self.رشته = رشته
+    
+    def معرفی(self):
+        return f"{super().معرفی()} و رشته‌ام {self.رشته} است"
+
+علی = دانشجو("علی", 25, "مهندسی کامپیوتر")
+print(علی.معرفی())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">من علی هستم و رشته‌ام مهندسی کامپیوتر است</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چندریختی (Polymorphism)</h2>
+        
+        <pre class="code-block">class حیوان:
+    def صدا_بده(self):
+        pass
+
+class سگ(حیوان):
+    def صدا_بده(self):
+        return "هاپ هاپ!"
+
+class گربه(حیوان):
+    def صدا_بده(self):
+        return "میو میو!"
+
+class گاو(حیوان):
+    def صدا_بده(self):
+        return "مــــووو!"
+
+def گوش_کن(حیوان):
+    print(حیوان.صدا_بده())
+
+گوش_کن(سگ())
+گوش_کن(گربه())
+گوش_کن(گاو())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">هاپ هاپ!
+میو میو!
+مــــووو!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 وراثت چندگانه</h2>
+        <p>پایتون از وراثت چندگانه پشتیبانی می‌کنه:</p>
+        
+        <pre class="code-block">class پرنده:
+    def پرواز_کن(self):
+        return "پرنده در حال پرواز"
+
+class ماهی:
+    def شنا_کن(self):
+        return "ماهی در حال شنا"
+
+class مرغ_ابی(پرنده, ماهی):
+    def رفتار(self):
+        return f"{self.proاز_کن()} و {self.شنا_کن()}"
+
+مرغ = مرغ_ابی()
+print(مرغ.رفتار())</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">پرنده در حال پرواز و ماهی در حال شنا</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 MRO (Method Resolution Order)</h2>
+        <p>ترتیب جستجوی متدها:</p>
+        
+        <pre class="code-block">class A:
+    def متد(self):
+        return "A"
+
+class B(A):
+    def متد(self):
+        return "B"
+
+class C(A):
+    def متد(self):
+        return "C"
+
+class D(B, C):
+    pass
+
+d = D()
+print(d.متد())  # B
+print(D.__mro__)  # ترتیب جستجو</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">B
+(&lt;class '__main__.D'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.A'&gt;, &lt;class 'object'&gt;)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 isinstance() و issubclass()</h2>
+        
+        <pre class="code-block">class حیوان: pass
+class سگ(حیوان): pass
+
+سگ_من = سگ()
+
+print(isinstance(سگ_من, سگ))  # True
+print(isinstance(سگ_من, حیوان))  # True
+print(issubclass(سگ, حیوان))  # True
+print(issubclass(حیوان, سگ))  # False</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>super().__init__()</code> در کلاس فرزند</p>
+            <p><strong>✅ راه‌حل:</strong> همیشه سازنده والد رو صدا بزن تا ویژگی‌ها مقداردهی بشن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> وراثت چندگانه با کلاس‌های هم‌نام</p>
+            <p><strong>✅ راه‌حل:</strong> از <code>__mro__</code> برای فهمیدن ترتیب استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>وراثت ترکیبی</strong> (Mixins) برای اضافه کردن قابلیت‌ها استفاده کن:</p>
+            <pre class="code-block">class JSONMixin:
+    def to_json(self):
+        import json
+        return json.dumps(self.__dict__)
+
+class شخص(JSONMixin):
+    def __init__(self, نام, سن):
+        self.نام = نام
+        self.سن = سن
+
+علی = شخص("علی", 25)
+print(علی.to_json())  # {"نام": "علی", "سن": 25}</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> کلاس <code>شکل</code> بساز و کلاس‌های <code>مستطیل</code> و <code>دایره</code> ازش ارث ببرن.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>کارمند</code> و <code>مدیر</code> بساز که مدیر از کارمند ارث ببره و حقوق بیشتری داشته باشه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با وراثت چندگانه، کلاس <code>پرنده_شناگر</code> بساز که هم پرواز کنه هم شنا.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>چندریختی</strong> بیشتر آشنا میشی.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

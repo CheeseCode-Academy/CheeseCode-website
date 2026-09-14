@@ -1,0 +1,95 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✅ پاسخ تمرین‌های درس ۴۴: Requests</h1>
+    <div class="lesson-meta">پاسخ‌های تشریحی | سطح: پیشرفته</div>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۱</h2>
+        <p><strong>سوال:</strong> با requests اطلاعات یک کاربر گیت‌هاب رو بگیر و نمایش بده.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+
+def get_github_user(username):
+    url = f"https://api.github.com/users/{username}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        print(f"📊 اطلاعات کاربر: {username}")
+        print(f"  نام: {data.get('name', 'نامشخص')}")
+        print(f"  بیوگرافی: {data.get('bio', 'بدون بیوگرافی')}")
+        print(f"  دنبال‌کنندگان: {data['followers']}")
+        print(f"  دنبال‌شوندگان: {data['following']}")
+        print(f"  مخزن‌ها: {data['public_repos']}")
+        print(f"  پیوند: {data['html_url']}")
+    else:
+        print(f"کاربر '{username}' یافت نشد!")
+
+get_github_user("python")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۲</h2>
+        <p><strong>سوال:</strong> یک فایل تصویر از اینترنت دانلود کن.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+
+def download_image(url, filename):
+    try:
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+        
+        total_size = int(response.headers.get('content-length', 0))
+        downloaded = 0
+        
+        with open(filename, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+                    downloaded += len(chunk)
+                    progress = (downloaded / total_size) * 100
+                    print(f"\rپیشرفت: {progress:.1f}%", end="")
+        
+        print(f"\n✅ تصویر با نام '{filename}' دانلود شد!")
+        
+    except Exception as e:
+        print(f"❌ خطا: {e}")
+
+# دانلود لوگوی پایتون
+url = "https://www.python.org/static/img/python-logo.png"
+download_image(url, "python-logo.png")</pre>
+    </section>
+
+    <section class="section">
+        <h2>📝 پاسخ تمرین ۳</h2>
+        <p><strong>سوال:</strong> با یک API آب و هوا، دمای یک شهر رو بگیر و نمایش بده.</p>
+        
+        <h3>✅ پاسخ:</h3>
+        <pre class="code-block">import requests
+
+def get_weather(city):
+    # استفاده از API رایگان OpenWeatherMap
+    api_key = "YOUR_API_KEY"  # برای تست از API رایگان diy استفاده کن
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        
+        print(f"🌤️ آب و هوای {city}:")
+        print(f"  دما: {data['main']['temp']}°C")
+        print(f"  احساس: {data['main']['feels_like']}°C")
+        print(f"  رطوبت: {data['main']['humidity']}%")
+        print(f"  وضعیت: {data['weather'][0]['description']}")
+        
+    except requests.exceptions.RequestException as e:
+        print(f"❌ خطا در دریافت اطلاعات: {e}")
+    except KeyError:
+        print(f"❌ شهر '{city}' یافت نشد!")
+
+# تست با تهران
+get_weather("Tehran")</pre>
+    </section>
+</div>

@@ -1,0 +1,467 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🏆 درس ۴۰: پروژه‌ی نهایی</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۳۰ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس، یک <strong>پروژه‌ی کامل</strong> می‌سازیم که همه‌چیزهایی که در ۴۰ درس یاد گرفتی رو به کار می‌گیره.</p>
+        <p>پروژه: <strong>سیستم مدیریت وظایف (To-Do List)</strong> با رابط کاربری خط فرمان</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 پروژه چیست؟</h2>
+        <p>این پروژه شامل:</p>
+        <ul>
+            <li>مدیریت وظایف (اضافه، حذف، ویرایش)</li>
+            <li>ذخیره در دیتابیس SQLite</li>
+            <li>تست‌نویسی</li>
+            <li>محیط مجازی و requirements</li>
+            <li>رابط کاربری خط فرمان</li>
+            <li>تایپ‌هینت‌ها</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساختار پروژه</h2>
+        
+        <pre class="code-block">todo_project/
+├── todo/
+│   ├── __init__.py
+│   ├── models.py      # مدل دیتابیس
+│   ├── database.py    # کار با دیتابیس
+│   ├── todo_manager.py # منطق مدیریت وظایف
+│   └── cli.py         # رابط کاربری
+├── tests/
+│   ├── __init__.py
+│   ├── test_models.py
+│   ├── test_database.py
+│   └── test_todo_manager.py
+├── requirements.txt
+├── setup.py
+└── README.md</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 مدل دیتابیس (models.py)</h2>
+        
+        <pre class="code-block">from dataclasses import dataclass
+from datetime import datetime
+from typing import Optional
+
+@dataclass
+class Task:
+    id: Optional[int] = None
+    title: str = ""
+    description: str = ""
+    done: bool = False
+    created_at: Optional[datetime] = None
+    
+    def __str__(self) -> str:
+        status = "✅" if self.done else "❌"
+        return f"{status} {self.id}. {self.title}"
+    
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "done": self.done,
+            "created_at": self.created_at.isoformat() if self.created_at else None
+        }
+    
+    @classmethod
+    def from_dict(cls, data: dict) -> "Task":
+        return cls(
+            id=data.get("id"),
+            title=data.get("title", ""),
+            description=data.get("description", ""),
+            done=data.get("done", False),
+            created_at=datetime.fromisoformat(data["created_at"]) if data.get("created_at") else None
+        )</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 دیتابیس (database.py)</h2>
+        
+        <pre class="code-block">import sqlite3
+from typing import List, Optional
+from datetime import datetime
+from .models import Task
+
+class Database:
+    def __init__(self, db_name: str = "todo.db"):
+        self.db_name = db_name
+        self._init_db()
+    
+    def _init_db(self) -> None:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title TEXT NOT NULL,
+                    description TEXT,
+                    done INTEGER DEFAULT 0,
+                    created_at TEXT
+                )
+            """)
+            conn.commit()
+    
+    def add_task(self, task: Task) -> int:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO tasks (title, description, done, created_at)
+                VALUES (?, ?, ?, ?)
+            """, (
+                task.title,
+                task.description,
+                1 if task.done else 0,
+                datetime.now().isoformat()
+            ))
+            conn.commit()
+            return cursor.lastrowid
+    
+    def get_all_tasks(self) -> List[Task]:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM tasks ORDER BY created_at DESC")
+            rows = cursor.fetchall()
+            return [
+                Task(
+                    id=row[0],
+                    title=row[1],
+                    description=row[2] or "",
+                    done=bool(row[3]),
+                    created_at=datetime.fromisoformat(row[4]) if row[4] else None
+                )
+                for row in rows
+            ]
+    
+    def get_task(self, task_id: int) -> Optional[Task]:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM tasks WHERE id = ?", (task_id,))
+            row = cursor.fetchone()
+            if row:
+                return Task(
+                    id=row[0],
+                    title=row[1],
+                    description=row[2] or "",
+                    done=bool(row[3]),
+                    created_at=datetime.fromisoformat(row[4]) if row[4] else None
+                )
+            return None
+    
+    def update_task(self, task: Task) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE tasks
+                SET title = ?, description = ?, done = ?
+                WHERE id = ?
+            """, (task.title, task.description, 1 if task.done else 0, task.id))
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def delete_task(self, task_id: int) -> bool:
+        with sqlite3.connect(self.db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def toggle_task(self, task_id: int) -> bool:
+        task = self.get_task(task_id)
+        if not task:
+            return False
+        task.done = not task.done
+        return self.update_task(task)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 مدیریت وظایف (todo_manager.py)</h2>
+        
+        <pre class="code-block">from typing import List, Optional
+from .models import Task
+from .database import Database
+
+class TodoManager:
+    def __init__(self, db: Optional[Database] = None):
+        self.db = db or Database()
+    
+    def add_task(self, title: str, description: str = "") -> Task:
+        task = Task(title=title, description=description)
+        task_id = self.db.add_task(task)
+        task.id = task_id
+        return task
+    
+    def get_all_tasks(self) -> List[Task]:
+        return self.db.get_all_tasks()
+    
+    def get_task(self, task_id: int) -> Optional[Task]:
+        return self.db.get_task(task_id)
+    
+    def update_task(self, task_id: int, title: str, description: str) -> Optional[Task]:
+        task = self.db.get_task(task_id)
+        if not task:
+            return None
+        task.title = title
+        task.description = description
+        if self.db.update_task(task):
+            return task
+        return None
+    
+    def delete_task(self, task_id: int) -> bool:
+        return self.db.delete_task(task_id)
+    
+    def toggle_task(self, task_id: int) -> Optional[Task]:
+        task = self.db.get_task(task_id)
+        if not task:
+            return None
+        task.done = not task.done
+        if self.db.update_task(task):
+            return task
+        return None
+    
+    def get_pending_tasks(self) -> List[Task]:
+        return [t for t in self.get_all_tasks() if not t.done]
+    
+    def get_done_tasks(self) -> List[Task]:
+        return [t for t in self.get_all_tasks() if t.done]</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 رابط کاربری (cli.py)</h2>
+        
+        <pre class="code-block">import sys
+from .todo_manager import TodoManager
+
+class CLI:
+    def __init__(self):
+        self.manager = TodoManager()
+    
+    def run(self) -> None:
+        while True:
+            self._show_menu()
+            choice = input("\nانتخاب خود را وارد کنید: ").strip()
+            
+            if choice == "1":
+                self._add_task()
+            elif choice == "2":
+                self._list_tasks()
+            elif choice == "3":
+                self._toggle_task()
+            elif choice == "4":
+                self._delete_task()
+            elif choice == "5":
+                self._update_task()
+            elif choice == "6":
+                self._show_stats()
+            elif choice == "7":
+                print("خروج از برنامه...")
+                break
+            else:
+                print("❗ انتخاب نامعتبر!")
+    
+    def _show_menu(self) -> None:
+        print("\n" + "="*50)
+        print("📋 مدیرت وظایف")
+        print("="*50)
+        print("1. اضافه کردن وظیفه جدید")
+        print("2. نمایش همه وظایف")
+        print("3. تغییر وضعیت وظیفه (انجام/انجام نشده)")
+        print("4. حذف وظیفه")
+        print("5. ویرایش وظیفه")
+        print("6. آمار وظایف")
+        print("7. خروج")
+        print("="*50)
+    
+    def _add_task(self) -> None:
+        title = input("عنوان وظیفه: ").strip()
+        if not title:
+            print("❗ عنوان نمی‌تواند خالی باشد!")
+            return
+        description = input("توضیحات (اختیاری): ").strip()
+        
+        task = self.manager.add_task(title, description)
+        print(f"✅ وظیفه '{task.title}' با ID {task.id} اضافه شد!")
+    
+    def _list_tasks(self) -> None:
+        tasks = self.manager.get_all_tasks()
+        if not tasks:
+            print("📭 هیچ وظیفه‌ای وجود ندارد!")
+            return
+        
+        print("\n📋 لیست وظایف:")
+        for task in tasks:
+            status = "✅" if task.done else "❌"
+            print(f"  {status} [{task.id}] {task.title}")
+            if task.description:
+                print(f"     📝 {task.description}")
+    
+    def _toggle_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            task = self.manager.toggle_task(task_id)
+            if task:
+                status = "انجام شده" if task.done else "انجام نشده"
+                print(f"✅ وضعیت وظیفه '{task.title}' به '{status}' تغییر کرد!")
+            else:
+                print("❗ وظیفه‌ای با این ID پیدا نشد!")
+        except ValueError:
+            print("❗ ID باید عدد باشد!")
+    
+    def _delete_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            if self.manager.delete_task(task_id):
+                print(f"✅ وظیفه با ID {task_id} حذف شد!")
+            else:
+                print("❗ وظیفه‌ای با این ID پیدا نشد!")
+        except ValueError:
+            print("❗ ID باید عدد باشد!")
+    
+    def _update_task(self) -> None:
+        try:
+            task_id = int(input("ID وظیفه: "))
+            task = self.manager.get_task(task_id)
+            if not task:
+                print("❗ وظیفه‌ای با این ID پیدا نشد!")
+                return
+            
+            print(f"وظیفه فعلی: {task.title}")
+            title = input("عنوان جدید (برای نگه‌داری Enter بزنید): ").strip()
+            description = input("توضیحات جدید (برای نگه‌داری Enter بزنید): ").strip()
+            
+            new_title = title if title else task.title
+            new_desc = description if description else task.description
+            
+            updated = self.manager.update_task(task_id, new_title, new_desc)
+            if updated:
+                print("✅ وظیفه به‌روزرسانی شد!")
+            else:
+                print("❗ خطا در به‌روزرسانی!")
+        except ValueError:
+            print("❗ ID باید عدد باشد!")
+    
+    def _show_stats(self) -> None:
+        all_tasks = self.manager.get_all_tasks()
+        total = len(all_tasks)
+        done = len(self.manager.get_done_tasks())
+        pending = len(self.manager.get_pending_tasks())
+        
+        print("\n📊 آمار وظایف:")
+        print(f"  مجموع: {total}")
+        print(f"  انجام شده: {done}")
+        print(f"  انجام نشده: {pending}")
+        if total > 0:
+            print(f"  درصد انجام: {done/total*100:.1f}%")
+
+def main() -> None:
+    cli = CLI()
+    cli.run()
+
+if __name__ == "__main__":
+    main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 فایل requirements.txt</h2>
+        
+        <pre class="code-block"># برای این پروژه نیازی به پکیج خاصی نیست
+# فقط پایتون استاندارد</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 تست‌ها (test_todo_manager.py)</h2>
+        
+        <pre class="code-block">import unittest
+import os
+from todo.todo_manager import TodoManager
+from todo.database import Database
+
+class TestTodoManager(unittest.TestCase):
+    def setUp(self):
+        self.db_name = "test_todo.db"
+        self.db = Database(self.db_name)
+        self.manager = TodoManager(self.db)
+    
+    def tearDown(self):
+        if os.path.exists(self.db_name):
+            os.remove(self.db_name)
+    
+    def test_add_task(self):
+        task = self.manager.add_task("Test Task", "Test Description")
+        self.assertIsNotNone(task.id)
+        self.assertEqual(task.title, "Test Task")
+        self.assertEqual(task.description, "Test Description")
+    
+    def test_get_all_tasks(self):
+        self.manager.add_task("Task 1")
+        self.manager.add_task("Task 2")
+        tasks = self.manager.get_all_tasks()
+        self.assertEqual(len(tasks), 2)
+    
+    def test_toggle_task(self):
+        task = self.manager.add_task("Toggle Test")
+        self.assertFalse(task.done)
+        
+        toggled = self.manager.toggle_task(task.id)
+        self.assertTrue(toggled.done)
+        
+        toggled = self.manager.toggle_task(task.id)
+        self.assertFalse(toggled.done)
+    
+    def test_delete_task(self):
+        task = self.manager.add_task("Delete Test")
+        self.assertIsNotNone(self.manager.get_task(task.id))
+        
+        result = self.manager.delete_task(task.id)
+        self.assertTrue(result)
+        self.assertIsNone(self.manager.get_task(task.id))
+
+if __name__ == "__main__":
+    unittest.main()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 اجرای پروژه</h2>
+        
+        <pre class="code-block"># نصب به صورت editable
+pip install -e .
+
+# اجرای برنامه
+python -m todo.cli
+
+# یا
+python todo/cli.py
+
+# اجرای تست‌ها
+python -m unittest discover tests</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>این پروژه رو می‌تونی گسترش بدی:</p>
+            <ul>
+                <li>اضافه کردن اولویت (بالا، متوسط، پایین)</li>
+                <li>اضافه کردن تاریخ سررسید</li>
+                <li>دسته‌بندی وظایف</li>
+                <li>یادآوری‌ها</li>
+                <li>رابط کاربری وب با Flask</li>
+                <li>ذخیره در فضای ابری</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🎓 تبریک! شما به پایان رسیدید!</h2>
+        <div class="highlight-box">
+            <p>🎉 <strong>شما ۴۰ درس پایتون رو با موفقیت کامل کردید!</strong></p>
+            <p>از یک مبتدی که هیچ‌چیزی از برنامه‌نویسی نمی‌دونست، به یک برنامه‌نویس حرفه‌ای پایتون تبدیل شدید!</p>
+            <p>🍀 <strong>موفق باشید و به یادگیری ادامه بدید!</strong></p>
+        </div>
+    </section>
+</div>

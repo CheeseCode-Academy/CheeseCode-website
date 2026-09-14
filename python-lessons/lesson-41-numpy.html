@@ -1,0 +1,390 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🔢 درس ۴۱: NumPy - پایه‌ی محاسبات عددی</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>با <strong>NumPy</strong> آشنا بشی، مهم‌ترین کتابخانه برای <strong>محاسبات عددی</strong> و <strong>آرایه‌ها</strong> در پایتون.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 NumPy چیست؟</h2>
+        <p>NumPy (Numerical Python) کتابخانه‌ای برای محاسبات عددی هست که:</p>
+        <ul>
+            <li>آرایه‌های <strong>چندبعدی</strong> (ndarray)</li>
+            <li>توابع <strong>ریاضی</strong> پیشرفته</li>
+            <li>عملیات <strong>بردار و ماتریس</strong></li>
+            <li>سرعت <strong>بالا</strong> (C++ در پس‌زمینه)</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نصب:</strong> <code>pip install numpy</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ساخت آرایه</h2>
+        
+        <pre class="code-block">import numpy as np
+
+# آرایه از لیست
+a = np.array([1, 2, 3, 4, 5])
+print("آرایه ۱D:", a)
+
+# آرایه ۲D
+b = np.array([[1, 2, 3], [4, 5, 6]])
+print("آرایه ۲D:\n", b)
+
+# آرایه از range
+c = np.arange(0, 10, 2)
+print("arange:", c)
+
+# آرایه از اعداد یکنواخت
+d = np.linspace(0, 1, 5)
+print("linspace:", d)
+
+# آرایه صفر
+e = np.zeros((3, 4))
+print("zeros:\n", e)
+
+# آرایه یک
+f = np.ones((2, 3))
+print("ones:\n", f)
+
+# ماتریس هویت
+g = np.eye(4)
+print("eye:\n", g)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">آرایه ۱D: [1 2 3 4 5]
+آرایه ۲D:
+ [[1 2 3]
+ [4 5 6]]
+arange: [0 2 4 6 8]
+linspace: [0.   0.25 0.5  0.75 1.  ]
+zeros:
+ [[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+ones:
+ [[1. 1. 1.]
+ [1. 1. 1.]]
+eye:
+ [[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملیات روی آرایه‌ها</h2>
+        
+        <pre class="code-block">import numpy as np
+
+a = np.array([1, 2, 3, 4, 5])
+b = np.array([10, 20, 30, 40, 50])
+
+# عملیات ریاضی
+print("جمع:", a + b)
+print("تفریق:", b - a)
+print("ضرب:", a * b)
+print("تقسیم:", b / a)
+
+# توابع ریاضی
+print("ریشه:", np.sqrt(a))
+print("توان:", np.power(a, 2))
+print("سینوس:", np.sin(a))
+print("لگاریتم:", np.log(a))
+
+# آمار
+print("میانگین:", np.mean(a))
+print("میانه:", np.median(a))
+print("انحراف معیار:", np.std(a))
+print("بیشترین:", np.max(a))
+print("کمترین:", np.min(a))
+print("مجموع:", np.sum(a))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">جمع: [11 22 33 44 55]
+تفریق: [ 9 18 27 36 45]
+ضرب: [ 10  40  90 160 250]
+تقسیم: [10. 10. 10. 10. 10.]
+ریشه: [1.         1.41421356 1.73205081 2.         2.23606798]
+توان: [ 1  4  9 16 25]
+سینوس: [ 0.84147098  0.90929743  0.14112001 -0.7568025  -0.95892427]
+لگاریتم: [0.         0.69314718 1.09861229 1.38629436 1.60943791]
+میانگین: 3.0
+میانه: 3.0
+انحراف معیار: 1.4142135623730951
+بیشترین: 5
+کمترین: 1
+مجموع: 15</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ایندکس و برش</h2>
+        
+        <pre class="code-block">import numpy as np
+
+a = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90])
+
+# دسترسی
+print("اولین:", a[0])
+print("آخرین:", a[-1])
+print("۳ تای اول:", a[:3])
+print("از ۲ تا ۵:", a[2:6])
+print("هر ۲ تا یکی:", a[::2])
+print("برعکس:", a[::-1])
+
+# آرایه ۲D
+b = np.array([[1, 2, 3, 4],
+              [5, 6, 7, 8],
+              [9, 10, 11, 12]])
+
+print("سطر اول:", b[0])
+print("ستون دوم:", b[:, 1])
+print("مربع وسط:", b[1:3, 1:3])</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">اولین: 10
+آخرین: 90
+۳ تای اول: [10 20 30]
+از ۲ تا ۵: [30 40 50 60]
+هر ۲ تا یکی: [10 30 50 70 90]
+برعکس: [90 80 70 60 50 40 30 20 10]
+سطر اول: [1 2 3 4]
+ستون دوم: [ 2  6 10]
+مربع وسط: [[ 6  7]
+ [10 11]]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملیات ماتریسی</h2>
+        
+        <pre class="code-block">import numpy as np
+
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# ضرب ماتریسی
+print("ضرب ماتریسی:\n", np.dot(A, B))
+print("ضرب ماتریسی (با @):\n", A @ B)
+
+# ترانهاده
+print("ترانهاده A:\n", A.T)
+
+# دترمینان
+print("دترمینان A:", np.linalg.det(A))
+
+# معکوس
+print("معکوس A:\n", np.linalg.inv(A))
+
+# مقادیر ویژه
+eigenvalues, eigenvectors = np.linalg.eig(A)
+print("مقادیر ویژه:", eigenvalues)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">ضرب ماتریسی:
+ [[19 22]
+ [43 50]]
+ضرب ماتریسی (با @):
+ [[19 22]
+ [43 50]]
+ترانهاده A:
+ [[1 3]
+ [2 4]]
+دترمینان A: -2.0
+معکوس A:
+ [[-2.   1. ]
+ [ 1.5 -0.5]]
+مقادیر ویژه: [-0.37228132  5.37228132]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 Broadcasting</h2>
+        
+        <pre class="code-block">import numpy as np
+
+a = np.array([1, 2, 3, 4, 5])
+b = 10
+
+# عدد به کل آرایه اضافه میشه
+print("a + 10:", a + 10)
+print("a * 2:", a * 2)
+
+# عملیات بین آرایه‌های با ابعاد مختلف
+A = np.array([[1, 2, 3],
+              [4, 5, 6]])
+B = np.array([10, 20, 30])
+
+print("A + B:\n", A + B)
+
+# شرط‌ها
+print("a > 3:", a > 3)
+print("شرط:", np.where(a > 3, "بزرگ", "کوچک"))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">a + 10: [11 12 13 14 15]
+a * 2: [ 2  4  6  8 10]
+A + B:
+ [[11 22 33]
+ [14 25 36]]
+a > 3: [False False False  True  True]
+شرط: ['کوچک' 'کوچک' 'کوچک' 'بزرگ' 'بزرگ']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 تغییر شکل آرایه</h2>
+        
+        <pre class="code-block">import numpy as np
+
+a = np.arange(12)
+print("اصلی:", a)
+
+# تغییر شکل
+b = a.reshape(3, 4)
+print("reshape 3x4:\n", b)
+
+# تغییر به ۱D
+c = b.flatten()
+print("flatten:", c)
+
+# ترکیب آرایه‌ها
+a1 = np.array([1, 2, 3])
+a2 = np.array([4, 5, 6])
+
+print("اتصال افقی:", np.concatenate([a1, a2]))
+print("اتصال عمودی:", np.vstack([a1, a2]))
+print("اتصال افقی (hstack):", np.hstack([a1, a2]))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">اصلی: [ 0  1  2  3  4  5  6  7  8  9 10 11]
+reshape 3x4:
+ [[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+flatten: [ 0  1  2  3  4  5  6  7  8  9 10 11]
+اتصال افقی: [1 2 3 4 5 6]
+اتصال عمودی: [[1 2 3]
+ [4 5 6]]
+اتصال افقی (hstack): [1 2 3 4 5 6]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 اعداد تصادفی</h2>
+        
+        <pre class="code-block">import numpy as np
+
+np.random.seed(42)  # برای تکرارپذیری
+
+# اعداد تصادفی یکنواخت
+print("یکنواخت:", np.random.rand(5))
+
+# اعداد تصادفی نرمال (گاوسی)
+print("نرمال:", np.random.randn(5))
+
+# اعداد صحیح تصادفی
+print("صحیح:", np.random.randint(1, 100, 10))
+
+# ماتریس تصادفی
+print("ماتریس:\n", np.random.rand(3, 4))
+
+# انتخاب تصادفی
+arr = np.array([10, 20, 30, 40, 50])
+print("انتخاب:", np.random.choice(arr, size=3, replace=False))
+
+# مرتب‌سازی تصادفی
+np.random.shuffle(arr)
+print("مرتب‌سازی:", arr)</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">یکنواخت: [0.37454012 0.95071431 0.73199394 0.59865848 0.15601864]
+نرمال: [-0.46947439  0.54256004 -0.46341769 -0.46572975  0.04596243]
+صحیح: [38 95 63 18 19 95 57 24 59 19]
+ماتریس:
+ [[0.49225737 0.66711418 0.97557319 0.53150386]
+ [0.5048029  0.86145719 0.0738372  0.1797697 ]
+ [0.30543831 0.44661281 0.89061792 0.58400057]]
+انتخاب: [40 20 50]
+مرتب‌سازی: [40 20 10 30 50]</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ذخیره و خواندن</h2>
+        
+        <pre class="code-block">import numpy as np
+
+a = np.array([1, 2, 3, 4, 5])
+
+# ذخیره در فایل
+np.save("array.npy", a)
+
+# خواندن از فایل
+b = np.load("array.npy")
+print("بارگیری:", b)
+
+# ذخیره به صورت txt
+np.savetxt("array.txt", a, fmt="%d")
+
+# خواندن از txt
+c = np.loadtxt("array.txt")
+print("بارگیری از txt:", c)
+
+# ذخیره چند آرایه
+np.savez("arrays.npz", arr1=a, arr2=b*2)
+data = np.load("arrays.npz")
+print("arr1:", data["arr1"])
+print("arr2:", data["arr2"])</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>NumPy</strong> برای <strong>بهینه‌سازی سرعت</strong> استفاده کن:</p>
+            <pre class="code-block">import numpy as np
+import time
+
+# روش پایتون (کند)
+start = time.time()
+result = [i ** 2 for i in range(1000000)]
+print(f"پایتون: {time.time() - start:.3f}s")
+
+# روش NumPy (سریع)
+start = time.time()
+result = np.arange(1000000) ** 2
+print(f"NumPy: {time.time() - start:.3f}s")</pre>
+            <p>تفاوت سرعت می‌تونه <strong>۵۰ تا ۱۰۰ برابر</strong> باشه!</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱:</strong> آرایه‌ای از اعداد ۰ تا ۱۰۰ بساز و میانگین، میانه و انحراف معیار رو حساب کن.</p>
+            
+            <p><strong>تمرین ۲:</strong> یک ماتریس ۵×۵ از اعداد تصادفی بساز و ترانهاده و دترمینانش رو حساب کن.</p>
+            
+            <p><strong>تمرین ۳:</strong> دو آرایه ۱×۱۰ بساز و ضرب داخلی (dot product)شون رو حساب کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>Pandas</strong> آشنا میشی که برای تحلیل داده خیلی قدرتمنده!</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

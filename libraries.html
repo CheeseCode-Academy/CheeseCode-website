@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرکز دانلود | CodaX Academy</title>
+    <link rel="stylesheet" href="./styles/terminal-python.css">
+    <link rel="stylesheet" href="./styles/python-linux-style.css">
+    <link rel="stylesheet" href="./styles/libraries-style.css">
+    <link rel="stylesheet" href="./styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CodaX">
+    
+    <script src="./configs/libraries-config.js"></script>
+    <script src="./js/codax-utils.js"></script>
+</head>
+<body data-theme="dark">
+
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo">
+            <div class="brand-text"><h1>CodaX</h1><p>مرکز دانلود | CodaX</p></div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button id="themeToggle" title="Select Theme" class="action-btn" style="background:transparent; border:1px solid rgba(0,212,255,0.1);">🌙</button>
+        </div>
+    </header>
+
+    <div class="libraries-wrapper">
+
+        <div class="cache-status-box" id="cacheStatusBox">
+            <div class="cache-status-icon">📦</div>
+            <div class="cache-status-info">
+                <h3>وضعیت کش آفلاین</h3>
+                <p id="cacheStatusText">در حال بررسی...</p>
+                <div class="cache-progress-bar">
+                    <div class="cache-progress-fill" id="globalProgressFill" style="width: 0%;"></div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <button class="btn-check-update" onclick="checkUpdateNow()">🔄 بررسی آپدیت</button>
+                <button class="btn-clear-all" onclick="clearAllCache()">🗑️ حذف کامل کش</button>
+            </div>
+        </div>
+
+        <div id="sectionsContainer">
+            <p style="color:#00d4ff; text-align:center; padding:1rem;">⏳ در حال بارگذاری...</p>
+        </div>
+
+    </div>
+
+    <script>
+        let versionData = null;
+
+        async function loadAllData() {
+            try {
+                document.getElementById('sectionsContainer').innerHTML = 
+                    '<p style="color:#00d4ff; text-align:center; padding:1rem;">⏳ در حال بارگذاری...</p>';
+                
+                const res = await fetch('version.json?v=' + Date.now());
+                
+                if (!res.ok) {
+                    throw new Error('version.json - HTTP ' + res.status);
+                }
+                
+                const text = await res.text();
+                
+                try {
+                    versionData = JSON.parse(text);
+                } catch (jsonErr) {
+                    throw new Error('JSON خرابه: ' + jsonErr.message);
+                }
+                
+                if (!versionData.courses) {
+                    throw new Error('فیلد courses توی version.json نیست');
+                }
+                
+                renderAllSections();
+                updateCacheStatus();
+                
+            } catch (err) {
+                console.error('❌ خطا:', err);
+                
+                document.getElementById('sectionsContainer').innerHTML = `
+                    <div style="
+                        background: rgba(255, 68, 68, 0.1);
+                        border: 1px solid rgba(255, 68, 68, 0.3);
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        text-align: center;
+                        font-family: 'Courier New', monospace;
+                        color: #ff6b6b;
+                    ">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+                        <h3 style="margin: 0 0 1rem 0;">خطا در بارگذاری اطلاعات</h3>
+                        <p style="
+                            background: rgba(0, 0, 0, 0.3);
+                            padding: 0.8rem;
+                            border-radius: 8px;
+                            font-size: 0.8rem;
+                            color: rgba(255, 255, 255, 0.8);
+                            direction: ltr;
+                            text-align: left;
+                            word-break: break-all;
+                        ">${err.message}</p>
+                        <button onclick="location.reload()" style="
+                            margin-top: 1rem;
+                            background: rgba(0, 212, 255, 0.1);
+                            border: 1px solid rgba(0, 212, 255, 0.3);
+                            padding: 0.6rem 1.5rem;
+                            border-radius: 8px;
+                            color: #00d4ff;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.85rem;
+                        ">🔄 تلاش دوباره</button>
+                    </div>
+                `;
+            }
+        }
+
+        function renderAllSections() {
+            const container = document.getElementById('sectionsContainer');
+            container.innerHTML = '';
+
+            if (typeof librariesConfig === 'undefined' || !librariesConfig.sections) {
+                container.innerHTML = '<p style="color:#ff6b6b; text-align:center; padding:1rem;">❌ فایل libraries-config.js یافت نشد</p>';
+                return;
+            }
+
+            librariesConfig.sections.forEach(section => {
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'libraries-section';
+                
+                sectionEl.innerHTML = `
+                    <h2 class="section-title">${section.title}</h2>
+                    <p class="section-desc">${section.description || ''}</p>
+                    <div class="download-cards" id="section-${section.id}"></div>
+                `;
+                
+                container.appendChild(sectionEl);
+                
+                const contentContainer = sectionEl.querySelector(`#section-${section.id}`);
+                
+                if (section.type === 'cacheable') {
+                    renderCacheableItems(contentContainer, section.items);
+                } else if (section.type === 'downloads') {
+                    renderDownloadItems(contentContainer, section.items);
+                } else if (section.type === 'links') {
+                    renderLinkItems(contentContainer, section.items);
+                }
+            });
+        }
+
+        function renderCacheableItems(container, items) {
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const courseKey = item.courseKey;
+                const course = versionData.courses[courseKey];
+                
+                if (!course) return;
+                
+                const total = course.lessons.length;
+                const cachedCount = CodaXUtils.getCourseCacheCount(courseKey);
+                const percent = Math.round((cachedCount / total) * 100);
+                
+                const card = document.createElement('div');
+                card.className = 'download-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-icon">${course.icon}</span>
+                        <div class="card-info">
+                            <h3>${course.title}</h3>
+                            <p class="card-stats">${total} فایل</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-progress">
+                        <div class="progress-bar-track-small">
+                            <div class="progress-bar-fill-small" style="width: ${percent}%;"></div>
+                        </div>
+                        <p class="progress-label">${cachedCount} / ${total} کش شده (${percent}%)</p>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <button class="btn-cache" onclick="cacheCourse('${courseKey}')">
+                            📦 کش کردن
+                        </button>
+                        ${cachedCount > 0 ? `
+                            <button class="btn-clear" onclick="clearCourse('${courseKey}')">
+                                🗑️ پاک کردن
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderDownloadItems(container, items) {
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'download-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-icon">${item.icon || '📄'}</span>
+                        <div class="card-info">
+                            <h3>${item.title}</h3>
+                            <p class="card-desc">${item.description || ''}</p>
+                            <p class="card-stats">
+                                ${item.size ? '💾 ' + item.size : ''}
+                                ${item.version ? ' | 📅 نسخه ' + item.version : ''}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="${item.url}" download class="btn-download">
+                            ⬇️ دانلود
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderLinkItems(container, items) {
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const card = document.createElement('a');
+                card.className = 'resource-card';
+                card.href = item.url;
+                card.target = '_blank';
+                card.innerHTML = `
+                    <span class="resource-icon">${item.icon || '🔗'}</span>
+                    <div class="resource-info">
+                        <h4>${item.title}</h4>
+                        <p>${item.description || ''}</p>
+                    </div>
+                    <span class="resource-arrow">↗</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function cacheCourse(courseKey) {
+            showProgress('📥 در حال کش کردن...');
+
+            try {
+                const result = await CodaXUtils.cacheCourse(courseKey, (completed, total, name) => {
+                    const percent = Math.round((completed / total) * 100);
+                    showProgress(`📥 ${completed} / ${total} (${percent}%)`);
+                });
+
+                if (result.errors && result.errors.length > 0) {
+                    let errorMsg = `${result.completed} از ${result.total} فایل کش شد\n`;
+                    errorMsg += `${result.errors.length} فایل خطا داد`;
+                    
+                    showErrorModal(errorMsg, result.errors);
+                    showProgress(`⚠️ ${result.completed} از ${result.total} (${result.errors.length} خطا)`, 'error');
+                } else {
+                    showProgress(`✅ ${result.completed} از ${result.total} فایل کش شد!`, 'success');
+                }
+                
+                setTimeout(() => {
+                    renderAllSections();
+                    updateCacheStatus();
+                    hideProgress();
+                }, 3000);
+
+            } catch (err) {
+                showProgress('❌ خطا: ' + err.message, 'error');
+                setTimeout(hideProgress, 3000);
+            }
+        }
+
+        function showErrorModal(message, errors) {
+            const oldModal = document.getElementById('cacheErrorModal');
+            if (oldModal) oldModal.remove();
+            
+            let errorsList = '';
+            if (errors && errors.length > 0) {
+                errorsList = errors.map(function(err, i) {
+                    return `
+                        <div style="
+                            background: rgba(255, 68, 68, 0.1);
+                            border: 1px solid rgba(255, 68, 68, 0.2);
+                            border-radius: 8px;
+                            padding: 0.6rem;
+                            margin-bottom: 0.5rem;
+                            font-size: 0.75rem;
+                            font-family: 'Courier New', monospace;
+                        ">
+                            <div style="color: #ff6b6b; font-weight: bold; margin-bottom: 0.2rem;">
+                                ${i + 1}. ${err.name}
+                            </div>
+                            <div style="color: rgba(255, 255, 255, 0.5); font-size: 0.7rem;">
+                                ${err.error}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            const modal = document.createElement('div');
+            modal.id = 'cacheErrorModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.9);
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1rem;
+                direction: rtl;
+                backdrop-filter: blur(10px);
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: rgba(15, 22, 38, 0.98);
+                    border: 1px solid rgba(255, 68, 68, 0.3);
+                    border-radius: 16px;
+                    padding: 1.5rem;
+                    max-width: 500px;
+                    width: 100%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    direction: rtl;
+                    font-family: 'Courier New', monospace;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+                ">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚠️</div>
+                        <h2 style="color: #ff6b6b; margin: 0; font-size: 1.2rem;">خطا در کش کردن</h2>
+                    </div>
+                    
+                    <div style="
+                        background: rgba(0, 0, 0, 0.3);
+                        border-radius: 8px;
+                        padding: 0.8rem;
+                        margin-bottom: 1rem;
+                        color: rgba(255, 255, 255, 0.7);
+                        font-size: 0.85rem;
+                        text-align: center;
+                    ">
+                        ${message.replace(/\n/g, '<br>')}
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <h3 style="color: #ff6b6b; font-size: 0.9rem; margin: 0 0 0.5rem 0;">
+                            📋 فایل‌های خطادار:
+                        </h3>
+                        <div style="max-height: 40vh; overflow-y: auto;">
+                            ${errorsList}
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyErrorsToClipboard()" style="
+                            flex: 1;
+                            background: rgba(0, 212, 255, 0.1);
+                            border: 1px solid rgba(0, 212, 255, 0.3);
+                            padding: 0.7rem;
+                            border-radius: 8px;
+                            color: #00d4ff;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                            font-weight: 600;
+                        ">
+                            📋 کپی خطاها
+                        </button>
+                        <button onclick="document.getElementById('cacheErrorModal').remove()" style="
+                            flex: 1;
+                            background: rgba(255, 68, 68, 0.1);
+                            border: 1px solid rgba(255, 68, 68, 0.3);
+                            padding: 0.7rem;
+                            border-radius: 8px;
+                            color: #ff6b6b;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                            font-weight: 600;
+                        ">
+                            ✖ بستن
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            window._cacheErrors = errors;
+            document.body.appendChild(modal);
+        }
+
+        function copyErrorsToClipboard() {
+            if (!window._cacheErrors) return;
+            
+            let text = 'خطاهای کش:\n\n';
+            window._cacheErrors.forEach(function(err, i) {
+                text += (i + 1) + '. ' + err.name + ' - ' + err.error + '\n';
+            });
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('✅ خطاها کپی شد!');
+                }).catch(function() {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('✅ خطاها کپی شد!');
+            } catch (e) {
+                alert('❌ کپی نشد.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function clearCourse(courseKey) {
+            if (confirm('آیا مطمئنی می‌خوای کش این دوره رو پاک کنی؟')) {
+                CodaXUtils.clearCourseCache(courseKey);
+                renderAllSections();
+                updateCacheStatus();
+            }
+        }
+
+        function clearAllCache() {
+            if (!confirm('⚠️ آیا مطمئنی می‌خوای کل کش سایت رو حذف کنی؟\n\nاین کار:\n• همه‌ی درس‌ها و جواب‌های کش‌شده رو پاک می‌کنه\n• تنظیمات تم رو پاک می‌کنه\n• آپدیت‌ها رو ریست می‌کنه\n\nبعدش صفحه رفرش میشه.')) {
+                return;
+            }
+            
+            try {
+                localStorage.clear();
+                console.log('✅ localStorage پاک شد');
+                
+                if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                        names.forEach(function(name) {
+                            caches.delete(name);
+                            console.log('🗑️ کش پاک شد:', name);
+                        });
+                    });
+                }
+                
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                        registrations.forEach(function(registration) {
+                            registration.unregister();
+                            console.log('🗑️ Service Worker حذف شد');
+                        });
+                    });
+                }
+                
+                showProgress('✅ کش کامل پاک شد! در حال رفرش...', 'success');
+                
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+                
+            } catch (err) {
+                console.error('❌ خطا:', err);
+                showProgress('❌ خطا: ' + err.message, 'error');
+            }
+        }
+
+        async function checkUpdateNow() {
+            showProgress('🔄 در حال بررسی آپدیت...');
+            
+            try {
+                const result = await CodaXUtils.checkForUpdates();
+                
+                if (result.hasUpdate) {
+                    showProgress(`📢 ${result.updates.length} آپدیت موجود است!`, 'success');
+                    setTimeout(() => {
+                        CodaXUtils.showUpdateNotification(result);
+                        hideProgress();
+                    }, 1500);
+                } else {
+                    showProgress('✅ شما از آخرین نسخه استفاده می‌کنید!', 'success');
+                    setTimeout(hideProgress, 2000);
+                }
+            } catch (err) {
+                showProgress('❌ خطا: ' + err.message, 'error');
+                setTimeout(hideProgress, 3000);
+            }
+        }
+
+        function updateCacheStatus() {
+            let totalCached = 0;
+            let totalFiles = 0;
+            
+            for (const key in versionData.courses) {
+                totalCached += CodaXUtils.getCourseCacheCount(key);
+                totalFiles += versionData.courses[key].lessons.length;
+            }
+
+            const percent = totalFiles > 0 ? Math.round((totalCached / totalFiles) * 100) : 0;
+            
+            const statusText = document.getElementById('cacheStatusText');
+            const progressFill = document.getElementById('globalProgressFill');
+            
+            if (totalCached === 0) {
+                statusText.textContent = 'هیچ فایلی کش نشده — برای استفاده آفلاین، دوره‌ها را کش کنید';
+            } else if (percent === 100) {
+                statusText.textContent = `✅ تمام ${totalFiles} فایل کش شده — آماده استفاده آفلاین`;
+            } else {
+                statusText.textContent = `${totalCached} از ${totalFiles} فایل کش شده (${percent}%)`;
+            }
+            
+            progressFill.style.width = percent + '%';
+        }
+
+        function showProgress(message, type) {
+            let progressEl = document.getElementById('globalProgress');
+            if (!progressEl) {
+                progressEl = document.createElement('div');
+                progressEl.id = 'globalProgress';
+                progressEl.className = 'global-progress';
+                document.body.appendChild(progressEl);
+            }
+            
+            progressEl.className = 'global-progress ' + (type || '');
+            progressEl.textContent = message;
+            progressEl.style.display = 'block';
+        }
+
+        function hideProgress() {
+            const progressEl = document.getElementById('globalProgress');
+            if (progressEl) progressEl.style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAllData);
+
+        // ثبت Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker ثبت شد:', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.warn('⚠️ Service Worker ثبت نشد:', err);
+                    });
+            });
+        }
+    </script>
+
+</body>
+</html>

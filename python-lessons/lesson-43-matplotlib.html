@@ -1,0 +1,260 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">📊 درس ۴۳: Matplotlib - مصورسازی داده</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>با <strong>Matplotlib</strong> آشنا بشی، کتابخانه‌ای برای <strong>نمودار</strong> و <strong>مصورسازی</strong> داده‌ها.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 Matplotlib چیست؟</h2>
+        <p>Matplotlib کتابخانه‌ای برای <strong>رسم نمودار</strong> هست که:</p>
+        <ul>
+            <li>نمودارهای <strong>خطی، میله‌ای، دایره‌ای، پراکندگی</strong> و ...</li>
+            <li>کنترل <strong>کامل</strong> بر ظاهر</li>
+            <li>قابل <strong>تعامل</strong> و ذخیره</li>
+            <li>سازگاری با <strong>NumPy</strong> و <strong>Pandas</strong></li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نصب:</strong> <code>pip install matplotlib</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار خطی</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+# داده‌ها
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+# رسم نمودار
+plt.plot(x, y)
+plt.title("نمودار خطی")
+plt.xlabel("محور X")
+plt.ylabel("محور Y")
+plt.grid(True)
+plt.show()
+
+# با داده‌های بیشتر
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y, label="سینوس", color="red", linestyle="--", linewidth=2)
+plt.plot(x, np.cos(x), label="کسینوس", color="blue", linestyle="-", linewidth=2)
+plt.legend()
+plt.grid(True)
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار میله‌ای</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+
+# داده‌ها
+محصولات = ["لپ‌تاپ", "موبایل", "تبلت", "هدفون"]
+فروش = [100, 200, 150, 300]
+
+# نمودار میله‌ای
+plt.bar(محصولات, فروش, color=["blue", "green", "red", "purple"])
+plt.title("فروش محصولات")
+plt.xlabel("محصول")
+plt.ylabel("فروش")
+plt.show()
+
+# نمودار میله‌ای افقی
+plt.barh(محصولات, فروش, color="orange")
+plt.title("فروش محصولات (افقی)")
+plt.xlabel("فروش")
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار دایره‌ای</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+
+# داده‌ها
+برچسب‌ها = ["پایتون", "جاوا", "C++", "JavaScript", "دیگر"]
+سهم = [30, 25, 20, 15, 10]
+
+# نمودار دایره‌ای
+plt.pie(سهم, labels=برچسب‌ها, autopct="%1.1f%%", startangle=90)
+plt.title("محبوبیت زبان‌های برنامه‌نویسی")
+plt.axis("equal")  # دایره کامل
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار پراکندگی</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+# داده‌های تصادفی
+np.random.seed(42)
+x = np.random.randn(100)
+y = np.random.randn(100)
+colors = np.random.rand(100)
+sizes = np.random.randint(20, 200, 100)
+
+# نمودار پراکندگی
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.5)
+plt.title("نمودار پراکندگی")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.colorbar()
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار هیستوگرام</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+# داده‌ها
+data = np.random.randn(1000)
+
+# هیستوگرام
+plt.hist(data, bins=30, color="blue", alpha=0.7, edgecolor="black")
+plt.title("هیستوگرام")
+plt.xlabel("مقدار")
+plt.ylabel("تعداد")
+plt.grid(True, alpha=0.3)
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 نمودار جعبه‌ای</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+# داده‌ها
+data = [np.random.normal(0, 1, 100) for _ in range(4)]
+
+# نمودار جعبه‌ای
+plt.boxplot(data, labels=["گروه ۱", "گروه ۲", "گروه ۳", "گروه ۴"])
+plt.title("نمودار جعبه‌ای")
+plt.ylabel("مقادیر")
+plt.grid(True, alpha=0.3)
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 چندین نمودار در یک شکل</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+# ایجاد شکل با ۲×۲ نمودار
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+
+# نمودار اول
+axes[0, 0].plot([1, 2, 3, 4], [1, 4, 9, 16])
+axes[0, 0].set_title("خطی")
+
+# نمودار دوم
+axes[0, 1].bar(["A", "B", "C"], [10, 20, 15])
+axes[0, 1].set_title("میله‌ای")
+
+# نمودار سوم
+axes[1, 0].pie([25, 35, 40], labels=["x", "y", "z"])
+axes[1, 0].set_title("دایره‌ای")
+
+# نمودار چهارم
+axes[1, 1].scatter(np.random.randn(50), np.random.randn(50))
+axes[1, 1].set_title("پراکندگی")
+
+plt.tight_layout()
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 سفارشی‌سازی</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use("seaborn-v0_8")  # استایل زیبا
+
+# داده‌ها
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# رسم با تنظیمات
+plt.figure(figsize=(10, 6))
+plt.plot(x, y1, label="سینوس", color="#FF6B6B", linestyle="-", linewidth=2, marker="o", markersize=4)
+plt.plot(x, y2, label="کسینوس", color="#4ECDC4", linestyle="--", linewidth=2, marker="s", markersize=4)
+
+plt.title("توابع مثلثاتی", fontsize=16, fontweight="bold")
+plt.xlabel("x", fontsize=14)
+plt.ylabel("y", fontsize=14)
+plt.legend(loc="upper right", fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.axhline(y=0, color="black", linestyle="-", linewidth=0.5)
+plt.axvline(x=0, color="black", linestyle="-", linewidth=0.5)
+plt.tight_layout()
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 ذخیره نمودار</h2>
+        
+        <pre class="code-block">import matplotlib.pyplot as plt
+
+# رسم نمودار
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.title("نمودار نمونه")
+
+# ذخیره
+plt.savefig("plot.png", dpi=300, bbox_inches="tight")
+plt.savefig("plot.pdf")  # وکتور
+plt.show()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>subplots</strong> با <strong>Pandas</strong> برای رسم سریع استفاده کن:</p>
+            <pre class="code-block">import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    "سال": [2018, 2019, 2020, 2021, 2022],
+    "فروش": [100, 120, 90, 150, 180],
+    "سود": [20, 25, 18, 30, 35]
+})
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+df.plot(x="سال", y="فروش", ax=axes[0], kind="line", marker="o")
+df.plot(x="سال", y="سود", ax=axes[1], kind="bar", color="green")
+plt.tight_layout()
+plt.show()</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱:</strong> نمودار خطی از تابع f(x) = x² در بازه [-۱۰, ۱۰] رسم کن.</p>
+            
+            <p><strong>تمرین ۲:</strong> نمودار میله‌ای از فروش ۴ محصول مختلف رسم کن.</p>
+            
+            <p><strong>تمرین ۳:</strong> یک نمودار ترکیبی (خطی + میله‌ای) با دو محور y رسم کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>Requests</strong> آشنا میشی که برای کار با اینترنت و APIهاست!</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

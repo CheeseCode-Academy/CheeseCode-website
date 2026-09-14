@@ -1,0 +1,221 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🔧 درس ۱۸: آرگومان‌های پیش‌فرض</h1>
+    <div class="lesson-meta">سطح: مبتدی | زمان مطالعه: ۱۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>آرگومان‌های پیش‌فرض</strong> آشنا میشی و یاد می‌گیری چطور توابع انعطاف‌پذیرتری بنویسی.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 آرگومان پیش‌فرض چیست؟</h2>
+        <p>آرگومان پیش‌فرض (Default Argument) به پارامترهایی گفته میشه که <strong>مقدار پیش‌فرض</strong> دارن. اگر موقع صدا زدن تابع مقدار ندی، از مقدار پیش‌فرض استفاده میشه.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> پارامترهای پیش‌فرض باید <strong>بعد از</strong> پارامترهای اجباری بیان.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 مثال ساده</h2>
+        
+        <pre class="code-block">def سلام(نام, رسمی=False):
+    if رسمی:
+        print(f"جناب {نام}، خوش آمدید!")
+    else:
+        print(f"سلام {نام}!")
+
+سلام("علی")           # استفاده از مقدار پیش‌فرض (رسمی=False)
+سلام("زهرا", True)   # مقدار جدید</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">سلام علی!
+جناب زهرا، خوش آمدید!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 چند پارامتر پیش‌فرض</h2>
+        
+        <pre class="code-block">def ثبت_نام(نام, سن=0, شهر="نامشخص", رشته="نامشخص"):
+    print(f"نام: {نام}")
+    print(f"سن: {سن}")
+    print(f"شهر: {شهر}")
+    print(f"رشته: {رشته}")
+    print("---")
+
+ثبت_نام("علی")
+ثبت_نام("زهرا", 25)
+ثبت_نام("رضا", 30, "تهران")
+ثبت_نام("سارا", 22, "اصفهان", "مهندسی")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">نام: علی
+سن: 0
+شهر: نامشخص
+رشته: نامشخص
+---
+نام: زهرا
+سن: 25
+شهر: نامشخص
+رشته: نامشخص
+---
+نام: رضا
+سن: 30
+شهر: تهران
+رشته: نامشخص
+---
+نام: سارا
+سن: 22
+شهر: اصفهان
+رشته: مهندسی
+---</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده از کلیدواژه‌ها</h2>
+        <p>می‌تونی فقط بعضی از پارامترها رو مقدار بدی:</p>
+        
+        <pre class="code-block">def اطلاعات(نام, سن=0, شهر="نامشخص", رشته="نامشخص"):
+    print(f"{نام}، {سن} سال، {شهر}، {رشته}")
+
+اطلاعات("علی")
+اطلاعات("زهرا", شهر="تهران")  # فقط شهر رو مقدار می‌دیم
+اطلاعات("رضا", رشته="برنامه‌نویسی")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">علی، 0 سال، نامشخص، نامشخص
+زهرا، 0 سال، تهران، نامشخص
+رضا، 0 سال، نامشخص، برنامه‌نویسی</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 قانون مهم: ترتیب پارامترها</h2>
+        <p>پارامترهای <strong>اجباری</strong> باید قبل از پارامترهای <strong>اختیاری</strong> بیان:</p>
+        
+        <pre class="code-block"># درسته
+def تابع_درست(a, b, c=10, d=20):
+    print(a, b, c, d)
+
+# غلطه! پارامتر اختیاری قبل از اجباری
+# def تابع_غلط(a=10, b, c):
+#     print(a, b, c)</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 مقدار پیش‌فرض متغیر</h2>
+        <p>مقدار پیش‌فرض می‌تونه هر چیزی باشه:</p>
+        
+        <pre class="code-block">def تابع(نام, اعداد=[]):
+    اعداد.append(نام)
+    return اعداد
+
+print(تابع("علی"))
+print(تابع("زهرا"))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">['علی']
+['علی', 'زهرا']</pre>
+        </div>
+        
+        <div class="highlight-box">
+            <p>⚠️ <strong>هشدار مهم:</strong> این کار خطرناکه! چون لیست بین دفعات مختلف به‌اشتراک گذاشته میشه. بهتره از <code>None</code> استفاده کنی.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 روش امن برای مقدار پیش‌فرض متغیر</h2>
+        
+        <pre class="code-block">def تابع_امن(نام, اعداد=None):
+    if اعداد is None:
+        اعداد = []
+    اعداد.append(نام)
+    return اعداد
+
+print(تابع_امن("علی"))
+print(تابع_امن("زهرا"))</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">['علی']
+['زهرا']</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 استفاده از توابع به عنوان پیش‌فرض</h2>
+        
+        <pre class="code-block">def زمان_حال():
+    from datetime import datetime
+    return datetime.now()
+
+def لاگ(پیام, زمان=زمان_حال()):
+    print(f"[{زمان}] {پیام}")
+
+لاگ("برنامه شروع شد")
+لاگ("کاربر وارد شد")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی (نمونه):</span>
+            <pre class="code-block-output">[2026-07-21 14:30:25.123456] برنامه شروع شد
+[2026-07-21 14:30:25.123456] کاربر وارد شد</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> قرار دادن پارامتر اختیاری قبل از اجباری:</p>
+            <pre class="code-block">def غلط(a=10, b):  # ارور!
+    return a + b</pre>
+            <p><strong>✅ راه‌حل:</strong> همیشه پارامترهای اجباری رو اول بذار:</p>
+            <pre class="code-block">def درست(b, a=10):
+    return a + b</pre>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از لیست به عنوان مقدار پیش‌فرض:</p>
+            <pre class="code-block">def تابع(لیست=[]):  # خطرناک!</pre>
+            <p><strong>✅ راه‌حل:</strong> از <code>None</code> استفاده کن:</p>
+            <pre class="code-block">def تابع(لیست=None):
+    if لیست is None:
+        لیست = []</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از پارامترهای پیش‌فرض برای <strong>ساده‌سازی</strong> رابط کاربری تابع استفاده کن:</p>
+            <pre class="code-block">def جستجو(عبارت, حساس_به_حروف=False, دقیق=False):
+    # کد جستجو
+    pass
+
+# کاربر می‌تونه به سادگی ازش استفاده کنه
+جستجو("python")
+جستجو("Python", حساس_به_حروف=True)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> تابعی بنویس که نام و سن رو بگیره، با سن پیش‌فرض ۱۸.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> تابعی بنویس که متن و تعداد تکرار رو بگیره و متن رو به تعداد مشخص چاپ کنه (تعداد پیش‌فرض ۱).</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که لیستی از اعداد و یک مقدار پیش‌فرض برای <code>mode</code> داشته باشه که مشخص کنه جمع یا ضرب انجام بده.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>توابع لامبدا</strong> آشنا میشی. توابع لامبدا توابع کوچک و یک‌خطی هستن که برای کارهای ساده استفاده میشن.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

@@ -1,0 +1,255 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">✨ درس ۲۷: متدهای خاص (Special Methods)</h1>
+    <div class="lesson-meta">سطح: متوسط | زمان مطالعه: ۱۸ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>توی این درس با <strong>متدهای خاص</strong> یا <strong>جادویی</strong> (Magic Methods) آشنا میشی که به کلاس‌ها قابلیت‌های ویژه‌ای می‌دن.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 متدهای خاص چیست؟</h2>
+        <p>متدهای خاص (Magic Methods) متدهایی هستن که با <strong>دو زیرخط</strong> شروع و تموم میشن (مثل <code>__init__</code>). این متدها به کلاس‌ها اجازه می‌دن رفتارهای ویژه‌ای داشته باشن.</p>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>یادت باشه:</strong> متدهای خاص به‌طور خودکار در شرایط خاص فراخوانی میشن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 __init__ (سازنده)</h2>
+        
+        <pre class="code-block">class شخص:
+    def __init__(self, نام):
+        self.نام = نام
+        print(f"{self.نام} ساخته شد!")
+
+علی = شخص("علی")  # علی ساخته شد!</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __str__ و __repr__</h2>
+        
+        <pre class="code-block">class کتاب:
+    def __init__(self, عنوان, نویسنده):
+        self.عنوان = عنوان
+        self.نویسنده = نویسنده
+    
+    def __str__(self):
+        return f"📚 {self.عنوان} - {self.نویسنده}"
+    
+    def __repr__(self):
+        return f"کتاب('{self.عنوان}', '{self.نویسنده}')"
+
+ک = کتاب("بوف کور", "صادق هدایت")
+print(ک)  # 📚 بوف کور - صادق هدایت
+print(repr(ک))  # کتاب('بوف کور', 'صادق هدایت')</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __len__ و __getitem__</h2>
+        
+        <pre class="code-block">class لیست_سفارشی:
+    def __init__(self, *items):
+        self.items = list(items)
+    
+    def __len__(self):
+        return len(self.items)
+    
+    def __getitem__(self, index):
+        return self.items[index]
+    
+    def __setitem__(self, index, value):
+        self.items[index] = value
+
+لیست = لیست_سفارشی(1, 2, 3, 4, 5)
+print(len(لیست))  # 5
+print(لیست[2])    # 3
+لیست[2] = 10
+print(لیست[2])    # 10</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __iter__ و __next__</h2>
+        
+        <pre class="code-block">class شمارنده:
+    def __init__(self, شروع, پایان):
+        self.شروع = شروع
+        self.پایان = پایان
+    
+    def __iter__(self):
+        self.فعلی = self.شروع
+        return self
+    
+    def __next__(self):
+        if self.فعلی > self.پایان:
+            raise StopIteration
+        مقدار = self.فعلی
+        self.فعلی += 1
+        return مقدار
+
+for i in شمارنده(1, 5):
+    print(i, end=" ")  # 1 2 3 4 5</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __call__</h2>
+        <p>شیء رو قابل صدا زدن می‌کنه:</p>
+        
+        <pre class="code-block">class ضرب_کننده:
+    def __init__(self, ضریب):
+        self.ضریب = ضریب
+    
+    def __call__(self, عدد):
+        return عدد * self.ضریب
+
+ضرب_در_دو = ضرب_کننده(2)
+print(ضرب_در_دو(5))   # 10
+print(ضرب_در_دو(10))  # 20</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای ریاضی</h2>
+        
+        <pre class="code-block">class عدد_خاص:
+    def __init__(self, مقدار):
+        self.مقدار = مقدار
+    
+    def __add__(self, دیگر):
+        return عدد_خاص(self.مقدار + دیگر.مقدار)
+    
+    def __sub__(self, دیگر):
+        return عدد_خاص(self.مقدار - دیگر.مقدار)
+    
+    def __mul__(self, دیگر):
+        return عدد_خاص(self.مقدار * دیگر.مقدار)
+    
+    def __str__(self):
+        return str(self.مقدار)
+
+a = عدد_خاص(10)
+b = عدد_خاص(5)
+print(a + b)  # 15
+print(a - b)  # 5
+print(a * b)  # 50</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 عملگرهای مقایسه‌ای</h2>
+        
+        <pre class="code-block">class فرد:
+    def __init__(self, نام, سن):
+        self.نام = نام
+        self.سن = سن
+    
+    def __eq__(self, دیگر):
+        return self.سن == دیگر.سن
+    
+    def __lt__(self, دیگر):
+        return self.سن < دیگر.سن
+    
+    def __gt__(self, دیگر):
+        return self.سن > دیگر.سن
+    
+    def __str__(self):
+        return f"{self.نام} ({self.سن})"
+
+علی = فرد("علی", 25)
+زهرا = فرد("زهرا", 30)
+رضا = فرد("رضا", 25)
+
+print(علی == زهرا)  # False
+print(علی == رضا)   # True
+print(علی < زهرا)   # True
+print(علی > زهرا)   # False</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __enter__ و __exit__</h2>
+        <p>برای استفاده با <code>with</code>:</p>
+        
+        <pre class="code-block">class مدیریت_فایل:
+    def __init__(self, نام_فایل):
+        self.نام_فایل = نام_فایل
+    
+    def __enter__(self):
+        self.فایل = open(self.نام_فایل, "w")
+        return self.فایل
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.فایل.close()
+        print("فایل بسته شد")
+
+with مدیریت_فایل("test.txt") as فایل:
+    فایل.write("سلام!")
+
+# فایل بسته شد</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 __dir__ و __dict__</h2>
+        
+        <pre class="code-block">class مثال:
+    def __init__(self):
+        self.a = 1
+        self.b = 2
+    
+    def __dir__(self):
+        return ["a", "b"]
+
+م = مثال()
+print(dir(م))  # ['a', 'b']
+print(م.__dict__)  # {'a': 1, 'b': 2}</pre>
+    </section>
+
+    <section class="section">
+        <h2>🧠 اشتباهات رایج</h2>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> فراموش کردن <code>return</code> در متدهای خاص:</p>
+            <pre class="code-block">def __add__(self, دیگر):
+    self.مقدار + دیگر.مقدار  # return رو فراموش کردی!</pre>
+            <p><strong>✅ راه‌حل:</strong> حتماً <code>return</code> کن.</p>
+        </div>
+        <div class="highlight-box">
+            <p><strong>❌ اشتباه:</strong> استفاده از متدهای خاص برای کارهای غیرمرتبط</p>
+            <p><strong>✅ راه‌حل:</strong> هر متد خاص یه کار مشخص داره، ازش برای همون کار استفاده کن.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <code>__getattr__</code> و <code>__setattr__</code> برای <strong>مدیریت پویا</strong> ویژگی‌ها استفاده کن:</p>
+            <pre class="code-block">class پویا:
+    def __getattr__(self, نام):
+        return f"ویژگی {نام} وجود ندارد!"
+    
+    def __setattr__(self, نام, مقدار):
+        if نام == "سن" and مقدار < 0:
+            raise ValueError("سن نمی‌تواند منفی باشد!")
+        super().__setattr__(نام, مقدار)
+
+obj = پویا()
+print(obj.چیزی)  # ویژگی چیزی وجود ندارد!
+obj.سن = 25
+# obj.سن = -5  # ValueError!</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱ (ساده):</strong> کلاسی بساز که با <code>__str__</code> اطلاعات رو نمایش بده.</p>
+            
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاسی برای <code>برداری</code> بساز که جمع و تفریق رو با عملگرها پشتیبانی کنه.</p>
+            
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاسی برای <code>زمان</code> بساز که با <code>__sub__</code> اختلاف دو زمان رو حساب کنه.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>وراثت</strong> آشنا میشی که یکی از مهم‌ترین مفاهیم برنامه‌نویسی شی‌گراست.</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>

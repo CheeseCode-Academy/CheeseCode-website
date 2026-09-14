@@ -1,0 +1,249 @@
+<div class="lesson-content" dir="rtl">
+    <h1 class="lesson-title">🌐 درس ۴۴: Requests و اینترنت</h1>
+    <div class="lesson-meta">سطح: پیشرفته | زمان مطالعه: ۲۵ دقیقه</div>
+
+    <section class="section">
+        <h2>🎯 هدف این درس</h2>
+        <p>با <strong>Requests</strong> آشنا بشی، کتابخانه‌ای برای <strong>کار با HTTP</strong> و دریافت داده از اینترنت.</p>
+    </section>
+
+    <section class="section">
+        <h2>📖 Requests چیست؟</h2>
+        <p>Requests کتابخانه‌ای برای <strong>درخواست HTTP</strong> هست که:</p>
+        <ul>
+            <li>دریافت داده از <strong>API</strong>ها</li>
+            <li>دانلود فایل</li>
+            <li>ارسال داده به سرور</li>
+            <li>کار با کوکی‌ها و هدرها</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p>💡 <strong>نصب:</strong> <code>pip install requests</code></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 دریافت داده (GET)</h2>
+        
+        <pre class="code-block">import requests
+
+# درخواست GET ساده
+response = requests.get("https://api.github.com")
+
+print(f"وضعیت: {response.status_code}")
+print(f"متن: {response.text[:200]}...")
+print(f"JSON: {response.json()}")
+
+# با پارامترها
+params = {"q": "python", "sort": "stars"}
+response = requests.get("https://api.github.com/search/repositories", params=params)
+print(f"URL: {response.url}")
+print(f"تعداد نتایج: {response.json()['total_count']}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">وضعیت: 200
+متن: {
+  "current_user_url": "https://api.github.com/user",
+  "current_user_authorizations_html_url": "https://github.com/settings/connections/applications{/client_id}",
+  "authorizations_url": "https://api.github.com/authorizations",
+...
+JSON: {'current_user_url': 'https://api.github.com/user', ...}
+URL: https://api.github.com/search/repositories?q=python&sort=stars
+تعداد نتایج: 1234567</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 ارسال داده (POST)</h2>
+        
+        <pre class="code-block">import requests
+
+# ارسال JSON
+data = {"title": "New Post", "body": "This is a new post", "userId": 1}
+response = requests.post("https://jsonplaceholder.typicode.com/posts", json=data)
+
+print(f"وضعیت: {response.status_code}")
+print(f"پاسخ: {response.json()}")
+
+# ارسال فرم
+data = {"name": "علی", "email": "ali@example.com"}
+response = requests.post("https://httpbin.org/post", data=data)
+print(f"پاسخ: {response.json()['form']}")</pre>
+        
+        <div class="output-box">
+            <span class="output-label">خروجی:</span>
+            <pre class="code-block-output">وضعیت: 201
+پاسخ: {'title': 'New Post', 'body': 'This is a new post', 'userId': 1, 'id': 101}
+پاسخ: {'name': 'علی', 'email': 'ali@example.com'}</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>💻 هدرها</h2>
+        
+        <pre class="code-block">import requests
+
+# هدرهای سفارشی
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Accept": "application/json",
+    "Authorization": "Bearer YOUR_TOKEN"
+}
+
+response = requests.get("https://api.github.com/user", headers=headers)
+print(f"وضعیت: {response.status_code}")
+
+# دیدن هدرهای پاسخ
+print("هدرهای پاسخ:")
+for key, value in response.headers.items():
+    print(f"  {key}: {value}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 خطاگیری</h2>
+        
+        <pre class="code-block">import requests
+
+try:
+    response = requests.get("https://api.github.com/user", timeout=5)
+    response.raise_for_status()  # خطا پرتاب میکنه
+    print("موفقیت!")
+except requests.exceptions.Timeout:
+    print("زمان پاسخ‌دهی تمام شد!")
+except requests.exceptions.ConnectionError:
+    print("خطا در اتصال!")
+except requests.exceptions.HTTPError as e:
+    print(f"خطای HTTP: {e}")
+except requests.exceptions.RequestException as e:
+    print(f"خطا: {e}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 دانلود فایل</h2>
+        
+        <pre class="code-block">import requests
+
+# دانلود تصویر
+url = "https://www.python.org/static/img/python-logo.png"
+response = requests.get(url, stream=True)
+
+if response.status_code == 200:
+    with open("python-logo.png", "wb") as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    print("تصویر دانلود شد!")
+
+# دانلود با پیشرفت
+url = "https://speedtest.tele2.net/10MB.zip"
+response = requests.get(url, stream=True)
+total_size = int(response.headers.get("content-length", 0))
+downloaded = 0
+
+with open("file.zip", "wb") as f:
+    for chunk in response.iter_content(chunk_size=8192):
+        f.write(chunk)
+        downloaded += len(chunk)
+        progress = (downloaded / total_size) * 100
+        print(f"\rپیشرفت: {progress:.1f}%", end="")
+print("\nدانلود کامل شد!")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 کار با API (مثال)</h2>
+        
+        <pre class="code-block">import requests
+
+class GitHubAPI:
+    def __init__(self, token=None):
+        self.base_url = "https://api.github.com"
+        self.headers = {}
+        if token:
+            self.headers["Authorization"] = f"Bearer {token}"
+    
+    def get_user(self, username):
+        url = f"{self.base_url}/users/{username}"
+        response = requests.get(url, headers=self.headers)
+        if response.status_code == 200:
+            return response.json()
+        return None
+    
+    def get_repos(self, username):
+        url = f"{self.base_url}/users/{username}/repos"
+        response = requests.get(url, headers=self.headers)
+        if response.status_code == 200:
+            return response.json()
+        return None
+
+# استفاده
+api = GitHubAPI()
+user = api.get_user("python")
+if user:
+    print(f"نام: {user['name']}")
+    print(f"دنبال‌کنندگان: {user['followers']}")
+    print(f"دنبال‌شوندگان: {user['following']}")
+    print(f"مخزن‌ها: {user['public_repos']}")
+
+repos = api.get_repos("python")
+if repos:
+    print(f"\n۵ مخزن اول:")
+    for repo in repos[:5]:
+        print(f"  - {repo['name']}: ★{repo['stargazers_count']}")</pre>
+    </section>
+
+    <section class="section">
+        <h2>💻 جلسه (Session)</h2>
+        
+        <pre class="code-block">import requests
+
+# ایجاد جلسه برای نگهداری کوکی‌ها
+session = requests.Session()
+session.headers.update({"User-Agent": "MyApp/1.0"})
+
+# لاگین
+login_data = {"username": "user", "password": "pass"}
+response = session.post("https://example.com/login", data=login_data)
+
+# درخواست‌های بعدی با جلسه
+response = session.get("https://example.com/dashboard")
+print(response.text[:100])
+
+# بستن جلسه
+session.close()</pre>
+    </section>
+
+    <section class="section">
+        <h2>💡 نکته‌ی هوشمندانه</h2>
+        <div class="highlight-box">
+            <p>از <strong>Retry</strong> برای درخواست‌های ناموفق استفاده کن:</p>
+            <pre class="code-block">from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
+session = requests.Session()
+retry = Retry(total=3, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
+adapter = HTTPAdapter(max_retries=retry)
+session.mount("http://", adapter)
+session.mount("https://", adapter)
+
+response = session.get("https://api.example.com/data")
+print(response.status_code)</pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>✍️ تمرین‌ها</h2>
+        <div class="exercise-box">
+            <p><strong>تمرین ۱:</strong> با requests اطلاعات یک کاربر گیت‌هاب رو بگیر و نمایش بده.</p>
+            
+            <p><strong>تمرین ۲:</strong> یک فایل تصویر از اینترنت دانلود کن.</p>
+            
+            <p><strong>تمرین ۳:</strong> با یک API آب و هوا، دمای یک شهر رو بگیر و نمایش بده.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>🔗 در درس بعدی...</h2>
+        <p>توی درس بعدی، با <strong>BeautifulSoup</strong> آشنا میشی که برای <strong>اسکرپینگ</strong> وب خیلی عالیه!</p>
+        <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
+    </section>
+</div>
