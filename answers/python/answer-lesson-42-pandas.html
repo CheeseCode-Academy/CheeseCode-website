@@ -5,7 +5,7 @@
     <section class="section">
         <h2>📝 پاسخ تمرین ۱</h2>
         <p><strong>سوال:</strong> یک DataFrame با اطلاعات ۵ نفر بساز (نام، سن، شهر، حقوق) و آمار پایه رو نمایش بده.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import pandas as pd
 
@@ -25,7 +25,7 @@ print("\nاطلاعات:\n", df.info())</pre>
     <section class="section">
         <h2>📝 پاسخ تمرین ۲</h2>
         <p><strong>سوال:</strong> DataFrame رو بر اساس سن مرتب کن و فقط افرادی که حقوق > ۵۰۰۰ هستن رو نمایش بده.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import pandas as pd
 
@@ -44,7 +44,7 @@ print("مرتب‌سازی بر اساس سن:\n", sorted_df)
 # فیلتر
 high_salary = df[df["حقوق"] > 5000]
 print("\nافراد با حقوق > ۵۰۰۰:\n", high_salary)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">مرتب‌سازی بر اساس سن:
@@ -66,7 +66,7 @@ print("\nافراد با حقوق > ۵۰۰۰:\n", high_salary)</pre>
     <section class="section">
         <h2>📝 پاسخ تمرین ۳</h2>
         <p><strong>سوال:</strong> DataFrame رو بر اساس شهر گروه‌بندی کن و میانگین حقوق هر شهر رو حساب کن.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import pandas as pd
 
@@ -83,7 +83,7 @@ grouped = df.groupby("شهر")
 print("میانگین حقوق هر شهر:\n", grouped["حقوق"].mean())
 
 print("\nآمار کامل:\n", grouped["حقوق"].agg(["mean", "min", "max", "count"]))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">میانگین حقوق هر شهر:

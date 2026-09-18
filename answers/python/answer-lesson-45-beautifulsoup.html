@@ -5,7 +5,7 @@
     <section class="section">
         <h2>📝 پاسخ تمرین ۱</h2>
         <p><strong>سوال:</strong> با BeautifulSoup تمام لینک‌های یک صفحه رو استخراج کن.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import requests
 from bs4 import BeautifulSoup
@@ -27,7 +27,7 @@ for i, link in enumerate(links[:10]):
     <section class="section">
         <h2>📝 پاسخ تمرین ۲</h2>
         <p><strong>سوال:</strong> از یک صفحه وب، تیترهای اخبار رو استخراج کن.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import requests
 from bs4 import BeautifulSoup
@@ -54,7 +54,7 @@ for item in news[:5]:
     <section class="section">
         <h2>📝 پاسخ تمرین ۳</h2>
         <p><strong>سوال:</strong> یک جدول HTML رو استخراج کن و به DataFrame تبدیل کن.</p>
-        
+
         <h3>✅ پاسخ:</h3>
         <pre class="code-block">import requests
 from bs4 import BeautifulSoup
@@ -129,7 +129,7 @@ def scrape_table_from_url(url, table_class=None):
 # استفاده
 # df = scrape_table_from_url("https://example.com", "table-class")
 # print(df)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">DataFrame:
