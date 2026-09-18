@@ -10,12 +10,15 @@
     <section class="section">
         <h2>💻 خلاصه (SYNOPSIS)</h2>
         <pre class="code-block">ls [گزینه] [فایل/پوشه]</pre>
-        <p><strong>توضیح:</strong> <code>گزینه</code> کارهایی که دستور باید انجام بده رو مشخص میکنه. <code>فایل/پوشه</code> مسیری هست که میخوای لیستش رو ببینی. اگه ندی، پوشه‌ی فعلی رو نشون میده.</p>
+        <p><strong>توضیح:</strong> <code>گزینه</code> کارهایی که دستور باید انجام بده رو مشخص میکنه.
+            <code>فایل/پوشه</code> مسیری هست که میخوای لیستش رو ببینی. اگه ندی، پوشه‌ی فعلی رو نشون میده.</p>
     </section>
 
     <section class="section">
         <h2>📖 توضیح کامل (DESCRIPTION)</h2>
-        <p>دستور <code>ls</code> اطلاعات مربوط به فایل‌ها و پوشه‌ها رو نشون میده. به‌طور پیش‌فرض، اسم فایل‌ها رو به ترتیب حروف الفبا لیست میکنه. اگه به جای فایل، یک پوشه بهش بدی، محتویات اون پوشه رو لیست میکنه. اگه چیزی بهش ندیا، پوشه‌ی فعلی رو لیست میکنه.</p>
+        <p>دستور <code>ls</code> اطلاعات مربوط به فایل‌ها و پوشه‌ها رو نشون میده. به‌طور پیش‌فرض، اسم فایل‌ها رو به
+            ترتیب حروف الفبا لیست میکنه. اگه به جای فایل، یک پوشه بهش بدی، محتویات اون پوشه رو لیست میکنه. اگه چیزی بهش
+            ندیا، پوشه‌ی فعلی رو لیست میکنه.</p>
     </section>
 
     <section class="section">
@@ -23,14 +26,16 @@
         <ul>
             <li><code>-l</code> – نمایش جزئیات کامل (حجم، تاریخ، مالک، مجوزها، تعداد لینک‌ها)</li>
             <li><code>-a</code> – نمایش همه‌ی فایل‌ها، حتی فایل‌های مخفی (با نقطه شروع میشن)</li>
-            <li><code>-h</code> – نمایش حجم به صورت قابل‌خوانی (مثلاً 1K، 1M، 1G) – معمولاً با <code>-l</code> استفاده میشه</li>
+            <li><code>-h</code> – نمایش حجم به صورت قابل‌خوانی (مثلاً 1K، 1M، 1G) – معمولاً با <code>-l</code> استفاده
+                میشه</li>
             <li><code>-R</code> – نمایش همه‌ی محتویات پوشه‌ها به صورت بازگشتی (زیرپوشه‌ها هم)</li>
             <li><code>-S</code> – مرتب‌سازی بر اساس حجم (بزرگ‌ترین اول)</li>
             <li><code>-t</code> – مرتب‌سازی بر اساس تاریخ تغییر (جدیدترین اول)</li>
             <li><code>-r</code> – برعکس کردن ترتیب مرتب‌سازی (مثلاً با <code>-t</code> قدیمی‌ترین اول)</li>
             <li><code>-i</code> – نمایش شماره‌ی inode (شناسه‌ی یکتا برای هر فایل)</li>
             <li><code>-n</code> – نمایش ID عددی کاربر و گروه به جای اسم</li>
-            <li><code>-F</code> – اضافه کردن علامت به انتهای اسم‌ها (مثل <code>/</code> برای پوشه و <code>*</code> برای فایل‌های اجرایی)</li>
+            <li><code>-F</code> – اضافه کردن علامت به انتهای اسم‌ها (مثل <code>/</code> برای پوشه و <code>*</code> برای
+                فایل‌های اجرایی)</li>
             <li><code>-p</code> – اضافه کردن <code>/</code> به انتهای اسم پوشه‌ها</li>
             <li><code>-d</code> – نمایش خود پوشه، نه محتویاتش (معمولاً با <code>-l</code> استفاده میشه)</li>
             <li><code>-1</code> – نمایش هر فایل در یک خط جداگانه (حالت ستونی)</li>
@@ -63,7 +68,7 @@
 
     <section class="section">
         <h2>🧪 مثال‌ها (EXAMPLES)</h2>
-        
+
         <div class="example">
             <h3>مثال ۱: ساده‌ترین حالت</h3>
             <pre class="code-block">ls</pre>
@@ -101,7 +106,8 @@
                 <span class="output-label">خروجی:</span>
                 <pre class="code-block-output">.  ..  .bashrc  .profile  Documents  Downloads</pre>
             </div>
-            <p>فایل‌هایی که با نقطه شروع میشن (مثل <code>.bashrc</code>) رو هم نشون میده. <code>.</code> یعنی پوشه‌ی فعلی و <code>..</code> یعنی پوشه‌ی بالاتر.</p>
+            <p>فایل‌هایی که با نقطه شروع میشن (مثل <code>.bashrc</code>) رو هم نشون میده. <code>.</code> یعنی پوشه‌ی
+                فعلی و <code>..</code> یعنی پوشه‌ی بالاتر.</p>
         </div>
 
         <div class="example">
@@ -135,8 +141,10 @@ drwxr-xr-x 2 user user 4096 Jul 20 10:00 Documents
     <section class="section">
         <h2>🧠 نکته (BUGS & NOTES)</h2>
         <div class="highlight-box">
-            <p><strong>نکته:</strong> بعضی از گزینه‌ها ممکنه توی نسخه‌های مختلف لینوکس کمی فرق کنن. برای دیدن گزینه‌های دقیق نسخه‌ی خودت، از <code>ls --help</code> استفاده کن.</p>
-            <p><strong>نکته:</strong> گزینه‌های <code>-l</code> و <code>-a</code> رو می‌تونی به هم بچسبونی: <code>ls -la</code> یا <code>ls -al</code> هر دو یک کار رو انجام میدن.</p>
+            <p><strong>نکته:</strong> بعضی از گزینه‌ها ممکنه توی نسخه‌های مختلف لینوکس کمی فرق کنن. برای دیدن گزینه‌های
+                دقیق نسخه‌ی خودت، از <code>ls --help</code> استفاده کن.</p>
+            <p><strong>نکته:</strong> گزینه‌های <code>-l</code> و <code>-a</code> رو می‌تونی به هم بچسبونی:
+                <code>ls -la</code> یا <code>ls -al</code> هر دو یک کار رو انجام میدن.</p>
         </div>
     </section>
 
@@ -153,22 +161,26 @@ drwxr-xr-x 2 user user 4096 Jul 20 10:00 Documents
     <section class="section">
         <h2>✍️ تمرین</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱:</strong> ترمینال رو باز کن و توی پوشه‌ی <code>/etc</code> برو. با <code>ls -l</code> لیست فایل‌ها رو ببین.</p>
+            <p><strong>تمرین ۱:</strong> ترمینال رو باز کن و توی پوشه‌ی <code>/etc</code> برو. با <code>ls -l</code>
+                لیست فایل‌ها رو ببین.</p>
             <p><strong>تمرین ۲:</strong> با <code>ls -la</code> فایل‌های مخفی رو هم توی <code>/etc</code> ببین.</p>
-            <p><strong>تمرین ۳:</strong> با <code>ls -lhS</code> فایل‌ها رو بر اساس حجم (بزرگ‌ترین اول) و با حجم قابل‌خوانی ببین.</p>
+            <p><strong>تمرین ۳:</strong> با <code>ls -lhS</code> فایل‌ها رو بر اساس حجم (بزرگ‌ترین اول) و با حجم
+                قابل‌خوانی ببین.</p>
             <p><strong>تمرین ۴:</strong> با <code>ls -R</code> محتویات پوشه‌ی فعلی رو به صورت بازگشتی ببین.</p>
         </div>
     </section>
     <section class="section">
-        <div class="highlight-box" style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
+        <div class="highlight-box"
+            style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
             <p style="font-size: 1.1rem;">
-                🧀 برای دیدن <strong>جواب تمرین</strong> این درس، 
-                <a href="../answers.html?id=04" style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+                🧀 برای دیدن <strong>جواب تمرین</strong> این درس،
+                <a href="../answers.html?id=04"
+                    style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
                     اینجا کلیک کن
                 </a>
             </p>
         </div>
     </section>
 
- 
+
 </div>

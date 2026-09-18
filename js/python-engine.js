@@ -21,7 +21,7 @@ async function initPythonEngine() {
     if (window.pyodideInstance) {
         return window.pyodideInstance;
     }
-    
+
     if (window.isPyodideLoading) {
         while (window.isPyodideLoading) {
             await new Promise(resolve => setTimeout(resolve, 100));
@@ -36,7 +36,7 @@ async function initPythonEngine() {
         window.pyodideInstance = await loadPyodide({
             indexURL: "./pyodide/"
         });
-        
+
         // بارگذاری micropip برای نصب پکیج‌ها
         await window.pyodideInstance.loadPackage("micropip");
         const micropip = window.pyodideInstance.importModule("micropip");
@@ -50,7 +50,7 @@ async function initPythonEngine() {
                     if (cachedResponse) {
                         let blob = await cachedResponse.blob();
                         let fileBuffer = await blob.arrayBuffer();
-                        
+
                         window.pyodideInstance.FS.writeFile(lib.name + ".whl", new Uint8Array(fileBuffer));
                         await micropip.install(lib.name + ".whl");
                         console.log(`📦 کتابخانه محلی ${lib.name} از کش مرورگر نصب شد.`);

@@ -1,15 +1,114 @@
 // ============================================
-// ⚡ کانفیگ مرکز دانلود | CodaX Academy
+// 🧀 کانفیگ مرکز دانلود | CheeseCode Academy
+// نسخه: 4.0.0 - Final
 // ============================================
 
-const librariesConfig = {
+window.librariesConfig = {
 
-    // ============================================
-    // بخش‌های مختلف صفحه
-    // ============================================
+    actionButtons: [
+        {
+            id: "cache-pages",
+            icon: "📄",
+            title: "کش کردن صفحات اصلی",
+            action: "cacheMainPages"
+        },
+        {
+            id: "check-update",
+            icon: "🔄",
+            title: "بررسی آپدیت",
+            action: "checkUpdateNow"
+        },
+        {
+            id: "clear-cache",
+            icon: "🗑️",
+            title: "حذف کامل کش",
+            action: "clearAllCache",
+            type: "danger"
+        }
+    ],
+
+    mainPages: [
+        './index.html',
+        './python.html',
+        './linux.html',
+        './answers.html',
+        './answers-python.html',
+        './answers-linux.html',
+        './quizzes.html',
+        './python-quiz.html',
+        './linux-quiz.html',
+        './projects.html',
+        './challenges.html',
+        './terminal-python.html',
+        './libraries.html',
+        './settings.html',
+        './notes.html',
+        './version.json',
+        './manifest.json',
+        
+        './styles/index-style.css',
+        './styles/python-linux-style.css',
+        './styles/challenges-style.css',
+        './styles/terminal-python.css',
+        './styles/libraries-style.css',
+        './styles/settings-style.css',
+        './styles/quizzes-style.css',
+        './styles/projects-style.css',
+        './styles/loading-style.css',
+        './styles/notes-style.css',
+        './styles/sticky-header.css',
+        './styles/mobile-optimization.css',
+        './styles/themes.css',
+        
+        './js/cheese-utils.js',
+        './js/python-engine.js',
+        './js/channel-modal.js',
+        './js/settings-functions.js',
+        './js/install-helper.js',
+        './js/quiz-engine.js',
+        './js/back-to-top.js',
+        './js/bookmarks-utils.js',
+        './js/challenge-compare.js',
+        './js/share-badge.js',
+        './js/notes-utils.js',
+        './js/syntax-highlight.js',
+        './js/focus-mode.js',
+        './js/loading-utils.js',
+        './js/global-search.js',
+        './js/share-challenge.js',
+        './js/diff-utils.js',
+        './js/stories-utils.js',
+        './js/lazy-load.js',
+        './js/sticky-header.js',
+        './js/navigate-highlight.js',
+        
+        './configs/index-config.js',
+        './configs/python-config.js',
+        './configs/linux-config.js',
+        './configs/answers.js',
+        './configs/answers-python-config.js',
+        './configs/answers-linux-config.js',
+        './configs/quizzes-config.js',
+        './configs/python-quiz-config.js',
+        './configs/linux-quiz-config.js',
+        './configs/projects-config.js',
+        './configs/libraries-config.js',
+        './configs/libraries-functions.js',
+        './configs/menu-config.js',
+        './configs/settings-config.js',
+        './configs/install-config.js',
+        
+        './configs/stories/python-stories.js',
+        './configs/stories/linux-stories.js',
+        
+        './settings/challenges.json',
+        
+        './images/logo.jpeg',
+        './images/icon-192.png',
+        './images/icon-512.png'
+    ],
+
     sections: [
-
-        // ===== بخش دوره‌ها =====
         {
             id: "courses",
             title: "📚 دوره‌ها",
@@ -22,8 +121,16 @@ const librariesConfig = {
                 { courseKey: "answers-linux" }
             ]
         },
-
-        // ===== بخش ZIP =====
+        {
+            id: "quizzes",
+            title: "🎓 کوییزها",
+            description: "کوییزها را برای استفاده‌ی آفلاین کش کنید",
+            type: "quiz-cacheable",
+            items: [
+                { courseKey: "python-quiz", title: "کوییزهای پایتون", icon: "🐍" },
+                { courseKey: "linux-quiz", title: "کوییزهای لینوکس", icon: "🐧" }
+            ]
+        },
         {
             id: "zips",
             title: "📦 دانلود یکجای دوره‌ها (ZIP)",
@@ -56,8 +163,6 @@ const librariesConfig = {
                 }
             ]
         },
-
-        // ===== بخش ابزارها =====
         {
             id: "tools",
             title: "🛠️ ابزارهای برنامه‌نویس",
@@ -87,8 +192,6 @@ const librariesConfig = {
                 }
             ]
         },
-
-        // ===== بخش منابع خارجی =====
         {
             id: "resources",
             title: "🔗 منابع خارجی",
@@ -118,10 +221,15 @@ const librariesConfig = {
                     icon: "💪",
                     description: "leetcode.com",
                     url: "https://leetcode.com/"
+                },
+                {
+                    title: "محیط کد نویسی وب",
+                    icon: "👨‍💻",
+                    description: "vscode.dev",
+                    url: "https://vscode.dev/"
                 }
             ]
         }
-
     ]
 
 };

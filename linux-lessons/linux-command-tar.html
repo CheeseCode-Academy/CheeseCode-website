@@ -10,12 +10,15 @@
     <section class="section">
         <h2>💻 خلاصه (SYNOPSIS)</h2>
         <pre class="code-block">tar [گزینه] [فایل خروجی] [فایل‌های ورودی]</pre>
-        <p><strong>توضیح:</strong> <code>tar</code> (مخفف Tape Archive) یکی از قدیمی‌ترین و پرکاربردترین ابزارهای بسته‌بندی و فشرده‌سازی در لینوکس است. این دستور می‌تواند چندین فایل و پوشه را در یک فایل (با پسوند <code>.tar</code>) جمع‌آوری کند و با الگوریتم‌های مختلف فشرده‌سازی کند.</p>
+        <p><strong>توضیح:</strong> <code>tar</code> (مخفف Tape Archive) یکی از قدیمی‌ترین و پرکاربردترین ابزارهای
+            بسته‌بندی و فشرده‌سازی در لینوکس است. این دستور می‌تواند چندین فایل و پوشه را در یک فایل (با پسوند
+            <code>.tar</code>) جمع‌آوری کند و با الگوریتم‌های مختلف فشرده‌سازی کند.</p>
     </section>
 
     <section class="section">
         <h2>📖 توضیح کامل (DESCRIPTION)</h2>
-        <p>دستور <code>tar</code> برای ایجاد فایل‌های بایگانی (Archive) و فشرده‌سازی آن‌ها استفاده می‌شود. این دستور می‌تواند فایل‌ها را به صورت فشرده یا غیرفشرده ذخیره کند. پسوندهای رایج عبارتند از:</p>
+        <p>دستور <code>tar</code> برای ایجاد فایل‌های بایگانی (Archive) و فشرده‌سازی آن‌ها استفاده می‌شود. این دستور
+            می‌تواند فایل‌ها را به صورت فشرده یا غیرفشرده ذخیره کند. پسوندهای رایج عبارتند از:</p>
         <ul>
             <li><code>.tar</code> – بدون فشرده‌سازی (فقط بسته‌بندی).</li>
             <li><code>.tar.gz</code> یا <code>.tgz</code> – فشرده‌سازی با <code>gzip</code>.</li>
@@ -65,7 +68,8 @@
                 <span class="output-label">خروجی:</span>
                 <pre class="code-block-output">(هیچ خروجی، فایل archive.tar ساخته می‌شود)</pre>
             </div>
-            <p>فایل‌های <code>file1.txt</code>، <code>file2.txt</code> و پوشه‌ی <code>folder/</code> را در <code>archive.tar</code> بسته‌بندی می‌کند.</p>
+            <p>فایل‌های <code>file1.txt</code>، <code>file2.txt</code> و پوشه‌ی <code>folder/</code> را در
+                <code>archive.tar</code> بسته‌بندی می‌کند.</p>
         </div>
 
         <div class="example">
@@ -117,33 +121,40 @@ folder/file2.txt</pre>
                 <span class="output-label">خروجی:</span>
                 <pre class="code-block-output">(همه‌ی فایل‌ها به جز فایل‌های با پسوند .log بسته‌بندی می‌شوند)</pre>
             </div>
-            <p>همه‌ی پوشه‌ی <code>/home/user/</code> را بسته‌بندی می‌کند، اما فایل‌های <code>.log</code> را از بایگانی حذف می‌کند.</p>
+            <p>همه‌ی پوشه‌ی <code>/home/user/</code> را بسته‌بندی می‌کند، اما فایل‌های <code>.log</code> را از بایگانی
+                حذف می‌کند.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🧠 نکته (BUGS & NOTES)</h2>
         <div class="highlight-box">
-            <p><strong>نکته:</strong> برای بسته‌بندی پوشه‌ها، حتماً از <code>-c</code> و <code>-f</code> استفاده کنید. ترتیب گزینه‌ها مهم است: <code>-cf</code> با <code>-fc</code> تفاوت دارد.</p>
-            <p><strong>نکته:</strong> برای استخراج فایل‌ها در پوشه‌ای که نیاز به دسترسی root دارد، از <code>sudo</code> استفاده کنید.</p>
-            <p><strong>نکته:</strong> پسوند فایل خروجی را با روش فشرده‌سازی هماهنگ کنید (مثلاً <code>.tar.gz</code> برای <code>-z</code>).</p>
+            <p><strong>نکته:</strong> برای بسته‌بندی پوشه‌ها، حتماً از <code>-c</code> و <code>-f</code> استفاده کنید.
+                ترتیب گزینه‌ها مهم است: <code>-cf</code> با <code>-fc</code> تفاوت دارد.</p>
+            <p><strong>نکته:</strong> برای استخراج فایل‌ها در پوشه‌ای که نیاز به دسترسی root دارد، از <code>sudo</code>
+                استفاده کنید.</p>
+            <p><strong>نکته:</strong> پسوند فایل خروجی را با روش فشرده‌سازی هماهنگ کنید (مثلاً <code>.tar.gz</code> برای
+                <code>-z</code>).</p>
         </div>
     </section>
 
     <section class="section">
         <h2>✍️ تمرین</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱:</strong> یک پوشه بسازید و چند فایل در آن ایجاد کنید. با <code>tar -cf</code> آن را بسته‌بندی کنید.</p>
+            <p><strong>تمرین ۱:</strong> یک پوشه بسازید و چند فایل در آن ایجاد کنید. با <code>tar -cf</code> آن را
+                بسته‌بندی کنید.</p>
             <p><strong>تمرین ۲:</strong> با <code>tar -czf</code> همان پوشه را با فشرده‌سازی gzip بسته‌بندی کنید.</p>
             <p><strong>تمرین ۳:</strong> با <code>tar -xf</code> بایگانی را استخراج کنید.</p>
             <p><strong>تمرین ۴:</strong> با <code>tar -tf</code> محتویات بایگانی را ببینید.</p>
         </div>
     </section>
     <section class="section">
-        <div class="highlight-box" style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
+        <div class="highlight-box"
+            style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
             <p style="font-size: 1.1rem;">
-                🧀 برای دیدن <strong>جواب تمرین</strong> این درس، 
-                <a href="../answers.html?id=25" style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+                🧀 برای دیدن <strong>جواب تمرین</strong> این درس،
+                <a href="../answers.html?id=25"
+                    style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
                     اینجا کلیک کن
                 </a>
             </p>

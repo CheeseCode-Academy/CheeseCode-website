@@ -10,13 +10,19 @@
     <section class="section">
         <h2>💻 خلاصه (SYNOPSIS)</h2>
         <pre class="code-block">sudo [گزینه] [دستور]</pre>
-        <p><strong>توضیح:</strong> <code>sudo</code> به شما اجازه می‌دهد یک دستور را با سطح دسترسی مدیر سیستم (root) یا کاربر دیگر اجرا کنید. این دستور برای کارهای مدیریتی مانند نصب برنامه، تغییر تنظیمات سیستمی و مدیریت فایل‌های محافظت‌شده استفاده می‌شود.</p>
+        <p><strong>توضیح:</strong> <code>sudo</code> به شما اجازه می‌دهد یک دستور را با سطح دسترسی مدیر سیستم (root) یا
+            کاربر دیگر اجرا کنید. این دستور برای کارهای مدیریتی مانند نصب برنامه، تغییر تنظیمات سیستمی و مدیریت فایل‌های
+            محافظت‌شده استفاده می‌شود.</p>
     </section>
 
     <section class="section">
         <h2>📖 توضیح کامل (DESCRIPTION)</h2>
-        <p><code>sudo</code> مخفف <strong>SuperUser DO</strong> است و به کاربران مجاز اجازه می‌دهد تا دستورات را با سطح دسترسی root (مدیر سیستم) اجرا کنند. کاربر برای استفاده از <code>sudo</code> باید در گروه <code>sudo</code> باشد. معمولاً اولین بار که از <code>sudo</code> استفاده می‌کنید، از شما رمز عبور خودتان را می‌خواهد (نه رمز root).</p>
-        <p>این دستور برای انجام کارهایی که نیاز به دسترسی بالا دارند، مثل نصب یا حذف برنامه‌ها، تغییر فایل‌های سیستمی و مدیریت سرویس‌ها، ضروری است.</p>
+        <p><code>sudo</code> مخفف <strong>SuperUser DO</strong> است و به کاربران مجاز اجازه می‌دهد تا دستورات را با سطح
+            دسترسی root (مدیر سیستم) اجرا کنند. کاربر برای استفاده از <code>sudo</code> باید در گروه <code>sudo</code>
+            باشد. معمولاً اولین بار که از <code>sudo</code> استفاده می‌کنید، از شما رمز عبور خودتان را می‌خواهد (نه رمز
+            root).</p>
+        <p>این دستور برای انجام کارهایی که نیاز به دسترسی بالا دارند، مثل نصب یا حذف برنامه‌ها، تغییر فایل‌های سیستمی و
+            مدیریت سرویس‌ها، ضروری است.</p>
     </section>
 
     <section class="section">
@@ -78,7 +84,8 @@ root@ubuntu:~#</pre>
             </div>
             <p>شل را با کاربر root باز می‌کند. برای خروج، <code>exit</code> یا <code>Ctrl+D</code> بزنید.</p>
             <div class="highlight-box">
-                <p><strong>⚠️ هشدار:</strong> با دقت از این حالت استفاده کنید، زیرا همه‌ی دستورات با سطح دسترسی کامل اجرا می‌شوند.</p>
+                <p><strong>⚠️ هشدار:</strong> با دقت از این حالت استفاده کنید، زیرا همه‌ی دستورات با سطح دسترسی کامل
+                    اجرا می‌شوند.</p>
             </div>
         </div>
 
@@ -110,9 +117,12 @@ root@ubuntu:~#</pre>
     <section class="section">
         <h2>🧠 نکته (BUGS & NOTES)</h2>
         <div class="highlight-box">
-            <p><strong>نکته مهم:</strong> از <code>sudo</code> با احتیاط استفاده کنید، زیرا دستورات با سطح دسترسی root می‌توانند به سیستم آسیب بزنند. همیشه قبل از اجرای دستورات خطرناک، مطمئن شوید که درست تایپ کرده‌اید.</p>
-            <p><strong>نکته:</strong> برای اجرای دستورات طولانی یا زنجیره‌ای، از <code>sudo</code> فقط یک بار در ابتدای زنجیره استفاده کنید.</p>
-            <p><strong>نکته:</strong> اگر نیاز به اجرای چندین دستور با sudo دارید، از <code>sudo -s</code> یا <code>sudo -i</code> استفاده کنید تا یک شل root باز شود.</p>
+            <p><strong>نکته مهم:</strong> از <code>sudo</code> با احتیاط استفاده کنید، زیرا دستورات با سطح دسترسی root
+                می‌توانند به سیستم آسیب بزنند. همیشه قبل از اجرای دستورات خطرناک، مطمئن شوید که درست تایپ کرده‌اید.</p>
+            <p><strong>نکته:</strong> برای اجرای دستورات طولانی یا زنجیره‌ای، از <code>sudo</code> فقط یک بار در ابتدای
+                زنجیره استفاده کنید.</p>
+            <p><strong>نکته:</strong> اگر نیاز به اجرای چندین دستور با sudo دارید، از <code>sudo -s</code> یا
+                <code>sudo -i</code> استفاده کنید تا یک شل root باز شود.</p>
         </div>
     </section>
 
@@ -121,14 +131,17 @@ root@ubuntu:~#</pre>
         <div class="exercise-box">
             <p><strong>تمرین ۱:</strong> با <code>sudo</code> دستور <code>apt update</code> را اجرا کنید.</p>
             <p><strong>تمرین ۲:</strong> با <code>sudo -l</code> ببینید چه دستوراتی را می‌توانید با sudo اجرا کنید.</p>
-            <p><strong>تمرین ۳:</strong> با <code>sudo -u</code> یک دستور را با کاربر دیگری اجرا کنید (مثلاً <code>whoami</code>).</p>
+            <p><strong>تمرین ۳:</strong> با <code>sudo -u</code> یک دستور را با کاربر دیگری اجرا کنید (مثلاً
+                <code>whoami</code>).</p>
         </div>
     </section>
     <section class="section">
-        <div class="highlight-box" style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
+        <div class="highlight-box"
+            style="text-align: center; background: rgba(245, 184, 27, 0.05); border-color: #f5b81b;">
             <p style="font-size: 1.1rem;">
-                🧀 برای دیدن <strong>جواب تمرین</strong> این درس، 
-                <a href="../answers.html?id=16" style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+                🧀 برای دیدن <strong>جواب تمرین</strong> این درس،
+                <a href="../answers.html?id=16"
+                    style="color: #f5b81b; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
                     اینجا کلیک کن
                 </a>
             </p>

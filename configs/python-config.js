@@ -1,4 +1,9 @@
-const lessonsConfig = [
+// ============================================
+// 🧀 درس‌های پایتون | CheeseCode Academy
+// نسخه: 3.0.0 - اصلاح باگ تکراری
+// ============================================
+
+const pythonLessonsConfig = [
     { title: "مقدمه و نصب پایتون", file: "lesson-01-intro-install.html" },
     { title: "چاپ کردن با print", file: "lesson-02-print.html" },
     { title: "متغیرها", file: "lesson-03-variables.html" },
@@ -43,5 +48,7 @@ const lessonsConfig = [
     { title: "Pandas - تحلیل داده", file: "lesson-42-pandas.html" },
     { title: "Matplotlib - مصورسازی داده", file: "lesson-43-matplotlib.html" },
     { title: "Requests - کار با اینترنت", file: "lesson-44-requests.html" },
-    { title: "BeautifulSoup - اسکرپینگ وب", file: "lesson-45-beautifulsoup.html" },
+    { title: "BeautifulSoup - اسکرپینگ وب", file: "lesson-45-beautifulsoup.html" }
 ];
+
+window.pythonLessonsConfig = pythonLessonsConfig;

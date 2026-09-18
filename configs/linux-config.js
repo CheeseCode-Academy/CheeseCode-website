@@ -1,6 +1,11 @@
-const lessonsConfig = [
+// ============================================
+// 🧀 درس‌های لینوکس | CheeseCode Academy
+// نسخه: 3.0.0 - اصلاح باگ تکراری
+// ============================================
+
+const linuxLessonsConfig = [
     { title: "آشنایی با لینوکس و اوبونتو", file: "linux-intro.html" },
-    { title: "آشنایی با دایرکتوری های لینوکس", file: "directory-structure.html"},
+    { title: "آشنایی با دایرکتوری های لینوکس", file: "directory-structure.html" },
     { title: "آشنایی با ترمینال", file: "linux-terminal-intro.html" },
     { title: "دستور pwd", file: "linux-command-pwd.html" },
     { title: "دستور ls", file: "linux-command-ls.html" },
@@ -50,4 +55,6 @@ const lessonsConfig = [
     { title: "دستور ss", file: "linux-command-ss.html" },
     { title: "دستور ufw", file: "linux-command-ufw.html" },
     { title: "دستور dmesg", file: "linux-command-dmesg.html" }
-]
+];
+
+window.linuxLessonsConfig = linuxLessonsConfig;
