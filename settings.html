@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنظیمات | CheeseCode Academy</title>
+
+    <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/settings-style.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f5b81b">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <script src="js/bookmarks-utils.js"></script>
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/notes-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
+    <script src="js/loading-utils.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="js/cheese-utils.js"></script>
+    <script src="configs/menu-config.js"></script>
+    <script src="configs/settings-config.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/channel-modal.js"></script>
+    <script src="js/settings-functions.js"></script>
+    <script src="js/install-helper.js"></script>
+</head>
+
+<body data-theme="dark">
+
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text">
+                <h1>CheeseCode</h1>
+                <p>تنظیمات | CheeseCode</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <a href="index.html" class="back-home-btn" title="بازگشت به صفحه اصلی">↩</a>
+        </div>
+    </header>
+
+    <div class="settings-wrapper">
+        <h2 class="settings-title">⚙️ تنظیمات</h2>
+        <p class="settings-desc">اینجا می‌تونی سایت رو شخصی‌سازی کنی</p>
+        <div id="settingsContainer"></div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function (r) { console.log('✅ SW ثبت شد'); })
+                    .catch(function (err) { console.warn('⚠️ SW:', err); });
+            });
+        }
+    </script>
+</body>
+
+</html>

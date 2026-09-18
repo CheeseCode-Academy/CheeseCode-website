@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "lastUpdate": "2026-09-14",
     "courses": {
         "python": {
@@ -9,51 +9,141 @@
             "title": "دوره پایتون",
             "icon": "🐍",
             "lessons": [
-                { "name": "lesson-01-intro-install.html" },
-                { "name": "lesson-02-print.html" },
-                { "name": "lesson-03-variables.html" },
-                { "name": "lesson-04-data-types.html" },
-                { "name": "lesson-05-input.html" },
-                { "name": "lesson-06-operators.html" },
-                { "name": "lesson-07-if.html" },
-                { "name": "lesson-08-elif-else.html" },
-                { "name": "lesson-09-while-loop.html" },
-                { "name": "lesson-10-for-loop.html" },
-                { "name": "lesson-11-lists.html" },
-                { "name": "lesson-12-list-methods.html" },
-                { "name": "lesson-13-tuples.html" },
-                { "name": "lesson-14-dictionaries.html" },
-                { "name": "lesson-15-sets.html" },
-                { "name": "lesson-16-functions.html" },
-                { "name": "lesson-17-parameters.html" },
-                { "name": "lesson-18-default-args.html" },
-                { "name": "lesson-19-lambda.html" },
-                { "name": "lesson-20-modules.html" },
-                { "name": "lesson-21-file-io.html" },
-                { "name": "lesson-22-exceptions.html" },
-                { "name": "lesson-23-list-comprehension.html" },
-                { "name": "lesson-24-generators.html" },
-                { "name": "lesson-25-decorators.html" },
-                { "name": "lesson-26-classes.html" },
-                { "name": "lesson-27-special-methods.html" },
-                { "name": "lesson-28-inheritance.html" },
-                { "name": "lesson-29-polymorphism.html" },
-                { "name": "lesson-30-class-methods.html" },
-                { "name": "lesson-31-properties.html" },
-                { "name": "lesson-32-library-project.html" },
-                { "name": "lesson-33-standard-modules.html" },
-                { "name": "lesson-34-json-csv.html" },
-                { "name": "lesson-35-regex.html" },
-                { "name": "lesson-36-type-hints.html" },
-                { "name": "lesson-37-sqlite.html" },
-                { "name": "lesson-38-unittest.html" },
-                { "name": "lesson-39-venv-pip.html" },
-                { "name": "lesson-40-final-project.html" },
-                { "name": "lesson-41-numpy.html" },
-                { "name": "lesson-42-pandas.html" },
-                { "name": "lesson-43-matplotlib.html" },
-                { "name": "lesson-44-requests.html" },
-                { "name": "lesson-45-beautifulsoup.html" }
+                {
+                    "name": "lesson-01-intro-install.html"
+                },
+                {
+                    "name": "lesson-02-print.html"
+                },
+                {
+                    "name": "lesson-03-variables.html"
+                },
+                {
+                    "name": "lesson-04-data-types.html"
+                },
+                {
+                    "name": "lesson-05-input.html"
+                },
+                {
+                    "name": "lesson-06-operators.html"
+                },
+                {
+                    "name": "lesson-07-if.html"
+                },
+                {
+                    "name": "lesson-08-elif-else.html"
+                },
+                {
+                    "name": "lesson-09-while-loop.html"
+                },
+                {
+                    "name": "lesson-10-for-loop.html"
+                },
+                {
+                    "name": "lesson-11-lists.html"
+                },
+                {
+                    "name": "lesson-12-list-methods.html"
+                },
+                {
+                    "name": "lesson-13-tuples.html"
+                },
+                {
+                    "name": "lesson-14-dictionaries.html"
+                },
+                {
+                    "name": "lesson-15-sets.html"
+                },
+                {
+                    "name": "lesson-16-functions.html"
+                },
+                {
+                    "name": "lesson-17-parameters.html"
+                },
+                {
+                    "name": "lesson-18-default-args.html"
+                },
+                {
+                    "name": "lesson-19-lambda.html"
+                },
+                {
+                    "name": "lesson-20-modules.html"
+                },
+                {
+                    "name": "lesson-21-file-io.html"
+                },
+                {
+                    "name": "lesson-22-exceptions.html"
+                },
+                {
+                    "name": "lesson-23-list-comprehension.html"
+                },
+                {
+                    "name": "lesson-24-generators.html"
+                },
+                {
+                    "name": "lesson-25-decorators.html"
+                },
+                {
+                    "name": "lesson-26-classes.html"
+                },
+                {
+                    "name": "lesson-27-special-methods.html"
+                },
+                {
+                    "name": "lesson-28-inheritance.html"
+                },
+                {
+                    "name": "lesson-29-polymorphism.html"
+                },
+                {
+                    "name": "lesson-30-class-methods.html"
+                },
+                {
+                    "name": "lesson-31-properties.html"
+                },
+                {
+                    "name": "lesson-32-library-project.html"
+                },
+                {
+                    "name": "lesson-33-standard-modules.html"
+                },
+                {
+                    "name": "lesson-34-json-csv.html"
+                },
+                {
+                    "name": "lesson-35-regex.html"
+                },
+                {
+                    "name": "lesson-36-type-hints.html"
+                },
+                {
+                    "name": "lesson-37-sqlite.html"
+                },
+                {
+                    "name": "lesson-38-unittest.html"
+                },
+                {
+                    "name": "lesson-39-venv-pip.html"
+                },
+                {
+                    "name": "lesson-40-final-project.html"
+                },
+                {
+                    "name": "lesson-41-numpy.html"
+                },
+                {
+                    "name": "lesson-42-pandas.html"
+                },
+                {
+                    "name": "lesson-43-matplotlib.html"
+                },
+                {
+                    "name": "lesson-44-requests.html"
+                },
+                {
+                    "name": "lesson-45-beautifulsoup.html"
+                }
             ]
         },
         "linux": {
@@ -63,57 +153,159 @@
             "title": "دوره لینوکس",
             "icon": "🐧",
             "lessons": [
-                { "name": "linux-intro.html" },
-                { "name": "directory-structure.html" },
-                { "name": "linux-terminal-intro.html" },
-                { "name": "linux-command-pwd.html" },
-                { "name": "linux-command-ls.html" },
-                { "name": "linux-command-cd.html" },
-                { "name": "linux-command-mkdir.html" },
-                { "name": "linux-command-touch.html" },
-                { "name": "linux-command-rm.html" },
-                { "name": "linux-command-cp.html" },
-                { "name": "linux-command-mv.html" },
-                { "name": "linux-command-cat.html" },
-                { "name": "linux-command-less.html" },
-                { "name": "linux-command-echo.html" },
-                { "name": "linux-redirect.html" },
-                { "name": "linux-command-man.html" },
-                { "name": "linux-command-sudo.html" },
-                { "name": "linux-command-apt-update-upgrade.html" },
-                { "name": "linux-command-apt-install-remove.html" },
-                { "name": "linux-command-chmod.html" },
-                { "name": "linux-command-chown.html" },
-                { "name": "linux-command-ps.html" },
-                { "name": "linux-command-kill.html" },
-                { "name": "linux-command-grep.html" },
-                { "name": "linux-command-find.html" },
-                { "name": "linux-command-tar.html" },
-                { "name": "linux-command-zip.html" },
-                { "name": "linux-command-ln.html" },
-                { "name": "linux-command-alias.html" },
-                { "name": "linux-command-history.html" },
-                { "name": "linux-command-systemctl.html" },
-                { "name": "linux-command-cron.html" },
-                { "name": "linux-command-whoami.html" },
-                { "name": "linux-command-id.html" },
-                { "name": "linux-command-uname.html" },
-                { "name": "linux-command-uptime.html" },
-                { "name": "linux-command-free.html" },
-                { "name": "linux-command-df.html" },
-                { "name": "linux-command-du.html" },
-                { "name": "linux-command-top.html" },
-                { "name": "linux-command-htop.html" },
-                { "name": "linux-command-ping.html" },
-                { "name": "linux-command-curl.html" },
-                { "name": "linux-command-wget.html" },
-                { "name": "linux-command-ssh.html" },
-                { "name": "linux-command-scp.html" },
-                { "name": "linux-command-rsync.html" },
-                { "name": "linux-command-netstat.html" },
-                { "name": "linux-command-ss.html" },
-                { "name": "linux-command-ufw.html" },
-                { "name": "linux-command-dmesg.html" }
+                {
+                    "name": "linux-intro.html"
+                },
+                {
+                    "name": "directory-structure.html"
+                },
+                {
+                    "name": "linux-terminal-intro.html"
+                },
+                {
+                    "name": "linux-command-pwd.html"
+                },
+                {
+                    "name": "linux-command-ls.html"
+                },
+                {
+                    "name": "linux-command-cd.html"
+                },
+                {
+                    "name": "linux-command-mkdir.html"
+                },
+                {
+                    "name": "linux-command-touch.html"
+                },
+                {
+                    "name": "linux-command-rm.html"
+                },
+                {
+                    "name": "linux-command-cp.html"
+                },
+                {
+                    "name": "linux-command-mv.html"
+                },
+                {
+                    "name": "linux-command-cat.html"
+                },
+                {
+                    "name": "linux-command-less.html"
+                },
+                {
+                    "name": "linux-command-echo.html"
+                },
+                {
+                    "name": "linux-redirect.html"
+                },
+                {
+                    "name": "linux-command-man.html"
+                },
+                {
+                    "name": "linux-command-sudo.html"
+                },
+                {
+                    "name": "linux-command-apt-update-upgrade.html"
+                },
+                {
+                    "name": "linux-command-apt-install-remove.html"
+                },
+                {
+                    "name": "linux-command-chmod.html"
+                },
+                {
+                    "name": "linux-command-chown.html"
+                },
+                {
+                    "name": "linux-command-ps.html"
+                },
+                {
+                    "name": "linux-command-kill.html"
+                },
+                {
+                    "name": "linux-command-grep.html"
+                },
+                {
+                    "name": "linux-command-find.html"
+                },
+                {
+                    "name": "linux-command-tar.html"
+                },
+                {
+                    "name": "linux-command-zip.html"
+                },
+                {
+                    "name": "linux-command-ln.html"
+                },
+                {
+                    "name": "linux-command-alias.html"
+                },
+                {
+                    "name": "linux-command-history.html"
+                },
+                {
+                    "name": "linux-command-systemctl.html"
+                },
+                {
+                    "name": "linux-command-cron.html"
+                },
+                {
+                    "name": "linux-command-whoami.html"
+                },
+                {
+                    "name": "linux-command-id.html"
+                },
+                {
+                    "name": "linux-command-uname.html"
+                },
+                {
+                    "name": "linux-command-uptime.html"
+                },
+                {
+                    "name": "linux-command-free.html"
+                },
+                {
+                    "name": "linux-command-df.html"
+                },
+                {
+                    "name": "linux-command-du.html"
+                },
+                {
+                    "name": "linux-command-top.html"
+                },
+                {
+                    "name": "linux-command-htop.html"
+                },
+                {
+                    "name": "linux-command-ping.html"
+                },
+                {
+                    "name": "linux-command-curl.html"
+                },
+                {
+                    "name": "linux-command-wget.html"
+                },
+                {
+                    "name": "linux-command-ssh.html"
+                },
+                {
+                    "name": "linux-command-scp.html"
+                },
+                {
+                    "name": "linux-command-rsync.html"
+                },
+                {
+                    "name": "linux-command-netstat.html"
+                },
+                {
+                    "name": "linux-command-ss.html"
+                },
+                {
+                    "name": "linux-command-ufw.html"
+                },
+                {
+                    "name": "linux-command-dmesg.html"
+                }
             ]
         },
         "answers-python": {
@@ -123,51 +315,141 @@
             "title": "پاسخ‌های پایتون",
             "icon": "📝",
             "lessons": [
-                { "name": "answer-lesson-01-intro-install.html" },
-                { "name": "answer-lesson-02-print.html" },
-                { "name": "answer-lesson-03-variables.html" },
-                { "name": "answer-lesson-04-data-types.html" },
-                { "name": "answer-lesson-05-input.html" },
-                { "name": "answer-lesson-06-operators.html" },
-                { "name": "answer-lesson-07-if.html" },
-                { "name": "answer-lesson-08-elif-else.html" },
-                { "name": "answer-lesson-09-while-loop.html" },
-                { "name": "answer-lesson-10-for-loop.html" },
-                { "name": "answer-lesson-11-lists.html" },
-                { "name": "answer-lesson-12-list-methods.html" },
-                { "name": "answer-lesson-13-tuples.html" },
-                { "name": "answer-lesson-14-dictionaries.html" },
-                { "name": "answer-lesson-15-sets.html" },
-                { "name": "answer-lesson-16-functions.html" },
-                { "name": "answer-lesson-17-parameters.html" },
-                { "name": "answer-lesson-18-default-args.html" },
-                { "name": "answer-lesson-19-lambda.html" },
-                { "name": "answer-lesson-20-modules.html" },
-                { "name": "answer-lesson-21-file-io.html" },
-                { "name": "answer-lesson-22-exceptions.html" },
-                { "name": "answer-lesson-23-list-comprehension.html" },
-                { "name": "answer-lesson-24-generators.html" },
-                { "name": "answer-lesson-25-decorators.html" },
-                { "name": "answer-lesson-26-classes.html" },
-                { "name": "answer-lesson-27-special-methods.html" },
-                { "name": "answer-lesson-28-inheritance.html" },
-                { "name": "answer-lesson-29-polymorphism.html" },
-                { "name": "answer-lesson-30-class-methods.html" },
-                { "name": "answer-lesson-31-properties.html" },
-                { "name": "answer-lesson-32-library-project.html" },
-                { "name": "answer-lesson-33-standard-modules.html" },
-                { "name": "answer-lesson-34-json-csv.html" },
-                { "name": "answer-lesson-35-regex.html" },
-                { "name": "answer-lesson-36-type-hints.html" },
-                { "name": "answer-lesson-37-sqlite.html" },
-                { "name": "answer-lesson-38-unittest.html" },
-                { "name": "answer-lesson-39-venv-pip.html" },
-                { "name": "answer-lesson-40-final-project.html" },
-                { "name": "answer-lesson-41-numpy.html" },
-                { "name": "answer-lesson-42-pandas.html" },
-                { "name": "answer-lesson-43-matplotlib.html" },
-                { "name": "answer-lesson-44-requests.html" },
-                { "name": "answer-lesson-45-beautifulsoup.html" }
+                {
+                    "name": "answer-lesson-01-intro-install.html"
+                },
+                {
+                    "name": "answer-lesson-02-print.html"
+                },
+                {
+                    "name": "answer-lesson-03-variables.html"
+                },
+                {
+                    "name": "answer-lesson-04-data-types.html"
+                },
+                {
+                    "name": "answer-lesson-05-input.html"
+                },
+                {
+                    "name": "answer-lesson-06-operators.html"
+                },
+                {
+                    "name": "answer-lesson-07-if.html"
+                },
+                {
+                    "name": "answer-lesson-08-elif-else.html"
+                },
+                {
+                    "name": "answer-lesson-09-while-loop.html"
+                },
+                {
+                    "name": "answer-lesson-10-for-loop.html"
+                },
+                {
+                    "name": "answer-lesson-11-lists.html"
+                },
+                {
+                    "name": "answer-lesson-12-list-methods.html"
+                },
+                {
+                    "name": "answer-lesson-13-tuples.html"
+                },
+                {
+                    "name": "answer-lesson-14-dictionaries.html"
+                },
+                {
+                    "name": "answer-lesson-15-sets.html"
+                },
+                {
+                    "name": "answer-lesson-16-functions.html"
+                },
+                {
+                    "name": "answer-lesson-17-parameters.html"
+                },
+                {
+                    "name": "answer-lesson-18-default-args.html"
+                },
+                {
+                    "name": "answer-lesson-19-lambda.html"
+                },
+                {
+                    "name": "answer-lesson-20-modules.html"
+                },
+                {
+                    "name": "answer-lesson-21-file-io.html"
+                },
+                {
+                    "name": "answer-lesson-22-exceptions.html"
+                },
+                {
+                    "name": "answer-lesson-23-list-comprehension.html"
+                },
+                {
+                    "name": "answer-lesson-24-generators.html"
+                },
+                {
+                    "name": "answer-lesson-25-decorators.html"
+                },
+                {
+                    "name": "answer-lesson-26-classes.html"
+                },
+                {
+                    "name": "answer-lesson-27-special-methods.html"
+                },
+                {
+                    "name": "answer-lesson-28-inheritance.html"
+                },
+                {
+                    "name": "answer-lesson-29-polymorphism.html"
+                },
+                {
+                    "name": "answer-lesson-30-class-methods.html"
+                },
+                {
+                    "name": "answer-lesson-31-properties.html"
+                },
+                {
+                    "name": "answer-lesson-32-library-project.html"
+                },
+                {
+                    "name": "answer-lesson-33-standard-modules.html"
+                },
+                {
+                    "name": "answer-lesson-34-json-csv.html"
+                },
+                {
+                    "name": "answer-lesson-35-regex.html"
+                },
+                {
+                    "name": "answer-lesson-36-type-hints.html"
+                },
+                {
+                    "name": "answer-lesson-37-sqlite.html"
+                },
+                {
+                    "name": "answer-lesson-38-unittest.html"
+                },
+                {
+                    "name": "answer-lesson-39-venv-pip.html"
+                },
+                {
+                    "name": "answer-lesson-40-final-project.html"
+                },
+                {
+                    "name": "answer-lesson-41-numpy.html"
+                },
+                {
+                    "name": "answer-lesson-42-pandas.html"
+                },
+                {
+                    "name": "answer-lesson-43-matplotlib.html"
+                },
+                {
+                    "name": "answer-lesson-44-requests.html"
+                },
+                {
+                    "name": "answer-lesson-45-beautifulsoup.html"
+                }
             ]
         },
         "answers-linux": {
@@ -177,57 +459,159 @@
             "title": "پاسخ‌های لینوکس",
             "icon": "📝",
             "lessons": [
-                { "name": "answer-linux-intro.html" },
-                { "name": "no-file.html" },
-                { "name": "answer-linux-terminal-intro.html" },
-                { "name": "answer-linux-command-pwd.html" },
-                { "name": "answer-linux-command-ls.html" },
-                { "name": "answer-linux-command-cd.html" },
-                { "name": "answer-linux-command-mkdir.html" },
-                { "name": "answer-linux-command-touch.html" },
-                { "name": "answer-linux-command-rm.html" },
-                { "name": "answer-linux-command-cp.html" },
-                { "name": "answer-linux-command-mv.html" },
-                { "name": "answer-linux-command-cat.html" },
-                { "name": "answer-linux-command-less.html" },
-                { "name": "answer-linux-command-echo.html" },
-                { "name": "answer-linux-redirect.html" },
-                { "name": "answer-linux-command-man.html" },
-                { "name": "answer-linux-command-sudo.html" },
-                { "name": "answer-linux-command-apt-update-upgrade.html" },
-                { "name": "answer-linux-command-apt-install-remove.html" },
-                { "name": "answer-linux-command-chmod.html" },
-                { "name": "answer-linux-command-chown.html" },
-                { "name": "answer-linux-command-ps.html" },
-                { "name": "answer-linux-command-kill.html" },
-                { "name": "answer-linux-command-grep.html" },
-                { "name": "answer-linux-command-find.html" },
-                { "name": "answer-linux-command-tar.html" },
-                { "name": "answer-linux-command-zip.html" },
-                { "name": "answer-linux-command-ln.html" },
-                { "name": "answer-linux-command-alias.html" },
-                { "name": "answer-linux-command-history.html" },
-                { "name": "answer-linux-command-systemctl.html" },
-                { "name": "answer-linux-command-cron.html" },
-                { "name": "answer-linux-command-whoami.html" },
-                { "name": "answer-linux-command-id.html" },
-                { "name": "answer-linux-command-uname.html" },
-                { "name": "answer-linux-command-uptime.html" },
-                { "name": "answer-linux-command-free.html" },
-                { "name": "answer-linux-command-df.html" },
-                { "name": "answer-linux-command-du.html" },
-                { "name": "answer-linux-command-top.html" },
-                { "name": "answer-linux-command-htop.html" },
-                { "name": "answer-linux-command-ping.html" },
-                { "name": "answer-linux-command-curl.html" },
-                { "name": "answer-linux-command-wget.html" },
-                { "name": "answer-linux-command-ssh.html" },
-                { "name": "answer-linux-command-scp.html" },
-                { "name": "answer-linux-command-rsync.html" },
-                { "name": "answer-linux-command-netstat.html" },
-                { "name": "answer-linux-command-ss.html" },
-                { "name": "answer-linux-command-ufw.html" },
-                { "name": "answer-linux-command-dmesg.html" }
+                {
+                    "name": "answer-linux-intro.html"
+                },
+                {
+                    "name": "no-file.html"
+                },
+                {
+                    "name": "answer-linux-terminal-intro.html"
+                },
+                {
+                    "name": "answer-linux-command-pwd.html"
+                },
+                {
+                    "name": "answer-linux-command-ls.html"
+                },
+                {
+                    "name": "answer-linux-command-cd.html"
+                },
+                {
+                    "name": "answer-linux-command-mkdir.html"
+                },
+                {
+                    "name": "answer-linux-command-touch.html"
+                },
+                {
+                    "name": "answer-linux-command-rm.html"
+                },
+                {
+                    "name": "answer-linux-command-cp.html"
+                },
+                {
+                    "name": "answer-linux-command-mv.html"
+                },
+                {
+                    "name": "answer-linux-command-cat.html"
+                },
+                {
+                    "name": "answer-linux-command-less.html"
+                },
+                {
+                    "name": "answer-linux-command-echo.html"
+                },
+                {
+                    "name": "answer-linux-redirect.html"
+                },
+                {
+                    "name": "answer-linux-command-man.html"
+                },
+                {
+                    "name": "answer-linux-command-sudo.html"
+                },
+                {
+                    "name": "answer-linux-command-apt-update-upgrade.html"
+                },
+                {
+                    "name": "answer-linux-command-apt-install-remove.html"
+                },
+                {
+                    "name": "answer-linux-command-chmod.html"
+                },
+                {
+                    "name": "answer-linux-command-chown.html"
+                },
+                {
+                    "name": "answer-linux-command-ps.html"
+                },
+                {
+                    "name": "answer-linux-command-kill.html"
+                },
+                {
+                    "name": "answer-linux-command-grep.html"
+                },
+                {
+                    "name": "answer-linux-command-find.html"
+                },
+                {
+                    "name": "answer-linux-command-tar.html"
+                },
+                {
+                    "name": "answer-linux-command-zip.html"
+                },
+                {
+                    "name": "answer-linux-command-ln.html"
+                },
+                {
+                    "name": "answer-linux-command-alias.html"
+                },
+                {
+                    "name": "answer-linux-command-history.html"
+                },
+                {
+                    "name": "answer-linux-command-systemctl.html"
+                },
+                {
+                    "name": "answer-linux-command-cron.html"
+                },
+                {
+                    "name": "answer-linux-command-whoami.html"
+                },
+                {
+                    "name": "answer-linux-command-id.html"
+                },
+                {
+                    "name": "answer-linux-command-uname.html"
+                },
+                {
+                    "name": "answer-linux-command-uptime.html"
+                },
+                {
+                    "name": "answer-linux-command-free.html"
+                },
+                {
+                    "name": "answer-linux-command-df.html"
+                },
+                {
+                    "name": "answer-linux-command-du.html"
+                },
+                {
+                    "name": "answer-linux-command-top.html"
+                },
+                {
+                    "name": "answer-linux-command-htop.html"
+                },
+                {
+                    "name": "answer-linux-command-ping.html"
+                },
+                {
+                    "name": "answer-linux-command-curl.html"
+                },
+                {
+                    "name": "answer-linux-command-wget.html"
+                },
+                {
+                    "name": "answer-linux-command-ssh.html"
+                },
+                {
+                    "name": "answer-linux-command-scp.html"
+                },
+                {
+                    "name": "answer-linux-command-rsync.html"
+                },
+                {
+                    "name": "answer-linux-command-netstat.html"
+                },
+                {
+                    "name": "answer-linux-command-ss.html"
+                },
+                {
+                    "name": "answer-linux-command-ufw.html"
+                },
+                {
+                    "name": "answer-linux-command-dmesg.html"
+                }
             ]
         }
     },
