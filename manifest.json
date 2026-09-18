@@ -1,16 +1,19 @@
 {
-    "name": "CodaX Academy",
-    "short_name": "CodaX",
-    "description": "هستۀ کد به دست تو | CodaX",
+    "name": "آکادمی چیزکد | CheeseCode",
+    "short_name": "CheeseCode",
+    "description": "آموزش ساده پایتون مثل خوردن پنیر 🍕",
     "start_url": "./index.html",
     "scope": "./",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#0a0e1a",
-    "theme_color": "#00d4ff",
+    "theme_color": "#f5b81b",
     "lang": "fa",
     "dir": "rtl",
-    "categories": ["education", "programming"],
+    "categories": [
+        "education",
+        "programming"
+    ],
     "icons": [
         {
             "src": "images/icon-192.png",
@@ -42,19 +45,34 @@
             "name": "دوره پایتون",
             "short_name": "پایتون",
             "url": "./python.html",
-            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+            "icons": [
+                {
+                    "src": "images/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
         },
         {
             "name": "دوره لینوکس",
             "short_name": "لینوکس",
             "url": "./linux.html",
-            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+            "icons": [
+                {
+                    "src": "images/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
         },
         {
             "name": "ترمینال پایتون",
             "short_name": "ترمینال",
             "url": "./terminal-python.html",
-            "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }]
+            "icons": [
+                {
+                    "src": "images/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
         }
     ]
 }

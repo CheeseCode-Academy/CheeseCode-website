@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس یاد می‌گیری چطور اطلاعات رو توی فایل‌ها <strong>ذخیره</strong> کنی و ازشون <strong>بخونی</strong>. این یکی از مهم‌ترین مباحث برنامه‌نویسیه!</p>
+        <p>توی این درس یاد می‌گیری چطور اطلاعات رو توی فایل‌ها <strong>ذخیره</strong> کنی و ازشون
+            <strong>بخونی</strong>. این یکی از مهم‌ترین مباحث برنامه‌نویسیه!</p>
     </section>
 
     <section class="section">
@@ -16,9 +17,10 @@
             <li><strong>خواندن یا نوشتن</strong> با متدهای مختلف</li>
             <li><strong>بستن</strong> فایل با <code>close()</code></li>
         </ol>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> همیشه بعد از کار با فایل، اون رو <strong>ببند</strong> تا اطلاعات ذخیره بشن و حافظه آزاد بشه.</p>
+            <p>💡 <strong>یادت باشه:</strong> همیشه بعد از کار با فایل، اون رو <strong>ببند</strong> تا اطلاعات ذخیره
+                بشن و حافظه آزاد بشه.</p>
         </div>
     </section>
 
@@ -35,7 +37,7 @@
 
     <section class="section">
         <h2>💻 نوشتن در فایل</h2>
-        
+
         <pre class="code-block"># نوشتن در فایل (محتوای قبلی پاک میشه)
 فایل = open("test.txt", "w")
 فایل.write("سلام دنیا!\n")
@@ -46,7 +48,7 @@
 فایل = open("test.txt", "a")
 فایل.write("این خط به انتها اضافه شد.\n")
 فایل.close()</pre>
-        
+
         <p>محتوای فایل <code>test.txt</code>:</p>
         <div class="output-box">
             <span class="output-label">خروجی (محتوای فایل):</span>
@@ -58,7 +60,7 @@
 
     <section class="section">
         <h2>💻 خواندن از فایل</h2>
-        
+
         <pre class="code-block"># روش‌های مختلف خواندن
 فایل = open("test.txt", "r")
 
@@ -81,7 +83,7 @@ for خط in فایل:
     print("خط:", خط.strip())
 
 فایل.close()</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">کل محتوا:
@@ -99,7 +101,7 @@ for خط in فایل:
     <section class="section">
         <h2>💻 استفاده از with (روش پیشنهادی)</h2>
         <p><code>with</code> به‌طور خودکار فایل رو می‌بنده:</p>
-        
+
         <pre class="code-block"># نوشتن با with
 with open("data.txt", "w") as فایل:
     فایل.write("این یک خط است.\n")
@@ -111,21 +113,22 @@ with open("data.txt", "r") as فایل:
     محتوا = فایل.read()
     print(محتوا)
 # فایل به‌طور خودکار بسته میشه</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">این یک خط است.
 این خط دوم است.</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> استفاده از <code>with</code> <strong>امن‌تر</strong> و <strong>خواناتر</strong> هست و نیازی به <code>close()</code> نداره.</p>
+            <p>💡 <strong>نکته:</strong> استفاده از <code>with</code> <strong>امن‌تر</strong> و <strong>خواناتر</strong>
+                هست و نیازی به <code>close()</code> نداره.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 خواندن فایل‌های CSV</h2>
-        
+
         <pre class="code-block">import csv
 
 # نوشتن CSV
@@ -140,7 +143,7 @@ with open("افراد.csv", "r") as فایل:
     خواننده = csv.reader(فایل)
     for ردیف in خواننده:
         print(ردیف)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['نام', 'سن', 'شهر']
@@ -151,7 +154,7 @@ with open("افراد.csv", "r") as فایل:
 
     <section class="section">
         <h2>💻 بررسی وجود فایل</h2>
-        
+
         <pre class="code-block">import os
 
 if os.path.exists("test.txt"):
@@ -164,7 +167,7 @@ else:
 
     <section class="section">
         <h2>💻 حذف فایل</h2>
-        
+
         <pre class="code-block">import os
 
 if os.path.exists("test.txt"):
@@ -204,10 +207,11 @@ else:
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> یه فایل به اسم <code>name.txt</code> بساز و اسم خودت رو توش بنویس.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> فایل <code>name.txt</code> رو بخون و محتواش رو چاپ کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر ۵ اسم بگیره، توی فایل <code>names.txt</code> ذخیره کنه و بعد دوباره بخونه و چاپ کنه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر ۵ اسم بگیره، توی فایل
+                <code>names.txt</code> ذخیره کنه و بعد دوباره بخونه و چاپ کنه.</p>
         </div>
     </section>
 

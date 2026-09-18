@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>چالش‌های پایتون | CodaX Academy</title>
-    
+    <title>چالش‌های پایتون | CheeseCode Academy</title>
+
     <link rel="stylesheet" href="styles/index-style.css">
     <link rel="stylesheet" href="styles/challenges-style.css">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
     <link rel="stylesheet" href="styles/themes.css">
-    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="theme-color" content="#f5b81b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CodaX">
-    
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
     <script src="./pyodide/pyodide.js"></script>
     <script src="./js/python-engine.js"></script>
-    <script src="./js/codax-utils.js"></script>
+    <script src="./js/cheese-utils.js"></script>
+    <script src="./js/loading-utils.js"></script>
+    <script src="./js/diff-utils.js"></script>
+    <script src="./js/share-challenge.js"></script>
+    <script src="./js/challenge-compare.js"></script>
+    <script src="./js/share-badge.js"></script>
+    <script src="./js/back-to-top.js"></script>
+    <script src="./js/sticky-header.js"></script>
+    <script src="./configs/install-config.js"></script>
+    <script src="./js/install-helper.js"></script>
 </head>
+
 <body>
 
     <div class="challenges-wrapper">
@@ -26,7 +39,6 @@
         <div class="page-header">
             <h2>چالش‌های پایتون</h2>
             <div class="header-actions">
-                <button class="theme-toggle" id="themeToggle" title="Select Theme">🌙</button>
                 <a href="index.html" class="back-link">↩ بازگشت</a>
             </div>
         </div>
@@ -34,15 +46,16 @@
         <div class="challenge-card">
             <h3 id="challenge-title">در حال بارگذاری چالش...</h3>
             <div id="challenge-description" class="challenge-desc"></div>
-            
-            <textarea id="challenge-code" dir="ltr" rows="6" placeholder="# کد پایتون خود را اینجا بنویسید..."></textarea>
-            
+
+            <textarea id="challenge-code" dir="ltr" rows="6"
+                placeholder="# کد پایتون خود را اینجا بنویسید..."></textarea>
+
             <button onclick="submitChallenge()" id="submitBtn" disabled>⏳ در حال آماده‌سازی...</button>
-            
+
             <p id="challenge-result"></p>
         </div>
 
-        <hr style="border-color: rgba(0, 212, 255, 0.08); margin: 30px 0;">
+        <hr style="border-color: rgba(245, 184, 27, 0.08); margin: 30px 0;">
 
         <div class="badges-section">
             <h2>نشان‌های من</h2>
@@ -52,35 +65,214 @@
     </div>
 
     <script>
-        let currentChallenge = null;
-        let isPyodideReady = false;
+        var currentChallenge = null;
+        var isPyodideReady = false;
+        var isArchivedMode = false;
 
+        // ============================================
+        // بارگذاری چالش
+        // ============================================
         async function loadDailyChallenge() {
             try {
-                let response = await fetch('./settings/challenges.json?v=' + Date.now());
+                var response = await fetch('./settings/challenges.json?v=' + Date.now());
                 if (!response.ok) throw new Error('HTTP ' + response.status);
-                
-                let challenges = await response.json();
+
+                var challenges = await response.json();
                 if (!challenges || challenges.length === 0) {
                     throw new Error('هیچ چالشی یافت نشد');
                 }
-                
-                currentChallenge = challenges[0];
-                document.getElementById('challenge-title').innerText = currentChallenge.title || 'چالش';
-                document.getElementById('challenge-description').innerHTML = currentChallenge.description || '';
-                
-                renderBadges();
+
+                var params = new URLSearchParams(window.location.search);
+                var challengeId = params.get('challenge');
+
+                var targetChallenge = null;
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                // اگه از لینک اومده
+                if (challengeId) {
+                    targetChallenge = challenges.find(function (ch) {
+                        return ch.id === challengeId;
+                    });
+
+                    if (targetChallenge) {
+                        var isExpired = false;
+                        if (targetChallenge.expirationDate) {
+                            var expDate = new Date(targetChallenge.expirationDate);
+                            expDate.setHours(23, 59, 59, 999);
+                            if (expDate < today) isExpired = true;
+                        }
+
+                        if (isExpired) {
+                            isArchivedMode = true;
+                        }
+
+                        currentChallenge = targetChallenge;
+                        showChallenge(targetChallenge, isArchivedMode);
+                        return;
+                    }
+                }
+
+                // حالت عادی
+                var activeChallenges = challenges.filter(function (ch) {
+                    if (ch.creationDate) {
+                        var creationDate = new Date(ch.creationDate);
+                        creationDate.setHours(0, 0, 0, 0);
+                        if (creationDate > today) return false;
+                    }
+
+                    if (ch.expirationDate) {
+                        var expirationDate = new Date(ch.expirationDate);
+                        expirationDate.setHours(23, 59, 59, 999);
+                        if (expirationDate < today) return false;
+                    }
+
+                    return true;
+                });
+
+                if (activeChallenges.length === 0) {
+                    document.getElementById('challenge-title').innerText = 'هیچ چالش فعالی وجود ندارد';
+                    document.getElementById('challenge-description').innerHTML =
+                        '<span style="color: #f5b81b;">منتظر چالش بعدی باشید! 🧀</span>';
+                    document.getElementById('submitBtn').disabled = true;
+                    document.getElementById('submitBtn').textContent = '⏳ منتظر چالش';
+                    renderBadges();
+                    return;
+                }
+
+                activeChallenges.sort(function (a, b) {
+                    return new Date(a.creationDate) - new Date(b.creationDate);
+                });
+
+                currentChallenge = activeChallenges[0];
+                showChallenge(currentChallenge, false);
+
             } catch (err) {
                 console.error('❌ خطا:', err);
                 document.getElementById('challenge-title').innerText = 'خطا در بارگذاری چالش';
-                document.getElementById('challenge-description').innerHTML = 
+                document.getElementById('challenge-description').innerHTML =
                     '<span style="color: #ff6b6b;">متأسفانه چالش بارگذاری نشد.</span>';
             }
         }
 
+        // ============================================
+        // نمایش چالش
+        // ============================================
+        function showChallenge(challenge, archived) {
+            document.getElementById('challenge-title').innerText = challenge.title || 'چالش';
+            document.getElementById('challenge-description').innerHTML = challenge.description || '';
+
+            var solutionSeenBeforeSolve = localStorage.getItem('cheese_solution_seen_before_solve_' + challenge.id) === 'true';
+            var earnedBadges = JSON.parse(localStorage.getItem('cheese_earned_badges') || "{}");
+            var alreadyEarned = !!earnedBadges[challenge.id];
+
+            // هشدار اگه راه‌حل رو قبل از حل دیده
+            if (solutionSeenBeforeSolve && !alreadyEarned && !archived) {
+                showWarning('⚠️ تو قبلاً راه‌حل این چالش رو دیدی.<br><span style="font-size: 0.7rem; color: rgba(255, 107, 107, 0.7);">حتی اگه درست حلش کنی، نشان تعلق نمی‌گیره.</span>');
+            }
+
+            if (archived) {
+                showArchivedMode(challenge);
+            }
+
+            if (alreadyEarned && !archived) {
+                document.getElementById('challenge-result').className = 'success';
+                document.getElementById('challenge-result').innerText =
+                    '✅ این چالش رو قبلاً حل کردی! نشانت توی پایینه.';
+                addChallengeButtons();
+            }
+
+            renderBadges();
+        }
+
+        // ============================================
+        // هشدار
+        // ============================================
+        function showWarning(html) {
+            var challengeCard = document.querySelector('.challenge-card');
+            if (!challengeCard) return;
+
+            var oldMsg = challengeCard.querySelector('.solution-seen-warning');
+            if (oldMsg) oldMsg.remove();
+
+            var warningMsg = document.createElement('div');
+            warningMsg.className = 'solution-seen-warning';
+            warningMsg.style.cssText = 'margin-top:1rem;padding:0.7rem 1rem;background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.3);border-radius:10px;color:#ff6b6b;font-size:0.8rem;font-family:Courier New,monospace;text-align:center;line-height:1.6;';
+            warningMsg.innerHTML = html;
+
+            var titleEl = document.getElementById('challenge-title');
+            if (titleEl && titleEl.parentNode) {
+                titleEl.parentNode.insertBefore(warningMsg, titleEl.nextSibling);
+            }
+        }
+
+        // ============================================
+        // حالت آرشیو
+        // ============================================
+        function showArchivedMode(challenge) {
+            showWarning('📦 این چالش منقضی شده و در حالت آرشیو است.<br><span style="font-size: 0.7rem; color: rgba(255, 107, 107, 0.7);">نمی‌تونی کد بنویسی، ولی می‌تونی راه‌حل رو ببینی.</span>');
+
+            var textarea = document.getElementById('challenge-code');
+            textarea.disabled = true;
+            textarea.placeholder = '📦 این چالش منقضی شده — فقط آرشیو';
+            textarea.style.opacity = '0.5';
+            textarea.style.cursor = 'not-allowed';
+
+            var submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '📦 آرشیو (منقضی شده)';
+            submitBtn.style.opacity = '0.5';
+
+            setTimeout(function () {
+                addSolutionButton(challenge);
+            }, 300);
+        }
+
+        // ============================================
+        // دکمه‌ی نمایش راه‌حل (آرشیو)
+        // ============================================
+        function addSolutionButton(challenge) {
+            var challengeCard = document.querySelector('.challenge-card');
+            if (!challengeCard) return;
+
+            var oldBtn = challengeCard.querySelector('.archive-solution-btn');
+            if (oldBtn) return;
+
+            var btn = document.createElement('button');
+            btn.className = 'archive-solution-btn';
+            btn.innerHTML = '👁️ نمایش راه‌حل آرشیو';
+            btn.style.cssText = 'background:rgba(245,184,27,0.1);border:1px solid rgba(245,184,27,0.3);padding:0.7rem 1.5rem;border-radius:10px;color:#f5b81b;font-family:Courier New,monospace;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s ease;margin-top:1rem;display:block;';
+            btn.onmouseover = function () {
+                this.style.background = 'rgba(245,184,27,0.2)';
+                this.style.transform = 'scale(1.02)';
+            };
+            btn.onmouseout = function () {
+                this.style.background = 'rgba(245,184,27,0.1)';
+                this.style.transform = 'scale(1)';
+            };
+            btn.onclick = function () {
+                if (challenge.solutionCode && window.DiffUtils) {
+                    window.DiffUtils.show('', challenge.solutionCode, {
+                        title: '📦 راه‌حل آرشیو'
+                    });
+                } else {
+                    if (window.LoadingUtils) {
+                        window.LoadingUtils.info('راه‌حل کد برای این چالش ثبت نشده');
+                    }
+                }
+            };
+
+            challengeCard.appendChild(btn);
+        }
+
+        // ============================================
+        // آماده‌سازی Pyodide
+        // ============================================
         async function preparePython() {
-            let submitBtn = document.getElementById('submitBtn');
-            
+            var submitBtn = document.getElementById('submitBtn');
+
+            if (isArchivedMode) return;
+
             try {
                 if (typeof initPythonEngine !== 'function') {
                     throw new Error('python-engine.js لود نشده');
@@ -88,20 +280,29 @@
 
                 await initPythonEngine();
                 isPyodideReady = true;
-                
+
                 submitBtn.disabled = false;
                 submitBtn.textContent = '▶ ارسال و بررسی';
-                
-                console.log('⚡ Pyodide آماده شد');
+
+                console.log('🧀 Pyodide آماده شد');
             } catch (err) {
                 console.error('❌ خطا:', err);
                 submitBtn.textContent = '❌ خطا در آماده‌سازی';
             }
         }
 
+        // ============================================
+        // ارسال چالش
+        // ============================================
         async function submitChallenge() {
-            let resultBox = document.getElementById('challenge-result');
-            
+            var resultBox = document.getElementById('challenge-result');
+
+            if (isArchivedMode) {
+                resultBox.className = 'error';
+                resultBox.innerText = '📦 این چالش منقضی شده و در حالت آرشیو است.';
+                return;
+            }
+
             if (!currentChallenge) {
                 resultBox.className = 'error';
                 resultBox.innerText = '❌ چالش بارگذاری نشده است!';
@@ -114,8 +315,8 @@
                 return;
             }
 
-            let userCode = document.getElementById('challenge-code').value;
-            
+            var userCode = document.getElementById('challenge-code').value;
+
             if (!userCode.trim()) {
                 resultBox.className = 'error';
                 resultBox.innerText = '❌ لطفاً کدی بنویسید!';
@@ -126,15 +327,59 @@
             resultBox.innerText = '⏳ در حال بررسی خروجی...';
 
             try {
-                let userOutput = await runPythonCode(userCode);
+                var userOutput = await runPythonCode(userCode);
 
                 if (userOutput.trim() === currentChallenge.expectedOutput.trim()) {
+                    // ============================================
+                    // حل درست
+                    // ============================================
+
+                    // آیا کاربر راه‌حل رو قبل از حل دیده بود؟
+                    var solutionSeenBeforeSolve = localStorage.getItem('cheese_solution_seen_before_solve_' + currentChallenge.id) === 'true';
+
+                    // آیا کاربر قبلاً نشان گرفته؟
+                    var earnedBadges = JSON.parse(localStorage.getItem('cheese_earned_badges') || '{}');
+                    var alreadyEarned = !!earnedBadges[currentChallenge.id];
+
                     resultBox.className = 'success';
-                    resultBox.innerText = '🎉 تبریک! چالش با موفقیت حل شد و نشان آزاد شد.';
-                    saveBadge(currentChallenge.id, currentChallenge.badgeName, currentChallenge.badgeImage);
+
+                    if (solutionSeenBeforeSolve && !alreadyEarned) {
+                        // ❌ راه‌حل رو قبل از حل دیده بود → نشان نمی‌گیره
+                        resultBox.innerHTML = '✅ آفرین! جواب درست بود.<br><br><span style="color: #f5b81b; font-size: 0.85rem;">⚠️ چون راه‌حل رو قبل از حل کردن دیدی، نشان تعلق نمی‌گیره.</span>';
+                    } else {
+                        // ✅ خودش حل کرد (یا از قبل نشان داشت)
+                        resultBox.innerText = '🎉 تبریک! چالش با موفقیت حل شد و نشان آزاد شد.';
+                        saveBadge(currentChallenge.id, currentChallenge.badgeName, currentChallenge.badgeImage);
+                    }
+
+                    if (window.ChallengeCompare) {
+                        window.ChallengeCompare.saveMyResult(currentChallenge.id, 100, 0);
+                    }
+
+                    addChallengeButtons();
+
+                    if (currentChallenge.solutionCode) {
+                        addDiffButton(userCode, currentChallenge.solutionCode);
+                    }
                 } else {
                     resultBox.className = 'error';
-                    resultBox.innerText = '❌ خروجی اشتباه است.\n\nخروجی شما:\n' + userOutput + '\n\nخروجی مورد انتظار:\n' + currentChallenge.expectedOutput;
+                    resultBox.innerHTML = '❌ خروجی اشتباه است.\n\nخروجی شما:\n' + userOutput + '\n\nخروجی مورد انتظار:\n' + currentChallenge.expectedOutput;
+
+                    if (currentChallenge.solutionCode) {
+                        addDiffButton(userCode, currentChallenge.solutionCode);
+                    } else {
+                        var noSolutionMsg = document.createElement('div');
+                        noSolutionMsg.className = 'no-solution-msg';
+                        noSolutionMsg.style.cssText = 'margin-top:1rem;padding:0.7rem;background:rgba(245,184,27,0.05);border:1px dashed rgba(245,184,27,0.3);border-radius:10px;color:rgba(255,255,255,0.6);font-size:0.8rem;font-family:Courier New,monospace;text-align:center;';
+                        noSolutionMsg.innerHTML = '💡 راه‌حل کد برای این چالش ثبت نشده.';
+
+                        var challengeCard = document.querySelector('.challenge-card');
+                        if (challengeCard) {
+                            var oldMsg = challengeCard.querySelector('.no-solution-msg');
+                            if (oldMsg) oldMsg.remove();
+                            challengeCard.appendChild(noSolutionMsg);
+                        }
+                    }
                 }
             } catch (err) {
                 resultBox.className = 'error';
@@ -142,56 +387,222 @@
             }
         }
 
+        // ============================================
+        // دکمه‌های اشتراک
+        // ============================================
+        function addChallengeButtons() {
+            var challengeCard = document.querySelector('.challenge-card');
+            if (!challengeCard) return;
+
+            var oldBtns = challengeCard.querySelectorAll('.challenge-action-btn');
+            oldBtns.forEach(function (b) { b.remove(); });
+
+            var btnContainer = document.createElement('div');
+            btnContainer.className = 'challenge-action-btn';
+            btnContainer.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;';
+
+            if (window.ChallengeCompare) {
+                var compareBtn = window.ChallengeCompare.createButton(currentChallenge);
+                compareBtn.style.marginTop = '0';
+                compareBtn.style.marginRight = '0';
+                btnContainer.appendChild(compareBtn);
+            }
+
+            var shareBtn = document.createElement('button');
+            shareBtn.innerHTML = '🔗 اشتراک‌گذاری';
+            shareBtn.style.cssText = 'background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);padding:0.6rem 1.2rem;border-radius:10px;color:#00d4ff;font-family:Courier New,monospace;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s ease;';
+            shareBtn.onclick = function () {
+                if (window.ShareChallenge) {
+                    window.ShareChallenge.share(currentChallenge);
+                }
+            };
+
+            btnContainer.appendChild(shareBtn);
+            challengeCard.appendChild(btnContainer);
+        }
+
+        // ============================================
+        // دکمه‌ی Diff (با تأیید)
+        // ============================================
+        function addDiffButton(userCode, solutionCode) {
+            var challengeCard = document.querySelector('.challenge-card');
+            if (!challengeCard) return;
+
+            var oldBtn = challengeCard.querySelector('.diff-btn');
+            if (oldBtn) oldBtn.remove();
+
+            var solutionSeen = localStorage.getItem('cheese_solution_seen_' + currentChallenge.id) === 'true';
+
+            var diffBtn = document.createElement('button');
+            diffBtn.className = 'diff-btn';
+
+            if (solutionSeen) {
+                diffBtn.innerHTML = '👁️ راه‌حل (دیده‌شده)';
+                diffBtn.style.cssText = 'background:rgba(255,68,68,0.05);border:1px solid rgba(255,68,68,0.2);padding:0.6rem 1.2rem;border-radius:10px;color:#ff6b6b;font-family:Courier New,monospace;font-size:0.85rem;font-weight:600;cursor:pointer;margin-top:1rem;display:block;';
+            } else {
+                diffBtn.innerHTML = '🔍 مقایسه کد من با راه‌حل';
+                diffBtn.style.cssText = 'background:rgba(245,184,27,0.08);border:1px solid rgba(245,184,27,0.25);padding:0.6rem 1.2rem;border-radius:10px;color:#f5b81b;font-family:Courier New,monospace;font-size:0.85rem;font-weight:600;cursor:pointer;margin-top:1rem;display:block;';
+            }
+
+            diffBtn.onclick = function () {
+                // اگه قبلاً راه‌حل رو دیده، بدون تأیید باز کن
+                if (solutionSeen) {
+                    if (window.DiffUtils) {
+                        window.DiffUtils.show(userCode, solutionCode, {
+                            title: 'مقایسه کد شما با راه‌حل'
+                        });
+                    }
+                    return;
+                }
+
+                // تأیید بگیر
+                showSolutionConfirm(function () {
+                    // ⚠️ علامت‌گذاری که کاربر راه‌حل رو دید
+                    localStorage.setItem('cheese_solution_seen_' + currentChallenge.id, 'true');
+
+                    // ⚠️ اگه کاربر قبلاً نشان نگرفته، علامت «قبل از حل دیده»
+                    var earnedBadges = JSON.parse(localStorage.getItem('cheese_earned_badges') || '{}');
+                    if (!earnedBadges[currentChallenge.id]) {
+                        localStorage.setItem('cheese_solution_seen_before_solve_' + currentChallenge.id, 'true');
+                    }
+
+                    // نمایش Diff
+                    if (window.DiffUtils) {
+                        window.DiffUtils.show(userCode, solutionCode, {
+                            title: 'مقایسه کد شما با راه‌حل'
+                        });
+                    }
+
+                    // پیام
+                    if (window.LoadingUtils) {
+                        setTimeout(function () {
+                            if (earnedBadges[currentChallenge.id]) {
+                                window.LoadingUtils.info('نشانت محفوظ می‌مونه چون قبلاً حلش کردی ✅');
+                            } else {
+                                window.LoadingUtils.info('⚠️ چون راه‌حل رو دیدی، اگه الان حل کنی نشان نمی‌گیری');
+                            }
+                        }, 500);
+                    }
+
+                    // آپدیت دکمه
+                    setTimeout(function () {
+                        diffBtn.innerHTML = '👁️ راه‌حل (دیده‌شده)';
+                        diffBtn.style.background = 'rgba(255,68,68,0.05)';
+                        diffBtn.style.borderColor = 'rgba(255,68,68,0.2)';
+                        diffBtn.style.color = '#ff6b6b';
+                    }, 1000);
+                });
+            };
+
+            challengeCard.appendChild(diffBtn);
+        }
+
+        // ============================================
+        // تأیید نمایش راه‌حل
+        // ============================================
+        function showSolutionConfirm(onConfirm) {
+            var oldModal = document.getElementById('solutionConfirmModal');
+            if (oldModal) oldModal.remove();
+
+            var modal = document.createElement('div');
+            modal.id = 'solutionConfirmModal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:99999;display:flex;align-items:center;justify-content:center;padding:1rem;direction:rtl;font-family:Courier New,monospace;backdrop-filter:blur(10px);';
+
+            modal.innerHTML = `
+                <div style="background:rgba(15,22,38,0.98);border:1px solid rgba(245,184,27,0.3);border-radius:20px;padding:1.8rem 1.5rem;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.7);border-top:2px solid #f5b81b;">
+                    <div style="font-size:3rem;margin-bottom:1rem;">🤔</div>
+                    <h3 style="color:#f5b81b;margin:0 0 0.8rem 0;font-size:1.1rem;">دیدن راه‌حل</h3>
+                    <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;line-height:1.8;margin:0 0 1.5rem 0;">
+                        مطمئنی می‌خوای راه‌حل رو ببینی؟ 🤔<br>
+                        <span style="color:rgba(255,255,255,0.4);font-size:0.75rem;">پیشنهاد می‌کنیم اول خودت بیشتر تلاش کنی! 💪</span>
+                    </p>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button id="confirmSeeSolution" style="flex:1;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.4);padding:0.8rem;border-radius:10px;color:#00d4ff;cursor:pointer;font-family:Courier New,monospace;font-size:0.85rem;font-weight:600;">👁️ بله، نشونم بده</button>
+                        <button id="cancelSeeSolution" style="flex:1;background:rgba(245,184,27,0.08);border:1px solid rgba(245,184,27,0.3);padding:0.8rem;border-radius:10px;color:#f5b81b;cursor:pointer;font-family:Courier New,monospace;font-size:0.85rem;font-weight:600;">💪 بازم تلاش می‌کنم</button>
+                    </div>
+                    <button id="closeConfirmModal" style="margin-top:1rem;background:transparent;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-family:Courier New,monospace;font-size:0.75rem;padding:0.3rem;">✖ بستن</button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            modal.querySelector('#confirmSeeSolution').onclick = function () {
+                modal.remove();
+                if (onConfirm) onConfirm();
+            };
+
+            modal.querySelector('#cancelSeeSolution').onclick = function () {
+                modal.remove();
+                if (window.LoadingUtils) {
+                    window.LoadingUtils.info('عالی! ادامه بده 💪');
+                }
+            };
+
+            modal.querySelector('#closeConfirmModal').onclick = function () {
+                modal.remove();
+            };
+
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) modal.remove();
+            });
+        }
+
+        // ============================================
+        // ذخیره نشان
+        // ============================================
         function saveBadge(id, name, imagePath) {
-            let earnedBadges = JSON.parse(localStorage.getItem('codax_earned_badges') || "{}");
+            var earnedBadges = JSON.parse(localStorage.getItem('cheese_earned_badges') || "{}");
             if (!earnedBadges[id]) {
                 earnedBadges[id] = { name: name, image: imagePath, date: new Date().toISOString() };
-                localStorage.setItem('codax_earned_badges', JSON.stringify(earnedBadges));
+                localStorage.setItem('cheese_earned_badges', JSON.stringify(earnedBadges));
                 renderBadges();
             }
         }
 
+        // ============================================
+        // نمایش نشان‌ها
+        // ============================================
         function renderBadges() {
-            let container = document.getElementById('badges-container');
-            let earnedBadges = JSON.parse(localStorage.getItem('codax_earned_badges') || "{}");
-            
+            var container = document.getElementById('badges-container');
+            var earnedBadges = JSON.parse(localStorage.getItem('cheese_earned_badges') || "{}");
+
             container.innerHTML = "";
-            
-            let keys = Object.keys(earnedBadges);
+
+            var keys = Object.keys(earnedBadges);
             if (keys.length === 0) {
                 container.innerHTML = '<div class="badge-empty">هنوز نشانی کسب نکرده‌اید 🏆</div>';
                 return;
             }
-            
-            for (let id in earnedBadges) {
-                let badge = earnedBadges[id];
+
+            for (var id in earnedBadges) {
+                var badge = earnedBadges[id];
                 container.innerHTML += `
-                    <div>
-                        <img src="${badge.image}" alt="${badge.name}">
-                        <p>${badge.name}</p>
+                    <div style="position:relative;background:rgba(245,184,27,0.05);padding:0.8rem 1rem;border-radius:12px;text-align:center;border:1px solid rgba(0,212,255,0.1);min-width:80px;">
+                        <img src="${badge.image}" alt="${badge.name}" style="width:45px;height:45px;display:block;margin:0 auto 0.3rem;border-radius:8px;" onerror="this.style.display='none'; this.nextElementSibling.style.fontSize='2rem'; this.nextElementSibling.textContent='🏆';">
+                        <p style="font-size:0.7rem;color:rgba(255,255,255,0.5);font-family:Courier New,monospace;margin:0;">${badge.name}</p>
+                        <button onclick="event.stopPropagation(); if(window.ShareBadge) window.ShareBadge.share('${id}');" title="اشتراک‌گذاری نشان" style="position:absolute;top:4px;left:4px;background:rgba(245,184,27,0.15);border:1px solid rgba(245,184,27,0.3);border-radius:6px;padding:0.2rem 0.4rem;color:#f5b81b;cursor:pointer;font-size:0.7rem;font-family:Courier New,monospace;">🔗</button>
                     </div>
                 `;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // ============================================
+        // شروع
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function () {
             loadDailyChallenge();
             setTimeout(preparePython, 500);
         });
 
-        // ثبت Service Worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
+            window.addEventListener('load', function () {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(function(registration) {
-                        console.log('✅ Service Worker ثبت شد:', registration.scope);
-                    })
-                    .catch(function(err) {
-                        console.warn('⚠️ Service Worker ثبت نشد:', err);
-                    });
+                    .then(function (r) { console.log('✅ SW ثبت شد'); })
+                    .catch(function (err) { console.warn('⚠️ SW:', err); });
             });
         }
     </script>
 
 </body>
+
 </html>

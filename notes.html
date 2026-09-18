@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یادداشت‌ها و نشان‌شده‌ها | CheeseCode Academy</title>
+
+    <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/notes-style.css">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f5b81b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+
+    <script src="js/cheese-utils.js"></script>
+    <script src="js/loading-utils.js"></script>
+    <script src="js/notes-utils.js"></script>
+    <script src="js/bookmarks-utils.js"></script>
+    <script src="js/global-search.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="js/lazy-load.js"></script>
+    <script src="configs/menu-config.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/channel-modal.js"></script>
+    <script src="js/install-helper.js"></script>
+</head>
+
+<body data-theme="dark">
+
+    <!-- ============================================
+         هدر کامل
+         ============================================ -->
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text">
+                <h1>CheeseCode</h1>
+                <p>یادداشت‌ها و نشان‌شده‌ها</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <a href="index.html" class="back-home-btn" title="بازگشت به صفحه اصلی">↩</a>
+        </div>
+    </header>
+
+    <!-- ============================================
+         محتوای صفحه
+         ============================================ -->
+    <div class="notes-page-wrapper">
+
+        <!-- تب‌ها -->
+        <div class="notes-tabs">
+            <button class="notes-tab active" data-tab="bookmarks">
+                ⭐ نشان‌شده‌ها
+                <span class="notes-tab-count" id="bookmarksCount">0</span>
+            </button>
+            <button class="notes-tab" data-tab="notes">
+                📝 یادداشت‌ها
+                <span class="notes-tab-count" id="notesCount">0</span>
+            </button>
+        </div>
+
+        <!-- بخش نشان‌شده‌ها -->
+        <div class="notes-section active" id="bookmarksSection">
+            <div id="bookmarksContainer"></div>
+        </div>
+
+        <!-- بخش یادداشت‌ها -->
+        <div class="notes-section" id="notesSection">
+            <div id="notesContainer"></div>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var tabs = document.querySelectorAll('.notes-tab');
+            var sections = {
+                bookmarks: document.getElementById('bookmarksSection'),
+                notes: document.getElementById('notesSection')
+            };
+
+            // ============================================
+            // تب‌ها
+            // ============================================
+            tabs.forEach(function (tab) {
+                tab.onclick = function () {
+                    var tabName = this.dataset.tab;
+
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
+                    Object.keys(sections).forEach(function (k) {
+                        sections[k].classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    sections[tabName].classList.add('active');
+
+                    renderAll();
+                };
+            });
+
+            // ============================================
+            // رندر
+            // ============================================
+            function renderAll() {
+                var bookmarksContainer = document.getElementById('bookmarksContainer');
+                if (window.BookmarksUtils) {
+                    window.BookmarksUtils.render(bookmarksContainer);
+                }
+
+                var notesContainer = document.getElementById('notesContainer');
+                if (window.BookmarksUtils && window.BookmarksUtils.renderNotes) {
+                    window.BookmarksUtils.renderNotes(notesContainer);
+                } else if (window.NotesUtils) {
+                    renderNotesFallback(notesContainer);
+                }
+
+                var bookmarksCount = window.BookmarksUtils ? window.BookmarksUtils.count() : 0;
+                var notesCount = window.NotesUtils ? window.NotesUtils.count() : 0;
+
+                document.getElementById('bookmarksCount').textContent = toPersianNumber(bookmarksCount);
+                document.getElementById('notesCount').textContent = toPersianNumber(notesCount);
+            }
+
+            // ============================================
+            // رندر یادداشت‌ها (اضطراری)
+            // ============================================
+            function renderNotesFallback(container) {
+                var notes = window.NotesUtils.getAllArray();
+
+                if (notes.length === 0) {
+                    container.innerHTML = `
+                    <div style="text-align:center;padding:2rem;color:rgba(255,255,255,0.4);font-size:0.85rem;font-family:'Courier New',monospace;">
+                        <div style="font-size:2.5rem;margin-bottom:0.5rem;">📝</div>
+                        هنوز یادداشتی نداری
+                        <div style="font-size:0.7rem;margin-top:0.5rem;color:rgba(255,255,255,0.3);">
+                            توی هر درس، 📝 بزن
+                        </div>
+                    </div>
+                `;
+                    return;
+                }
+
+                var html = '';
+                notes.forEach(function (n) {
+                    var page = n.course === 'python' ? 'python.html' :
+                        n.course === 'linux' ? 'linux.html' :
+                            n.course === 'answers-python' ? 'answers-python.html' :
+                                n.course === 'answers-linux' ? 'answers-linux.html' : 'python.html';
+
+                    var url = page + '?lesson=' + encodeURIComponent(n.key) + '&notes=1';
+                    var preview = n.text.length > 60 ? n.text.substring(0, 60) + '...' : n.text;
+
+                    html += `
+                    <a href="${url}" style="display:flex;align-items:center;gap:0.8rem;background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:0.7rem 1rem;font-family:'Courier New',monospace;text-decoration:none;color:inherit;margin-bottom:0.5rem;">
+                        <span style="font-size:1.2rem;">📝</span>
+                        <div style="flex:1;text-align:right;min-width:0;">
+                            <div style="color:rgba(255,255,255,0.85);font-size:0.85rem;">${escapeHtml(n.title)}</div>
+                            <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:0.2rem;">${escapeHtml(preview)}</div>
+                        </div>
+                        <span style="color:rgba(0,212,255,0.5);">❯</span>
+                    </a>
+                `;
+                });
+
+                container.innerHTML = html;
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                return String(text)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function toPersianNumber(num) {
+                var persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+                return String(num).replace(/\d/g, function (d) { return persian[d]; });
+            }
+
+            // ============================================
+            // شروع
+            // ============================================
+            renderAll();
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(function (r) { console.log('✅ SW ثبت شد'); })
+                        .catch(function (err) { console.warn('⚠️ SW:', err); });
+                });
+            }
+
+            console.log('🧀 Notes Page ready!');
+        })();
+    </script>
+</body>
+
+</html>

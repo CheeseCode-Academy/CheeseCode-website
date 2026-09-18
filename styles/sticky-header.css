@@ -1,0 +1,111 @@
+/* ============================================
+   🧀 هدر چسبنده | CheeseCode Academy
+   نسخه: 1.0.0
+   ============================================ */
+
+/* ============================================
+   هدر چسبنده
+   ============================================ */
+
+.hero-panel {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.hero-panel.scrolled {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 212, 255, 0.3);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    background: rgba(15, 22, 38, 0.95);
+}
+
+/* ============================================
+   هدر در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .hero-panel {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin-bottom: 1rem;
+        border-radius: 0 0 12px 12px;
+        padding: 0.8rem 1rem;
+    }
+
+    .hero-panel.scrolled {
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+        border-radius: 0;
+    }
+
+    .hero-panel.scrolled .brand-text h1 {
+        font-size: 1rem;
+        transition: font-size 0.3s ease;
+    }
+
+    .hero-panel.scrolled .brand-text p {
+        display: none;
+    }
+
+    .hero-panel.scrolled .brand-logo {
+        width: 36px;
+        height: 36px;
+        transition: all 0.3s ease;
+    }
+}
+
+/* ============================================
+   هدر در صفحات اصلی
+   ============================================ */
+
+body>header:first-of-type {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+body>header:first-of-type.scrolled {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    background: rgba(10, 14, 26, 0.95);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+}
+
+/* ============================================
+   انیمیشن ورود هدر
+   ============================================ */
+
+@keyframes slideDownHeader {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hero-panel {
+    animation: slideDownHeader 0.4s ease;
+}
+
+/* ============================================
+   تم روشن
+   ============================================ */
+
+body[data-theme^="light"] .hero-panel.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(217, 119, 6, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+body[data-theme^="light"] body>header:first-of-type.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}

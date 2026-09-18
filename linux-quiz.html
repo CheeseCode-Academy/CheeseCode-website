@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کوییزهای لینوکس | CheeseCode Academy</title>
+    <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/quizzes-style.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f5b81b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/notes-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
+    <script src="js/loading-utils.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="js/cheese-utils.js"></script>
+    <script src="configs/linux-quiz-config.js"></script>
+    <script src="configs/menu-config.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/quiz-engine.js"></script>
+    <script src="js/channel-modal.js"></script>
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <script src="js/install-helper.js"></script>
+</head>
+
+<body data-theme="dark">
+
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text">
+                <h1>CheeseCode</h1>
+                <p>کوییز لینوکس | CheeseCode</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <a href="index.html" class="back-home-btn" title="بازگشت به صفحه اصلی">↩</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>📊 پیشرفت کوییزها</span>
+                    <span id="progressText">۰ / ۰ کوییز</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progressBar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 جستجوی کوییز...">
+            </div>
+
+            <h2 class="sidebar-header">📚 کوییزهای لینوکس</h2>
+            <nav class="lessons-list" id="quizzes-menu"></nav>
+        </aside>
+    </div>
+
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeQuiz">&times;</span>
+            <div id="quiz-content"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var menuContainer = document.getElementById('quizzes-menu');
+            var quizModal = document.getElementById('quizModal');
+            var closeQuiz = document.getElementById('closeQuiz');
+
+            if (typeof linuxQuizConfig === 'undefined') {
+                menuContainer.innerHTML = '<p style="color: #ff6b6b; padding: 1rem;">❌ خطا: فایل linux-quiz-config.js یافت نشد!</p>';
+                return;
+            }
+
+            console.log('🧀 تعداد کوییزها:', linuxQuizConfig.length);
+
+            function closeModal() {
+                quizModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                updateProgress();
+            }
+
+            function updateProgress() {
+                var total = linuxQuizConfig.length;
+                var done = 0;
+                var results = JSON.parse(localStorage.getItem('cheese_quiz_results') || '{}');
+
+                linuxQuizConfig.forEach(function (q) {
+                    if (results[q.file]) done++;
+                });
+
+                var percent = total > 0 ? Math.round((done / total) * 100) : 0;
+                var bar = document.getElementById('progressBar');
+                var text = document.getElementById('progressText');
+
+                if (bar) bar.style.width = percent + '%';
+                if (text) text.textContent = done + ' / ' + total + ' (' + percent + '%)';
+            }
+
+            function openQuiz(quiz) {
+                quizModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+
+                if (window.CheeseUtils) {
+                    CheeseUtils.makeWindow('#quizModal', 'linux-quiz-' + quiz.file);
+                }
+
+                if (window.QuizEngine) {
+                    window.QuizEngine.load(quiz, document.getElementById('quiz-content'), closeModal);
+                } else {
+                    document.getElementById('quiz-content').innerHTML =
+                        '<p style="color:#ff6b6b; text-align:center; padding:2rem;">❌ quiz-engine.js لود نشده!</p>';
+                }
+            }
+
+            menuContainer.innerHTML = '';
+
+            for (var i = 0; i < linuxQuizConfig.length; i++) {
+                (function (index) {
+                    var quiz = linuxQuizConfig[index];
+                    var button = document.createElement('button');
+                    button.className = 'menu-item';
+                    button.setAttribute('data-index', index + 1);
+                    button.innerHTML = '<span>🐧</span> ' + (index + 1) + '. ' + quiz.title;
+
+                    button.addEventListener('click', function () {
+                        openQuiz(quiz);
+                    });
+
+                    menuContainer.appendChild(button);
+                })(i);
+            }
+
+            closeQuiz.addEventListener('click', closeModal);
+            window.addEventListener('click', function (e) {
+                if (e.target === quizModal) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && quizModal.style.display === 'block') closeModal();
+            });
+
+            updateProgress();
+
+            if (window.CheeseUtils) {
+                window.CheeseUtils.setupSearch();
+            }
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(function (r) { console.log('✅ SW ثبت شد'); })
+                        .catch(function (err) { console.warn('⚠️ SW:', err); });
+                });
+            }
+
+            console.log('🧀 Linux Quiz page ready!');
+        })();
+    </script>
+</body>
+
+</html>

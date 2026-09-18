@@ -4,14 +4,16 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>تایپ‌هینت‌ها</strong> آشنا میشی که کدت رو <strong>خوانا‌تر</strong> و <strong>قابل فهم‌تر</strong> می‌کنن و به IDEها کمک می‌کنن خطاها رو زودتر پیدا کنن.</p>
+        <p>توی این درس با <strong>تایپ‌هینت‌ها</strong> آشنا میشی که کدت رو <strong>خوانا‌تر</strong> و <strong>قابل
+                فهم‌تر</strong> می‌کنن و به IDEها کمک می‌کنن خطاها رو زودتر پیدا کنن.</p>
     </section>
 
     <section class="section">
         <h2>📖 تایپ‌هینت چیست؟</h2>
-        <p>تایپ‌هینت (Type Hint) مشخص می‌کنه که یه متغیر یا تابع <strong>چه نوعی</strong> از داده رو دریافت می‌کنه یا برمی‌گردونه.</p>
+        <p>تایپ‌هینت (Type Hint) مشخص می‌کنه که یه متغیر یا تابع <strong>چه نوعی</strong> از داده رو دریافت می‌کنه یا
+            برمی‌گردونه.</p>
         <p>تایپ‌هینت‌ها <strong>اجباری</strong> نیستن و فقط برای <strong>مستندسازی</strong> و کمک به IDE هستن.</p>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> تایپ‌هینت‌ها در پایتون ۳.۵+ اضافه شدن.</p>
         </div>
@@ -19,7 +21,7 @@
 
     <section class="section">
         <h2>💻 تایپ‌هینت ساده</h2>
-        
+
         <pre class="code-block">def جمع(a: int, b: int) -> int:
     return a + b
 
@@ -36,7 +38,7 @@ print(پیام)   # سلام علی!</pre>
 
     <section class="section">
         <h2>💻 تایپ‌های مختلف</h2>
-        
+
         <pre class="code-block">from typing import List, Dict, Tuple, Optional, Union
 
 # لیست
@@ -64,7 +66,7 @@ def تبدیل(مقدار: Union[int, float, str]) -> str:
 
     <section class="section">
         <h2>💻 تایپ‌های پیشرفته</h2>
-        
+
         <pre class="code-block">from typing import Callable, Any, TypeVar, Generic
 
 # Callable (تابع)
@@ -97,7 +99,7 @@ class Stack(Generic[T]):
 
     <section class="section">
         <h2>💻 تایپ‌هینت برای متغیرها</h2>
-        
+
         <pre class="code-block">name: str = "علی"
 age: int = 25
 scores: List[int] = [18, 19, 17]
@@ -112,7 +114,7 @@ maybe_number = 5</pre>
 
     <section class="section">
         <h2>💻 تایپ‌هینت برای کلاس‌ها</h2>
-        
+
         <pre class="code-block">class شخص:
     def __init__(self, نام: str, سن: int) -> None:
         self.نام = نام
@@ -132,7 +134,7 @@ class دانشجو(شخص):
 
     <section class="section">
         <h2>💻 نوع‌های سفارشی</h2>
-        
+
         <pre class="code-block">from typing import NewType
 
 # ایجاد نوع سفارشی
@@ -155,7 +157,7 @@ print(get_product(product_id))</pre>
 
     <section class="section">
         <h2>💻 Literal و Final</h2>
-        
+
         <pre class="code-block">from typing import Literal, Final
 
 # Literal - مقادیر مشخص
@@ -175,7 +177,7 @@ print(وضعیت("فعال"))    # وضعیت: فعال
     <section class="section">
         <h2>💻 بررسی تایپ‌ها با mypy</h2>
         <p>برای بررسی تایپ‌هینت‌ها می‌تونی از <code>mypy</code> استفاده کنی:</p>
-        
+
         <pre class="code-block"># در خط فرمان:
 # pip install mypy
 # mypy filename.py</pre>
@@ -204,10 +206,12 @@ def پردازش_افراد(افراد: PeopleList) -> None:
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> تابعی با تایپ‌هینت بنویس که دو عدد رو جمع کنه و نتیجه رو برگردونه.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> تابعی با تایپ‌هینت بنویس که لیستی از اعداد بگیره و مجموعشون رو برگردونه.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس با تایپ‌هینت کامل بنویس که اطلاعات یک کتاب رو مدیریت کنه.</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> تابعی با تایپ‌هینت بنویس که لیستی از اعداد بگیره و مجموعشون رو
+                برگردونه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس با تایپ‌هینت کامل بنویس که اطلاعات یک کتاب رو مدیریت
+                کنه.</p>
         </div>
     </section>
 

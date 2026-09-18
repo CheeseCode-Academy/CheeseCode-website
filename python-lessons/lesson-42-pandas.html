@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>با <strong>Pandas</strong> آشنا بشی، کتابخانه‌ای قدرتمند برای <strong>تحلیل</strong> و <strong>دستکاری</strong> داده‌ها.</p>
+        <p>با <strong>Pandas</strong> آشنا بشی، کتابخانه‌ای قدرتمند برای <strong>تحلیل</strong> و
+            <strong>دستکاری</strong> داده‌ها.</p>
     </section>
 
     <section class="section">
@@ -16,7 +17,7 @@
             <li>پاکسازی و آماده‌سازی داده</li>
             <li>گروه‌بندی و تجمیع</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نصب:</strong> <code>pip install pandas</code></p>
         </div>
@@ -24,7 +25,7 @@
 
     <section class="section">
         <h2>💻 Series و DataFrame</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 # Series - ستون یک‌بعدی
@@ -47,7 +48,7 @@ print("\nستون نام:\n", df.نام)
 # دسترسی به سطر
 print("\nسطر اول:\n", df.iloc[0])
 print("\nسطر با ایندکس:\n", df.loc[2])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">Series:
@@ -94,7 +95,7 @@ Name: 2, dtype: object</pre>
 
     <section class="section">
         <h2>💻 خواندن داده</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 # خواندن CSV
@@ -125,7 +126,7 @@ print("\nآخرین ۲ سطر:\n", df.tail(2))
 # اطلاعات
 print("\nاطلاعات:\n", df.info())
 print("\nآمار:\n", df.describe())</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">  Product  Price  Quantity
@@ -172,7 +173,7 @@ max    300.00000  10.00000</pre>
 
     <section class="section">
         <h2>💻 فیلتر کردن داده</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 data = {
@@ -197,7 +198,7 @@ print("\nنام‌های با 'ر':\n", df[df["نام"].str.contains("ر")])
 
 # انتخاب ستون‌ها
 print("\nفقط نام و حقوق:\n", df[["نام", "حقوق"]])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سن > 25:
@@ -234,7 +235,7 @@ print("\nفقط نام و حقوق:\n", df[["نام", "حقوق"]])</pre>
 
     <section class="section">
         <h2>💻 گروه‌بندی و تجمیع</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 data = {
@@ -259,7 +260,7 @@ print("\nآمار فروش:\n", grouped["فروش"].agg(["sum", "mean", "max", "
 
 # چندین ستون
 print("\nچندین ستون:\n", grouped.agg({"فروش": "sum", "تعداد": "mean"}))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">گروه‌بندی:
@@ -297,7 +298,7 @@ Name: فروش, dtype: float64
 
     <section class="section">
         <h2>💻 مرتب‌سازی و تغییر</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 data = {
@@ -328,7 +329,7 @@ print("\nحذف ستون:\n", df)</pre>
 
     <section class="section">
         <h2>💻 مقادیر گمشده</h2>
-        
+
         <pre class="code-block">import pandas as pd
 import numpy as np
 
@@ -361,7 +362,7 @@ print("\nپر کردن با میانگین:\n", df)</pre>
 
     <section class="section">
         <h2>💻 ذخیره داده</h2>
-        
+
         <pre class="code-block">import pandas as pd
 
 df = pd.DataFrame({
@@ -412,10 +413,12 @@ plt.show()</pre>
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱:</strong> یک DataFrame با اطلاعات ۵ نفر بساز (نام، سن، شهر، حقوق) و آمار پایه رو نمایش بده.</p>
-            
-            <p><strong>تمرین ۲:</strong> DataFrame رو بر اساس سن مرتب کن و فقط افرادی که حقوق > ۵۰۰۰ هستن رو نمایش بده.</p>
-            
+            <p><strong>تمرین ۱:</strong> یک DataFrame با اطلاعات ۵ نفر بساز (نام، سن، شهر، حقوق) و آمار پایه رو نمایش
+                بده.</p>
+
+            <p><strong>تمرین ۲:</strong> DataFrame رو بر اساس سن مرتب کن و فقط افرادی که حقوق > ۵۰۰۰ هستن رو نمایش بده.
+            </p>
+
             <p><strong>تمرین ۳:</strong> DataFrame رو بر اساس شهر گروه‌بندی کن و میانگین حقوق هر شهر رو حساب کن.</p>
         </div>
     </section>

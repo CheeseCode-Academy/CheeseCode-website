@@ -1,21 +1,24 @@
 <div class="lesson-content-wrapper">
     <h1>🎯 متدهای <span>مجموعه</span> در پایتون</h1>
-    
+
     <p>
-        مجموعه (Set) یک <strong>دیتا تایپ تغییرپذیر</strong> (mutable) برای ذخیره اعضای <strong style="color: #f5b81b;">منحصر‌به‌فرد</strong> و <strong style="color: #f5b81b;">بدون ترتیب</strong> است.
+        مجموعه (Set) یک <strong>دیتا تایپ تغییرپذیر</strong> (mutable) برای ذخیره اعضای <strong
+            style="color: #f5b81b;">منحصر‌به‌فرد</strong> و <strong style="color: #f5b81b;">بدون ترتیب</strong> است.
         در این درس با <strong style="color: #f5b81b;">همه متدهای مجموعه</strong> آشنا میشیم.
     </p>
 
     <h2>📌 مجموعه چیه؟</h2>
     <p>
-        مجموعه یک <strong>دنباله تغییرپذیر</strong> از اعضای منحصر‌به‌فرد که با <span style="color: #f5b81b;">{ }</span> تعریف میشه.
+        مجموعه یک <strong>دنباله تغییرپذیر</strong> از اعضای منحصر‌به‌فرد که با <span style="color: #f5b81b;">{ }</span>
+        تعریف میشه.
         اعضای مجموعه <strong>تکرار نمیشن</strong> و ترتیبی ندارن.
     </p>
 
     <div class="code-block">
         <span class="comment"># تعریف یک مجموعه</span>
-        my_set = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>}
-        <span class="function">print</span>(my_set)  <span class="comment"># خروجی: {1, 2, 3} (تکرارها حذف شدن)</span>
+        my_set = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span
+            class="number">3</span>, <span class="number">2</span>}
+        <span class="function">print</span>(my_set) <span class="comment"># خروجی: {1, 2, 3} (تکرارها حذف شدن)</span>
     </div>
 
     <h2>🧰 همه متدهای مجموعه</h2>
@@ -144,19 +147,20 @@
     <h2>🎯 مثال عملی: مدیریت مخاطبان</h2>
     <div class="code-block">
         <span class="comment"># مجموعه مخاطبان</span>
-        contacts = {<span class="string">"علی"</span>, <span class="string">"مریم"</span>, <span class="string">"رضا"</span>}
-        
+        contacts = {<span class="string">"علی"</span>, <span class="string">"مریم"</span>, <span
+            class="string">"رضا"</span>}
+
         <span class="comment"># اضافه کردن مخاطب جدید</span>
         contacts.<span class="function">add</span>(<span class="string">"سارا"</span>)
-        
+
         <span class="comment"># حذف مخاطب (در صورت وجود)</span>
         contacts.<span class="function">discard</span>(<span class="string">"احمد"</span>)
-        
+
         <span class="comment"># اشتراک با مجموعه دیگر</span>
         new_contacts = {<span class="string">"مریم"</span>, <span class="string">"زهرا"</span>}
         common = contacts.<span class="function">intersection</span>(new_contacts)
-        
-        <span class="function">print</span>(common)  <span class="comment"># {'مریم'}</span>
+
+        <span class="function">print</span>(common) <span class="comment"># {'مریم'}</span>
     </div>
 
     <div class="exercise-box">
@@ -175,7 +179,7 @@
     </div>
 
     <div class="highlight-box">
-        💚 <strong>دمت گرم!</strong> با متدهای مجموعه آشنا شدی. 
+        💚 <strong>دمت گرم!</strong> با متدهای مجموعه آشنا شدی.
         مجموعه‌ها برای کار با داده‌های منحصر‌به‌فرد خیلی مفیدن! 🚀
     </div>
 

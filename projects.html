@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروژه‌های عملی | CheeseCode Academy</title>
+    <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/projects-style.css">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f5b81b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <script src="js/cheese-utils.js"></script>
+    <script src="configs/projects-config.js"></script>
+    <script src="configs/menu-config.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/loading-utils.js"></script>
+    <script src="js/syntax-highlight.js"></script>
+    <script src="js/global-search.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="js/lazy-load.js"></script>
+    <script src="js/channel-modal.js"></script>
+    <script src="js/install-helper.js"></script>
+</head>
+
+<body data-theme="dark">
+
+    <header class="hero-panel">
+        <div class="brand">
+            <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
+            <div class="brand-text">
+                <h1>CheeseCode</h1>
+                <p>پروژه‌های عملی | CheeseCode</p>
+            </div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <a href="index.html" class="back-home-btn" title="بازگشت به صفحه اصلی">↩</a>
+        </div>
+    </header>
+
+    <div class="projects-wrapper">
+        <h2 class="projects-title">💼 پروژه‌های عملی</h2>
+        <p class="projects-desc">با این پروژه‌ها، مهارت‌هات رو واقعی کن!</p>
+
+        <div id="projectsContainer" class="projects-grid"></div>
+    </div>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeProject">&times;</span>
+            <div id="project-content"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var container = document.getElementById('projectsContainer');
+            var projectModal = document.getElementById('projectModal');
+            var closeBtn = document.getElementById('closeProject');
+
+            if (typeof projectsConfig === 'undefined') {
+                container.innerHTML = '<p style="color:#ff6b6b; text-align:center;">❌ projects-config.js پیدا نشد!</p>';
+                return;
+            }
+
+            // ============================================
+            // نمایش کارت‌ها
+            // ============================================
+            container.innerHTML = '';
+
+            projectsConfig.forEach(function (project, index) {
+                var card = document.createElement('div');
+                card.className = 'project-card';
+                card.style.animationDelay = (index * 0.05) + 's';
+
+                var skillsHtml = project.skills.map(function (s) {
+                    return '<span class="project-skill">' + s + '</span>';
+                }).join('');
+
+                card.innerHTML = `
+                <div class="project-header">
+                    <span class="project-icon">${project.icon}</span>
+                    <span class="project-level" style="color: ${project.levelColor}; border-color: ${project.levelColor}40; background: ${project.levelColor}15;">
+                        ${project.level}
+                    </span>
+                </div>
+                <h3 class="project-title">${project.title}</h3>
+                <p class="project-description">${project.description}</p>
+                <div class="project-skills">${skillsHtml}</div>
+                <div class="project-footer">
+                    <span class="project-duration">⏱️ ${project.duration}</span>
+                    <span class="project-course">${project.course === 'python' ? '🐍 پایتون' : '🐧 لینوکس'}</span>
+                </div>
+            `;
+
+                card.onclick = function () {
+                    openProject(project);
+                };
+
+                container.appendChild(card);
+            });
+
+            // ============================================
+            // باز کردن پروژه
+            // ============================================
+            function openProject(project) {
+                projectModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+
+                if (window.CheeseUtils) {
+                    CheeseUtils.makeWindow('#projectModal', 'project-' + project.id);
+                }
+
+                var content = document.getElementById('project-content');
+
+                var stepsHtml = project.steps.map(function (step, i) {
+                    return `
+                    <div class="project-step">
+                        <div class="project-step-num">${toPersianNumber(i + 1)}</div>
+                        <div class="project-step-text">${step}</div>
+                    </div>
+                `;
+                }).join('');
+
+                var skillsHtml = project.skills.map(function (s) {
+                    return '<span class="project-skill">' + s + '</span>';
+                }).join('');
+
+                content.innerHTML = `
+                <div class="project-detail">
+                    <div class="project-detail-header">
+                        <span class="project-detail-icon">${project.icon}</span>
+                        <div style="flex: 1;">
+                            <h2 class="project-detail-title">${project.title}</h2>
+                            <div class="project-detail-meta">
+                                <span class="project-level" style="color: ${project.levelColor}; border-color: ${project.levelColor}40; background: ${project.levelColor}15;">
+                                    ${project.level}
+                                </span>
+                                <span class="project-duration-badge">⏱️ ${project.duration}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="project-detail-desc">${project.description}</p>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">🎯 مهارت‌هایی که یاد می‌گیری</h3>
+                        <div class="project-skills">${skillsHtml}</div>
+                    </div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">📋 مراحل انجام</h3>
+                        <div class="project-steps">${stepsHtml}</div>
+                    </div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">💻 کد شروع</h3>
+                        <div class="code-block">${escapeHtml(project.starterCode)}</div>
+                    </div>
+
+                    <div class="project-hint">
+                        <span class="project-hint-icon">💡</span>
+                        <span>${project.hint}</span>
+                    </div>
+                </div>
+            `;
+
+                // برجسته‌سازی سینتکس
+                if (window.SyntaxHighlight) {
+                    setTimeout(function () {
+                        window.SyntaxHighlight.refresh();
+                    }, 150);
+                }
+            }
+
+            function closeProjectModal() {
+                projectModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // ============================================
+            // ابزارها
+            // ============================================
+            function escapeHtml(text) {
+                if (!text) return '';
+                return String(text)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function toPersianNumber(num) {
+                var persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+                return String(num).replace(/\d/g, function (d) { return persian[d]; });
+            }
+
+            // ============================================
+            // رویدادها
+            // ============================================
+            closeBtn.addEventListener('click', closeProjectModal);
+            window.addEventListener('click', function (e) {
+                if (e.target === projectModal) closeProjectModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && projectModal.style.display === 'block') closeProjectModal();
+            });
+
+            // ============================================
+            // Service Worker
+            // ============================================
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(function (r) { console.log('✅ SW ثبت شد'); })
+                        .catch(function (err) { console.warn('⚠️ SW:', err); });
+                });
+            }
+
+            console.log('🧀 Projects page ready!');
+        })();
+    </script>
+</body>
+
+</html>

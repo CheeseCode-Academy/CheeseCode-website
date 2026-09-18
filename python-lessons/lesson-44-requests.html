@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>با <strong>Requests</strong> آشنا بشی، کتابخانه‌ای برای <strong>کار با HTTP</strong> و دریافت داده از اینترنت.</p>
+        <p>با <strong>Requests</strong> آشنا بشی، کتابخانه‌ای برای <strong>کار با HTTP</strong> و دریافت داده از
+            اینترنت.</p>
     </section>
 
     <section class="section">
@@ -16,7 +17,7 @@
             <li>ارسال داده به سرور</li>
             <li>کار با کوکی‌ها و هدرها</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نصب:</strong> <code>pip install requests</code></p>
         </div>
@@ -24,7 +25,7 @@
 
     <section class="section">
         <h2>💻 دریافت داده (GET)</h2>
-        
+
         <pre class="code-block">import requests
 
 # درخواست GET ساده
@@ -39,7 +40,7 @@ params = {"q": "python", "sort": "stars"}
 response = requests.get("https://api.github.com/search/repositories", params=params)
 print(f"URL: {response.url}")
 print(f"تعداد نتایج: {response.json()['total_count']}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">وضعیت: 200
@@ -56,7 +57,7 @@ URL: https://api.github.com/search/repositories?q=python&sort=stars
 
     <section class="section">
         <h2>💻 ارسال داده (POST)</h2>
-        
+
         <pre class="code-block">import requests
 
 # ارسال JSON
@@ -70,7 +71,7 @@ print(f"پاسخ: {response.json()}")
 data = {"name": "علی", "email": "ali@example.com"}
 response = requests.post("https://httpbin.org/post", data=data)
 print(f"پاسخ: {response.json()['form']}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">وضعیت: 201
@@ -81,7 +82,7 @@ print(f"پاسخ: {response.json()['form']}")</pre>
 
     <section class="section">
         <h2>💻 هدرها</h2>
-        
+
         <pre class="code-block">import requests
 
 # هدرهای سفارشی
@@ -102,7 +103,7 @@ for key, value in response.headers.items():
 
     <section class="section">
         <h2>💻 خطاگیری</h2>
-        
+
         <pre class="code-block">import requests
 
 try:
@@ -121,7 +122,7 @@ except requests.exceptions.RequestException as e:
 
     <section class="section">
         <h2>💻 دانلود فایل</h2>
-        
+
         <pre class="code-block">import requests
 
 # دانلود تصویر
@@ -151,7 +152,7 @@ print("\nدانلود کامل شد!")</pre>
 
     <section class="section">
         <h2>💻 کار با API (مثال)</h2>
-        
+
         <pre class="code-block">import requests
 
 class GitHubAPI:
@@ -193,7 +194,7 @@ if repos:
 
     <section class="section">
         <h2>💻 جلسه (Session)</h2>
-        
+
         <pre class="code-block">import requests
 
 # ایجاد جلسه برای نگهداری کوکی‌ها
@@ -234,16 +235,17 @@ print(response.status_code)</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱:</strong> با requests اطلاعات یک کاربر گیت‌هاب رو بگیر و نمایش بده.</p>
-            
+
             <p><strong>تمرین ۲:</strong> یک فایل تصویر از اینترنت دانلود کن.</p>
-            
+
             <p><strong>تمرین ۳:</strong> با یک API آب و هوا، دمای یک شهر رو بگیر و نمایش بده.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>BeautifulSoup</strong> آشنا میشی که برای <strong>اسکرپینگ</strong> وب خیلی عالیه!</p>
+        <p>توی درس بعدی، با <strong>BeautifulSoup</strong> آشنا میشی که برای <strong>اسکرپینگ</strong> وب خیلی عالیه!
+        </p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

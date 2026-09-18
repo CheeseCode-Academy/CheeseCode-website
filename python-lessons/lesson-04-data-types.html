@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس یاد می‌گیری که هر متغیر یه <strong>نوع</strong> داره و هر نوع برای چیز خاصی استفاده میشه. مثلاً عدد، متن، درست/نادرست و ...</p>
+        <p>توی این درس یاد می‌گیری که هر متغیر یه <strong>نوع</strong> داره و هر نوع برای چیز خاصی استفاده میشه. مثلاً
+            عدد، متن، درست/نادرست و ...</p>
     </section>
 
     <section class="section">
@@ -21,20 +22,21 @@
     <section class="section">
         <h2>💻 نوع str (متن)</h2>
         <p>برای متن از <strong>str</strong> استفاده می‌کنیم. یعنی هر چیزی که داخل کوتیشن (" ") یا (' ') باشه:</p>
-        
+
         <pre class="code-block">نام = "علی"
 پیام = 'سلام به همه!'
 متن_توصیفی = "پایتون عالیه!"</pre>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> حتی اعداد هم اگر داخل کوتیشن باشن، تبدیل به متن میشن: <code>عدد = "۱۲۳"</code></p>
+            <p>💡 <strong>نکته:</strong> حتی اعداد هم اگر داخل کوتیشن باشن، تبدیل به متن میشن: <code>عدد = "۱۲۳"</code>
+            </p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 نوع int (عدد صحیح)</h2>
         <p>برای اعداد بدون اعشار از <strong>int</strong> استفاده می‌کنیم:</p>
-        
+
         <pre class="code-block">سن = 25
 تعداد = 10
 سال_تولد = 1375</pre>
@@ -43,7 +45,7 @@
     <section class="section">
         <h2>💻 نوع float (عدد اعشاری)</h2>
         <p>برای اعداد با اعشار از <strong>float</strong> استفاده می‌کنیم:</p>
-        
+
         <pre class="code-block">قد = 175.5
 وزن = 72.3
 pi = 3.14</pre>
@@ -52,10 +54,10 @@ pi = 3.14</pre>
     <section class="section">
         <h2>💻 نوع bool (درست/نادرست)</h2>
         <p><strong>bool</strong> فقط دو مقدار داره: <code>True</code> (درست) یا <code>False</code> (نادرست):</p>
-        
+
         <pre class="code-block">آیا_باران_می‌بارد = False
 آیا_پایتون_عالی_است = True</pre>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نکته:</strong> <code>True</code> و <code>False</code> حتماً با حرف بزرگ نوشته میشن!</p>
         </div>
@@ -64,7 +66,7 @@ pi = 3.14</pre>
     <section class="section">
         <h2>💻 تشخیص نوع داده با type()</h2>
         <p>با دستور <code>type()</code> می‌تونی ببینی هر متغیر چه نوعی داره:</p>
-        
+
         <pre class="code-block">نام = "علی"
 سن = 25
 قد = 175.5
@@ -74,7 +76,7 @@ print(type(نام))
 print(type(سن))
 print(type(قد))
 print(type(آیا))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">&lt;class 'str'&gt;
@@ -87,7 +89,7 @@ print(type(آیا))</pre>
     <section class="section">
         <h2>💻 تبدیل نوع داده</h2>
         <p>می‌تونی نوع داده رو به هم تبدیل کنی:</p>
-        
+
         <pre class="code-block"># تبدیل متن به عدد
 عدد_متنی = "123"
 عدد_عددی = int(عدد_متنی)
@@ -102,7 +104,7 @@ print(عدد_متنی, type(عدد_متنی))
 pi = 3.14
 pi_صحیح = int(pi)  # اعشار رو حذف میکنه
 print(pi_صحیح)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">123 &lt;class 'int'&gt;
@@ -115,7 +117,8 @@ print(pi_صحیح)</pre>
         <h2>🧠 اشتباهات رایج</h2>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> جمع کردن متن با عدد: <code>"۱۰" + ۵</code></p>
-            <p><strong>✅ راه‌حل:</strong> اول عدد رو به متن تبدیل کن: <code>"۱۰" + str(5)</code> یا عدد رو به int تبدیل کن: <code>int("۱۰") + 5</code></p>
+            <p><strong>✅ راه‌حل:</strong> اول عدد رو به متن تبدیل کن: <code>"۱۰" + str(5)</code> یا عدد رو به int تبدیل
+                کن: <code>int("۱۰") + 5</code></p>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> نوشتن <code>true</code> یا <code>false</code> با حرف کوچک</p>
@@ -126,24 +129,29 @@ print(pi_صحیح)</pre>
     <section class="section">
         <h2>💡 نکته‌ی هوشمندانه</h2>
         <div class="highlight-box">
-            <p>از <code>type()</code> برای <strong>دیباگ</strong> کردن استفاده کن. وقتی مطمئن نیستی که یه متغیر چه نوعی داره، <code>type()</code> رو بزن تا ببینی.</p>
+            <p>از <code>type()</code> برای <strong>دیباگ</strong> کردن استفاده کن. وقتی مطمئن نیستی که یه متغیر چه نوعی
+                داره، <code>type()</code> رو بزن تا ببینی.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> چهار متغیر با انواع <code>str</code>، <code>int</code>، <code>float</code> و <code>bool</code> تعریف کن و با <code>type()</code> نوع هر کدوم رو چاپ کن.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> عدد ۱۵ رو به متن تبدیل کن و با متن "سال" ترکیب کن. (راهنمایی: <code>str()</code>)</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک عدد اعشاری مثل ۷.۸ رو به عدد صحیح تبدیل کن و بعد دوباره به متن تبدیل کن و چاپ کن.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> چهار متغیر با انواع <code>str</code>، <code>int</code>،
+                <code>float</code> و <code>bool</code> تعریف کن و با <code>type()</code> نوع هر کدوم رو چاپ کن.</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> عدد ۱۵ رو به متن تبدیل کن و با متن "سال" ترکیب کن. (راهنمایی:
+                <code>str()</code>)</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک عدد اعشاری مثل ۷.۸ رو به عدد صحیح تبدیل کن و بعد دوباره به
+                متن تبدیل کن و چاپ کن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، یاد می‌گیری که چطور از کاربر <strong>ورودی</strong> بگیری. یعنی برنامه از کاربر سوال بپرسه و کاربر جواب بده!</p>
+        <p>توی درس بعدی، یاد می‌گیری که چطور از کاربر <strong>ورودی</strong> بگیری. یعنی برنامه از کاربر سوال بپرسه و
+            کاربر جواب بده!</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

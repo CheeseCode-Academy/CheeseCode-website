@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>با <strong>NumPy</strong> آشنا بشی، مهم‌ترین کتابخانه برای <strong>محاسبات عددی</strong> و <strong>آرایه‌ها</strong> در پایتون.</p>
+        <p>با <strong>NumPy</strong> آشنا بشی، مهم‌ترین کتابخانه برای <strong>محاسبات عددی</strong> و
+            <strong>آرایه‌ها</strong> در پایتون.</p>
     </section>
 
     <section class="section">
@@ -16,7 +17,7 @@
             <li>عملیات <strong>بردار و ماتریس</strong></li>
             <li>سرعت <strong>بالا</strong> (C++ در پس‌زمینه)</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نصب:</strong> <code>pip install numpy</code></p>
         </div>
@@ -24,7 +25,7 @@
 
     <section class="section">
         <h2>💻 ساخت آرایه</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 # آرایه از لیست
@@ -54,7 +55,7 @@ print("ones:\n", f)
 # ماتریس هویت
 g = np.eye(4)
 print("eye:\n", g)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">آرایه ۱D: [1 2 3 4 5]
@@ -80,7 +81,7 @@ eye:
 
     <section class="section">
         <h2>💻 عملیات روی آرایه‌ها</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 a = np.array([1, 2, 3, 4, 5])
@@ -105,7 +106,7 @@ print("انحراف معیار:", np.std(a))
 print("بیشترین:", np.max(a))
 print("کمترین:", np.min(a))
 print("مجموع:", np.sum(a))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">جمع: [11 22 33 44 55]
@@ -127,7 +128,7 @@ print("مجموع:", np.sum(a))</pre>
 
     <section class="section">
         <h2>💻 ایندکس و برش</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 a = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90])
@@ -148,7 +149,7 @@ b = np.array([[1, 2, 3, 4],
 print("سطر اول:", b[0])
 print("ستون دوم:", b[:, 1])
 print("مربع وسط:", b[1:3, 1:3])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">اولین: 10
@@ -166,7 +167,7 @@ print("مربع وسط:", b[1:3, 1:3])</pre>
 
     <section class="section">
         <h2>💻 عملیات ماتریسی</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 A = np.array([[1, 2], [3, 4]])
@@ -188,7 +189,7 @@ print("معکوس A:\n", np.linalg.inv(A))
 # مقادیر ویژه
 eigenvalues, eigenvectors = np.linalg.eig(A)
 print("مقادیر ویژه:", eigenvalues)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">ضرب ماتریسی:
@@ -210,7 +211,7 @@ print("مقادیر ویژه:", eigenvalues)</pre>
 
     <section class="section">
         <h2>💻 Broadcasting</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 a = np.array([1, 2, 3, 4, 5])
@@ -230,7 +231,7 @@ print("A + B:\n", A + B)
 # شرط‌ها
 print("a > 3:", a > 3)
 print("شرط:", np.where(a > 3, "بزرگ", "کوچک"))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">a + 10: [11 12 13 14 15]
@@ -245,7 +246,7 @@ a > 3: [False False False  True  True]
 
     <section class="section">
         <h2>💻 تغییر شکل آرایه</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 a = np.arange(12)
@@ -266,7 +267,7 @@ a2 = np.array([4, 5, 6])
 print("اتصال افقی:", np.concatenate([a1, a2]))
 print("اتصال عمودی:", np.vstack([a1, a2]))
 print("اتصال افقی (hstack):", np.hstack([a1, a2]))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">اصلی: [ 0  1  2  3  4  5  6  7  8  9 10 11]
@@ -284,7 +285,7 @@ flatten: [ 0  1  2  3  4  5  6  7  8  9 10 11]
 
     <section class="section">
         <h2>💻 اعداد تصادفی</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 np.random.seed(42)  # برای تکرارپذیری
@@ -308,7 +309,7 @@ print("انتخاب:", np.random.choice(arr, size=3, replace=False))
 # مرتب‌سازی تصادفی
 np.random.shuffle(arr)
 print("مرتب‌سازی:", arr)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">یکنواخت: [0.37454012 0.95071431 0.73199394 0.59865848 0.15601864]
@@ -325,7 +326,7 @@ print("مرتب‌سازی:", arr)</pre>
 
     <section class="section">
         <h2>💻 ذخیره و خواندن</h2>
-        
+
         <pre class="code-block">import numpy as np
 
 a = np.array([1, 2, 3, 4, 5])
@@ -375,9 +376,9 @@ print(f"NumPy: {time.time() - start:.3f}s")</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱:</strong> آرایه‌ای از اعداد ۰ تا ۱۰۰ بساز و میانگین، میانه و انحراف معیار رو حساب کن.</p>
-            
+
             <p><strong>تمرین ۲:</strong> یک ماتریس ۵×۵ از اعداد تصادفی بساز و ترانهاده و دترمینانش رو حساب کن.</p>
-            
+
             <p><strong>تمرین ۳:</strong> دو آرایه ۱×۱۰ بساز و ضرب داخلی (dot product)شون رو حساب کن.</p>
         </div>
     </section>

@@ -4,22 +4,25 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>لیست‌ها</strong> آشنا میشی. لیست‌ها مثل یه <strong>کیف</strong> هستن که می‌تونی چندین چیز رو توی یه جا ذخیره کنی و به‌راحتی بهشون دسترسی داشته باشی.</p>
+        <p>توی این درس با <strong>لیست‌ها</strong> آشنا میشی. لیست‌ها مثل یه <strong>کیف</strong> هستن که می‌تونی چندین
+            چیز رو توی یه جا ذخیره کنی و به‌راحتی بهشون دسترسی داشته باشی.</p>
     </section>
 
     <section class="section">
         <h2>📖 لیست چیست؟</h2>
-        <p>لیست یه <strong>ساختار داده</strong> هست که می‌تونه چندین مقدار رو توی خودش نگه داره. هر مقدار توی لیست می‌تونه از هر نوعی باشه (عدد، متن، حتی خود لیست!).</p>
+        <p>لیست یه <strong>ساختار داده</strong> هست که می‌تونه چندین مقدار رو توی خودش نگه داره. هر مقدار توی لیست
+            می‌تونه از هر نوعی باشه (عدد، متن، حتی خود لیست!).</p>
         <p>فرض کن لیست مثل یه <strong>لیست خرید</strong> هست که چندین قلم کالا توش هست و به ترتیب نوشته شدن.</p>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> لیست‌ها با <strong>کروشه</strong> [ ] تعریف میشن و اعضاشون با <strong>کاما</strong> (,) از هم جدا میشن.</p>
+            <p>💡 <strong>یادت باشه:</strong> لیست‌ها با <strong>کروشه</strong> [ ] تعریف میشن و اعضاشون با
+                <strong>کاما</strong> (,) از هم جدا میشن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تعریف لیست</h2>
-        
+
         <pre class="code-block"># لیست خالی
 لیست_خالی = []
 
@@ -33,7 +36,7 @@
 مختلط = ["علی", 25, 175.5, True]
 
 print(میوه‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['سیب', 'موز', 'پرتقال']</pre>
@@ -42,15 +45,16 @@ print(میوه‌ها)</pre>
 
     <section class="section">
         <h2>💻 دسترسی به اعضای لیست</h2>
-        <p>با استفاده از <strong>ایندکس</strong> (شماره) می‌تونی به هر عضو لیست دسترسی پیدا کنی. ایندکس از <strong>۰</strong> شروع میشه:</p>
-        
+        <p>با استفاده از <strong>ایندکس</strong> (شماره) می‌تونی به هر عضو لیست دسترسی پیدا کنی. ایندکس از
+            <strong>۰</strong> شروع میشه:</p>
+
         <pre class="code-block">میوه‌ها = ["سیب", "موز", "پرتقال", "انگور", "هندوانه"]
 
 print(میوه‌ها[0])  # اولین عضو
 print(میوه‌ها[2])  # سومین عضو
 print(میوه‌ها[-1]) # آخرین عضو
 print(میوه‌ها[-2]) # یکی مانده به آخر</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سیب
@@ -58,16 +62,17 @@ print(میوه‌ها[-2]) # یکی مانده به آخر</pre>
 هندوانه
 انگور</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> ایندکس منفی یعنی از <strong>آخر</strong> لیست بشمار. <code>-1</code> یعنی آخرین عضو، <code>-2</code> یعنی یکی مانده به آخر و ...</p>
+            <p>💡 <strong>نکته:</strong> ایندکس منفی یعنی از <strong>آخر</strong> لیست بشمار. <code>-1</code> یعنی آخرین
+                عضو، <code>-2</code> یعنی یکی مانده به آخر و ...</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 برش (Slicing) در لیست</h2>
         <p>با برش می‌تونی قسمتی از لیست رو استخراج کنی:</p>
-        
+
         <pre class="code-block">اعداد = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 print(اعداد[2:6])   # از ایندکس ۲ تا ۵
@@ -75,7 +80,7 @@ print(اعداد[:4])    # از ابتدا تا ایندکس ۳
 print(اعداد[6:])    # از ایندکس ۶ تا آخر
 print(اعداد[::2])   # از ابتدا تا آخر، هر ۲ تا یکی
 print(اعداد[::-1])  # برعکس کردن لیست</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">[2, 3, 4, 5]
@@ -89,7 +94,7 @@ print(اعداد[::-1])  # برعکس کردن لیست</pre>
     <section class="section">
         <h2>💻 تغییر اعضای لیست</h2>
         <p>لیست‌ها <strong>تغییرپذیر</strong> هستن، یعنی می‌تونی اعضاشون رو عوض کنی:</p>
-        
+
         <pre class="code-block">میوه‌ها = ["سیب", "موز", "پرتقال"]
 print(میوه‌ها)
 
@@ -98,7 +103,7 @@ print(میوه‌ها)
 
 میوه‌ها[0:2] = ["هلو", "شلیل"]  # تغییر چند عضو
 print(میوه‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['سیب', 'موز', 'پرتقال']
@@ -109,7 +114,7 @@ print(میوه‌ها)</pre>
 
     <section class="section">
         <h2>💻 اضافه کردن به لیست</h2>
-        
+
         <pre class="code-block">میوه‌ها = ["سیب", "موز"]
 
 # اضافه کردن به انتهای لیست
@@ -123,7 +128,7 @@ print(میوه‌ها)
 # اضافه کردن چند عضو
 میوه‌ها.extend(["هلو", "شلیل"])
 print(میوه‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['سیب', 'موز', 'پرتقال']
@@ -134,7 +139,7 @@ print(میوه‌ها)</pre>
 
     <section class="section">
         <h2>💻 حذف از لیست</h2>
-        
+
         <pre class="code-block">میوه‌ها = ["سیب", "موز", "پرتقال", "انگور", "هلو"]
 
 # حذف با ایندکس
@@ -154,7 +159,7 @@ print(میوه‌ها)
 # پاک کردن کل لیست
 میوه‌ها.clear()
 print(میوه‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">پرتقال
@@ -168,7 +173,7 @@ print(میوه‌ها)</pre>
 
     <section class="section">
         <h2>💻 حلقه for روی لیست</h2>
-        
+
         <pre class="code-block">میوه‌ها = ["سیب", "موز", "پرتقال"]
 
 # روش اول: مستقیم روی اعضا
@@ -180,7 +185,7 @@ print("---")
 # روش دوم: با ایندکس
 for i in range(len(میوه‌ها)):
     print(i, ":", میوه‌ها[i])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سیب
@@ -195,7 +200,7 @@ for i in range(len(میوه‌ها)):
 
     <section class="section">
         <h2>💻 عملگرها روی لیست</h2>
-        
+
         <pre class="code-block">a = [1, 2, 3]
 b = [4, 5, 6]
 
@@ -210,7 +215,7 @@ print(d)
 # بررسی عضویت
 print(2 in a)
 print(7 in a)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">[1, 2, 3, 4, 5, 6]
@@ -232,7 +237,8 @@ False</pre>
 b = a  # هر دو به یه لیست اشاره می‌کنن!
 b[0] = 100
 print(a)  # [100, 2, 3]</pre>
-            <p><strong>✅ راه‌حل:</strong> برای کپی واقعی از <code>b = a.copy()</code> یا <code>b = a[:]</code> استفاده کن.</p>
+            <p><strong>✅ راه‌حل:</strong> برای کپی واقعی از <code>b = a.copy()</code> یا <code>b = a[:]</code> استفاده
+                کن.</p>
         </div>
     </section>
 
@@ -252,17 +258,20 @@ print(a)  # [5, 4, 3, 2, 1]</pre>
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> لیستی از ۵ اسم از دوستانت بساز و با حلقه <code>for</code> همه رو چاپ کن.</p>
-            
+            <p><strong>تمرین ۱ (ساده):</strong> لیستی از ۵ اسم از دوستانت بساز و با حلقه <code>for</code> همه رو چاپ کن.
+            </p>
+
             <p><strong>تمرین ۲ (متوسط):</strong> لیستی از اعداد بساز و جمع همه‌شون رو محاسبه کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر ۵ عدد بگیره، توی لیست ذخیره کنه و بعد بزرگترین و کوچکترین عدد رو پیدا کنه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر ۵ عدد بگیره، توی لیست ذخیره کنه و
+                بعد بزرگترین و کوچکترین عدد رو پیدا کنه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>متدهای لیست</strong> بیشتر آشنا میشی و یاد می‌گیری چطور لیست‌ها رو مرتب کنی، بگردی و کارهای پیشرفته‌تر روشون انجام بدی.</p>
+        <p>توی درس بعدی، با <strong>متدهای لیست</strong> بیشتر آشنا میشی و یاد می‌گیری چطور لیست‌ها رو مرتب کنی، بگردی و
+            کارهای پیشرفته‌تر روشون انجام بدی.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

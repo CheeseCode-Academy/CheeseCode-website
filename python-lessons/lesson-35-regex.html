@@ -4,12 +4,14 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>عبارت‌های منظم</strong> (Regular Expressions) آشنا میشی که ابزاری قدرتمند برای <strong>جستجو</strong> و <strong>تطابق</strong> الگوها در متن هستن.</p>
+        <p>توی این درس با <strong>عبارت‌های منظم</strong> (Regular Expressions) آشنا میشی که ابزاری قدرتمند برای
+            <strong>جستجو</strong> و <strong>تطابق</strong> الگوها در متن هستن.</p>
     </section>
 
     <section class="section">
         <h2>📖 عبارت منظم چیست؟</h2>
-        <p>عبارت منظم (Regex) یه <strong>الگو</strong> (Pattern) هست که برای پیدا کردن <strong>تطابق</strong> در متن استفاده میشه.</p>
+        <p>عبارت منظم (Regex) یه <strong>الگو</strong> (Pattern) هست که برای پیدا کردن <strong>تطابق</strong> در متن
+            استفاده میشه.</p>
         <p>با Regex می‌تونی:</p>
         <ul>
             <li>ایمیل‌ها رو پیدا کنی</li>
@@ -17,7 +19,7 @@
             <li>کلماتی با الگوی خاص رو پیدا کنی</li>
             <li>و خیلی کارهای دیگه!</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> Regex در پایتون با ماژول <code>re</code> کار می‌کنه.</p>
         </div>
@@ -25,7 +27,7 @@
 
     <section class="section">
         <h2>💻 مفاهیم پایه Regex</h2>
-        
+
         <pre class="code-block">import re
 
 # کاراکترهای خاص:
@@ -54,7 +56,7 @@ if تطابق:
 تطابق = re.search(الگو_ایمیل, متن)
 if تطابق:
     print(f"ایمیل: {تطابق.group()}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">شماره: 0912-345-6789
@@ -64,7 +66,7 @@ if تطابق:
 
     <section class="section">
         <h2>💻 متدهای اصلی re</h2>
-        
+
         <pre class="code-block">import re
 
 متن = "سلام علی، سلام زهرا، سلام رضا"
@@ -81,7 +83,7 @@ print(f"همه: {نتایج}")
 # finditer() - تکرار روی تطابق‌ها
 for تطابق in re.finditer(r"سلام (\w+)", متن):
     print(f"تطابق: {تطابق.group(1)} در موقعیت {تطابق.start()}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">اولین: علی
@@ -94,7 +96,7 @@ for تطابق in re.finditer(r"سلام (\w+)", متن):
 
     <section class="section">
         <h2>💻 کاراکترهای ویژه</h2>
-        
+
         <pre class="code-block">import re
 
 متن = "سلام! قیمت 1500 تومان، قیمت 2000 تومان"
@@ -114,7 +116,7 @@ print(f"فاصله‌ها: {فاصله‌ها}")
 # \D = غیر عدد
 غیر_عدد = re.findall(r"\D+", متن)
 print(f"غیر عدد: {غیر_عدد}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">اعداد: ['1500', '2000']
@@ -126,7 +128,7 @@ print(f"غیر عدد: {غیر_عدد}")</pre>
 
     <section class="section">
         <h2>💻 گروه‌ها (Groups)</h2>
-        
+
         <pre class="code-block">import re
 
 # استخراج تاریخ
@@ -151,7 +153,7 @@ if تطابق:
 
     <section class="section">
         <h2>💻 جایگزینی با regex</h2>
-        
+
         <pre class="code-block">import re
 
 متن = "شماره من 0912-345-6789 و شماره شما 0912-987-6543 است."
@@ -164,7 +166,7 @@ print(f"متن مخفی: {متن_مخفی}")
 الگو = r"(\d{4})-(\d{3})-(\d{4})"
 متن_فرمت = re.sub(الگو, r"(\1) \2-\3", متن)
 print(f"متن فرمت: {متن_فرمت}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">متن مخفی: شماره من ***-***-**** و شماره شما ***-***-**** است.
@@ -174,7 +176,7 @@ print(f"متن فرمت: {متن_فرمت}")</pre>
 
     <section class="section">
         <h2>💻 اعتبارسنجی با regex</h2>
-        
+
         <pre class="code-block">import re
 
 def اعتبارسنجی_ایمیل(ایمیل):
@@ -194,7 +196,7 @@ print(اعتبارسنجی_تلفن("0912"))         # False</pre>
 
     <section class="section">
         <h2>💻 regex پیشرفته</h2>
-        
+
         <pre class="code-block">import re
 
 # استخراج URL
@@ -212,7 +214,7 @@ print(f"کلمات با 'پ': {کلمات_با_پ}")
 متن = "نام: علی, سن: 25, شهر: تهران"
 نتایج = re.findall(r":\s*([^,]+)", متن)
 print(f"مقادیر: {نتایج}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">URLها: ['https://example.com', 'https://google.com']
@@ -243,10 +245,11 @@ print(متن_جدید)</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> با regex تمام اعداد یک متن رو پیدا کن.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> با regex کدهای پستی (۵ رقمی) رو از متن استخراج کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با regex یک اعتبارسنجی کامل برای شماره تلفن همراه (شروع با ۰۹ و ۱۱ رقم) بنویس.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با regex یک اعتبارسنجی کامل برای شماره تلفن همراه (شروع با ۰۹ و
+                ۱۱ رقم) بنویس.</p>
         </div>
     </section>
 

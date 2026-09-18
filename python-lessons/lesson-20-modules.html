@@ -4,22 +4,25 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>ماژول‌ها</strong> و <strong>import</strong> آشنا میشی. ماژول‌ها بهت کمک می‌کنن کدها رو سازماندهی کنی و از کدهای آماده استفاده کنی.</p>
+        <p>توی این درس با <strong>ماژول‌ها</strong> و <strong>import</strong> آشنا میشی. ماژول‌ها بهت کمک می‌کنن کدها رو
+            سازماندهی کنی و از کدهای آماده استفاده کنی.</p>
     </section>
 
     <section class="section">
         <h2>📖 ماژول چیست؟</h2>
-        <p>ماژول (Module) یه <strong>فایل پایتون</strong> هست که شامل توابع، کلاس‌ها و متغیرهای مختلفه. با <code>import</code> می‌تونی از ماژول‌ها استفاده کنی.</p>
+        <p>ماژول (Module) یه <strong>فایل پایتون</strong> هست که شامل توابع، کلاس‌ها و متغیرهای مختلفه. با
+            <code>import</code> می‌تونی از ماژول‌ها استفاده کنی.</p>
         <p>فرض کن ماژول مثل یه <strong>کتابخانه</strong> هست که پر از ابزارهای آماده‌ست.</p>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> هر فایل <code>.py</code> یه ماژول هست و می‌تونی ازش <code>import</code> کنی.</p>
+            <p>💡 <strong>یادت باشه:</strong> هر فایل <code>.py</code> یه ماژول هست و می‌تونی ازش <code>import</code>
+                کنی.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 import ماژول‌های استاندارد</h2>
-        
+
         <pre class="code-block">import math
 import random
 import datetime
@@ -35,7 +38,7 @@ print("انتخاب تصادفی:", random.choice(["سیب", "موز", "پرتق
 # استفاده از datetime
 اکنون = datetime.datetime.now()
 print("تاریخ و زمان:", اکنون)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">عدد پی: 3.141592653589793
@@ -48,13 +51,13 @@ print("تاریخ و زمان:", اکنون)</pre>
 
     <section class="section">
         <h2>💻 import با اسم مستعار (alias)</h2>
-        
+
         <pre class="code-block">import math as m
 import datetime as dt
 
 print(m.pi)
 print(dt.datetime.now())</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">3.141592653589793
@@ -64,7 +67,7 @@ print(dt.datetime.now())</pre>
 
     <section class="section">
         <h2>💻 import فقط بخشی از ماژول</h2>
-        
+
         <pre class="code-block">from math import pi, sqrt
 from random import randint, choice
 
@@ -72,7 +75,7 @@ print("pi:", pi)
 print("جذر ۲۵:", sqrt(25))
 print("عدد تصادفی:", randint(1, 100))
 print("انتخاب:", choice(["الف", "ب", "ج"]))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">pi: 3.141592653589793
@@ -80,37 +83,39 @@ print("انتخاب:", choice(["الف", "ب", "ج"]))</pre>
 عدد تصادفی: 42
 انتخاب: ب</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> این روش باعث میشه کد <strong>کوتاه‌تر</strong> بشه، ولی ممکنه نام‌ها با هم تداخل پیدا کنن.</p>
+            <p>💡 <strong>نکته:</strong> این روش باعث میشه کد <strong>کوتاه‌تر</strong> بشه، ولی ممکنه نام‌ها با هم
+                تداخل پیدا کنن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 import همه چیز (توصیه نمی‌شه)</h2>
-        
+
         <pre class="code-block">from math import *
 
 print(pi)
 print(sqrt(16))
 print(cos(0))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">3.141592653589793
 4.0
 1.0</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>⚠️ <strong>هشدار:</strong> این روش رو <strong>استفاده نکن</strong> چون ممکنه نام‌ها با هم تداخل پیدا کنن و کد گیج‌کننده بشه.</p>
+            <p>⚠️ <strong>هشدار:</strong> این روش رو <strong>استفاده نکن</strong> چون ممکنه نام‌ها با هم تداخل پیدا کنن
+                و کد گیج‌کننده بشه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 ساخت ماژول خودمان</h2>
         <p>فرض کن فایل <code>ابزار.py</code> رو می‌سازیم:</p>
-        
+
         <pre class="code-block"># فایل: ابزار.py
 def سلام(نام):
     return f"سلام {نام}!"
@@ -119,15 +124,15 @@ def جمع(a, b):
     return a + b
 
 پیش‌فرض = "سلام"</pre>
-        
+
         <p>حالا می‌تونیم ازش استفاده کنیم:</p>
-        
+
         <pre class="code-block">import ابزار
 
 print(ابزار.سلام("علی"))
 print(ابزار.جمع(5, 3))
 print(ابزار.پیش‌فرض)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام علی!
@@ -138,7 +143,7 @@ print(ابزار.پیش‌فرض)</pre>
 
     <section class="section">
         <h2>💻 ماژول‌های مفید استاندارد</h2>
-        
+
         <pre class="code-block">import os
 import sys
 import json
@@ -158,7 +163,7 @@ print("JSON:", json_string)
 # time - زمان
 time.sleep(1)  # ۱ ثانیه توقف
 print("بعد از ۱ ثانیه")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">پوشه فعلی: /home/user
@@ -171,14 +176,14 @@ JSON: {"نام": "علی", "سن": 25}
     <section class="section">
         <h2>💻 نصب پکیج‌های خارجی</h2>
         <p>با <code>pip</code> می‌تونی پکیج‌های خارجی نصب کنی:</p>
-        
+
         <pre class="code-block"># در خط فرمان:
 pip install requests
 pip install numpy
 pip install pandas</pre>
-        
+
         <p>حالا می‌تونی ازشون استفاده کنی:</p>
-        
+
         <pre class="code-block">import requests
 
 response = requests.get("https://api.github.com")
@@ -188,7 +193,7 @@ print(response.status_code)</pre>
     <section class="section">
         <h2>💻 __name__ و __main__</h2>
         <p>برای تشخیص اینکه فایل به عنوان ماژول import شده یا مستقیم اجرا شده:</p>
-        
+
         <pre class="code-block"># فایل: مثال.py
 def تابع():
     print("این یک تابع است")
@@ -232,17 +237,21 @@ print(dir(math))  # همه چیزهای موجود در math رو نشون می�
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> با <code>import math</code> سینوس ۳۰ درجه رو حساب کن. (راهنمایی: <code>math.radians()</code> و <code>math.sin()</code>)</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> با <code>random</code> یه عدد تصادفی بین ۱ تا ۱۰۰ تولید کن و به کاربر بگو حدس بزنه.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک ماژول به اسم <code>عملیات</code> بساز که شامل توابع جمع، تفریق، ضرب و تقسیم باشه. سپس ازش در برنامه اصلی استفاده کن.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> با <code>import math</code> سینوس ۳۰ درجه رو حساب کن. (راهنمایی:
+                <code>math.radians()</code> و <code>math.sin()</code>)</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> با <code>random</code> یه عدد تصادفی بین ۱ تا ۱۰۰ تولید کن و به کاربر
+                بگو حدس بزنه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک ماژول به اسم <code>عملیات</code> بساز که شامل توابع جمع،
+                تفریق، ضرب و تقسیم باشه. سپس ازش در برنامه اصلی استفاده کن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>کار با فایل‌ها</strong> آشنا میشی. یاد می‌گیری چطور اطلاعات رو توی فایل ذخیره کنی و ازش بخونی.</p>
+        <p>توی درس بعدی، با <strong>کار با فایل‌ها</strong> آشنا میشی. یاد می‌گیری چطور اطلاعات رو توی فایل ذخیره کنی و
+            ازش بخونی.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

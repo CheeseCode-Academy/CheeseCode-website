@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس، یک <strong>پروژه‌ی کامل</strong> می‌سازیم که همه‌چیزهایی که در ۴۰ درس یاد گرفتی رو به کار می‌گیره.</p>
+        <p>توی این درس، یک <strong>پروژه‌ی کامل</strong> می‌سازیم که همه‌چیزهایی که در ۴۰ درس یاد گرفتی رو به کار
+            می‌گیره.</p>
         <p>پروژه: <strong>سیستم مدیریت وظایف (To-Do List)</strong> با رابط کاربری خط فرمان</p>
     </section>
 
@@ -23,7 +24,7 @@
 
     <section class="section">
         <h2>💻 ساختار پروژه</h2>
-        
+
         <pre class="code-block">todo_project/
 ├── todo/
 │   ├── __init__.py
@@ -43,7 +44,7 @@
 
     <section class="section">
         <h2>💻 مدل دیتابیس (models.py)</h2>
-        
+
         <pre class="code-block">from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
@@ -82,7 +83,7 @@ class Task:
 
     <section class="section">
         <h2>💻 دیتابیس (database.py)</h2>
-        
+
         <pre class="code-block">import sqlite3
 from typing import List, Optional
 from datetime import datetime
@@ -181,7 +182,7 @@ class Database:
 
     <section class="section">
         <h2>💻 مدیریت وظایف (todo_manager.py)</h2>
-        
+
         <pre class="code-block">from typing import List, Optional
 from .models import Task
 from .database import Database
@@ -233,7 +234,7 @@ class TodoManager:
 
     <section class="section">
         <h2>💻 رابط کاربری (cli.py)</h2>
-        
+
         <pre class="code-block">import sys
 from .todo_manager import TodoManager
 
@@ -368,14 +369,14 @@ if __name__ == "__main__":
 
     <section class="section">
         <h2>💻 فایل requirements.txt</h2>
-        
+
         <pre class="code-block"># برای این پروژه نیازی به پکیج خاصی نیست
 # فقط پایتون استاندارد</pre>
     </section>
 
     <section class="section">
         <h2>💻 تست‌ها (test_todo_manager.py)</h2>
-        
+
         <pre class="code-block">import unittest
 import os
 from todo.todo_manager import TodoManager
@@ -427,7 +428,7 @@ if __name__ == "__main__":
 
     <section class="section">
         <h2>💻 اجرای پروژه</h2>
-        
+
         <pre class="code-block"># نصب به صورت editable
 pip install -e .
 

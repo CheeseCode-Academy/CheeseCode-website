@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کوییزها | CheeseCode Academy</title>
+    <link rel="stylesheet" href="styles/index-style.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <meta name="theme-color" content="#f5b81b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/notes-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
+    <script src="js/loading-utils.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="configs/quizzes-config.js"></script>
+    <script src="js/cheese-utils.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/install-helper.js"></script>
+</head>
+
+<body>
+
+    <header
+        style="width:100%; max-width:500px; display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; padding:0.5rem 1rem; background:rgba(10,14,26,0.5); border-radius:16px; border:1px solid rgba(245,184,27,0.06);">
+        <div style="display:flex; align-items:center; gap:0.8rem;">
+            <img src="images/logo.jpeg" alt="Logo"
+                style="width:40px; height:40px; border-radius:12px; object-fit:cover; border:1px solid rgba(245,184,27,0.15);">
+            <div>
+                <h1 style="font-size:1.1rem; color:#f5b81b; margin:0; font-family:'Courier New',monospace;">CheeseCode
+                    کوییزها</h1>
+                <p
+                    style="font-size:0.6rem; color:rgba(245,184,27,0.5); margin:0; letter-spacing:2px; font-family:'Courier New',monospace;">
+                    CheeseCode Quizzes</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="glass-card">
+        <h1>کوییزهای چیزکد</h1>
+        <p>کوییز کدوم دوره رو می‌خوای ببینی؟</p>
+        <div id="course-list"></div>
+    </div>
+
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <h2>🎓 خوش آمدید</h2>
+            <p style="margin:1rem 0;">آموزش ساده پایتون مثل خوردن پنیر 🍕</p>
+            <a href="https://ble.ir/cheesecode" class="btn-link">👉 ورود به کانال بله</a>
+            <a href="https://ble.ir/cheese_code" class="btn-link"
+                style="background:transparent; color:#f5b81b; border:1px solid #f5b81b;">ارتباط با ادمین</a>
+            <button onclick="document.getElementById('welcomeModal').style.display='none'"
+                style="margin-top:10px; background:none; border:none; color:#8899aa; cursor:pointer;">بستن</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var container = document.getElementById('course-list');
+            if (typeof quizzesCoursesConfig !== 'undefined' && quizzesCoursesConfig.length > 0) {
+                container.innerHTML = '';
+                for (var i = 0; i < quizzesCoursesConfig.length; i++) {
+                    var course = quizzesCoursesConfig[i];
+                    var link = document.createElement('a');
+                    link.className = 'course-card';
+                    link.href = course.url;
+                    link.innerHTML = '🚀 ' + course.title;
+                    container.appendChild(link);
+                }
+            }
+
+            if (localStorage.getItem('cheese_welcome_shown')) {
+                document.getElementById('welcomeModal').style.display = 'none';
+            } else {
+                document.getElementById('welcomeModal').style.display = 'flex';
+                localStorage.setItem('cheese_welcome_shown', 'true');
+            }
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(function (r) { console.log('✅ SW ثبت شد'); })
+                        .catch(function (err) { console.warn('⚠️ SW:', err); });
+                });
+            }
+
+            console.log('🧀 Quizzes index page ready!');
+        })();
+    </script>
+</body>
+
+</html>

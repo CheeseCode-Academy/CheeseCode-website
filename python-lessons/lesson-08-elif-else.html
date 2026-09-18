@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس یاد می‌گیری که چطور با <code>elif</code> و <code>else</code> شرط‌های <strong>چندگانه</strong> و <strong>پیچیده‌تر</strong> بنویسی.</p>
+        <p>توی این درس یاد می‌گیری که چطور با <code>elif</code> و <code>else</code> شرط‌های <strong>چندگانه</strong> و
+            <strong>پیچیده‌تر</strong> بنویسی.</p>
     </section>
 
     <section class="section">
@@ -17,15 +18,16 @@
             <li>... هر تعداد <code>elif</code> که نیاز باشه</li>
             <li><code>else</code> - اگر هیچ کدوم از شرط‌ها درست نبود</li>
         </ul>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> فقط <strong>یک</strong> <code>if</code> و <strong>یک</strong> <code>else</code> می‌تونی داشته باشی، ولی تعداد <code>elif</code> محدودیتی نداره.</p>
+            <p>💡 <strong>یادت باشه:</strong> فقط <strong>یک</strong> <code>if</code> و <strong>یک</strong>
+                <code>else</code> می‌تونی داشته باشی، ولی تعداد <code>elif</code> محدودیتی نداره.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 مثال: سیستم نمره‌دهی</h2>
-        
+
         <pre class="code-block">نمره = float(input("نمره خود را (۰ تا ۲۰) وارد کنید: "))
 
 if نمره >= 18:
@@ -40,7 +42,7 @@ elif نمره >= 10:
     print("وضعیت: نیاز به تلاش")
 else:
     print("وضعیت: مردود")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">نمره خود را (۰ تا ۲۰) وارد کنید: 15.5
@@ -50,7 +52,7 @@ else:
 
     <section class="section">
         <h2>💻 مثال: تشخیص فصول سال</h2>
-        
+
         <pre class="code-block">ماه = int(input("شماره ماه (۱ تا ۱۲) را وارد کنید: "))
 
 if 1 <= ماه <= 3:
@@ -63,7 +65,7 @@ elif 10 <= ماه <= 12:
     print("فصل زمستان")
 else:
     print("شماره ماه نامعتبر است!")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">شماره ماه (۱ تا ۱۲) را وارد کنید: 7
@@ -74,7 +76,7 @@ else:
     <section class="section">
         <h2>💻 شرط‌های تو در تو با elif</h2>
         <p>می‌تونی <code>if</code> رو داخل <code>elif</code> هم بذاری:</p>
-        
+
         <pre class="code-block">سن = int(input("سن خود را وارد کنید: "))
 
 if سن < 0:
@@ -90,7 +92,7 @@ elif سن < 60:
     print("بزرگسال")
 else:
     print("سالمند")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 8
@@ -100,7 +102,7 @@ else:
 
     <section class="section">
         <h2>💻 استفاده از عملگرهای منطقی در elif</h2>
-        
+
         <pre class="code-block">x = float(input("عدد را وارد کنید: "))
 
 if x > 0 and x < 10:
@@ -111,7 +113,7 @@ elif x >= 20 and x < 30:
     print("عدد بین ۲۰ و ۳۰ است")
 else:
     print("عدد خارج از بازه ۰ تا ۳۰ است")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">عدد را وارد کنید: 15
@@ -127,7 +129,8 @@ else:
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> استفاده از <code>else</code> با شرط: <code>else x > 10:</code></p>
-            <p><strong>✅ راه‌حل:</strong> <code>else</code> هیچ شرطی نداره و برای مواقعی که همه شرط‌ها نادرست بودن استفاده میشه.</p>
+            <p><strong>✅ راه‌حل:</strong> <code>else</code> هیچ شرطی نداره و برای مواقعی که همه شرط‌ها نادرست بودن
+                استفاده میشه.</p>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> نوشتن شرط‌های همپوشانی (overlap):</p>
@@ -155,17 +158,21 @@ if x >= 10 and x <= 20:
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که "کوچک"، "متوسط" یا "بزرگ" هست. (کوچک: کمتر از ۱۰، متوسط: بین ۱۰ تا ۵۰، بزرگ: بیشتر از ۵۰)</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر سه عدد بگیره و اون‌ها رو به ترتیب صعودی مرتب کنه و چاپ کنه.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که آیا <strong>عدد اول</strong> هست یا نه. (راهنمایی: عدد اول فقط بر ۱ و خودش بخش‌پذیره)</p>
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که "کوچک"، "متوسط" یا
+                "بزرگ" هست. (کوچک: کمتر از ۱۰، متوسط: بین ۱۰ تا ۵۰، بزرگ: بیشتر از ۵۰)</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر سه عدد بگیره و اون‌ها رو به ترتیب صعودی
+                مرتب کنه و چاپ کنه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که آیا
+                <strong>عدد اول</strong> هست یا نه. (راهنمایی: عدد اول فقط بر ۱ و خودش بخش‌پذیره)</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>حلقه while</strong> آشنا میشی. حلقه‌ها بهت کمک می‌کنن که یه کار رو <strong>تکرار</strong> کنی تا وقتی که یه شرط برقراره.</p>
+        <p>توی درس بعدی، با <strong>حلقه while</strong> آشنا میشی. حلقه‌ها بهت کمک می‌کنن که یه کار رو
+            <strong>تکرار</strong> کنی تا وقتی که یه شرط برقراره.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

@@ -1,0 +1,65 @@
+{
+    "id": "python-quiz-02",
+    "title": "کوییز درس 2: چاپ کردن با print",
+    "description": "تست دانش تو درباره دستور print",
+    "course": "python",
+    "lessonFile": "lesson-02-print.html",
+    "passScore": 70,
+    "questions": [
+        {
+            "question": "برای چاپ متن در پایتون از چه دستوری استفاده می‌کنیم؟",
+            "options": [
+                "echo()",
+                "print()",
+                "console.log()",
+                "printf()"
+            ],
+            "correct": 1,
+            "explanation": "در پایتون از print() برای چاپ استفاده می‌شود."
+        },
+        {
+            "question": "خروجی این کد چیست؟ print(\"Hello\")",
+            "options": [
+                "Hello",
+                "\"Hello\"",
+                "print(Hello)",
+                "خطا"
+            ],
+            "correct": 0,
+            "explanation": "دستور print متن داخل پرانتز را بدون کوتیشن چاپ می‌کند."
+        },
+        {
+            "question": "برای چاپ چند مقدار با هم از چه کاراکتری استفاده می‌کنیم؟",
+            "options": [
+                "+",
+                ",",
+                "&",
+                "|"
+            ],
+            "correct": 1,
+            "explanation": "با استفاده از کاما (,) می‌توان چند مقدار را در یک print چاپ کرد."
+        },
+        {
+            "question": "خروجی print(5 + 3) چیست؟",
+            "options": [
+                "5 + 3",
+                "53",
+                "8",
+                "خطا"
+            ],
+            "correct": 2,
+            "explanation": "print محاسبه‌ی داخل پرانتز را انجام داده و نتیجه (8) را چاپ می‌کند."
+        },
+        {
+            "question": "کدام گزینه یک متن را در خط جدید چاپ می‌کند؟",
+            "options": [
+                "print(\"Hello\\nWorld\")",
+                "print(\"Hello World\")",
+                "print(\"Hello\" + \"World\")",
+                "print(\"Hello\", \"World\")"
+            ],
+            "correct": 0,
+            "explanation": "کاراکتر \\n در رشته‌ها باعث ایجاد خط جدید می‌شود."
+        }
+    ]
+}

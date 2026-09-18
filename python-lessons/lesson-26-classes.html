@@ -4,14 +4,17 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>کلاس‌ها</strong> و <strong>اشیاء</strong> آشنا میشی. این درس، ورود به دنیای <strong>برنامه‌نویسی شی‌گرا</strong> (OOP) هست.</p>
+        <p>توی این درس با <strong>کلاس‌ها</strong> و <strong>اشیاء</strong> آشنا میشی. این درس، ورود به دنیای
+            <strong>برنامه‌نویسی شی‌گرا</strong> (OOP) هست.</p>
     </section>
 
     <section class="section">
         <h2>📖 کلاس و شی چیست؟</h2>
-        <p><strong>کلاس</strong> (Class) مثل یه <strong>قالب</strong> یا <strong>نقشه</strong> هست که مشخص می‌کنه یه شیء چه ویژگی‌ها و چه کارهایی داره.</p>
-        <p><strong>شیء</strong> (Object) یه <strong>نمونه</strong> (Instance) از کلاس هست. مثل یه ماشین که از روی نقشه ساخته شده.</p>
-        
+        <p><strong>کلاس</strong> (Class) مثل یه <strong>قالب</strong> یا <strong>نقشه</strong> هست که مشخص می‌کنه یه شیء
+            چه ویژگی‌ها و چه کارهایی داره.</p>
+        <p><strong>شیء</strong> (Object) یه <strong>نمونه</strong> (Instance) از کلاس هست. مثل یه ماشین که از روی نقشه
+            ساخته شده.</p>
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> کلاس = نقشه، شیء = چیزی که از روی نقشه ساخته میشه.</p>
         </div>
@@ -19,7 +22,7 @@
 
     <section class="section">
         <h2>💻 تعریف کلاس ساده</h2>
-        
+
         <pre class="code-block">class شخص:
     def __init__(self, نام, سن):
         self.نام = نام
@@ -34,21 +37,22 @@ print(علی.معرفی())
 
 زهرا = شخص("زهرا", 30)
 print(زهرا.معرفی())</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام! من علی هستم و 25 سال دارم.
 سلام! من زهرا هستم و 30 سال دارم.</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> <code>__init__</code> متد <strong>سازنده</strong> (Constructor) هست که موقع ساخت شیء فراخوانی میشه.</p>
+            <p>💡 <strong>نکته:</strong> <code>__init__</code> متد <strong>سازنده</strong> (Constructor) هست که موقع
+                ساخت شیء فراخوانی میشه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 متدهای کلاس</h2>
-        
+
         <pre class="code-block">class ماشین:
     def __init__(self, نام, سرعت):
         self.نام = نام
@@ -69,7 +73,7 @@ print(پژو.شتاب(20))
 print(پژو.شتاب(30))
 print(پژو.ترمز(10))
 print(پژو.ترمز(50))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سرعت جدید: 20
@@ -81,7 +85,7 @@ print(پژو.ترمز(50))</pre>
 
     <section class="section">
         <h2>💻 متغیرهای کلاس و شیء</h2>
-        
+
         <pre class="code-block">class دانشجو:
     دانشگاه = "دانشگاه تهران"  # متغیر کلاس
     
@@ -104,7 +108,7 @@ print(زهرا.دانشگاه)  # دانشگاه صنعتی</pre>
 
     <section class="section">
         <h2>💻 متدهای کلاس و استاتیک</h2>
-        
+
         <pre class="code-block">class حساب:
     نرخ_بهره = 0.05
     
@@ -130,7 +134,7 @@ print(حساب.اعتبار_سنجی(-10))  # False</pre>
 
     <section class="section">
         <h2>💻 properties (پروپرتی‌ها)</h2>
-        
+
         <pre class="code-block">class شخص:
     def __init__(self, نام):
         self._نام = نام
@@ -156,7 +160,7 @@ print(علی.نام)  # علی رضایی
 
     <section class="section">
         <h2>💻 __str__ و __repr__</h2>
-        
+
         <pre class="code-block">class کتاب:
     def __init__(self, عنوان, نویسنده):
         self.عنوان = عنوان
@@ -207,11 +211,14 @@ print(repr(کتاب۱))  # کتاب('صد سال تنهایی', 'گابریل گ
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> کلاسی به اسم <code>مستطیل</code> بساز که طول و عرض رو بگیره و مساحت و محیط رو حساب کنه.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> کلاسی به اسم <code>دانشجو</code> بساز با ویژگی‌های نام، شماره دانشجویی و نمرات. متدی برای محاسبه معدل اضافه کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاسی به اسم <code>بانک</code> بساز که حساب‌های کاربری رو مدیریت کنه (واریز، برداشت، نمایش موجودی).</p>
+            <p><strong>تمرین ۱ (ساده):</strong> کلاسی به اسم <code>مستطیل</code> بساز که طول و عرض رو بگیره و مساحت و
+                محیط رو حساب کنه.</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاسی به اسم <code>دانشجو</code> بساز با ویژگی‌های نام، شماره دانشجویی
+                و نمرات. متدی برای محاسبه معدل اضافه کن.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاسی به اسم <code>بانک</code> بساز که حساب‌های کاربری رو مدیریت
+                کنه (واریز، برداشت، نمایش موجودی).</p>
         </div>
     </section>
 

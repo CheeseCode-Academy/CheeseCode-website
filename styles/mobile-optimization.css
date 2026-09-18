@@ -1,0 +1,528 @@
+/* ============================================
+   📱 بهینه‌سازی موبایل | CheeseCode Academy
+   نسخه: 2.0.0
+   ============================================ */
+
+   html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================
+   دکمه‌ها — حداقل 44px
+   ============================================ */
+
+button, .btn, .action-btn, a.btn {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+@media (hover: none) {
+    button:hover, .btn:hover, .action-btn:hover {
+        transform: none !important;
+    }
+    button:active, .btn:active, .action-btn:active {
+        transform: scale(0.98) !important;
+    }
+}
+
+/* ============================================
+   دکمه‌ی برگشت — سایز دقیق
+   ============================================ */
+
+.back-home-btn {
+    width: 51.19px !important;
+    height: 51.19px !important;
+    min-width: 51.19px !important;
+    min-height: 51.19px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2rem !important;
+    flex-shrink: 0 !important;
+    background: rgba(245, 184, 27, 0.08) !important;
+    border: 1px solid rgba(245, 184, 27, 0.2) !important;
+    border-radius: 8px !important;
+    color: #f5b81b !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 700px) {
+    .back-home-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .back-home-btn {
+        width: 46px !important;
+        height: 46px !important;
+        min-width: 46px !important;
+        min-height: 46px !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* ============================================
+   هدر در موبایل — فشرده و مرتب
+   ============================================ */
+
+@media (max-width: 700px) {
+    .hero-panel {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0.6rem 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+        border-radius: 0 0 12px 12px !important;
+        gap: 0.5rem !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .hero-panel .brand {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .hero-panel .brand-logo {
+        width: 36px !important;
+        height: 36px !important;
+        flex-shrink: 0 !important;
+        border-radius: 8px !important;
+    }
+
+    .hero-panel .brand-text {
+        flex: 1 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        text-align: right !important;
+    }
+
+    .hero-panel .brand-text h1 {
+        font-size: 0.95rem !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-panel .brand-text p {
+        font-size: 0.6rem !important;
+        margin: 0.1rem 0 0 0 !important;
+        letter-spacing: 0.5px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1 !important;
+    }
+
+    .hero-panel > div[style*="display:flex"] {
+        display: flex !important;
+        gap: 0.4rem !important;
+        flex-shrink: 0 !important;
+        align-items: center !important;
+    }
+
+    .hero-panel .action-btn,
+    .hero-panel #globalSearchBtn,
+    .hero-panel #menuToggle {
+        width: 46px !important;
+        height: 46px !important;
+        min-width: 46px !important;
+        min-height: 46px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.1rem !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .hero-panel {
+        padding: 0.5rem 0.6rem !important;
+    }
+
+    .hero-panel .brand-logo {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .hero-panel .brand-text h1 {
+        font-size: 0.85rem !important;
+    }
+
+    .hero-panel .brand-text p {
+        font-size: 0.55rem !important;
+    }
+
+    .hero-panel .action-btn,
+    .hero-panel #globalSearchBtn,
+    .hero-panel #menuToggle {
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+        min-height: 42px !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* ============================================
+   مودال‌ها — تمام‌صفحه در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .modal {
+        padding: 0 !important;
+    }
+
+    .modal-content {
+        margin: 0 !important;
+        border-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
+        padding: 4rem 1rem 2rem 1rem !important;
+        border-top-width: 3px !important;
+    }
+
+    .close-modal {
+        top: 0.9rem !important;
+        left: 0.9rem !important;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1.3rem !important;
+    }
+}
+
+/* ============================================
+   منو در موبایل — تمام‌صفحه
+   ============================================ */
+
+@media (max-width: 700px) {
+    #sideMenu {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .theme-menu {
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 20px 20px 0 0 !important;
+        max-height: 70vh !important;
+    }
+}
+
+/* ============================================
+   سایدبار در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .main-container {
+        flex-direction: column !important;
+        padding: 0 0.5rem !important;
+        gap: 0.8rem !important;
+    }
+
+    .sidebar {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 1rem 0.8rem !important;
+        border-radius: 12px !important;
+    }
+
+    .menu-item {
+        padding: 0.85rem 0.9rem !important;
+        font-size: 0.85rem !important;
+        border-radius: 10px !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .progress-container,
+    .search-box {
+        margin-bottom: 0.8rem !important;
+    }
+}
+
+/* ============================================
+   تایپوگرافی موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    html { font-size: 15px !important; }
+    body { line-height: 1.7 !important; }
+
+    h1 { font-size: 1.4rem !important; }
+    h2 { font-size: 1.2rem !important; }
+    h3 { font-size: 1.05rem !important; }
+
+    p { font-size: 0.9rem !important; line-height: 1.8 !important; }
+
+    .code-block,
+    .code-block-output,
+    .terminal-output {
+        font-size: 0.75rem !important;
+        padding: 0.8rem !important;
+        line-height: 1.6 !important;
+    }
+}
+
+@media (max-width: 450px) {
+    html { font-size: 14px !important; }
+}
+
+/* ============================================
+   دکمه‌های عملیات در libraries
+   ============================================ */
+
+@media (max-width: 700px) {
+    .cache-status-box {
+        flex-direction: column !important;
+        padding: 1rem !important;
+        gap: 1rem !important;
+    }
+
+    #actionButtonsContainer {
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+
+    #actionButtonsContainer button {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        font-size: 0.8rem !important;
+        padding: 0.7rem !important;
+        min-height: 46px !important;
+    }
+
+    .download-cards {
+        grid-template-columns: 1fr !important;
+        gap: 0.8rem !important;
+    }
+
+    .card-actions {
+        flex-direction: column !important;
+    }
+
+    .card-actions button,
+    .card-actions a {
+        width: 100% !important;
+        padding: 0.75rem !important;
+    }
+}
+
+/* ============================================
+   اسکرول‌بار در موبایل — پنهان
+   ============================================ */
+
+@media (max-width: 700px) {
+    ::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ============================================
+   دکمه‌ی Back to Top در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    #backToTopBtn {
+        width: 48px !important;
+        height: 48px !important;
+        bottom: 75px !important;
+        left: 15px !important;
+        font-size: 1.2rem !important;
+        min-height: 48px !important;
+        min-width: 48px !important;
+    }
+}
+
+/* ============================================
+   حذف کادر جستجوی ساده
+   ============================================ */
+
+@media (max-width: 700px) {
+    .search-box {
+        display: none !important;
+    }
+
+    /* ولی در موبایل جستجو از دکمه‌ی هدر */
+    .sidebar .search-box {
+        display: none !important;
+    }
+}
+
+/* ⚠️ حذف کادر جستجوی ساده در دسکتاپ هم اگه بخوای */
+.sidebar .search-box input#searchInput {
+    display: none !important;
+}
+
+.sidebar .search-box {
+    display: none !important;
+}
+
+/* ============================================
+   یادداشت‌ها در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    #notesTextarea {
+        min-height: 180px !important;
+        font-size: 0.9rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .notes-tabs {
+        padding: 0.4rem !important;
+        gap: 0.3rem !important;
+    }
+
+    .notes-tab {
+        padding: 0.7rem 0.5rem !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* ============================================
+   کوئیز در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .quiz-option {
+        padding: 0.85rem 0.9rem !important;
+        font-size: 0.85rem !important;
+        min-height: 48px !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .quiz-option-text {
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .quiz-question-text {
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .quiz-btn {
+        padding: 0.85rem !important;
+        font-size: 0.9rem !important;
+        min-height: 48px !important;
+    }
+
+    .quiz-actions {
+        flex-direction: column !important;
+    }
+
+    .quiz-actions .quiz-btn {
+        width: 100% !important;
+    }
+}
+
+/* ============================================
+   پروژه‌ها در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #projectModal .modal-content {
+        padding: 3rem 1rem 2rem 1rem !important;
+        min-height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+    }
+}
+
+/* ============================================
+   تنظیمات در موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .settings-section {
+        padding: 1.2rem 1rem !important;
+    }
+
+    .settings-opener-btn {
+        padding: 0.85rem 1rem !important;
+        min-height: 52px !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .modal-item {
+        padding: 0.85rem 0.9rem !important;
+        min-height: 52px !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .modal-item-info {
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+}
+
+/* ============================================
+   input — جلوگیری از زوم iOS
+   ============================================ */
+
+@media (max-width: 700px) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}
+
+/* ============================================
+   Safe Area — برای iPhone
+   ============================================ */
+
+@supports (padding: max(0px)) {
+    body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
+    .hero-panel {
+        padding-top: max(0.6rem, env(safe-area-inset-top));
+    }
+
+    #backToTopBtn {
+        bottom: max(75px, calc(env(safe-area-inset-bottom) + 75px));
+    }
+}

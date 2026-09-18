@@ -1,22 +1,24 @@
 <div class="lesson-content-wrapper">
     <h1>📝 متدهای <span>رشته</span> در پایتون</h1>
-    
+
     <p>
-        رشته (String) یکی از <strong>پرکاربردترین</strong> دیتا تایپ‌های پایتونه که برای کار با متن استفاده میشه. 
+        رشته (String) یکی از <strong>پرکاربردترین</strong> دیتا تایپ‌های پایتونه که برای کار با متن استفاده میشه.
         در این درس با <strong style="color: #f5b81b;">مهم‌ترین متدهای رشته</strong> آشنا میشیم.
     </p>
 
     <h2>📌 رشته چیه؟</h2>
     <p>
-        رشته یک <strong>دنباله تغییرناپذیر</strong> (immutable) از کاراکترهاست که با <span style="color: #f5b81b;">' '</span> یا <span style="color: #f5b81b;">" "</span> تعریف میشه.
+        رشته یک <strong>دنباله تغییرناپذیر</strong> (immutable) از کاراکترهاست که با <span style="color: #f5b81b;">'
+            '</span> یا <span style="color: #f5b81b;">" "</span> تعریف میشه.
         هر کاراکتر در رشته یک ایندکس داره که از <span style="color: #50fa7b;">0</span> شروع میشه.
     </p>
 
     <div class="code-block">
         <span class="comment"># تعریف یک رشته</span><br>
         text = <span class="string">"سلام دنیا!"</span><br>
-        <span class="function">print</span>(text[<span class="number">0</span>])  <span class="comment"># خروجی: س</span><br>
-        <span class="function">print</span>(len(text))  <span class="comment"># خروجی: 9</span><br>
+        <span class="function">print</span>(text[<span class="number">0</span>]) <span class="comment"># خروجی:
+            س</span><br>
+        <span class="function">print</span>(len(text)) <span class="comment"># خروجی: 9</span><br>
     </div>
 
     <h1>🧰 متدهای پرکاربرد رشته:</h1>
@@ -111,7 +113,7 @@
             <div class="method-card">
                 <div class="code-block">.strip()</div>
                 <div class="method-desc">فاصله‌های ابتدا و انتها را حذف می‌کند</div>
-                <div class="code-block">"  hi  ".strip() → "hi"</div>
+                <div class="code-block">" hi ".strip() → "hi"</div>
                 <div class="method-desc">------------------------------------------------------------------</div>
             </div>
             <div class="method-card">
@@ -153,7 +155,7 @@
             <div class="method-card">
                 <div class="code-block">.isspace()</div>
                 <div class="method-desc">همه کاراکترها فاصله هستند؟</div>
-                <div class="code-block">"   ".isspace() → True</div>
+                <div class="code-block">" ".isspace() → True</div>
                 <div class="method-desc">------------------------------------------------------------------</div>
             </div>
             <div class="method-card">
@@ -169,7 +171,7 @@
     <div class="code-block">
         <span class="comment"># یک متن نمونه</span><br>
         text = <span class="string">" hello world "</span><br>
-        
+
         <span class="comment"># پاکسازی متن</span><br>
         cleaned = text.<span class="function">strip</span>()
         <br>
@@ -179,15 +181,15 @@
         <br>
         <span class="comment"># تقسیم به کلمات</span><br>
         words = cleaned.<span class="function">split</span>() <br>
-        
-        <span class="function">print</span>(cleaned)   <span class="comment"># "hello world"</span><br>
-        <span class="function">print</span>(words)     <span class="comment"># ["hello","world"]</span><br>
+
+        <span class="function">print</span>(cleaned) <span class="comment"># "hello world"</span><br>
+        <span class="function">print</span>(words) <span class="comment"># ["hello","world"]</span><br>
     </div>
 
     <div class="exercise-box">
         <strong>🏋️ تمرین:</strong>
         <p>
-            یک رشته مانند <span style="color: #f5b81b;">"python programming"</span> دارید. 
+            یک رشته مانند <span style="color: #f5b81b;">"python programming"</span> دارید.
             با متدهای مناسب:
             <br>۱. حرف اول را بزرگ کنید
             <br>۲. همه را به بزرگ تبدیل کنید
@@ -197,9 +199,9 @@
     </div>
 
     <div class="highlight-box">
-        💚 <strong>عالی!</strong> با متدهای رشته آشنا شدی. 
+        💚 <strong>عالی!</strong> با متدهای رشته آشنا شدی.
         رشته‌ها در پایتون خیلی قدرتمندن، پس حتماً تمرین کن! 🚀
     </div>
 
- 
+
 </div>

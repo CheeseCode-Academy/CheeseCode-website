@@ -4,29 +4,33 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس یاد می‌گیری چطور خطاهای برنامه رو <strong>مدیریت</strong> کنی و از کرش کردن برنامه جلوگیری کنی.</p>
+        <p>توی این درس یاد می‌گیری چطور خطاهای برنامه رو <strong>مدیریت</strong> کنی و از کرش کردن برنامه جلوگیری کنی.
+        </p>
     </section>
 
     <section class="section">
         <h2>📖 خطاها در پایتون</h2>
-        <p>خطاها (Exceptions) وقتی رخ می‌دن که یه اتفاق غیرمنتظره توی برنامه بیفته. مثلاً تقسیم بر صفر یا باز کردن فایلی که وجود نداره.</p>
-        <p>با <code>try</code> و <code>except</code> می‌تونی خطاها رو <strong>گرفته</strong> و <strong>مدیریت</strong> کنی.</p>
-        
+        <p>خطاها (Exceptions) وقتی رخ می‌دن که یه اتفاق غیرمنتظره توی برنامه بیفته. مثلاً تقسیم بر صفر یا باز کردن فایلی
+            که وجود نداره.</p>
+        <p>با <code>try</code> و <code>except</code> می‌تونی خطاها رو <strong>گرفته</strong> و <strong>مدیریت</strong>
+            کنی.</p>
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> مدیریت خطا به برنامه‌ات <strong>قابلیت اطمینان</strong> میده و از کرش کردن جلوگیری می‌کنه.</p>
+            <p>💡 <strong>یادت باشه:</strong> مدیریت خطا به برنامه‌ات <strong>قابلیت اطمینان</strong> میده و از کرش کردن
+                جلوگیری می‌کنه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 ساختار try/except</h2>
-        
+
         <pre class="code-block">try:
     عدد = int(input("یک عدد وارد کنید: "))
     نتیجه = 10 / عدد
     print("نتیجه:", نتیجه)
 except:
     print("خطایی رخ داد!")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه ۱):</span>
             <pre class="code-block-output">یک عدد وارد کنید: 5
@@ -46,7 +50,7 @@ except:
 
     <section class="section">
         <h2>💻 گرفتن خطاهای خاص</h2>
-        
+
         <pre class="code-block">try:
     عدد = int(input("یک عدد وارد کنید: "))
     نتیجه = 10 / عدد
@@ -57,15 +61,16 @@ except ZeroDivisionError:
     print("خطا: تقسیم بر صفر ممکن نیست!")
 except Exception as e:
     print(f"خطای ناشناخته: {e}")</pre>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> همیشه خطاهای <strong>خاص</strong> رو قبل از خطای <strong>کلی</strong> (<code>Exception</code>) بنویس.</p>
+            <p>💡 <strong>نکته:</strong> همیشه خطاهای <strong>خاص</strong> رو قبل از خطای <strong>کلی</strong>
+                (<code>Exception</code>) بنویس.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 try/except/else/finally</h2>
-        
+
         <pre class="code-block">try:
     عدد = int(input("یک عدد وارد کنید: "))
     نتیجه = 10 / عدد
@@ -77,7 +82,7 @@ else:
     print(f"نتیجه: {نتیجه}")  # اگر خطایی نبود
 finally:
     print("این پیام همیشه اجرا میشه")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">یک عدد وارد کنید: 5
@@ -89,7 +94,7 @@ finally:
     <section class="section">
         <h2>💻 raise (پرتاب خطا)</h2>
         <p>می‌تونی خودت خطا ایجاد کنی:</p>
-        
+
         <pre class="code-block">def سن_را_بررسی_کن(سن):
     if سن < 0:
         raise ValueError("سن نمی‌تواند منفی باشد!")
@@ -102,7 +107,7 @@ try:
     print(سن_را_بررسی_کن(-5))
 except ValueError as e:
     print(f"خطا: {e}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سن معتبر است
@@ -124,7 +129,7 @@ except ValueError as e:
 
     <section class="section">
         <h2>💻 مثال کامل</h2>
-        
+
         <pre class="code-block">def خواندن_فایل(نام_فایل):
     try:
         with open(نام_فایل, "r") as فایل:
@@ -148,7 +153,8 @@ if محتوا:
         <h2>🧠 اشتباهات رایج</h2>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> گرفتن همه خطاها با <code>except:</code> بدون مشخص کردن نوع خطا</p>
-            <p><strong>✅ راه‌حل:</strong> حداقل از <code>except Exception as e:</code> استفاده کن تا نوع خطا رو بدونی.</p>
+            <p><strong>✅ راه‌حل:</strong> حداقل از <code>except Exception as e:</code> استفاده کن تا نوع خطا رو بدونی.
+            </p>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> خالی گذاشتن <code>except</code> (بدون هیچ کدی)</p>
@@ -180,11 +186,14 @@ finally:
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و تقسیم ۱۰۰ بر اون رو انجام بده. خطای تقسیم بر صفر رو مدیریت کن.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر یه فایل بخونه و محتواش رو چاپ کنه. خطای <code>FileNotFoundError</code> رو مدیریت کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که سن رو بگیره و اگر منفی یا بزرگتر از ۱۲۰ بود، خطا پرتاب کنه.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و تقسیم ۱۰۰ بر اون رو انجام
+                بده. خطای تقسیم بر صفر رو مدیریت کن.</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر یه فایل بخونه و محتواش رو چاپ کنه. خطای
+                <code>FileNotFoundError</code> رو مدیریت کن.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که سن رو بگیره و اگر منفی یا بزرگتر از ۱۲۰ بود، خطا
+                پرتاب کنه.</p>
         </div>
     </section>
 

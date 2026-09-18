@@ -9,14 +9,15 @@
 
     <section class="section">
         <h2>📖 BeautifulSoup چیست؟</h2>
-        <p>BeautifulSoup کتابخانه‌ای برای <strong>پارس کردن HTML</strong> و <strong>استخراج داده</strong> از صفحات وب هست:</p>
+        <p>BeautifulSoup کتابخانه‌ای برای <strong>پارس کردن HTML</strong> و <strong>استخراج داده</strong> از صفحات وب
+            هست:</p>
         <ul>
             <li>جستجو با <strong>تگ‌ها</strong> و <strong>کلاس‌ها</strong></li>
             <li>استخراج متن و ویژگی‌ها</li>
             <li>سازگاری با <strong>Requests</strong></li>
             <li>حتی صفحات <strong>نامرتب</strong> رو هم مدیریت می‌کنه</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نصب:</strong> <code>pip install beautifulsoup4 lxml</code></p>
         </div>
@@ -24,7 +25,7 @@
 
     <section class="section">
         <h2>💻 نمونه HTML</h2>
-        
+
         <pre class="code-block">from bs4 import BeautifulSoup
 
 html = """
@@ -63,7 +64,7 @@ print("p با کلاس content:", p.text)
 # پیدا کردن بر اساس id
 div = soup.find(id="main")
 print("div با id main:", div.text[:50])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">عنوان: <title>صفحه نمونه</title>
@@ -82,7 +83,7 @@ div با id main:
 
     <section class="section">
         <h2>💻 جستجوی پیشرفته</h2>
-        
+
         <pre class="code-block">from bs4 import BeautifulSoup
 
 html = """
@@ -126,7 +127,7 @@ for p in products:
 prices = soup.select(".price")
 for price in prices:
     print(f"قیمت: {price.text}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">تعداد محصولات: 3
@@ -144,7 +145,7 @@ for price in prices:
 
     <section class="section">
         <h2>💻 استخراج داده از وب (مثال)</h2>
-        
+
         <pre class="code-block">import requests
 from bs4 import BeautifulSoup
 
@@ -169,7 +170,7 @@ for link in links[:5]:
 
     <section class="section">
         <h2>💻 استخراج جدول</h2>
-        
+
         <pre class="code-block">from bs4 import BeautifulSoup
 
 html = """
@@ -201,7 +202,7 @@ for row in rows:
     cols = row.find_all(["th", "td"])
     data = [col.text.strip() for col in cols]
     print(data)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['نام', 'سن', 'شهر']
@@ -212,7 +213,7 @@ for row in rows:
 
     <section class="section">
         <h2>💻 پیدا کردن والدین و فرزندان</h2>
-        
+
         <pre class="code-block">from bs4 import BeautifulSoup
 
 html = """
@@ -248,7 +249,7 @@ for sibling in li.next_siblings:
 
     <section class="section">
         <h2>💻 استخراج ویژگی‌ها</h2>
-        
+
         <pre class="code-block">from bs4 import BeautifulSoup
 
 html = """
@@ -267,7 +268,7 @@ print("target:", a.get("target"))</pre>
 
     <section class="section">
         <h2>💻 اسکرپینگ پیشرفته (مثال واقعی)</h2>
-        
+
         <pre class="code-block">import requests
 from bs4 import BeautifulSoup
 import time
@@ -332,9 +333,9 @@ items = soup.select("ul > li.active")</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱:</strong> با BeautifulSoup تمام لینک‌های یک صفحه رو استخراج کن.</p>
-            
+
             <p><strong>تمرین ۲:</strong> از یک صفحه وب، تیترهای اخبار رو استخراج کن.</p>
-            
+
             <p><strong>تمرین ۳:</strong> یک جدول HTML رو استخراج کن و به DataFrame تبدیل کن.</p>
         </div>
     </section>

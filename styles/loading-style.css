@@ -1,0 +1,329 @@
+/* ============================================
+   🧀 استایل لودینگ، حالت تمرکز، و دکمه‌ها
+   نسخه: 2.0.0
+   ============================================ */
+
+/* ============================================
+   حالت تمرکز (Focus Mode)
+   ============================================ */
+
+body.focus-mode .hero-panel {
+    opacity: 0.15;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+body.focus-mode .sidebar {
+    opacity: 0.15;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+body.focus-mode .hero-panel:hover,
+body.focus-mode .sidebar:hover {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.focus-mode .main-container {
+    max-width: 1000px;
+}
+
+/* ============================================
+   اسپینر خودکار پنیر
+   ============================================ */
+
+.cheese-auto-loader-icon {
+    font-size: 4rem;
+    animation: cheeseSpinAuto 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(245, 184, 27, 0.8));
+}
+
+@keyframes cheeseSpinAuto {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: rotate(90deg) scale(1.15);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1);
+    }
+
+    75% {
+        transform: rotate(270deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.cheese-auto-loader-text {
+    color: #f5b81b;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: textPulseAuto 1.5s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(245, 184, 27, 0.5);
+}
+
+@keyframes textPulseAuto {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* ============================================
+   اسپینر لودینگ (overlay)
+   ============================================ */
+
+#cheeseLoader {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.cheese-loader-icon {
+    font-size: 3.5rem;
+    animation: cheeseSpin 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(245, 184, 27, 0.6));
+}
+
+@keyframes cheeseSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: rotate(90deg) scale(1.1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1);
+    }
+
+    75% {
+        transform: rotate(270deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* ============================================
+   Overlay لودینگ
+   ============================================ */
+
+.cheese-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    direction: rtl;
+    font-family: 'Courier New', monospace;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cheese-loading-overlay.fullscreen {
+    background: rgba(10, 14, 26, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.cheese-loading-overlay.visible {
+    opacity: 1;
+}
+
+.cheese-loading-text {
+    color: #f5b81b;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    letter-spacing: 1px;
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   توست
+   ============================================ */
+
+.cheese-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    padding: 0.9rem 1.5rem;
+    border-radius: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 10000;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    max-width: 90%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.cheese-toast.visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+.cheese-toast-info {
+    background: rgba(0, 212, 255, 0.15);
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    color: #00d4ff;
+}
+
+.cheese-toast-success {
+    background: rgba(0, 255, 100, 0.15);
+    border: 1px solid rgba(0, 255, 100, 0.4);
+    color: #00ff64;
+}
+
+.cheese-toast-error {
+    background: rgba(255, 68, 68, 0.15);
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    color: #ff6b6b;
+}
+
+.cheese-toast-warning {
+    background: rgba(245, 184, 27, 0.15);
+    border: 1px solid rgba(245, 184, 27, 0.4);
+    color: #f5b81b;
+}
+
+/* ============================================
+   اسکلت لودینگ
+   ============================================ */
+
+.skeleton-item {
+    background: linear-gradient(90deg,
+            rgba(245, 184, 27, 0.05) 0%,
+            rgba(245, 184, 27, 0.15) 50%,
+            rgba(245, 184, 27, 0.05) 100%);
+    background-size: 200% 100%;
+    border-radius: 12px;
+    height: 50px;
+    margin-bottom: 0.6rem;
+    animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   تم روشن
+   ============================================ */
+
+body[data-theme^="light"] .cheese-loading-overlay.fullscreen {
+    background: rgba(240, 244, 248, 0.95);
+}
+
+body[data-theme^="light"] .cheese-loading-text {
+    color: #d97706;
+}
+
+body[data-theme^="light"] .cheese-loader-icon,
+body[data-theme^="light"] .cheese-auto-loader-icon {
+    filter: drop-shadow(0 0 20px rgba(217, 119, 6, 0.4));
+}
+
+body[data-theme^="light"] .cheese-auto-loader-text {
+    color: #d97706;
+    text-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+}
+
+body[data-theme^="light"] .skeleton-item {
+    background: linear-gradient(90deg,
+            rgba(217, 119, 6, 0.05) 0%,
+            rgba(217, 119, 6, 0.15) 50%,
+            rgba(217, 119, 6, 0.05) 100%);
+    background-size: 200% 100%;
+}
+
+/* ============================================
+   موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .cheese-loader-icon {
+        font-size: 3rem;
+    }
+
+    .cheese-auto-loader-icon {
+        font-size: 3.5rem;
+    }
+
+    .cheese-auto-loader-text {
+        font-size: 1rem;
+    }
+
+    #cheeseLoader {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cheese-loading-text {
+        font-size: 0.9rem;
+    }
+
+    .cheese-toast {
+        font-size: 0.8rem;
+        padding: 0.7rem 1.2rem;
+        bottom: 20px;
+    }
+
+    #backToTopBtn {
+        width: 45px !important;
+        height: 45px !important;
+        bottom: 80px !important;
+        left: 20px !important;
+        font-size: 1.1rem !important;
+    }
+}

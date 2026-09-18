@@ -4,19 +4,21 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>SQLite</strong> آشنا میشی که یک دیتابیس سبک و بدون نیاز به سرور هست. یاد می‌گیری چطور داده‌ها رو توی دیتابیس ذخیره و مدیریت کنی.</p>
+        <p>توی این درس با <strong>SQLite</strong> آشنا میشی که یک دیتابیس سبک و بدون نیاز به سرور هست. یاد می‌گیری چطور
+            داده‌ها رو توی دیتابیس ذخیره و مدیریت کنی.</p>
     </section>
 
     <section class="section">
         <h2>📖 SQLite چیست؟</h2>
-        <p>SQLite یک <strong>دیتابیس</strong> ساده و سبک هست که به‌صورت <strong>فایل</strong> ذخیره میشه و نیازی به نصب سرور نداره.</p>
+        <p>SQLite یک <strong>دیتابیس</strong> ساده و سبک هست که به‌صورت <strong>فایل</strong> ذخیره میشه و نیازی به نصب
+            سرور نداره.</p>
         <ul>
             <li>بدون سرور</li>
             <li>فایل واحد</li>
             <li>سبک و سریع</li>
             <li>در پایتون داخلی‌ست</li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> SQLite با ماژول <code>sqlite3</code> در پایتون کار می‌کنه.</p>
         </div>
@@ -24,7 +26,7 @@
 
     <section class="section">
         <h2>💻 اتصال به دیتابیس</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 # اتصال به دیتابیس (ایجاد میشه اگر نباشه)
@@ -39,7 +41,7 @@ conn.close()</pre>
 
     <section class="section">
         <h2>💻 ایجاد جدول</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 conn = sqlite3.connect("mydb.db")
@@ -62,7 +64,7 @@ print("جدول ساخته شد!")</pre>
 
     <section class="section">
         <h2>💻 درج داده</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 conn = sqlite3.connect("mydb.db")
@@ -93,7 +95,7 @@ print("داده‌ها ذخیره شدند!")</pre>
 
     <section class="section">
         <h2>💻 خواندن داده</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 conn = sqlite3.connect("mydb.db")
@@ -118,7 +120,7 @@ if علی:
     print(f"\nعلی: {علی}")
 
 conn.close()</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">همه کاربران:
@@ -135,7 +137,7 @@ conn.close()</pre>
 
     <section class="section">
         <h2>💻 به‌روزرسانی داده</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 conn = sqlite3.connect("mydb.db")
@@ -160,7 +162,7 @@ conn.close()</pre>
 
     <section class="section">
         <h2>💻 حذف داده</h2>
-        
+
         <pre class="code-block">import sqlite3
 
 conn = sqlite3.connect("mydb.db")
@@ -182,7 +184,7 @@ conn.close()</pre>
 
     <section class="section">
         <h2>💻 کار با کلاس</h2>
-        
+
         <pre class="code-block">import sqlite3
 from typing import List, Optional, Dict
 
@@ -251,7 +253,7 @@ db.delete_user(2)</pre>
 
     <section class="section">
         <h2>💻 کار با SQLite و pandas</h2>
-        
+
         <pre class="code-block">import sqlite3
 import pandas as pd
 
@@ -293,10 +295,11 @@ except sqlite3.Error as e:
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> یک دیتابیس با جدول <code>products</code> (نام، قیمت، تعداد) بساز.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> به جدول <code>products</code> چند محصول اضافه کن و همه رو بخون.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس کامل برای مدیریت محصولات بساز (اضافه، حذف، به‌روزرسانی، جستجو).</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک کلاس کامل برای مدیریت محصولات بساز (اضافه، حذف، به‌روزرسانی،
+                جستجو).</p>
         </div>
     </section>
 

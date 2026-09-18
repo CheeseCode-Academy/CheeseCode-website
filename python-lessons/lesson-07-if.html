@@ -4,63 +4,67 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس یاد می‌گیری که چطور به برنامه‌ات <strong>قدرت تصمیم‌گیری</strong> بدی. یعنی برنامه بر اساس شرایط مختلف، کارهای مختلفی انجام بده.</p>
+        <p>توی این درس یاد می‌گیری که چطور به برنامه‌ات <strong>قدرت تصمیم‌گیری</strong> بدی. یعنی برنامه بر اساس شرایط
+            مختلف، کارهای مختلفی انجام بده.</p>
     </section>
 
     <section class="section">
         <h2>📖 شرط if چیست؟</h2>
         <p><code>if</code> به برنامه می‌گه که <strong>"اگر این شرط درست بود، این کار رو بکن"</strong>.</p>
-        <p>فرض کن می‌خوای به یه ربات بگی: "اگر بارون می‌باره، چتر بردار". این دقیقاً همون کاریه که <code>if</code> انجام میده.</p>
-        
+        <p>فرض کن می‌خوای به یه ربات بگی: "اگر بارون می‌باره، چتر بردار". این دقیقاً همون کاریه که <code>if</code> انجام
+            میده.</p>
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> بعد از <code>if</code> همیشه <strong>دونقطه</strong> (:) می‌ذاریم و کدهایی که باید اجرا بشن رو <strong>با فاصله (indentation)</strong> تو خط بعد می‌نویسیم.</p>
+            <p>💡 <strong>یادت باشه:</strong> بعد از <code>if</code> همیشه <strong>دونقطه</strong> (:) می‌ذاریم و کدهایی
+                که باید اجرا بشن رو <strong>با فاصله (indentation)</strong> تو خط بعد می‌نویسیم.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 ساختار if</h2>
-        
+
         <pre class="code-block">سن = int(input("سن خود را وارد کنید: "))
 
 if سن >= 18:
     print("شما بزرگسال هستید")
     print("می‌توانید رانندگی کنید")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه ۱):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 20
 شما بزرگسال هستید
 می‌توانید رانندگی کنید</pre>
         </div>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه ۲):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 15
 (هیچ خروجی)</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> اگه شرط درست نباشه، کدهای داخل <code>if</code> اجرا نمیشن و برنامه ادامه پیدا می‌کنه.</p>
+            <p>💡 <strong>نکته:</strong> اگه شرط درست نباشه، کدهای داخل <code>if</code> اجرا نمیشن و برنامه ادامه پیدا
+                می‌کنه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 if با else</h2>
         <p><code>else</code> به برنامه می‌گه <strong>"اگر شرط درست نبود، این کار رو بکن"</strong>:</p>
-        
+
         <pre class="code-block">سن = int(input("سن خود را وارد کنید: "))
 
 if سن >= 18:
     print("شما بزرگسال هستید")
 else:
     print("شما کودک یا نوجوان هستید")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه ۱):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 20
 شما بزرگسال هستید</pre>
         </div>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه ۲):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 15
@@ -70,8 +74,9 @@ else:
 
     <section class="section">
         <h2>💻 if با elif (چند شرط)</h2>
-        <p><code>elif</code> یعنی <strong>"اگر شرط اول درست نبود، این شرط رو چک کن"</strong>. می‌تونی چندتا <code>elif</code> داشته باشی:</p>
-        
+        <p><code>elif</code> یعنی <strong>"اگر شرط اول درست نبود، این شرط رو چک کن"</strong>. می‌تونی چندتا
+            <code>elif</code> داشته باشی:</p>
+
         <pre class="code-block">نمره = float(input("نمره خود را وارد کنید: "))
 
 if نمره >= 18:
@@ -82,22 +87,23 @@ elif نمره >= 12:
     print("متوسط")
 else:
     print("نیاز به تلاش بیشتر")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">نمره خود را وارد کنید: 16.5
 خوب</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> شرط‌ها از بالا به پایین بررسی میشن. به محض اینکه یه شرط درست بشه، بقیه نادیده گرفته میشن.</p>
+            <p>💡 <strong>نکته:</strong> شرط‌ها از بالا به پایین بررسی میشن. به محض اینکه یه شرط درست بشه، بقیه نادیده
+                گرفته میشن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 if های تو در تو</h2>
         <p>می‌تونی داخل یه <code>if</code> یه <code>if</code> دیگه بذاری:</p>
-        
+
         <pre class="code-block">سن = int(input("سن خود را وارد کنید: "))
 گواهینامه = input("آیا گواهینامه دارید؟ (بله/خیر): ")
 
@@ -108,7 +114,7 @@ if سن >= 18:
         print("ابتدا گواهینامه بگیرید")
 else:
     print("سن شما برای رانندگی مناسب نیست")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">سن خود را وارد کنید: 22
@@ -120,7 +126,8 @@ else:
     <section class="section">
         <h2>🧠 اشتباهات رایج</h2>
         <div class="highlight-box">
-            <p><strong>❌ اشتباه:</strong> فراموش کردن دونقطه (<code>:</code>) بعد از <code>if</code>: <code>if سن > 18</code></p>
+            <p><strong>❌ اشتباه:</strong> فراموش کردن دونقطه (<code>:</code>) بعد از <code>if</code>:
+                <code>if سن > 18</code></p>
             <p><strong>✅ راه‌حل:</strong> همیشه بعد از <code>if</code> دونقطه بذار: <code>if سن > 18:</code></p>
         </div>
         <div class="highlight-box">
@@ -132,7 +139,8 @@ print("بزرگسال")  # اشتباه!</pre>
     print("بزرگسال")  # درست</pre>
         </div>
         <div class="highlight-box">
-            <p><strong>❌ اشتباه:</strong> استفاده از <code>=</code> به جای <code>==</code> برای مقایسه: <code>if نمره = 20:</code></p>
+            <p><strong>❌ اشتباه:</strong> استفاده از <code>=</code> به جای <code>==</code> برای مقایسه:
+                <code>if نمره = 20:</code></p>
             <p><strong>✅ راه‌حل:</strong> برای مقایسه از <code>==</code> استفاده کن: <code>if نمره == 20:</code></p>
         </div>
     </section>
@@ -154,21 +162,26 @@ else:
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که مثبت، منفی یا صفر هست.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر سنش رو بپرسه و بر اساس سن، یکی از این پیام‌ها رو چاپ کنه:
-            <br>کمتر از ۱۲: "کودک"
-            <br>۱۲ تا ۱۸: "نوجوان"
-            <br>۱۸ تا ۶۰: "بزرگسال"
-            <br>بیشتر از ۶۰: "سالمند"</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که سه عدد از کاربر بگیره و بگه که آیا می‌تونن سه ضلع یه مثلث باشن یا نه. (راهنمایی: در یک مثلث، مجموع هر دو ضلع باید از ضلع سوم بزرگتر باشه)</p>
+            <p><strong>تمرین ۱ (ساده):</strong> برنامه‌ای بنویس که از کاربر یک عدد بگیره و بگه که مثبت، منفی یا صفر هست.
+            </p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> برنامه‌ای بنویس که از کاربر سنش رو بپرسه و بر اساس سن، یکی از این
+                پیام‌ها رو چاپ کنه:
+                <br>کمتر از ۱۲: "کودک"
+                <br>۱۲ تا ۱۸: "نوجوان"
+                <br>۱۸ تا ۶۰: "بزرگسال"
+                <br>بیشتر از ۶۰: "سالمند"
+            </p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که سه عدد از کاربر بگیره و بگه که آیا می‌تونن سه
+                ضلع یه مثلث باشن یا نه. (راهنمایی: در یک مثلث، مجموع هر دو ضلع باید از ضلع سوم بزرگتر باشه)</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، بیشتر با <code>if</code>، <code>elif</code> و <code>else</code> کار می‌کنیم و یاد می‌گیری چطور شرط‌های پیچیده‌تر بنویسی.</p>
+        <p>توی درس بعدی، بیشتر با <code>if</code>، <code>elif</code> و <code>else</code> کار می‌کنیم و یاد می‌گیری چطور
+            شرط‌های پیچیده‌تر بنویسی.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

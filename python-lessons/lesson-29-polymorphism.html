@@ -4,21 +4,24 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>چندریختی</strong> (Polymorphism) آشنا میشی که یکی از مهم‌ترین مفاهیم برنامه‌نویسی شی‌گراست.</p>
+        <p>توی این درس با <strong>چندریختی</strong> (Polymorphism) آشنا میشی که یکی از مهم‌ترین مفاهیم برنامه‌نویسی
+            شی‌گراست.</p>
     </section>
 
     <section class="section">
         <h2>📖 چندریختی چیست؟</h2>
-        <p>چندریختی (Polymorphism) یعنی <strong>یک رابط، چند رفتار</strong>. یعنی کلاس‌های مختلف می‌تونن متدهای هم‌نام داشته باشن ولی رفتارهای متفاوتی داشته باشن.</p>
-        
+        <p>چندریختی (Polymorphism) یعنی <strong>یک رابط، چند رفتار</strong>. یعنی کلاس‌های مختلف می‌تونن متدهای هم‌نام
+            داشته باشن ولی رفتارهای متفاوتی داشته باشن.</p>
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> چندریختی به کدت <strong>انعطاف‌پذیری</strong> میده و از تکرار کد جلوگیری می‌کنه.</p>
+            <p>💡 <strong>یادت باشه:</strong> چندریختی به کدت <strong>انعطاف‌پذیری</strong> میده و از تکرار کد جلوگیری
+                می‌کنه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 چندریختی با متدهای هم‌نام</h2>
-        
+
         <pre class="code-block">class سگ:
     def صدا_بده(self):
         return "هاپ هاپ!"
@@ -48,7 +51,7 @@ def رفتار_حیوان(حیوان):
 رفتار_حیوان(سگ())
 رفتار_حیوان(گربه())
 رفتار_حیوان(پرنده())</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">هاپ هاپ!
@@ -62,7 +65,7 @@ def رفتار_حیوان(حیوان):
 
     <section class="section">
         <h2>💻 چندریختی با وراثت</h2>
-        
+
         <pre class="code-block">class شکل:
     def مساحت(self):
         pass
@@ -93,7 +96,7 @@ class مثلث(شکل):
 اشکال = [مستطیل(5, 3), دایره(4), مثلث(6, 4)]
 for شکل in اشکال:
     print(f"مساحت: {شکل.مساحت():.2f}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">مساحت: 15.00
@@ -105,7 +108,7 @@ for شکل in اشکال:
     <section class="section">
         <h2>💻 Duck Typing</h2>
         <p>در پایتون، "اگر مثل اردک راه بره و مثل اردک صدا بده، پس اردک است":</p>
-        
+
         <pre class="code-block">class اردک:
     def صدا_بده(self):
         return "کواک کواک"
@@ -134,7 +137,7 @@ def تست_اردک(چیز):
 تست_اردک(اردک())
 تست_اردک(مرغ())
 تست_اردک(انسان())</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">کواک کواک
@@ -144,16 +147,17 @@ def تست_اردک(چیز):
 سلام!
 راه می‌رود</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> Duck Typing یعنی به جای اینکه چک کنی یه شیء از چه کلاسی هست، چک می‌کنی که چه متدهایی داره.</p>
+            <p>💡 <strong>نکته:</strong> Duck Typing یعنی به جای اینکه چک کنی یه شیء از چه کلاسی هست، چک می‌کنی که چه
+                متدهایی داره.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 Operator Overloading</h2>
         <p>چندریختی با عملگرها:</p>
-        
+
         <pre class="code-block">class عدد_با_واحد:
     def __init__(self, مقدار, واحد):
         self.مقدار = مقدار
@@ -176,7 +180,7 @@ print(وزن۳)  # 8 kg</pre>
     <section class="section">
         <h2>💻 ABC (Abstract Base Classes)</h2>
         <p>برای强制执行 چندریختی:</p>
-        
+
         <pre class="code-block">from abc import ABC, abstractmethod
 
 class شکل(ABC):
@@ -236,11 +240,15 @@ print(پردازش(3.14)) # نوع نامشخص: 3.14</pre>
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> سه کلاس با متد <code>صدا_بده</code> بساز و با یک حلقه همه رو صدا بزن.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>وسیله_نقلیه</code> بساز و کلاس‌های <code>ماشین</code> و <code>دوچرخه</code> ازش ارث ببرن و متد <code>حرکت_کن</code> رو بازنویسی کنن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس انتزاعی <code>محاسبه_گر</code> بساز با متد <code>محاسبه</code> و دو کلاس <code>جمع_کننده</code> و <code>ضرب_کننده</code> که اون رو پیاده‌سازی کنن.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> سه کلاس با متد <code>صدا_بده</code> بساز و با یک حلقه همه رو صدا بزن.
+            </p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>وسیله_نقلیه</code> بساز و کلاس‌های <code>ماشین</code> و
+                <code>دوچرخه</code> ازش ارث ببرن و متد <code>حرکت_کن</code> رو بازنویسی کنن.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس انتزاعی <code>محاسبه_گر</code> بساز با متد
+                <code>محاسبه</code> و دو کلاس <code>جمع_کننده</code> و <code>ضرب_کننده</code> که اون رو پیاده‌سازی کنن.
+            </p>
         </div>
     </section>
 

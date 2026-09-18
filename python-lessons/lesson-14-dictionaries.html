@@ -4,22 +4,25 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>دیکشنری‌ها</strong> آشنا میشی. دیکشنری‌ها مثل یه <strong>دفترچه تلفن</strong> هستن که با یه کلید (اسم) می‌تونی به مقدار (شماره تلفن) دسترسی پیدا کنی.</p>
+        <p>توی این درس با <strong>دیکشنری‌ها</strong> آشنا میشی. دیکشنری‌ها مثل یه <strong>دفترچه تلفن</strong> هستن که
+            با یه کلید (اسم) می‌تونی به مقدار (شماره تلفن) دسترسی پیدا کنی.</p>
     </section>
 
     <section class="section">
         <h2>📖 دیکشنری چیست؟</h2>
-        <p>دیکشنری (Dictionary) یه ساختار داده هست که داده‌ها رو به صورت <strong>کلید-مقدار</strong> (key-value) ذخیره می‌کنه. هر کلید یه مقدار داره و با اون کلید می‌تونی به مقدار دسترسی پیدا کنی.</p>
+        <p>دیکشنری (Dictionary) یه ساختار داده هست که داده‌ها رو به صورت <strong>کلید-مقدار</strong> (key-value) ذخیره
+            می‌کنه. هر کلید یه مقدار داره و با اون کلید می‌تونی به مقدار دسترسی پیدا کنی.</p>
         <p>فرض کن دیکشنری مثل یه <strong>دفترچه تلفن</strong> هست: اسم (کلید) و شماره (مقدار).</p>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> دیکشنری‌ها با <strong>آکولاد</strong> { } تعریف میشن و هر کلید-مقدار با <strong>دونقطه</strong> (:) از هم جدا میشن.</p>
+            <p>💡 <strong>یادت باشه:</strong> دیکشنری‌ها با <strong>آکولاد</strong> { } تعریف میشن و هر کلید-مقدار با
+                <strong>دونقطه</strong> (:) از هم جدا میشن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تعریف دیکشنری</h2>
-        
+
         <pre class="code-block"># دیکشنری خالی
 دیکشنری_خالی = {}
 
@@ -41,7 +44,7 @@
 
 print(افراد)
 print(فرد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">{'علی': 25, 'زهرا': 30, 'رضا': 22}
@@ -51,7 +54,7 @@ print(فرد)</pre>
 
     <section class="section">
         <h2>💻 دسترسی به مقادیر دیکشنری</h2>
-        
+
         <pre class="code-block">فرد = {
     "نام": "علی",
     "سن": 25,
@@ -65,7 +68,7 @@ print(فرد["سن"])
 # روش دوم: با get() (امن‌تر)
 print(فرد.get("شهر"))
 print(فرد.get("کشور", "نامشخص"))  # اگر کلید نباشه، مقدار پیش‌فرض</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">علی
@@ -73,15 +76,16 @@ print(فرد.get("کشور", "نامشخص"))  # اگر کلید نباشه، م
 تهران
 نامشخص</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> تفاوت <code>[]</code> و <code>get()</code>: اگر کلید نباشه، <code>[]</code> ارور میده ولی <code>get()</code> <code>None</code> یا مقدار پیش‌فرض برمی‌گردونه.</p>
+            <p>💡 <strong>نکته:</strong> تفاوت <code>[]</code> و <code>get()</code>: اگر کلید نباشه، <code>[]</code>
+                ارور میده ولی <code>get()</code> <code>None</code> یا مقدار پیش‌فرض برمی‌گردونه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تغییر و اضافه کردن</h2>
-        
+
         <pre class="code-block">فرد = {"نام": "علی", "سن": 25}
 
 # تغییر مقدار
@@ -92,7 +96,7 @@ print(فرد)
 فرد["شهر"] = "تهران"
 فرد["علاقه‌مندی"] = "برنامه‌نویسی"
 print(فرد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">{'نام': 'علی', 'سن': 26}
@@ -102,7 +106,7 @@ print(فرد)</pre>
 
     <section class="section">
         <h2>💻 حذف از دیکشنری</h2>
-        
+
         <pre class="code-block">فرد = {"نام": "علی", "سن": 25, "شهر": "تهران", "علاقه": "برنامه‌نویسی"}
 
 # حذف با pop()
@@ -122,7 +126,7 @@ print(فرد)
 # پاک کردن کل دیکشنری
 فرد.clear()
 print(فرد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">شهر حذف شد: تهران
@@ -136,7 +140,7 @@ print(فرد)</pre>
 
     <section class="section">
         <h2>💻 حلقه for روی دیکشنری</h2>
-        
+
         <pre class="code-block">فرد = {"نام": "علی", "سن": 25, "شهر": "تهران"}
 
 # فقط کلیدها
@@ -148,7 +152,7 @@ print("---")
 # کلید و مقدار با items()
 for کلید, مقدار in فرد.items():
     print(کلید, ":", مقدار)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">نام
@@ -163,7 +167,7 @@ for کلید, مقدار in فرد.items():
 
     <section class="section">
         <h2>💻 متدهای دیکشنری</h2>
-        
+
         <pre class="code-block">فرد = {"نام": "علی", "سن": 25, "شهر": "تهران"}
 
 # keys() - همه کلیدها
@@ -181,7 +185,7 @@ print("سن:", فرد.get("سن"))
 # update() - به‌روزرسانی
 فرد.update({"سن": 26, "علاقه": "برنامه‌نویسی"})
 print("بعد از update:", فرد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">کلیدها: dict_keys(['نام', 'سن', 'شهر'])
@@ -194,7 +198,7 @@ print("بعد از update:", فرد)</pre>
 
     <section class="section">
         <h2>💻 دیکشنری تو در تو</h2>
-        
+
         <pre class="code-block">افراد = {
     "علی": {
         "سن": 25,
@@ -217,7 +221,7 @@ for نام, اطلاعات in افراد.items():
     print(f"\n{نام}:")
     for کلید, مقدار in اطلاعات.items():
         print(f"  {کلید}: {مقدار}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سن علی: 25
@@ -243,7 +247,8 @@ for نام, اطلاعات in افراد.items():
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> استفاده از لیست به عنوان کلید: <code>{[1, 2]: "value"}</code></p>
-            <p><strong>✅ راه‌حل:</strong> کلیدها باید <strong>غیرقابل تغییر</strong> باشن. از تاپل به جای لیست استفاده کن.</p>
+            <p><strong>✅ راه‌حل:</strong> کلیدها باید <strong>غیرقابل تغییر</strong> باشن. از تاپل به جای لیست استفاده
+                کن.</p>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> فراموش کردن <code>()</code> در متدها: <code>فرد.keys</code></p>
@@ -264,17 +269,21 @@ print(فرد)  # {'نام': 'علی', 'سن': 25, 'شهر': 'تهران'}</pre>
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> یک دیکشنری از اطلاعات خودت بساز (نام، سن، شهر، رشته تحصیلی) و چاپ کن.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> دیکشنری از ۳ نفر با اطلاعات (نام، سن، شهر) بساز و با حلقه همه رو چاپ کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر اطلاعات افراد رو بگیره و توی دیکشنری ذخیره کنه. کاربر می‌تونه افراد جدید اضافه کنه یا اطلاعات افراد موجود رو ببینه.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> یک دیکشنری از اطلاعات خودت بساز (نام، سن، شهر، رشته تحصیلی) و چاپ کن.
+            </p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> دیکشنری از ۳ نفر با اطلاعات (نام، سن، شهر) بساز و با حلقه همه رو چاپ
+                کن.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که از کاربر اطلاعات افراد رو بگیره و توی دیکشنری
+                ذخیره کنه. کاربر می‌تونه افراد جدید اضافه کنه یا اطلاعات افراد موجود رو ببینه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>مجموعه‌ها</strong> آشنا میشی. مجموعه‌ها مثل کیسه‌ای هستن که اعضای <strong>تکراری</strong> ندارن و <strong>بی‌ترتیب</strong> هستن.</p>
+        <p>توی درس بعدی، با <strong>مجموعه‌ها</strong> آشنا میشی. مجموعه‌ها مثل کیسه‌ای هستن که اعضای
+            <strong>تکراری</strong> ندارن و <strong>بی‌ترتیب</strong> هستن.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

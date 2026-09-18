@@ -1,0 +1,451 @@
+/* ============================================
+   🧀💻 استایل صفحه تنظیمات | CheeseCode Academy
+   نسخه: 3.0.0
+   ============================================ */
+
+.settings-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.settings-title {
+    color: #f5b81b;
+    font-size: 1.6rem;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.settings-title::before {
+    content: '> ';
+    color: #00d4ff;
+}
+
+.settings-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0 0 2rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   دکمه‌ی برگشت
+   ============================================ */
+
+.back-home-btn {
+    background: rgba(245, 184, 27, 0.08);
+    border: 1px solid rgba(245, 184, 27, 0.2);
+    border-radius: 8px;
+    color: #f5b81b;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 71.19px;
+    height: 51.19px;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.back-home-btn:hover {
+    background: rgba(245, 184, 27, 0.15);
+    border-color: rgba(0, 212, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   بخش‌های تنظیمات
+   ============================================ */
+
+.settings-section {
+    background: rgba(15, 22, 38, 0.85);
+    border: 1px solid rgba(245, 184, 27, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.settings-section:hover {
+    border-color: rgba(0, 212, 255, 0.25);
+}
+
+.section-title {
+    color: #f5b81b;
+    font-size: 1.2rem;
+    margin: 0 0 0.3rem 0;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.section-title::before {
+    content: '> ';
+    color: #00d4ff;
+}
+
+.section-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0 0 1.2rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   دکمه‌ی باز کردن مودال
+   ============================================ */
+
+.settings-opener-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    width: 100%;
+    border-radius: 12px;
+    background: rgba(245, 184, 27, 0.05);
+    border: 1px solid rgba(245, 184, 27, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: right;
+    outline: none;
+}
+
+.settings-opener-btn:hover {
+    background: rgba(245, 184, 27, 0.12);
+    border-color: rgba(0, 212, 255, 0.4);
+    color: #f5b81b;
+    transform: translateX(-4px);
+    box-shadow: 0 4px 20px rgba(245, 184, 27, 0.15);
+}
+
+.settings-opener-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.settings-opener-text {
+    flex: 1;
+    text-align: right;
+}
+
+.settings-opener-arrow {
+    color: rgba(245, 184, 27, 0.5);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.settings-opener-btn:hover .settings-opener-arrow {
+    color: #00d4ff;
+    transform: translateX(-4px);
+}
+
+/* ============================================
+   مودال
+   ============================================ */
+
+.modal-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    background: rgba(245, 184, 27, 0.03);
+    border: 1px solid rgba(245, 184, 27, 0.1);
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    text-align: right;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+}
+
+.modal-item:hover {
+    background: rgba(245, 184, 27, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: #f5b81b;
+    transform: translateX(-4px);
+}
+
+.modal-item.active {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: #00d4ff;
+    font-weight: 600;
+}
+
+.modal-item.info-item {
+    cursor: default;
+}
+
+.modal-item.info-item:hover {
+    transform: none;
+}
+
+.modal-item-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.modal-item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-align: right;
+}
+
+.modal-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: inherit;
+}
+
+.modal-item-desc {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.2s ease;
+}
+
+.modal-item.active .modal-item-desc {
+    color: rgba(0, 212, 255, 0.6);
+}
+
+.modal-item:hover .modal-item-desc {
+    color: rgba(245, 184, 27, 0.7);
+}
+
+.modal-item-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #0a0e1a;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+.modal-item.active .modal-item-check {
+    display: flex;
+    animation: checkPop 0.3s ease;
+}
+
+@keyframes checkPop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ============================================
+   تم روشن
+   ============================================ */
+
+body[data-theme^="light"] .settings-title {
+    color: #d97706;
+}
+
+body[data-theme^="light"] .settings-desc {
+    color: #475569;
+}
+
+body[data-theme^="light"] .settings-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(217, 119, 6, 0.15);
+}
+
+body[data-theme^="light"] .section-title {
+    color: #d97706;
+}
+
+body[data-theme^="light"] .section-desc {
+    color: #475569;
+}
+
+body[data-theme^="light"] .back-home-btn {
+    background: rgba(217, 119, 6, 0.06);
+    border-color: rgba(217, 119, 6, 0.2);
+    color: #d97706;
+}
+
+body[data-theme^="light"] .settings-opener-btn {
+    background: #f8fafc;
+    border-color: rgba(217, 119, 6, 0.15);
+    color: #334155;
+}
+
+body[data-theme^="light"] .settings-opener-btn:hover {
+    background: rgba(217, 119, 6, 0.08);
+    border-color: rgba(217, 119, 6, 0.4);
+    color: #d97706;
+}
+
+body[data-theme^="light"] .modal-item {
+    background: #f8fafc;
+    border-color: rgba(217, 119, 6, 0.15);
+    color: #334155;
+}
+
+body[data-theme^="light"] .modal-item:hover {
+    background: rgba(217, 119, 6, 0.08);
+    border-color: rgba(217, 119, 6, 0.4);
+    color: #d97706;
+}
+
+body[data-theme^="light"] .modal-item.active {
+    background: rgba(2, 132, 199, 0.1);
+    border-color: #0284c7;
+    color: #0284c7;
+}
+
+body[data-theme^="light"] .modal-item-desc {
+    color: #64748b;
+}
+
+body[data-theme^="light"] .modal-item.active .modal-item-desc {
+    color: #0284c7;
+}
+
+body[data-theme^="light"] .modal-item-check {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+/* ============================================
+   موبایل
+   ============================================ */
+
+@media (max-width: 700px) {
+    .settings-wrapper {
+        padding: 1rem 0.8rem;
+    }
+
+    .settings-title {
+        font-size: 1.3rem;
+    }
+
+    .settings-opener-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .modal-item {
+        padding: 0.7rem 0.8rem;
+        gap: 0.7rem;
+    }
+
+    .modal-item-icon {
+        font-size: 1.2rem;
+    }
+
+    .modal-item-name {
+        font-size: 0.85rem;
+    }
+
+    .modal-item-desc {
+        font-size: 0.65rem;
+    }
+
+    .modal-item-check {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+    }
+}
+
+/* ============================================
+   آمار (Stats)
+   ============================================ */
+
+.stats-container {
+    margin-top: 0.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+}
+
+.stat-card {
+    background: rgba(245, 184, 27, 0.03);
+    border: 1px solid rgba(245, 184, 27, 0.1);
+    border-radius: 12px;
+    padding: 0.9rem 0.6rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    background: rgba(245, 184, 27, 0.08);
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.stat-value {
+    color: #00d4ff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+}
+
+body[data-theme^="light"] .stat-card {
+    background: #f8fafc;
+    border-color: rgba(217, 119, 6, 0.15);
+}
+
+body[data-theme^="light"] .stat-value {
+    color: #0284c7;
+}
+
+body[data-theme^="light"] .stat-label {
+    color: #64748b;
+}
+
+@media (max-width: 450px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

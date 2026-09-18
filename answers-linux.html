@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodaX | پاسخ تمرین‌های لینوکس</title>
+    <title>آکادمی چیزکد | پاسخ تمرین‌های لینوکس</title>
     <link rel="stylesheet" href="styles/python-linux-style.css">
+    <link rel="stylesheet" href="styles/loading-style.css">
+    <link rel="stylesheet" href="styles/notes-style.css">
+    <link rel="stylesheet" href="styles/sticky-header.css">
     <link rel="stylesheet" href="styles/themes.css">
-    <link rel="icon" type="image/jpeg" href="images/logo.png">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="theme-color" content="#f5b81b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CodaX">
-    
-    <script src="js/codax-utils.js"></script>
+    <meta name="apple-mobile-web-app-title" content="CheeseCode">
+    <link rel="stylesheet" href="styles/mobile-optimization.css">
+    <script src="js/cheese-utils.js"></script>
     <script src="configs/answers-linux-config.js"></script>
+    <script src="configs/menu-config.js"></script>
+    <script src="configs/install-config.js"></script>
+    <script src="js/loading-utils.js"></script>
+    <script src="js/syntax-highlight.js"></script>
+    <script src="js/notes-utils.js"></script>
+    <script src="js/bookmarks-utils.js"></script>
+    <script src="js/global-search.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/sticky-header.js"></script>
+    <script src="js/channel-modal.js"></script>
+    <script src="js/install-helper.js"></script>
 </head>
+
 <body data-theme="dark">
 
     <header class="hero-panel">
         <div class="brand">
             <img src="images/logo.jpeg" alt="Logo" class="brand-logo" id="logoBtn">
-            <div class="brand-text"><h1>CodaX</h1><p>پاسخ لینوکس | CodaX</p></div>
+            <div class="brand-text">
+                <h1>CheeseCode</h1>
+                <p>پاسخ لینوکس | CheeseCode</p>
+            </div>
         </div>
         <div style="display:flex; gap:0.5rem; align-items:center;">
-            <button id="themeToggle" title="Select Theme" class="action-btn" style="background:transparent; border:1px solid rgba(0,212,255,0.1);">🌙</button>
-            <button class="action-btn" id="infoButton">📢 اطلاعات</button>
+            <a href="index.html" class="back-home-btn" title="بازگشت به صفحه اصلی">↩</a>
         </div>
     </header>
 
@@ -61,193 +79,221 @@
         </div>
     </div>
 
-    <div id="channelModal" class="modal">
-        <div class="modal-content" style="max-width: 450px; text-align: center; border-top-color: #00d4ff;">
-            <span class="close-modal" id="closeChannel">&times;</span>
-            <div><img src="images/logo.jpeg" style="width: 300px; height: auto; border-radius: 20px;"></div>
-            <h3 style="color: #00d4ff; font-weight: 700; font-size: 1.4rem;" dir="rtl">CodaX Academy | آکادمی CodaX</h3>
-            <p style="margin: 1rem 0; color: rgba(255,255,255,0.5);">هستۀ کد به دست تو | CodaX</p>
-            <p style="color: rgba(255,255,255,0.7);">
-                ارتباط با ادمین: 
-                <span>
-                    <a href="https://ble.ir/CodaX_Admin" target="_blank" class="channel-link" style="color: #00d4ff; text-decoration: none; font-size: 0.95rem; font-weight: 600; display: inline-block; background: rgba(0,212,255,0.08); padding: 0.5rem 1.8rem; border-radius: 60px; border: 1px solid rgba(0,212,255,0.15); transition: all 0.3s ease; backdrop-filter: blur(8px);">
-                        CodaX_Admin@
-                    </a>
-                </span>
-            </p>
-            <p style="margin-top: 1.5rem;">
-                <a href="https://ble.ir/CodaX" target="_blank" class="channel-link" style="color: #00d4ff; text-decoration: none; font-size: 0.95rem; font-weight: 600; display: inline-block; background: rgba(0,212,255,0.08); padding: 0.5rem 1.8rem; border-radius: 60px; border: 1px solid rgba(0,212,255,0.15); transition: all 0.3s ease; backdrop-filter: blur(8px);">
-                    👈 ورود به کانال بله 👉
-                </a>
-            </p>
-        </div>
-    </div>
-
     <script>
-    (function() {
-        var menuContainer = document.getElementById('answers-menu');
-        var lessonModal = document.getElementById('lessonModal');
-        var modalBody = document.getElementById('modal-body-content');
-        var closeLesson = document.getElementById('closeLesson');
-        var channelModal = document.getElementById('channelModal');
-        var logoBtn = document.getElementById('logoBtn');
-        var infoButton = document.getElementById('infoButton');
-        var closeChannel = document.getElementById('closeChannel');
+        (function () {
+            var menuContainer = document.getElementById('answers-menu');
+            var lessonModal = document.getElementById('lessonModal');
+            var modalBody = document.getElementById('modal-body-content');
+            var closeLesson = document.getElementById('closeLesson');
+            var COURSE_TYPE = 'answers-linux';
 
-        if (typeof answersConfig === 'undefined') {
-            menuContainer.innerHTML = '<p style="color: #ff6b6b; padding: 1rem;">❌ خطا: فایل answers-linux-config.js یافت نشد!</p>';
-            console.error('answersConfig is undefined!');
-            return;
-        }
-
-        console.log('⚡ تعداد جواب‌ها:', answersConfig.length);
-
-        function closeModal() {
-            lessonModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            if (window.CodaXUtils) {
-                setTimeout(function() {
-                    window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
-                }, 100);
-            }
-        }
-
-        function loadAnswer(answer) {
-            modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">⏳ در حال بارگذاری...</div>';
-            lessonModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-
-            var cachedContent = null;
-            if (window.CodaXUtils) {
-                cachedContent = window.CodaXUtils.getFromCache(answer.file, 'answers-linux');
-            }
-            
-            if (cachedContent) {
-                console.log('📦 از cache لود شد:', answer.file);
-                showAnswerContent(cachedContent, answer);
+            if (typeof answersLinuxConfig === 'undefined') {
+                menuContainer.innerHTML = '<p style="color: #ff6b6b; padding: 1rem;">❌ خطا: فایل answers-linux-config.js یافت نشد!</p>';
                 return;
             }
-            
-            console.log('🌐 از شبکه لود میشه:', answer.file);
-            fetch('answers/linux/' + answer.file + '?v=' + Date.now())
-                .then(function(res) {
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return res.text();
-                })
-                .then(function(html) {
-                    if (window.CodaXUtils) {
-                        window.CodaXUtils.saveToCache(answer.file, html, 'answers-linux');
+
+            function closeModal() {
+                lessonModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                if (window.CheeseUtils) {
+                    setTimeout(function () {
+                        window.CheeseUtils.updateProgress(answersLinuxConfig.length, COURSE_TYPE);
+                    }, 100);
+                }
+            }
+
+            function loadAnswer(answer) {
+                modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">⏳ در حال بارگذاری...</div>';
+                lessonModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+
+                if (window.CheeseUtils) {
+                    CheeseUtils.makeWindow('#lessonModal', 'answers-linux-' + answer.file);
+                }
+
+                var cachedContent = null;
+                if (window.CheeseUtils) {
+                    cachedContent = window.CheeseUtils.getFromCache(answer.file, COURSE_TYPE);
+                }
+
+                if (cachedContent) {
+                    showAnswerContent(cachedContent, answer);
+                    return;
+                }
+
+                // ⚠️ فقط از شبکه، بدون ذخیره‌ی خودکار
+                fetch('answers/linux/' + answer.file + '?v=' + Date.now())
+                    .then(function (res) {
+                        if (!res.ok) throw new Error('HTTP ' + res.status);
+                        return res.text();
+                    })
+                    .then(function (html) {
+                        showAnswerContent(html, answer);
+                    })
+                    .catch(function (err) {
+                        modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">❌ خطا در بارگذاری<br><span style="font-size:0.8rem;color:rgba(255,255,255,0.3);">' + err.message + '</span></div>';
+                    });
+            }
+
+            function showAnswerContent(html, answer) {
+                modalBody.innerHTML = html;
+
+                if (window.CheeseUtils) {
+                    window.CheeseUtils.saveLastLesson(answer.file, answer.title);
+                    window.CheeseUtils.markAsSeen(answer.file, COURSE_TYPE);
+                    window.CheeseUtils.updateProgress(answersLinuxConfig.length, COURSE_TYPE);
+                }
+
+                // دکمه‌های اضافی (شامل یادداشت)
+                addExtraButtons(answer, COURSE_TYPE);
+
+                if (window.SyntaxHighlight) {
+                    setTimeout(function () {
+                        window.SyntaxHighlight.refresh();
+                    }, 200);
+                }
+            }
+
+            function addExtraButtons(lesson, courseType) {
+                setTimeout(function() {
+                    var modalContent = document.querySelector('#lessonModal .modal-content');
+                    if (!modalContent) return;
+                    
+                    // حذف نوار قبلی
+                    var oldBar = modalContent.querySelector('.extra-buttons-bar');
+                    if (oldBar) oldBar.remove();
+                    
+                    // حذف دکمه‌های قبلی (اگه position:absolute هستن)
+                    modalContent.querySelectorAll('.share-btn, .notes-btn, .bookmark-btn').forEach(function(el) {
+                        el.remove();
+                    });
+                    
+                    // نوار جدید
+                    var bar = document.createElement('div');
+                    bar.className = 'extra-buttons-bar';
+                    
+                    // دکمه‌ی اشتراک‌گذاری
+                    var shareBtn = document.createElement('button');
+                    shareBtn.className = 'share-btn';
+                    shareBtn.innerHTML = '🔗 اشتراک';
+                    shareBtn.style.cssText = 'background:rgba(245,184,27,0.08);border:1px solid rgba(245,184,27,0.3);color:#f5b81b;';
+                    shareBtn.onclick = function() {
+                        window.CheeseUtils.shareLesson(lesson.file, lesson.title, courseType);
+                    };
+                    bar.appendChild(shareBtn);
+                    
+                    // دکمه‌ی یادداشت
+                    var notesBtn = document.createElement('button');
+                    notesBtn.className = 'notes-btn';
+                    notesBtn.innerHTML = '📝 یادداشت';
+                    notesBtn.style.cssText = 'background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;';
+                    notesBtn.onclick = function() {
+                        if (window.NotesUtils) {
+                            window.NotesUtils.open(lesson.file, lesson.title, courseType);
+                        }
+                    };
+                    bar.appendChild(notesBtn);
+                    
+                    // دکمه‌ی بوکمارک
+                    if (window.BookmarksUtils) {
+                        var bookmarkBtn = window.BookmarksUtils.createButton(lesson.file, lesson.title, courseType);
+                        bookmarkBtn.style.cssText = 'background:rgba(245,184,27,0.08);border:1px solid rgba(245,184,27,0.3);color:#f5b81b;';
+                        bookmarkBtn.style.position = 'static';
+                        bookmarkBtn.style.left = 'auto';
+                        bookmarkBtn.style.top = 'auto';
+                        bar.appendChild(bookmarkBtn);
                     }
-                    showAnswerContent(html, answer);
-                })
-                .catch(function(err) {
-                    console.error('❌ خطا:', err);
-                    modalBody.innerHTML = '<div style="text-align:center;padding:2rem;">❌ خطا در بارگذاری<br><span style="font-size:0.8rem;color:rgba(255,255,255,0.3);">' + err.message + '</span></div>';
-                });
-        }
-
-        function showAnswerContent(html, answer) {
-            modalBody.innerHTML = html;
-            
-            if (window.CodaXUtils) {
-                window.CodaXUtils.saveLastLesson(answer.file, answer.title);
-                window.CodaXUtils.markAsSeen(answer.file, 'answers-linux');
-                window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
+                    
+                    // اضافه کن به ابتدای محتوا
+                    var modalBody = modalContent.querySelector('#modal-body-content') || modalContent;
+                    if (modalBody && modalBody.parentNode) {
+                        modalBody.parentNode.insertBefore(bar, modalBody);
+                    } else {
+                        modalContent.appendChild(bar);
+                    }
+                }, 100);
             }
-            
-            addShareButton(answer, 'answers-linux');
-        }
+            menuContainer.innerHTML = '';
 
-        function addShareButton(answer, courseType) {
-            setTimeout(function() {
-                var modalContent = document.querySelector('#lessonModal .modal-content');
-                if (!modalContent) return;
-                
-                var oldBtn = modalContent.querySelector('.share-btn');
-                if (oldBtn) oldBtn.remove();
-                
-                var shareBtn = document.createElement('button');
-                shareBtn.className = 'share-btn';
-                shareBtn.innerHTML = '🔗';
-                shareBtn.title = 'اشتراک‌گذاری';
-                shareBtn.style.cssText = `
-                    position: absolute;
-                    top: 0.2rem;
-                    left: 4rem;
-                    background: rgba(0, 212, 255, 0.1);
-                    border: 1px solid rgba(0, 212, 255, 0.3);
-                    border-radius: 8px;
-                    padding: 0.4rem 0.7rem;
-                    color: #00d4ff;
-                    cursor: pointer;
-                    font-family: 'Courier New', monospace;
-                    font-size: 0.9rem;
-                    z-index: 11;
-                    transition: all 0.2s ease;
-                `;
-                shareBtn.onclick = function() {
-                    window.CodaXUtils.shareLesson(answer.file, answer.title, courseType);
-                };
-                shareBtn.onmouseover = function() {
-                    this.style.background = 'rgba(0, 212, 255, 0.2)';
-                    this.style.transform = 'scale(1.05)';
-                };
-                shareBtn.onmouseout = function() {
-                    this.style.background = 'rgba(0, 212, 255, 0.1)';
-                    this.style.transform = 'scale(1)';
-                };
-                
-                modalContent.appendChild(shareBtn);
-            }, 100);
-        }
+            for (var i = 0; i < answersLinuxConfig.length; i++) {
+                (function (index) {
+                    var answer = answersLinuxConfig[index];
+                    var button = document.createElement('button');
+                    button.className = 'menu-item';
+                    button.setAttribute('data-index', index + 1);
+                    button.innerHTML = '<span>🧀</span> ' + (index + 1) + '. ' + answer.title;
 
-        menuContainer.innerHTML = '';
+                    button.addEventListener('click', function () {
+                        loadAnswer(answer);
+                    });
 
-        for (var i = 0; i < answersConfig.length; i++) {
-            (function(index) {
-                var answer = answersConfig[index];
-                var button = document.createElement('button');
-                button.className = 'menu-item';
-                button.setAttribute('data-index', index + 1);
-                button.innerHTML = '<span>💻</span> ' + (index + 1) + '. ' + answer.title;
-                
-                button.addEventListener('click', function() {
-                    loadAnswer(answer);
-                });
-                
-                menuContainer.appendChild(button);
-            })(i);
-        }
-
-        console.log('⚡ منو ساخته شد با', answersConfig.length, 'دکمه');
-
-        closeLesson.addEventListener('click', closeModal);
-        infoButton.addEventListener('click', function() { channelModal.style.display = 'block'; });
-        logoBtn.addEventListener('click', function() { channelModal.style.display = 'block'; });
-        closeChannel.addEventListener('click', function() { channelModal.style.display = 'none'; });
-        window.addEventListener('click', function(e) {
-            if (e.target === lessonModal) closeModal();
-            if (e.target === channelModal) channelModal.style.display = 'none';
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (lessonModal.style.display === 'block') closeModal();
-                if (channelModal.style.display === 'block') channelModal.style.display = 'none';
+                    menuContainer.appendChild(button);
+                })(i);
             }
-        });
 
-        if (window.CodaXUtils) {
-            window.CodaXUtils.updateProgress(answersConfig.length, 'answers-linux');
-            window.CodaXUtils.setupResume();
-            setTimeout(function() {
-                window.CodaXUtils.setupSearch();
-            }, 100);
-        } else {
-            console.warn('⚠️ CodaXUtils پیدا نشد!');
-        }
+            closeLesson.addEventListener('click', closeModal);
+            window.addEventListener('click', function (e) {
+                if (e.target === lessonModal) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && lessonModal.style.display === 'block') closeModal();
+            });
 
-        console.log('⚡ Answers Linux page ready!');
-    })();
+            if (window.CheeseUtils) {
+                window.CheeseUtils.updateProgress(answersLinuxConfig.length, COURSE_TYPE);
+                window.CheeseUtils.setupResume();
+                setTimeout(function () {
+                    window.CheeseUtils.setupSearch();
+                }, 100);
+            }
+
+            function checkUrlParams() {
+                var params = new URLSearchParams(window.location.search);
+                var lessonFile = params.get('lesson');
+                var lessonId = params.get('id');
+                var openNotes = params.get('notes');
+
+                var targetAnswer = null;
+
+                if (lessonFile) {
+                    targetAnswer = answersLinuxConfig.find(function (a) {
+                        return a.file === lessonFile || a.file === decodeURIComponent(lessonFile);
+                    });
+                } else if (lessonId) {
+                    var idx = parseInt(lessonId) - 1;
+                    if (idx >= 0 && idx < answersLinuxConfig.length) {
+                        targetAnswer = answersLinuxConfig[idx];
+                    }
+                }
+
+                if (!targetAnswer) return;
+
+                setTimeout(function () {
+                    loadAnswer(targetAnswer);
+
+                    if (openNotes === '1') {
+                        setTimeout(function () {
+                            if (window.NotesUtils) {
+                                window.NotesUtils.open(targetAnswer.file, targetAnswer.title, COURSE_TYPE);
+                            }
+                        }, 1200);
+                    }
+                }, 500);
+            }
+
+            checkUrlParams();
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(function (r) { console.log('✅ SW ثبت شد'); })
+                        .catch(function (err) { console.warn('⚠️ SW:', err); });
+                });
+            }
+
+            console.log('🧀 Answers Linux page ready!');
+        })();
     </script>
 </body>
+
 </html>

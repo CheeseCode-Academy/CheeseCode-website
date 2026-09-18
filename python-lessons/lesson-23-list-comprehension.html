@@ -4,13 +4,15 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>لیست‌های فشرده</strong> آشنا میشی. این روش بهت کمک می‌کنه لیست‌ها رو به صورت <strong>کوتاه</strong> و <strong>خوانا</strong> بسازی.</p>
+        <p>توی این درس با <strong>لیست‌های فشرده</strong> آشنا میشی. این روش بهت کمک می‌کنه لیست‌ها رو به صورت
+            <strong>کوتاه</strong> و <strong>خوانا</strong> بسازی.</p>
     </section>
 
     <section class="section">
         <h2>📖 لیست فشرده چیست؟</h2>
-        <p>لیست فشرده (List Comprehension) یه روش <strong>خلاصه</strong> برای ساخت لیست‌هاست که کد رو <strong>کوتاه‌تر</strong> و <strong>خواناتر</strong> می‌کنه.</p>
-        
+        <p>لیست فشرده (List Comprehension) یه روش <strong>خلاصه</strong> برای ساخت لیست‌هاست که کد رو
+            <strong>کوتاه‌تر</strong> و <strong>خواناتر</strong> می‌کنه.</p>
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> ساختار: <code>[عبارت for متغیر in iterable if شرط]</code></p>
         </div>
@@ -18,7 +20,7 @@
 
     <section class="section">
         <h2>💻 مثال ساده</h2>
-        
+
         <pre class="code-block"># روش معمولی
 مربع‌ها = []
 for i in range(1, 6):
@@ -28,7 +30,7 @@ print("روش معمولی:", مربع‌ها)
 # روش فشرده
 مربع‌ها = [i ** 2 for i in range(1, 6)]
 print("روش فشرده:", مربع‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">روش معمولی: [1, 4, 9, 16, 25]
@@ -38,7 +40,7 @@ print("روش فشرده:", مربع‌ها)</pre>
 
     <section class="section">
         <h2>💻 با شرط (if)</h2>
-        
+
         <pre class="code-block"># اعداد زوج
 زوج‌ها = [x for x in range(1, 11) if x % 2 == 0]
 print("اعداد زوج:", زوج‌ها)
@@ -46,7 +48,7 @@ print("اعداد زوج:", زوج‌ها)
 # اعداد بزرگتر از ۵
 بزرگتر = [x for x in range(1, 11) if x > 5]
 print("بزرگتر از ۵:", بزرگتر)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">اعداد زوج: [2, 4, 6, 8, 10]
@@ -56,7 +58,7 @@ print("بزرگتر از ۵:", بزرگتر)</pre>
 
     <section class="section">
         <h2>💻 با if/else</h2>
-        
+
         <pre class="code-block"># زوج/فرد
 وضعیت = ["زوج" if x % 2 == 0 else "فرد" for x in range(1, 6)]
 print(وضعیت)
@@ -65,7 +67,7 @@ print(وضعیت)
 اعداد = [-3, -2, 0, 2, 3]
 وضعیت_عدد = ["مثبت" if x > 0 else ("منفی" if x < 0 else "صفر") for x in اعداد]
 print(وضعیت_عدد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">['فرد', 'زوج', 'فرد', 'زوج', 'فرد']
@@ -75,7 +77,7 @@ print(وضعیت_عدد)</pre>
 
     <section class="section">
         <h2>💻 حلقه‌های تو در تو</h2>
-        
+
         <pre class="code-block"># جدول ضرب ساده
 جدول = [f"{i}×{j}={i*j}" for i in range(1, 4) for j in range(1, 4)]
 for مورد in جدول:
@@ -86,7 +88,7 @@ print("---")
 # ماتریس ۳×۳
 ماتریس = [[i * j for j in range(1, 4)] for i in range(1, 4)]
 print(ماتریس)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">1×1=1
@@ -105,7 +107,7 @@ print(ماتریس)</pre>
 
     <section class="section">
         <h2>💻 روی رشته‌ها</h2>
-        
+
         <pre class="code-block">کلمات = ["سلام", "علی", "چطوری"]
 
 # طول هر کلمه
@@ -119,7 +121,7 @@ print("حروف بزرگ:", بزرگ)
 # کلمات با حرف 'ی'
 با_ی = [کلمه for کلمه in کلمات if 'ی' in کلمه]
 print("کلمات دارای 'ی':", با_ی)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">طول کلمات: [4, 3, 6]
@@ -130,7 +132,7 @@ print("کلمات دارای 'ی':", با_ی)</pre>
 
     <section class="section">
         <h2>💻 روی دیکشنری</h2>
-        
+
         <pre class="code-block">فرد = {"نام": "علی", "سن": 25, "شهر": "تهران"}
 
 # کلیدها
@@ -144,7 +146,7 @@ print("مقادیر:", مقادیر)
 # کلید-مقدار
 آیتم‌ها = [f"{کلید}: {مقدار}" for کلید, مقدار in فرد.items()]
 print("آیتم‌ها:", آیتم‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">کلیدها: ['نام', 'سن', 'شهر']
@@ -155,7 +157,7 @@ print("آیتم‌ها:", آیتم‌ها)</pre>
 
     <section class="section">
         <h2>💻 set و دیکشنری فشرده</h2>
-        
+
         <pre class="code-block"># مجموعه فشرده (Set Comprehension)
 مربع_مجموعه = {x ** 2 for x in range(1, 6)}
 print("مجموعه مربع‌ها:", مربع_مجموعه)
@@ -163,7 +165,7 @@ print("مجموعه مربع‌ها:", مربع_مجموعه)
 # دیکشنری فشرده (Dictionary Comprehension)
 مربع_دیکشنری = {x: x ** 2 for x in range(1, 6)}
 print("دیکشنری مربع‌ها:", مربع_دیکشنری)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">مجموعه مربع‌ها: {1, 4, 9, 16, 25}
@@ -173,7 +175,7 @@ print("دیکشنری مربع‌ها:", مربع_دیکشنری)</pre>
 
     <section class="section">
         <h2>💻 ترکیب با توابع</h2>
-        
+
         <pre class="code-block">def زوج_است(x):
     return x % 2 == 0
 
@@ -194,7 +196,8 @@ print("اعداد زوج:", زوج‌ها)</pre>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> استفاده از <code>else</code> قبل از <code>if</code> در جای اشتباه</p>
-            <p><strong>✅ راه‌حل:</strong> <code>if</code> بعد از حلقه برای فیلتر کردن، <code>if/else</code> قبل از حلقه برای انتخاب مقدار.</p>
+            <p><strong>✅ راه‌حل:</strong> <code>if</code> بعد از حلقه برای فیلتر کردن، <code>if/else</code> قبل از حلقه
+                برای انتخاب مقدار.</p>
         </div>
     </section>
 
@@ -212,10 +215,11 @@ print(صاف)  # [1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> با لیست فشرده، لیستی از مربع اعداد ۱ تا ۱۰ بساز.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> با لیست فشرده، اعداد فرد بین ۱ تا ۲۰ رو انتخاب کن.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با دیکشنری فشرده، دیکشنری بساز که کلیدها اعداد ۱ تا ۵ و مقادیرشون مکعب اون اعداد باشه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> با دیکشنری فشرده، دیکشنری بساز که کلیدها اعداد ۱ تا ۵ و
+                مقادیرشون مکعب اون اعداد باشه.</p>
         </div>
     </section>
 

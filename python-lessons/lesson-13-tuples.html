@@ -4,22 +4,25 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>تاپل‌ها</strong> آشنا میشی. تاپل‌ها مثل لیست‌ها هستن با این تفاوت که <strong>غیرقابل تغییر</strong> هستن.</p>
+        <p>توی این درس با <strong>تاپل‌ها</strong> آشنا میشی. تاپل‌ها مثل لیست‌ها هستن با این تفاوت که <strong>غیرقابل
+                تغییر</strong> هستن.</p>
     </section>
 
     <section class="section">
         <h2>📖 تاپل چیست؟</h2>
-        <p>تاپل (Tuple) یه ساختار داده مثل لیست هست، با این تفاوت که <strong>غیرقابل تغییر</strong> (immutable) هست. یعنی بعد از ساخته شدن، نمی‌تونی اعضاش رو عوض کنی، حذف کنی یا اضافه کنی.</p>
+        <p>تاپل (Tuple) یه ساختار داده مثل لیست هست، با این تفاوت که <strong>غیرقابل تغییر</strong> (immutable) هست.
+            یعنی بعد از ساخته شدن، نمی‌تونی اعضاش رو عوض کنی، حذف کنی یا اضافه کنی.</p>
         <p>تاپل‌ها برای زمانی که می‌خوای یه سری داده رو <strong>ثابت</strong> نگه داری، عالی هستن.</p>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> تاپل‌ها با <strong>پرانتز</strong> ( ) تعریف میشن و اعضاشون با <strong>کاما</strong> (,) از هم جدا میشن.</p>
+            <p>💡 <strong>یادت باشه:</strong> تاپل‌ها با <strong>پرانتز</strong> ( ) تعریف میشن و اعضاشون با
+                <strong>کاما</strong> (,) از هم جدا میشن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تعریف تاپل</h2>
-        
+
         <pre class="code-block"># تاپل خالی
 تاپل_خالی = ()
 
@@ -36,28 +39,29 @@
 یک_عضو = ("سلام",)
 
 print(میوه‌ها)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">('سیب', 'موز', 'پرتقال')</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> برای تاپل یک عضوی، حتماً بعد از عضو <strong>کاما</strong> بذار، وگرنه پایتون اون رو تاپل حساب نمی‌کنه.</p>
+            <p>💡 <strong>نکته:</strong> برای تاپل یک عضوی، حتماً بعد از عضو <strong>کاما</strong> بذار، وگرنه پایتون
+                اون رو تاپل حساب نمی‌کنه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 دسترسی به اعضای تاپل</h2>
         <p>دسترسی به اعضای تاپل <strong>دقیقاً مثل لیست</strong> هست:</p>
-        
+
         <pre class="code-block">میوه‌ها = ("سیب", "موز", "پرتقال", "انگور", "هندوانه")
 
 print(میوه‌ها[0])  # اولین عضو
 print(میوه‌ها[2])  # سومین عضو
 print(میوه‌ها[-1]) # آخرین عضو
 print(میوه‌ها[1:4]) # برش</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سیب
@@ -69,7 +73,7 @@ print(میوه‌ها[1:4]) # برش</pre>
 
     <section class="section">
         <h2>💻 تفاوت تاپل و لیست</h2>
-        
+
         <pre class="code-block"># لیست قابل تغییره
 لیست = [1, 2, 3]
 لیست[0] = 100
@@ -84,7 +88,7 @@ print(لیست)  # [100, 2, 3]
     <section class="section">
         <h2>💻 متدهای تاپل</h2>
         <p>تاپل‌ها متدهای محدودی دارن چون غیرقابل تغییر هستن:</p>
-        
+
         <pre class="code-block">تاپل = (1, 2, 3, 2, 4, 2, 5)
 
 # count() - تعداد تکرار
@@ -99,7 +103,7 @@ print(len(تاپل))
 # in - بررسی عضویت
 print(3 in تاپل)
 print(7 in تاپل)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">3
@@ -112,7 +116,7 @@ False</pre>
 
     <section class="section">
         <h2>💻 تبدیل لیست به تاپل و برعکس</h2>
-        
+
         <pre class="code-block"># لیست به تاپل
 لیست = [1, 2, 3, 4]
 تاپل = tuple(لیست)
@@ -122,7 +126,7 @@ print(تاپل)
 تاپل = (5, 6, 7, 8)
 لیست = list(تاپل)
 print(لیست)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">(1, 2, 3, 4)
@@ -132,12 +136,12 @@ print(لیست)</pre>
 
     <section class="section">
         <h2>💻 تاپل و حلقه for</h2>
-        
+
         <pre class="code-block">میوه‌ها = ("سیب", "موز", "پرتقال", "انگور")
 
 for میوه in میوه‌ها:
     print(میوه)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سیب
@@ -150,7 +154,7 @@ for میوه in میوه‌ها:
     <section class="section">
         <h2>💻 unpacking در تاپل</h2>
         <p>می‌تونی اعضای تاپل رو به متغیرهای جداگانه اختصاص بدی:</p>
-        
+
         <pre class="code-block">مختصات = (10, 20, 30)
 x, y, z = مختصات
 print("x:", x, "y:", y, "z:", z)
@@ -159,7 +163,7 @@ print("x:", x, "y:", y, "z:", z)
 نقاط = [(1, 2), (3, 4), (5, 6)]
 for x, y in نقاط:
     print("x:", x, "y:", y)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">x: 10 y: 20 z: 30
@@ -172,14 +176,14 @@ x: 5 y: 6</pre>
     <section class="section">
         <h2>💻 تاپل به عنوان کلید دیکشنری</h2>
         <p>چون تاپل‌ها غیرقابل تغییر هستن، می‌تونن <strong>کلید دیکشنری</strong> بشن:</p>
-        
+
         <pre class="code-block"># لیست نمی‌تونه کلید باشه
 # دیکشنری = {[1, 2]: "value"}  # ارور!
 
 # تاپل می‌تونه کلید باشه
 دیکشنری = {(1, 2): "نقطه اول", (3, 4): "نقطه دوم"}
 print(دیکشنری[(1, 2)])</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">نقطه اول</pre>
@@ -190,10 +194,12 @@ print(دیکشنری[(1, 2)])</pre>
         <h2>🧠 اشتباهات رایج</h2>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> سعی در تغییر تاپل: <code>تاپل[0] = 10</code></p>
-            <p><strong>✅ راه‌حل:</strong> اگر نیاز به تغییر داری، اول به لیست تبدیل کن، تغییر بده و دوباره به تاپل برگردون.</p>
+            <p><strong>✅ راه‌حل:</strong> اگر نیاز به تغییر داری، اول به لیست تبدیل کن، تغییر بده و دوباره به تاپل
+                برگردون.</p>
         </div>
         <div class="highlight-box">
-            <p><strong>❌ اشتباه:</strong> فراموش کردن کاما برای تاپل یک عضوی: <code>تاپل = ("سلام")</code> که این یه رشته‌ست، نه تاپل!</p>
+            <p><strong>❌ اشتباه:</strong> فراموش کردن کاما برای تاپل یک عضوی: <code>تاپل = ("سلام")</code> که این یه
+                رشته‌ست، نه تاپل!</p>
             <p><strong>✅ راه‌حل:</strong> حتماً کاما بذار: <code>تاپل = ("سلام",)</code></p>
         </div>
     </section>
@@ -215,17 +221,21 @@ print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگ�
     <section class="section">
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
-            <p><strong>تمرین ۱ (ساده):</strong> یک تاپل از ۵ شهر favorite خودت بساز و با حلقه <code>for</code> چاپ کن.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> یک تاپل از ۳ رنگ بساز و با <code>unpacking</code> هر کدوم رو توی متغیر جداگانه بریز.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک تاپل از اعداد بساز و جمع همه‌شون رو بدون استفاده از <code>sum()</code> محاسبه کن.</p>
+            <p><strong>تمرین ۱ (ساده):</strong> یک تاپل از ۵ شهر favorite خودت بساز و با حلقه <code>for</code> چاپ کن.
+            </p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> یک تاپل از ۳ رنگ بساز و با <code>unpacking</code> هر کدوم رو توی متغیر
+                جداگانه بریز.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> یک تاپل از اعداد بساز و جمع همه‌شون رو بدون استفاده از
+                <code>sum()</code> محاسبه کن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>دیکشنری‌ها</strong> آشنا میشی. دیکشنری‌ها مثل دفترچه تلفن هستن که با کلید می‌تونی به مقدار دسترسی پیدا کنی.</p>
+        <p>توی درس بعدی، با <strong>دیکشنری‌ها</strong> آشنا میشی. دیکشنری‌ها مثل دفترچه تلفن هستن که با کلید می‌تونی به
+            مقدار دسترسی پیدا کنی.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>

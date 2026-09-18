@@ -4,22 +4,26 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>ژنراتورها</strong> آشنا میشی. ژنراتورها مثل لیست‌ها هستن ولی <strong>حافظه‌ی کمتری</strong> مصرف می‌کنن و برای داده‌های بزرگ عالی‌ان.</p>
+        <p>توی این درس با <strong>ژنراتورها</strong> آشنا میشی. ژنراتورها مثل لیست‌ها هستن ولی <strong>حافظه‌ی
+                کمتری</strong> مصرف می‌کنن و برای داده‌های بزرگ عالی‌ان.</p>
     </section>
 
     <section class="section">
         <h2>📖 ژنراتور چیست؟</h2>
-        <p>ژنراتور (Generator) یه راه برای ساخت <strong>توالی</strong> از مقادیره که به‌جای ذخیره همه‌ی مقادیر توی حافظه، <strong>یک‌یک</strong> تولیدشون می‌کنه.</p>
-        <p>فرض کن ژنراتور مثل یه <strong>کارخانه</strong> هست که هر بار یه محصول تولید می‌کنه و توی انبار ذخیره نمی‌کنه.</p>
-        
+        <p>ژنراتور (Generator) یه راه برای ساخت <strong>توالی</strong> از مقادیره که به‌جای ذخیره همه‌ی مقادیر توی
+            حافظه، <strong>یک‌یک</strong> تولیدشون می‌کنه.</p>
+        <p>فرض کن ژنراتور مثل یه <strong>کارخانه</strong> هست که هر بار یه محصول تولید می‌کنه و توی انبار ذخیره نمی‌کنه.
+        </p>
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> ژنراتورها با <code>yield</code> ساخته میشن و <strong>حافظه‌ی خیلی کم</strong> مصرف می‌کنن.</p>
+            <p>💡 <strong>یادت باشه:</strong> ژنراتورها با <code>yield</code> ساخته میشن و <strong>حافظه‌ی خیلی
+                    کم</strong> مصرف می‌کنن.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تفاوت لیست و ژنراتور</h2>
-        
+
         <pre class="code-block"># لیست - همه مقادیر توی حافظه
 لیست = [x ** 2 for x in range(10)]
 print("لیست:", لیست)
@@ -29,7 +33,7 @@ print("لیست:", لیست)
 print("ژنراتور:", ژنراتور)
 for مقدار in ژنراتور:
     print(مقدار, end=" ")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">لیست: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
@@ -40,7 +44,7 @@ for مقدار in ژنراتور:
 
     <section class="section">
         <h2>💻 ساخت ژنراتور با yield</h2>
-        
+
         <pre class="code-block">def شمارنده(حداکثر):
     i = 1
     while i <= حداکثر:
@@ -56,22 +60,24 @@ print("\n---")
 # ژنراتور رو می‌تونی به لیست هم تبدیل کنی
 لیست_اعداد = list(شمارنده(5))
 print(لیست_اعداد)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">1 2 3 4 5 
 ---
 [1, 2, 3, 4, 5]</pre>
         </div>
-        
+
         <div class="highlight-box">
-            <p>💡 <strong>نکته:</strong> تفاوت <code>return</code> و <code>yield</code>: <code>return</code> تابع رو متوقف می‌کنه، ولی <code>yield</code> مقدار رو برمی‌گردونه و تابع <strong>به حالت تعلیق</strong> درمیاد.</p>
+            <p>💡 <strong>نکته:</strong> تفاوت <code>return</code> و <code>yield</code>: <code>return</code> تابع رو
+                متوقف می‌کنه، ولی <code>yield</code> مقدار رو برمی‌گردونه و تابع <strong>به حالت تعلیق</strong> درمیاد.
+            </p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 ژنراتور فیبوناچی</h2>
-        
+
         <pre class="code-block">def فیبوناچی(تعداد):
     a, b = 0, 1
     for _ in range(تعداد):
@@ -81,7 +87,7 @@ print(لیست_اعداد)</pre>
 # چاپ ۱۰ عدد فیبوناچی
 for عدد in فیبوناچی(10):
     print(عدد, end=" ")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">0 1 1 2 3 5 8 13 21 34</pre>
@@ -90,7 +96,7 @@ for عدد in فیبوناچی(10):
 
     <section class="section">
         <h2>💻 مزیت ژنراتور: صرفه‌جویی در حافظه</h2>
-        
+
         <pre class="code-block">import sys
 
 # لیست ۱۰۰۰۰۰۰ عضو
@@ -104,14 +110,14 @@ for عدد in فیبوناچی(10):
 print(f"حجم لیست: {حجم_لیست} بایت")
 print(f"حجم ژنراتور: {حجم_ژنراتور} بایت")
 print(f"تفاوت: {حجم_لیست - حجم_ژنراتور} بایت")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی (نمونه):</span>
             <pre class="code-block-output">حجم لیست: 8000056 بایت
 حجم ژنراتور: 112 بایت
 تفاوت: 7999944 بایت</pre>
         </div>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نکته:</strong> ژنراتور تقریباً <strong>۷۱ هزار برابر</strong> حافظه‌ی کمتری مصرف می‌کنه!</p>
         </div>
@@ -119,7 +125,7 @@ print(f"تفاوت: {حجم_لیست - حجم_ژنراتور} بایت")</pre>
 
     <section class="section">
         <h2>💻 next() روی ژنراتور</h2>
-        
+
         <pre class="code-block">ژن = (x ** 2 for x in range(5))
 
 print(next(ژن))  # 0
@@ -132,7 +138,7 @@ print(next(ژن))  # 16
 
     <section class="section">
         <h2>💻 send() به ژنراتور</h2>
-        
+
         <pre class="code-block">def افزایش_دهنده():
     مقدار = 0
     while True:
@@ -147,7 +153,7 @@ print(ژن.send(3))   # 18</pre>
 
     <section class="section">
         <h2>💻 ژنراتور بی‌نهایت</h2>
-        
+
         <pre class="code-block">def اعداد_طبیعی():
     i = 1
     while True:
@@ -158,7 +164,7 @@ print(ژن.send(3))   # 18</pre>
 ژن = اعداد_طبیعی()
 for _ in range(10):
     print(next(ژن), end=" ")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">1 2 3 4 5 6 7 8 9 10</pre>
@@ -173,7 +179,8 @@ for _ in range(10):
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> فکر کردن به ژنراتور مثل لیست (دسترسی به ایندکس)</p>
-            <p><strong>✅ راه‌حل:</strong> ژنراتورها ایندکس ندارن، فقط با حلقه یا <code>next()</code> قابل دسترسی هستن.</p>
+            <p><strong>✅ راه‌حل:</strong> ژنراتورها ایندکس ندارن، فقط با حلقه یا <code>next()</code> قابل دسترسی هستن.
+            </p>
         </div>
         <div class="highlight-box">
             <p><strong>❌ اشتباه:</strong> استفاده از ژنراتور برای کارهای خیلی کوچک</p>
@@ -201,10 +208,11 @@ for p in itertools.permutations([1, 2, 3]):
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> ژنراتوری بساز که اعداد زوج ۰ تا ۲۰ رو تولید کنه.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> ژنراتوری بساز که اعداد اول رو تولید کنه (نامحدود).</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که با ژنراتور، ۱۰۰۰ عدد فیبوناچی تولید کنه و جمعشون رو حساب کنه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> برنامه‌ای بنویس که با ژنراتور، ۱۰۰۰ عدد فیبوناچی تولید کنه و
+                جمعشون رو حساب کنه.</p>
         </div>
     </section>
 

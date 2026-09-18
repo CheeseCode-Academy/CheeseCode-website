@@ -4,7 +4,8 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>متدهای کلاس</strong> و <strong>متدهای استاتیک</strong> آشنا میشی و تفاوت‌شون رو با متدهای معمولی یاد می‌گیری.</p>
+        <p>توی این درس با <strong>متدهای کلاس</strong> و <strong>متدهای استاتیک</strong> آشنا میشی و تفاوت‌شون رو با
+            متدهای معمولی یاد می‌گیری.</p>
     </section>
 
     <section class="section">
@@ -14,7 +15,7 @@
             <li><strong>متد کلاس</strong> - با <code>cls</code> کار می‌کنه (روی کلاس) - <code>@classmethod</code></li>
             <li><strong>متد استاتیک</strong> - به کلاس یا شیء وابسته نیست - <code>@staticmethod</code></li>
         </ul>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>یادت باشه:</strong> متدهای کلاس و استاتیک رو می‌تونی بدون ساختن شیء هم صدا بزنی.</p>
         </div>
@@ -22,7 +23,7 @@
 
     <section class="section">
         <h2>💻 متد معمولی</h2>
-        
+
         <pre class="code-block">class شخص:
     def __init__(self, نام):
         self.نام = نام
@@ -36,7 +37,7 @@ print(علی.معرفی())  # فقط با شیء قابل صدا زدنه</pre>
 
     <section class="section">
         <h2>💻 متد کلاس (@classmethod)</h2>
-        
+
         <pre class="code-block">class دانشجو:
     دانشگاه = "دانشگاه تهران"
     
@@ -67,7 +68,7 @@ print(علی.رشته)  # مهندسی</pre>
 
     <section class="section">
         <h2>💻 متد استاتیک (@staticmethod)</h2>
-        
+
         <pre class="code-block">class ریاضی:
     @staticmethod
     def جمع(a, b):
@@ -95,7 +96,7 @@ print(ریاضی.اول_است(10))  # False</pre>
 
     <section class="section">
         <h2>💻 تفاوت‌های کلیدی</h2>
-        
+
         <pre class="code-block">class مثال:
     متغیر_کلاس = "مقدار کلاس"
     
@@ -128,7 +129,7 @@ print(م.متد_استاتیک())     # متد استاتیک</pre>
 
     <section class="section">
         <h2>💻 کاربردهای عملی</h2>
-        
+
         <pre class="code-block">class تاریخ:
     def __init__(self, روز, ماه, سال):
         self.روز = روز
@@ -164,7 +165,7 @@ print(تاریخ.معتبر_است(32, 12, 2026))  # False</pre>
 
     <section class="section">
         <h2>💻 متد کلاس برای inheritance</h2>
-        
+
         <pre class="code-block">class حیوان:
     نوع = "حیوان"
     
@@ -185,7 +186,7 @@ print(گربه.اطلاعات())   # من یک گربه هستم</pre>
 
     <section class="section">
         <h2>💻 استفاده عملی از @staticmethod</h2>
-        
+
         <pre class="code-block">class ابزار:
     @staticmethod
     def پاک_کن_فاصله(متن):
@@ -215,7 +216,8 @@ print(ابزار.بزرگ_کن("hello"))  # HELLO</pre>
             <p><strong>✅ راه‌حل:</strong> متد استاتیک به کلاس وابسته نیست، از هیچی استفاده نکن.</p>
         </div>
         <div class="highlight-box">
-            <p><strong>❌ اشتباه:</strong> فراموش کردن دکوریتورها: <code>@classmethod</code> یا <code>@staticmethod</code></p>
+            <p><strong>❌ اشتباه:</strong> فراموش کردن دکوریتورها: <code>@classmethod</code> یا
+                <code>@staticmethod</code></p>
             <p><strong>✅ راه‌حل:</strong> حتماً دکوریتور رو قبل از متد بذار.</p>
         </div>
     </section>
@@ -223,7 +225,8 @@ print(ابزار.بزرگ_کن("hello"))  # HELLO</pre>
     <section class="section">
         <h2>💡 نکته‌ی هوشمندانه</h2>
         <div class="highlight-box">
-            <p>از <code>@classmethod</code> برای <strong>سازنده‌های جایگزین</strong> استفاده کن که ورودی‌های مختلفی رو قبول کنن:</p>
+            <p>از <code>@classmethod</code> برای <strong>سازنده‌های جایگزین</strong> استفاده کن که ورودی‌های مختلفی رو
+                قبول کنن:</p>
             <pre class="code-block">class نقطه:
     def __init__(self, x, y):
         self.x = x
@@ -248,10 +251,12 @@ print(نقطه2)  # (~3, ~4)</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> کلاسی با یه متد کلاس بساز که یه پیام چاپ کنه.</p>
-            
-            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>تبدیل</code> بساز با متدهای استاتیک برای تبدیل دما (سلسیوس به فارنهایت و بالعکس).</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس <code>کارخانه</code> بساز که با متد کلاس، اشیاء مختلف تولید کنه.</p>
+
+            <p><strong>تمرین ۲ (متوسط):</strong> کلاس <code>تبدیل</code> بساز با متدهای استاتیک برای تبدیل دما (سلسیوس
+                به فارنهایت و بالعکس).</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> کلاس <code>کارخانه</code> بساز که با متد کلاس، اشیاء مختلف تولید
+                کنه.</p>
         </div>
     </section>
 

@@ -4,22 +4,26 @@
 
     <section class="section">
         <h2>🎯 هدف این درس</h2>
-        <p>توی این درس با <strong>توابع</strong> آشنا میشی. توابع بهت کمک می‌کنن کدهای تکراری رو <strong>سازماندهی</strong> کنی و ازشون دوباره استفاده کنی.</p>
+        <p>توی این درس با <strong>توابع</strong> آشنا میشی. توابع بهت کمک می‌کنن کدهای تکراری رو
+            <strong>سازماندهی</strong> کنی و ازشون دوباره استفاده کنی.</p>
     </section>
 
     <section class="section">
         <h2>📖 تابع چیست؟</h2>
-        <p>تابع (Function) یه <strong>بلوک کد</strong> هست که یه کار خاص رو انجام میده. با تعریف کردن یه تابع، می‌تونی هر وقت که خواستی اون رو <strong>صدا بزنی</strong> و ازش استفاده کنی.</p>
-        <p>فرض کن تابع مثل یه <strong>دستور پخت</strong> هست. یه بار دستور رو می‌نویسی، ولی هر وقت که خواستی می‌تونی ازش استفاده کنی و غذا درست کنی.</p>
-        
+        <p>تابع (Function) یه <strong>بلوک کد</strong> هست که یه کار خاص رو انجام میده. با تعریف کردن یه تابع، می‌تونی
+            هر وقت که خواستی اون رو <strong>صدا بزنی</strong> و ازش استفاده کنی.</p>
+        <p>فرض کن تابع مثل یه <strong>دستور پخت</strong> هست. یه بار دستور رو می‌نویسی، ولی هر وقت که خواستی می‌تونی ازش
+            استفاده کنی و غذا درست کنی.</p>
+
         <div class="highlight-box">
-            <p>💡 <strong>یادت باشه:</strong> توابع با کلمه‌ی کلیدی <code>def</code> تعریف میشن و بعد از اسم تابع، <strong>پرانتز</strong> ( ) و <strong>دونقطه</strong> (:) می‌ذاریم.</p>
+            <p>💡 <strong>یادت باشه:</strong> توابع با کلمه‌ی کلیدی <code>def</code> تعریف میشن و بعد از اسم تابع،
+                <strong>پرانتز</strong> ( ) و <strong>دونقطه</strong> (:) می‌ذاریم.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>💻 تعریف تابع ساده</h2>
-        
+
         <pre class="code-block">def سلام():
     print("سلام به همه!")
     print("خوش آمدید!")
@@ -27,7 +31,7 @@
 # صدا زدن تابع
 سلام()
 سلام()</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام به همه!
@@ -35,7 +39,7 @@
 سلام به همه!
 خوش آمدید!</pre>
         </div>
-        
+
         <div class="highlight-box">
             <p>💡 <strong>نکته:</strong> تابع رو با اسمش و پرانتز صدا می‌زنیم: <code>سلام()</code></p>
         </div>
@@ -44,13 +48,13 @@
     <section class="section">
         <h2>💻 تابع با پارامتر</h2>
         <p>پارامترها ورودی‌های تابع هستن:</p>
-        
+
         <pre class="code-block">def سلام_به(نام):
     print("سلام", نام, "خوش آمدی!")
 
 سلام_به("علی")
 سلام_به("زهرا")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام علی خوش آمدی!
@@ -60,13 +64,13 @@
 
     <section class="section">
         <h2>💻 تابع با چند پارامتر</h2>
-        
+
         <pre class="code-block">def معرفی(نام, سن, شهر):
     print(f"سلام! من {نام} هستم، {سن} ساله و اهل {شهر} هستم.")
 
 معرفی("علی", 25, "تهران")
 معرفی("زهرا", 30, "اصفهان")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام! من علی هستم، 25 ساله و اهل تهران هستم.
@@ -77,7 +81,7 @@
     <section class="section">
         <h2>💻 تابع با مقدار برگشتی (return)</h2>
         <p><code>return</code> یه مقدار رو از تابع <strong>برمی‌گردونه</strong>:</p>
-        
+
         <pre class="code-block">def جمع(a, b):
     return a + b
 
@@ -86,7 +90,7 @@ print("نتیجه جمع:", نتیجه)
 
 # می‌تونی مستقیم توی print استفاده کنی
 print("جمع ۱۰ و ۲۰:", جمع(10, 20))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">نتیجه جمع: 8
@@ -96,7 +100,7 @@ print("جمع ۱۰ و ۲۰:", جمع(10, 20))</pre>
 
     <section class="section">
         <h2>💻 تابع با چند return</h2>
-        
+
         <pre class="code-block">def بزرگترین(a, b):
     if a > b:
         return a
@@ -105,7 +109,7 @@ print("جمع ۱۰ و ۲۰:", جمع(10, 20))</pre>
 
 print(بزرگترین(10, 20))
 print(بزرگترین(100, 50))</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">20
@@ -116,13 +120,13 @@ print(بزرگترین(100, 50))</pre>
     <section class="section">
         <h2>💻 تابع بدون return</h2>
         <p>اگر تابع <code>return</code> نداشته باشه، <code>None</code> برمی‌گردونه:</p>
-        
+
         <pre class="code-block">def چاپ_کن(پیام):
     print(پیام)
 
 نتیجه = چاپ_کن("سلام")
 print("مقدار برگشتی:", نتیجه)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام
@@ -133,14 +137,14 @@ print("مقدار برگشتی:", نتیجه)</pre>
     <section class="section">
         <h2>💻 برگرداندن چند مقدار</h2>
         <p>با <code>return</code> می‌تونی چند مقدار رو به صورت <strong>تاپل</strong> برگردونی:</p>
-        
+
         <pre class="code-block">def آمار(لیست):
     return min(لیست), max(لیست), sum(لیست) / len(لیست)
 
 اعداد = [10, 20, 30, 40, 50]
 کوچک, بزرگ, میانگین = آمار(اعداد)
 print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگین}")</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">کوچک: 10, بزرگ: 50, میانگین: 30.0</pre>
@@ -149,7 +153,7 @@ print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگ�
 
     <section class="section">
         <h2>💻 تابع با پارامتر پیش‌فرض</h2>
-        
+
         <pre class="code-block">def سلام(نام, رسمی=False):
     if رسمی:
         print(f"جناب {نام}، خوش آمدید!")
@@ -158,7 +162,7 @@ print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگ�
 
 سلام("علی")
 سلام("زهرا", True)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">سلام علی!
@@ -169,7 +173,7 @@ print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگ�
     <section class="section">
         <h2>💻 داک‌استرینگ (مستندات تابع)</h2>
         <p>با <strong>داک‌استرینگ</strong> می‌تونی تابع رو مستند کنی:</p>
-        
+
         <pre class="code-block">def جمع(a, b):
     """این تابع دو عدد رو جمع می‌کنه و نتیجه رو برمی‌گردونه."""
     return a + b
@@ -177,7 +181,7 @@ print(f"کوچک: {کوچک}, بزرگ: {بزرگ}, میانگین: {میانگ�
 # دیدن مستندات
 print(جمع.__doc__)
 help(جمع)</pre>
-        
+
         <div class="output-box">
             <span class="output-label">خروجی:</span>
             <pre class="code-block-output">این تابع دو عدد رو جمع می‌کنه و نتیجه رو برمی‌گردونه.
@@ -227,16 +231,18 @@ print(عملیات(5, 3, ضرب))  # 15</pre>
         <h2>✍️ تمرین‌ها</h2>
         <div class="exercise-box">
             <p><strong>تمرین ۱ (ساده):</strong> تابعی بنویس که اسم کاربر رو بگیره و بهش سلام کنه.</p>
-            
+
             <p><strong>تمرین ۲ (متوسط):</strong> تابعی بنویس که سه عدد بگیره و بزرگترینشون رو برگردونه.</p>
-            
-            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که یه لیست از اعداد بگیره و مجموع اعداد <strong>زوج</strong> رو برگردونه.</p>
+
+            <p><strong>تمرین ۳ (چالش‌برانگیز):</strong> تابعی بنویس که یه لیست از اعداد بگیره و مجموع اعداد
+                <strong>زوج</strong> رو برگردونه.</p>
         </div>
     </section>
 
     <section class="section">
         <h2>🔗 در درس بعدی...</h2>
-        <p>توی درس بعدی، با <strong>پارامترها و مقدار برگشتی</strong> بیشتر کار می‌کنیم و یاد می‌گیری چطور توابع قدرتمندتری بنویسی.</p>
+        <p>توی درس بعدی، با <strong>پارامترها و مقدار برگشتی</strong> بیشتر کار می‌کنیم و یاد می‌گیری چطور توابع
+            قدرتمندتری بنویسی.</p>
         <p>🍀 <strong>موفق باشی! تا درس بعدی...</strong></p>
     </section>
 </div>
