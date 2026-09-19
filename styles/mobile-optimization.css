@@ -1,10 +1,10 @@
 /* ============================================
    📱 بهینه‌سازی موبایل | CheeseCode Academy
-   نسخه: 3.0.0 - Final
+   نسخه: 4.0.0 - Final
    ============================================ */
 
 /* ============================================
-   پایه — جلوگیری از اسکرول افقی
+   پایه
    ============================================ */
 
 html, body {
@@ -15,54 +15,25 @@ html, body {
     text-size-adjust: 100%;
 }
 
-/* ============================================
-   راست‌چین کردن همه‌چیز به صورت پیش‌فرض
-   ============================================ */
-
-[dir="rtl"] *,
-[dir="rtl"] body,
-[dir="rtl"] p,
-[dir="rtl"] div,
-[dir="rtl"] span,
-[dir="rtl"] h1,
-[dir="rtl"] h2,
-[dir="rtl"] h3,
-[dir="rtl"] h4,
-[dir="rtl"] h5,
-[dir="rtl"] h6,
-[dir="rtl"] li,
-[dir="rtl"] ul,
-[dir="rtl"] ol,
-[dir="rtl"] button,
-[dir="rtl"] a,
-[dir="rtl"] label {
-    text-align: right;
-    direction: rtl;
-}
-
-/* استثناها — کدها همیشه چپ‌چین */
+/* ⚠️ کدها همیشه چپ‌چین */
 .code-block,
 .code-block-output,
 .terminal-output,
 textarea.code-textarea,
 #challenge-code,
 pre,
-code,
-[dir="ltr"],
-[style*="direction: ltr"],
-[style*="direction:ltr"] {
+code {
     text-align: left !important;
     direction: ltr !important;
 }
 
 /* ============================================
-   دکمه‌ها — حداقل 44px
+   دکمه‌ها
    ============================================ */
 
 button, .btn, .action-btn, a.btn {
     min-height: 44px;
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(245, 184, 27, 0.15);
 }
 
 @media (hover: none) {
@@ -75,7 +46,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   دکمه‌ی برگشت — سایز دقیق
+   دکمه‌ی برگشت
    ============================================ */
 
 .back-home-btn {
@@ -95,12 +66,6 @@ button, .btn, .action-btn, a.btn {
     color: #f5b81b !important;
     text-decoration: none !important;
     box-sizing: border-box !important;
-    transition: all 0.2s ease !important;
-}
-
-.back-home-btn:hover {
-    background: rgba(245, 184, 27, 0.15) !important;
-    border-color: rgba(0, 212, 255, 0.4) !important;
 }
 
 @media (max-width: 700px) {
@@ -124,105 +89,70 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   هدر — چیدمان مثل دسکتاپ
-   لوگو راست، دکمه‌ها چپ
-   ============================================ */
-
-.hero-panel {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    flex-direction: row !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    gap: 0.8rem !important;
-}
-
-/* برند — سمت راست */
-.hero-panel .brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.8rem !important;
-    flex: 0 1 auto !important;
-    min-width: 0 !important;
-    order: 1 !important;
-}
-
-.hero-panel .brand-logo {
-    flex-shrink: 0 !important;
-    border-radius: 10px !important;
-}
-
-.hero-panel .brand-text {
-    min-width: 0 !important;
-    text-align: right !important;
-    direction: rtl !important;
-}
-
-.hero-panel .brand-text h1 {
-    margin: 0 !important;
-    line-height: 1.3 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-.hero-panel .brand-text p {
-    margin: 0.15rem 0 0 0 !important;
-    line-height: 1.2 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-/* دکمه‌ها — سمت چپ */
-.hero-panel > div:last-child,
-.hero-panel > div:not(.brand) {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    flex-shrink: 0 !important;
-    order: 2 !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
-
-/* ============================================
-   هدر — موبایل
+   هدر
    ============================================ */
 
 @media (max-width: 700px) {
     .hero-panel {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-direction: row !important;
         padding: 0.7rem 0.9rem !important;
         margin-bottom: 1rem !important;
         border-radius: 0 0 14px 14px !important;
         gap: 0.5rem !important;
         flex-wrap: nowrap !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .hero-panel .brand {
+        display: flex !important;
+        align-items: center !important;
         gap: 0.5rem !important;
         flex: 0 1 auto !important;
+        min-width: 0 !important;
+        order: 1 !important;
     }
 
     .hero-panel .brand-logo {
         width: 40px !important;
         height: 40px !important;
+        flex-shrink: 0 !important;
         border-radius: 10px !important;
+    }
+
+    .hero-panel .brand-text {
+        min-width: 0 !important;
+        overflow: hidden !important;
     }
 
     .hero-panel .brand-text h1 {
         font-size: 1rem !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.3 !important;
     }
 
     .hero-panel .brand-text p {
         font-size: 0.65rem !important;
-        letter-spacing: 0.5px !important;
+        margin: 0.15rem 0 0 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.2 !important;
     }
 
     .hero-panel > div:last-child,
     .hero-panel > div:not(.brand) {
+        display: flex !important;
         gap: 0.4rem !important;
+        flex-shrink: 0 !important;
+        align-items: center !important;
+        order: 2 !important;
     }
 
     .hero-panel .action-btn,
@@ -250,10 +180,6 @@ button, .btn, .action-btn, a.btn {
         gap: 0.4rem !important;
     }
 
-    .hero-panel .brand {
-        gap: 0.4rem !important;
-    }
-
     .hero-panel .brand-logo {
         width: 36px !important;
         height: 36px !important;
@@ -270,22 +196,17 @@ button, .btn, .action-btn, a.btn {
     .hero-panel .action-btn,
     .hero-panel #globalSearchBtn,
     .hero-panel #menuToggle,
-    .hero-panel #themeToggle,
-    .hero-panel button:not(.back-home-btn) {
+    .hero-panel #themeToggle {
         width: 42px !important;
         height: 42px !important;
         min-width: 42px !important;
         min-height: 42px !important;
         font-size: 1rem !important;
     }
-
-    .hero-panel > div:last-child {
-        gap: 0.25rem !important;
-    }
 }
 
 /* ============================================
-   مودال‌ها — توی موبایل با فاصله، نه تمام‌صفحه
+   مودال‌ها — با فاصله، نه تمام‌صفحه
    ============================================ */
 
 @media (max-width: 700px) {
@@ -307,7 +228,6 @@ button, .btn, .action-btn, a.btn {
         overflow-y: auto !important;
     }
 
-    /* ⚠️ مودال درس — کمی بزرگ‌تر */
     #lessonModal .modal-content,
     #quizModal .modal-content,
     #projectModal .modal-content {
@@ -322,14 +242,12 @@ button, .btn, .action-btn, a.btn {
         font-size: 1.2rem !important;
     }
 
-    /* نوار عنوان پنجره */
     .window-titlebar {
         padding: 0.6rem 0.7rem !important;
         margin: -2rem -1rem 0.8rem -1rem !important;
         margin-top: -1.7rem !important;
         border-radius: 14px 14px 0 0 !important;
         min-height: 44px !important;
-        cursor: grab !important;
         touch-action: none !important;
     }
 
@@ -345,7 +263,6 @@ button, .btn, .action-btn, a.btn {
 
     .window-title {
         font-size: 0.75rem !important;
-        letter-spacing: 0.5px !important;
     }
 }
 
@@ -379,7 +296,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   منوها — توی موبایل تمام‌صفحه از پایین
+   منوها
    ============================================ */
 
 @media (max-width: 700px) {
@@ -401,7 +318,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   سایدبار — موبایل
+   سایدبار
    ============================================ */
 
 @media (max-width: 700px) {
@@ -418,20 +335,10 @@ button, .btn, .action-btn, a.btn {
         border-radius: 12px !important;
     }
 
-    .sidebar-header {
-        font-size: 1rem !important;
-        margin-bottom: 1rem !important;
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    /* ⚠️ اسم درس‌ها — راست‌چین */
     .menu-item {
         padding: 0.85rem 0.9rem !important;
         font-size: 0.85rem !important;
         border-radius: 10px !important;
-        text-align: right !important;
-        direction: rtl !important;
         display: flex !important;
         align-items: center !important;
         gap: 0.6rem !important;
@@ -445,11 +352,6 @@ button, .btn, .action-btn, a.btn {
         font-size: 1rem !important;
     }
 
-    .menu-item::before {
-        font-size: 0.65rem !important;
-        margin-left: auto !important;
-    }
-
     .progress-container,
     .search-box {
         margin-bottom: 0.8rem !important;
@@ -458,12 +360,11 @@ button, .btn, .action-btn, a.btn {
     .resume-btn {
         padding: 0.7rem !important;
         font-size: 0.8rem !important;
-        text-align: center !important;
     }
 }
 
 /* ============================================
-   کارت‌ها و دوره‌ها — راست‌چین
+   کارت‌ها
    ============================================ */
 
 @media (max-width: 700px) {
@@ -475,33 +376,16 @@ button, .btn, .action-btn, a.btn {
     .download-card {
         padding: 1.2rem 1rem !important;
         border-radius: 14px !important;
-        text-align: right !important;
-        direction: rtl !important;
     }
 
-    /* ⚠️ کارت‌های دوره (index) */
     .course-card {
         padding: 1rem 1.2rem !important;
         font-size: 0.95rem !important;
         border-radius: 12px !important;
-        text-align: right !important;
-        direction: rtl !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important;
+        justify-content: center !important;
         gap: 0.6rem !important;
-    }
-
-    /* ⚠️ کارت‌های دانلود (libraries) */
-    .download-card .card-header {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .download-card .card-info h3,
-    .download-card .card-info p {
-        text-align: right !important;
-        direction: rtl !important;
     }
 
     .download-card .card-actions {
@@ -514,29 +398,10 @@ button, .btn, .action-btn, a.btn {
         padding: 0.75rem !important;
         min-height: 44px !important;
     }
-
-    /* ⚠️ پروژه‌ها */
-    .project-card {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .project-title,
-    .project-description {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    /* ⚠️ چالش‌ها */
-    .challenge-card h3,
-    .challenge-desc {
-        text-align: right !important;
-        direction: rtl !important;
-    }
 }
 
 /* ============================================
-   تایپوگرافی موبایل
+   تایپوگرافی
    ============================================ */
 
 @media (max-width: 700px) {
@@ -555,8 +420,6 @@ button, .btn, .action-btn, a.btn {
         font-size: 0.75rem !important;
         padding: 0.8rem !important;
         line-height: 1.6 !important;
-        text-align: left !important;
-        direction: ltr !important;
     }
 }
 
@@ -565,7 +428,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   دکمه‌های عملیات در libraries
+   libraries
    ============================================ */
 
 @media (max-width: 700px) {
@@ -573,18 +436,6 @@ button, .btn, .action-btn, a.btn {
         flex-direction: column !important;
         padding: 1rem !important;
         gap: 1rem !important;
-        text-align: right !important;
-    }
-
-    .cache-status-info {
-        width: 100% !important;
-        text-align: right !important;
-    }
-
-    .cache-status-info h3,
-    .cache-status-info p {
-        text-align: right !important;
-        direction: rtl !important;
     }
 
     #actionButtonsContainer {
@@ -606,17 +457,10 @@ button, .btn, .action-btn, a.btn {
         grid-template-columns: 1fr !important;
         gap: 0.8rem !important;
     }
-
-    /* عنوان بخش‌ها */
-    .section-title,
-    .section-desc {
-        text-align: right !important;
-        direction: rtl !important;
-    }
 }
 
 /* ============================================
-   اسکرول‌بار در موبایل — پنهان
+   اسکرول‌بار
    ============================================ */
 
 @media (max-width: 700px) {
@@ -631,7 +475,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   دکمه‌ی Back to Top
+   Back to Top
    ============================================ */
 
 @media (max-width: 700px) {
@@ -655,7 +499,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   یادداشت‌ها — موبایل
+   یادداشت‌ها
    ============================================ */
 
 @media (max-width: 700px) {
@@ -663,8 +507,6 @@ button, .btn, .action-btn, a.btn {
         min-height: 180px !important;
         font-size: 0.9rem !important;
         padding: 0.8rem !important;
-        text-align: right !important;
-        direction: rtl !important;
     }
 
     .notes-tabs {
@@ -678,23 +520,10 @@ button, .btn, .action-btn, a.btn {
         font-size: 0.8rem !important;
         text-align: center !important;
     }
-
-    .notes-tab-count {
-        font-size: 0.7rem !important;
-        padding: 0.1rem 0.4rem !important;
-        min-width: 22px !important;
-    }
-
-    /* آیتم‌های یادداشت/بوکمارک */
-    .bookmark-item,
-    .note-item {
-        text-align: right !important;
-        direction: rtl !important;
-    }
 }
 
 /* ============================================
-   کوئیز — موبایل
+   کوئیز
    ============================================ */
 
 @media (max-width: 700px) {
@@ -702,25 +531,6 @@ button, .btn, .action-btn, a.btn {
         padding: 0.85rem 0.9rem !important;
         font-size: 0.85rem !important;
         min-height: 48px !important;
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .quiz-option-text {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .quiz-question-text {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .quiz-intro-title,
-    .quiz-intro-desc,
-    .quiz-result-title,
-    .quiz-result-details {
-        text-align: center !important;
     }
 
     .quiz-btn {
@@ -736,72 +546,30 @@ button, .btn, .action-btn, a.btn {
     .quiz-actions .quiz-btn {
         width: 100% !important;
     }
-
-    .quiz-wrong-item {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .quiz-wrong-question,
-    .quiz-wrong-answer {
-        text-align: right !important;
-        direction: rtl !important;
-    }
 }
 
 /* ============================================
-   پروژه‌ها — موبایل
+   پروژه‌ها
    ============================================ */
 
 @media (max-width: 700px) {
     .projects-grid {
         grid-template-columns: 1fr !important;
     }
-
-    .projects-title,
-    .projects-desc {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .project-detail-title,
-    .project-detail-desc {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .project-section-title {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .project-step-text {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .project-hint {
-        text-align: right !important;
-        direction: rtl !important;
-    }
 }
 
 /* ============================================
-   تنظیمات — موبایل
+   تنظیمات
    ============================================ */
 
 @media (max-width: 700px) {
     .settings-section {
         padding: 1.2rem 1rem !important;
-        text-align: right !important;
-        direction: rtl !important;
     }
 
     .settings-opener-btn {
         padding: 0.85rem 1rem !important;
         min-height: 52px !important;
-        text-align: right !important;
-        direction: rtl !important;
         display: flex !important;
         align-items: center !important;
         justify-content: flex-start !important;
@@ -810,19 +578,6 @@ button, .btn, .action-btn, a.btn {
     .modal-item {
         padding: 0.85rem 0.9rem !important;
         min-height: 52px !important;
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .modal-item-info {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .modal-item-name,
-    .modal-item-desc {
-        text-align: right !important;
-        direction: rtl !important;
     }
 
     .stats-grid {
@@ -832,12 +587,6 @@ button, .btn, .action-btn, a.btn {
 
     .stat-card {
         padding: 0.8rem 0.4rem !important;
-        text-align: center !important;
-    }
-
-    .stat-label,
-    .stat-value {
-        text-align: center !important;
     }
 }
 
@@ -854,13 +603,11 @@ button, .btn, .action-btn, a.btn {
 @media (max-width: 700px) {
     input, textarea, select {
         font-size: 16px !important;
-        text-align: right !important;
-        direction: rtl !important;
     }
 }
 
 /* ============================================
-   دکمه‌های اضافی (اشتراک، یادداشت، بوکمارک)
+   دکمه‌های اضافی
    ============================================ */
 
 @media (max-width: 700px) {
@@ -869,11 +616,6 @@ button, .btn, .action-btn, a.btn {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         padding-bottom: 0.6rem !important;
-        direction: rtl !important;
-    }
-
-    .extra-buttons-bar::-webkit-scrollbar {
-        height: 3px !important;
     }
 
     .extra-buttons-bar button {
@@ -885,7 +627,7 @@ button, .btn, .action-btn, a.btn {
 }
 
 /* ============================================
-   Safe Area — برای iPhone
+   Safe Area
    ============================================ */
 
 @supports (padding: max(0px)) {
