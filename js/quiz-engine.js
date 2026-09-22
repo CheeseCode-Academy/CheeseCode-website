@@ -1,6 +1,6 @@
 // ============================================
-// 🧀 موتور کوییز | CheeseCode Academy
-// نسخه: 1.0.0
+// موتور کوییز | CheeseCode Academy
+// نسخه: 1.1.0 — با اتصال به قفل درس‌ها
 // ============================================
 
 (function () {
@@ -12,9 +12,6 @@
     var quizContainer = null;
     var onCloseCallback = null;
 
-    // ============================================
-    // بارگذاری کوییز
-    // ============================================
     function load(quiz, container, onClose) {
         currentQuiz = quiz;
         quizContainer = container;
@@ -37,7 +34,7 @@
                 startQuiz(data);
                 return;
             } catch (e) {
-                console.warn('⚠️ cache خرابه');
+                console.warn('cache خرابه');
             }
         }
 
@@ -54,30 +51,22 @@
             })
             .catch(function (err) {
                 container.innerHTML =
-                    '<div style="text-align:center;padding:2rem;color:#ff6b6b;font-family:\'Courier New\',monospace;">' +
+                    '<div style="text-align:center;padding:2rem;color:#ff6b6b;">' +
                     '❌ خطا در بارگذاری کوییز<br>' +
                     '<span style="font-size:0.8rem;color:rgba(255,255,255,0.3);">' + err.message + '</span>' +
                     '</div>';
             });
     }
 
-    // ============================================
-    // شروع کوییز
-    // ============================================
     function startQuiz(data) {
         currentQuiz.data = data;
         currentAnswers = new Array(data.questions.length).fill(null);
         currentQuestionIndex = 0;
-
         renderIntro();
     }
 
-    // ============================================
-    // صفحه‌ی شروع
-    // ============================================
     function renderIntro() {
         var data = currentQuiz.data;
-
         var results = JSON.parse(localStorage.getItem('cheese_quiz_results') || '{}');
         var lastResult = results[currentQuiz.file];
 
@@ -86,7 +75,6 @@
             + '  <div class="quiz-intro-icon">🎓</div>'
             + '  <h2 class="quiz-intro-title">' + escapeHtml(data.title) + '</h2>'
             + '  <p class="quiz-intro-desc">' + escapeHtml(data.description || '') + '</p>'
-            + ''
             + '  <div class="quiz-intro-stats">'
             + '    <div class="quiz-stat">'
             + '      <div class="quiz-stat-icon">📝</div>'
@@ -98,17 +86,16 @@
             + '      <div class="quiz-stat-value">' + (data.passScore || 70) + '%</div>'
             + '      <div class="quiz-stat-label">حد قبولی</div>'
             + '    </div>'
-            + '  </div>'
-            + '';
+            + '  </div>';
 
         if (lastResult) {
-            var isPass = lastResult.score >= (data.passScore || 70);
+            var wasPass = lastResult.score >= (data.passScore || 70);
             html += ''
-                + '<div class="quiz-last-result ' + (isPass ? 'pass' : 'fail') + '">'
-                + '  <div class="quiz-last-icon">' + (isPass ? '✅' : '⚠️') + '</div>'
+                + '<div class="quiz-last-result ' + (wasPass ? 'pass' : 'fail') + '">'
+                + '  <div class="quiz-last-icon">' + (wasPass ? '✅' : '⚠️') + '</div>'
                 + '  <div class="quiz-last-text">'
                 + '    <div class="quiz-last-label">نتیجه‌ی قبلی شما:</div>'
-                + '    <div class="quiz-last-score">' + lastResult.score + '% — ' + (isPass ? 'قبول' : 'مردود') + '</div>'
+                + '    <div class="quiz-last-score">' + lastResult.score + '% — ' + (wasPass ? 'قبول' : 'مردود') + '</div>'
                 + '  </div>'
                 + '</div>';
         }
@@ -122,17 +109,11 @@
         quizContainer.innerHTML = html;
     }
 
-    // ============================================
-    // شروع سؤالات
-    // ============================================
     function start() {
         currentQuestionIndex = 0;
         renderQuestion();
     }
 
-    // ============================================
-    // نمایش سؤال
-    // ============================================
     function renderQuestion() {
         var data = currentQuiz.data;
         var q = data.questions[currentQuestionIndex];
@@ -151,9 +132,7 @@
             + '      <div class="quiz-progress-fill" style="width: ' + percent + '%;"></div>'
             + '    </div>'
             + '  </div>'
-            + ''
             + '  <div class="quiz-question-text">' + escapeHtml(q.question) + '</div>'
-            + ''
             + '  <div class="quiz-options" id="quizOptions">';
 
         q.options.forEach(function (option, i) {
@@ -170,7 +149,6 @@
 
         html += ''
             + '  </div>'
-            + ''
             + '  <div class="quiz-actions">'
             + '    <button class="quiz-btn quiz-btn-secondary" onclick="QuizEngine.prev()" '
             + (currentQuestionIndex === 0 ? 'disabled' : '') + '>'
@@ -187,9 +165,6 @@
         quizContainer.innerHTML = html;
     }
 
-    // ============================================
-    // انتخاب گزینه
-    // ============================================
     function selectOption(optionIndex) {
         currentAnswers[currentQuestionIndex] = optionIndex;
 
@@ -206,12 +181,8 @@
         if (nextBtn) nextBtn.disabled = false;
     }
 
-    // ============================================
-    // سؤال بعدی
-    // ============================================
     function next() {
         var data = currentQuiz.data;
-
         if (currentQuestionIndex === data.questions.length - 1) {
             finish();
         } else {
@@ -220,9 +191,6 @@
         }
     }
 
-    // ============================================
-    // سؤال قبلی
-    // ============================================
     function prev() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
@@ -230,9 +198,6 @@
         }
     }
 
-    // ============================================
-    // پایان
-    // ============================================
     function finish() {
         var data = currentQuiz.data;
         var correct = 0;
@@ -255,7 +220,6 @@
         var score = Math.round((correct / data.questions.length) * 100);
         var isPass = score >= (data.passScore || 70);
 
-        // ذخیره نتیجه
         var results = JSON.parse(localStorage.getItem('cheese_quiz_results') || '{}');
         results[currentQuiz.file] = {
             score: score,
@@ -267,17 +231,22 @@
         };
         localStorage.setItem('cheese_quiz_results', JSON.stringify(results));
 
-        // نشان
         if (isPass) {
             saveBadge(currentQuiz.file, data.title);
+        }
+
+        // اتصال به قفل درس‌ها
+        if (window.LessonLock && currentQuiz) {
+            LessonLock.onQuizFinished(
+                currentQuiz.file,
+                score,
+                data.passScore || 70
+            );
         }
 
         renderResult(score, correct, data.questions.length, isPass, wrong);
     }
 
-    // ============================================
-    // نتیجه
-    // ============================================
     function renderResult(score, correct, total, isPass, wrong) {
         var html = ''
             + '<div class="quiz-result">'
@@ -318,32 +287,44 @@
             html += '</div>';
         }
 
+        html += '  <div class="quiz-actions">';
+
+        if (isPass) {
+            html += ''
+                + '    <button class="quiz-btn quiz-btn-primary" id="btnBackToLessons">'
+                + '      برگردیم به دروس'
+                + '    </button>';
+        } else {
+            html += ''
+                + '    <button class="quiz-btn quiz-btn-secondary" onclick="QuizEngine.retry()">'
+                + '      🔄 تلاش دوباره'
+                + '    </button>'
+                + '    <button class="quiz-btn quiz-btn-primary" onclick="QuizEngine.close()">'
+                + '      ✖ بستن'
+                + '    </button>';
+        }
+
         html += ''
-            + '  <div class="quiz-actions">'
-            + '    <button class="quiz-btn quiz-btn-secondary" onclick="QuizEngine.retry()">'
-            + '      🔄 تلاش دوباره'
-            + '    </button>'
-            + '    <button class="quiz-btn quiz-btn-primary" onclick="QuizEngine.close()">'
-            + '      ✖ بستن'
-            + '    </button>'
             + '  </div>'
             + '</div>';
 
         quizContainer.innerHTML = html;
+
+        var backBtn = document.getElementById('btnBackToLessons');
+        if (backBtn) {
+            backBtn.onclick = function () {
+                var isLinux = (location.pathname || '').toLowerCase().indexOf('linux') !== -1;
+                location.href = isLinux ? 'linux.html' : 'python.html';
+            };
+        }
     }
 
-    // ============================================
-    // تلاش دوباره
-    // ============================================
     function retry() {
         currentAnswers = new Array(currentQuiz.data.questions.length).fill(null);
         currentQuestionIndex = 0;
         renderIntro();
     }
 
-    // ============================================
-    // ذخیره نشان
-    // ============================================
     function saveBadge(quizId, title) {
         var badges = JSON.parse(localStorage.getItem('cheese_earned_badges') || '{}');
         if (!badges[quizId]) {
@@ -357,16 +338,10 @@
         }
     }
 
-    // ============================================
-    // بستن
-    // ============================================
     function close() {
         if (onCloseCallback) onCloseCallback();
     }
 
-    // ============================================
-    // ابزارها
-    // ============================================
     function escapeHtml(text) {
         if (!text) return '';
         return String(text)
@@ -378,12 +353,11 @@
 
     function toPersianNumber(num) {
         var persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        return String(num).replace(/\d/g, function (d) { return persian[d]; });
+        return String(num).replace(/\d/g, function (d) {
+            return persian[d];
+        });
     }
 
-    // ============================================
-    // API
-    // ============================================
     window.QuizEngine = {
         load: load,
         start: start,
